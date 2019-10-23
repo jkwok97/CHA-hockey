@@ -1,1 +1,25 @@
-<p>navigation works!</p>
+<div class="main-container">
+
+    <div class="header-container">
+
+        <div class="header-text">
+            <p class="title" routerLink="main">Continental Hockey Association</p>
+            <p class="sub-title">est. 1995</p>
+        </div>
+
+        <div class="button-container">
+            <div class="buttons" *ngFor="let route of routes">
+                <button mat-stroked-button color="primary" routerLink="{{ route.url }}" [ngClass]="{chosen: route.current, button: !route.current}">
+                    <span class="route-name">{{ route.name }}</span>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="body-container">
+        <router-outlet></router-outlet>
+    </div>
+
+</div>
+

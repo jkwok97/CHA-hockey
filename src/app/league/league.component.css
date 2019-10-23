@@ -1,0 +1,80 @@
+.leagueContainer {
+    height: 100%;
+    width: 100%;
+    border: 1px solid red;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.conference {
+    height: 90%;
+    width: 45%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: space-around;
+}
+
+.conferenceHeader {
+    width: 100%;
+    color: white;
+    text-align: center;
+}
+
+.conferenceHeader p {
+    font-size: x-large;
+    font-weight: 100;
+    margin: 0;
+}
+
+.headerText {
+    width: 100%;
+    color: white;
+    text-align: center;
+}
+
+.headerText p {
+    font-size: large;
+    font-weight: 100;
+}
+
+.division {
+    height: 45%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-content: center;
+}
+
+.headerText {
+    color: white;
+}
+
+.white-text {
+    color: white;
+}
+
+.logo {
+    height: 125px;
+    width: 125px;
+    cursor: pointer;
+}
+
+.team-card {
+    width: 15%;
+    text-align: center;
+}
+
+.team-card p {
+    color: white;
+    font-size: medium;
+    font-weight: 100;
+}
+
+hr.line-style {
+    width: 25%;
+    border-top: 1px solid #3D5AFE;
+    border-bottom: 1px solid #3D5AFE;
+}

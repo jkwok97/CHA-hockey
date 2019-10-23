@@ -1,0 +1,13 @@
+.playerStatsContainer {
+    border: 1px solid red;
+    height: 100%;
+    width: 100%;
+}
+
+.playerCard {
+    border: 1px solid blue;
+}
+
+.playerCard p {
+    color: white;
+}
