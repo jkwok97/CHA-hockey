@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TeamsService } from '../teams.service';
-import { takeWhile } from 'rxjs/operators';
 
 @Component({
   selector: 'app-team-stats',
@@ -11,22 +10,26 @@ import { takeWhile } from 'rxjs/operators';
 export class TeamStatsComponent implements OnInit {
 
   private _alive:boolean = true;
+  isLoading: boolean = false;
 
-  team_name: string = '';
-  players = [];
+  short_team_name: string = '';
 
+  team: any;
+  
   constructor(
     private _route: ActivatedRoute,
     private _teamsService: TeamsService
   ) { }
 
   ngOnInit() {
-    this.team_name = this._route.snapshot.paramMap.get("params");
-    console.log(this.team_name);
-    this._teamsService.getTeamPlayerStats(this.team_name).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      console.log(resp);
-      this.players = resp as [];
-    });
+    this.isLoading = true;
+    this.short_team_name = this._route.snapshot.paramMap.get("params");
+    this.team = this._teamsService.getTeamInfo(this.short_team_name);
+    this.isLoading = false;
+  }
+
+  toSalaryPage() {
+    window.open(this.team.link);
   }
 
 }

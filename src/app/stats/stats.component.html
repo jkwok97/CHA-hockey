@@ -1,1 +1,40 @@
-<p>stats works!</p>
+<div class="statsContainer">
+    <div class="halfContainer">
+
+    </div>
+    <div class="halfContainer">
+        <div class="section">
+            <div class="header">
+                <p>Players Stats</p>
+                <p routerLink="players" class="link">See All ></p>
+            </div>
+            <div class="spinner" *ngIf="isLeadersLoading">
+                <mat-spinner color="accent"></mat-spinner>
+            </div>
+            <div class="card" *ngIf="!isLeadersLoading">
+                <div class="header">
+                    <p>Points Leaders</p>
+                    <hr class="line-style">
+                </div> 
+                <div class="table">
+                    <table>
+                        <tr>
+                            <th>Player</th>
+                            <th>Points</th>
+                        </tr>
+                        <tr *ngFor="let point of pointLeaders">
+                            <td>{{point.player_name}}</td>
+                            <td>{{point.points}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>   
+        </div>
+        <div class="section">
+            <div class="header">
+                <p>Goalie Stats</p>
+                <p routerLink="goalies" class="link">See All ></p>
+            </div>
+        </div>
+    </div>
+</div>

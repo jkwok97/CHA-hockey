@@ -14,6 +14,8 @@ import { ScheduleComponent } from './schedule/schedule.component';
 import { StatsComponent } from './stats/stats.component';
 import { HistoryComponent } from './history/history.component';
 import { TeamStatsComponent } from './teams/team-stats/team-stats.component';
+import { PlayersStatsComponent } from './stats/players-stats/players-stats.component';
+import { GoalieStatsComponent } from './stats/goalie-stats/goalie-stats.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { TeamStatsComponent } from './teams/team-stats/team-stats.component';
     ScheduleComponent,
     StatsComponent,
     HistoryComponent,
-    TeamStatsComponent
+    TeamStatsComponent,
+    PlayersStatsComponent,
+    GoalieStatsComponent
   ],
   imports: [
     BrowserModule,

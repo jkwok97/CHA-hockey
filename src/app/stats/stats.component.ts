@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TeamsService } from '../teams/teams.service';
+import { takeWhile } from 'rxjs/operators';
 
 @Component({
   selector: 'app-stats',
@@ -7,9 +9,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StatsComponent implements OnInit {
 
-  constructor() { }
+  private _alive:boolean = true;
+  isLeadersLoading: boolean = false;
+
+  pointLeaders = [];
+
+  constructor(
+    private _teamsService: TeamsService
+  ) { }
 
   ngOnInit() {
+    this.isLeadersLoading = true;
+    this._teamsService.getPlayerStats().pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      this.getPointLeaders(resp);
+      this.isLeadersLoading = false;
+    });
   }
+
+  getPointLeaders(resp) {
+    this.pointLeaders = resp as [];
+    this.pointLeaders.sort((a,b) => b.points - a.points).splice(10, this.pointLeaders.length-10);
+  }
+
+  
 
 }
