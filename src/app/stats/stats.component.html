@@ -14,16 +14,21 @@
             <div class="card" *ngIf="!isLeadersLoading">
                 <div class="header">
                     <p>Points Leaders</p>
-                    <hr class="line-style">
                 </div> 
                 <div class="table">
                     <table>
                         <tr>
                             <th>Player</th>
-                            <th>Points</th>
+                            <th>GP</th>
+                            <th>G</th>
+                            <th>A</th>
+                            <th>Pts</th>
                         </tr>
                         <tr *ngFor="let point of pointLeaders">
                             <td>{{point.player_name}}</td>
+                            <td>{{point.games_played}}</td>
+                            <td>{{point.goals}}</td>
+                            <td>{{point.assists}}</td>
                             <td>{{point.points}}</td>
                         </tr>
                     </table>
@@ -34,6 +39,34 @@
             <div class="header">
                 <p>Goalie Stats</p>
                 <p routerLink="goalies" class="link">See All ></p>
+            </div>
+            <div class="spinner" *ngIf="isGoaliesLoading">
+                <mat-spinner color="accent"></mat-spinner>
+            </div>
+            <div class="card" *ngIf="!isGoaliesLoading">
+                <div class="header">
+                    <p>Wins Leaders</p>
+                </div> 
+                <div class="table">
+                    <table>
+                        <tr>
+                            <th>Player</th>
+                            <th>GP</th>
+                            <th>W</th>
+                            <th>L</th>
+                            <th>Save %</th>
+                            <th>SO</th>
+                        </tr>
+                        <tr *ngFor="let goalie of goalieLeaders">
+                            <td>{{goalie.player_name}}</td>
+                            <td>{{goalie.games_played}}</td>
+                            <td>{{goalie.wins}}</td>
+                            <td>{{goalie.loss}}</td>
+                            <td>{{goalie.save_pct}}%</td>
+                            <td>{{goalie.shutouts}}</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

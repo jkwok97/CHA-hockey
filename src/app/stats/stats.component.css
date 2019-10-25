@@ -8,7 +8,7 @@
 }
 
 .halfContainer {
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
     width: 45%;
     height: 90%;
     display: flex;
@@ -18,7 +18,7 @@
 }
 
 .section {
-    border: 1px solid green;
+    border: 1px solid red;
     width: 95%;
     height: 45%;
     display: flex;
@@ -38,7 +38,7 @@
 .header p {
     color: white;
     font-weight: 100;
-    margin: 0;
+    margin: 0 10px 0 10px;
 }
 
 .link {
@@ -77,18 +77,22 @@
     justify-content: center;
 }
 
+table {
+    border-collapse: collapse;
+}
+
 th, td {
     color: white;
     text-align: center;
     font-weight: 100;
+    border: 1px solid #3D5AFE;
+    padding: 2px 15px;
+}
+
+tr:nth-child(even) {
+    background-color: #3D5AFE;
 }
 
 .table p {
     width: 100%;
-}
-
-hr.line-style {
-    width: 35%;
-    border-top: 1px solid #3D5AFE;
-    border-bottom: 1px solid #3D5AFE;
 }

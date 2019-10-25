@@ -68,6 +68,22 @@ export class TeamsService {
     return this._http.get(`${environment.back_end_url}/players-stats/`);
   }
 
+  getTeamGoalieStats(team) {
+    return this._http.get(`${environment.back_end_url}/goalies-stats/${team}`);
+  }
+
+  getGoalieStats() {
+    return this._http.get(`${environment.back_end_url}/goalies-stats/`);
+  }
+
+  getTeamStats(team) {
+    return this._http.get(`${environment.back_end_url}/team-stats/${team}`);
+  }
+
+  getLeagueTeamsStats() {
+    return this._http.get(`${environment.back_end_url}/team-stats/`);
+  }
+
   getTeamInfo(short) {
     this.league.conference.forEach( conference => {
       conference.division.forEach(division => {
