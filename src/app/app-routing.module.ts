@@ -13,6 +13,7 @@ import { GoalieStatsComponent } from './stats/goalie-stats/goalie-stats.componen
 import { OverallTeamStatsComponent } from './stats/overall-team-stats/overall-team-stats.component';
 import { ChampionsComponent } from './history/champions/champions.component';
 import { DraftsComponent } from './history/drafts/drafts.component';
+import { TradesComponent } from './trades/trades.component';
 
 const routes: Routes = [
   { path: 'main', component: LeagueComponent },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'history/drafts', component: DraftsComponent },
   { path: 'rules', component: RulesComponent },
   { path: 'schedule', component: ScheduleComponent },
+  { path: 'trades-picks', component: TradesComponent },
 ];
 
 @NgModule({

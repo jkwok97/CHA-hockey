@@ -33,3 +33,10 @@
     justify-content: center;
     align-items: center;
 }
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+    color: rgb(61, 90, 254);
+    background-color: lightgray;
+  }

@@ -17,6 +17,7 @@ export class NavigationComponent implements OnInit {
     {name: 'History', url: 'history', current: false},
     {name: 'Rules & Prizes', url: 'rules', current: false},
     {name: 'Schedule', url: 'schedule', current: false},
+    {name: 'Trades & Picks', url: 'trades-picks', current: false},
   ];
 
   constructor(

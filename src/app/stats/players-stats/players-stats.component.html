@@ -9,6 +9,11 @@
     </div>
 
     <div class="table">
+
+        <mat-form-field *ngIf="inAllPlayersStats">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+        </mat-form-field>
+
         <table mat-table [dataSource]="players" matSort class="mat-elevation-z8 full-width" matSortActive="points" matSortDirection="desc">
 
             <ng-container matColumnDef="player_name">

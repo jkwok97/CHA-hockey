@@ -15,6 +15,7 @@ export class PlayersStatsComponent implements OnInit, OnDestroy {
 
   private _alive:boolean = true;
   isLoading: boolean = false;
+  inAllPlayersStats: boolean = false;
 
   stats: any[];
 
@@ -41,6 +42,7 @@ export class PlayersStatsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.isLoading = true;
     if (this._route.snapshot.routeConfig.path === "stats/players") {
+      this.inAllPlayersStats = true;
       this._teamsService.getPlayerStats().pipe(takeWhile(() => this._alive)).subscribe(resp => {
         console.log(resp);
         this.stats = resp as [];
@@ -67,6 +69,14 @@ export class PlayersStatsComponent implements OnInit, OnDestroy {
       });
     }
     
+  }
+
+  applyFilter(filterValue: string) {
+    this.players.filter = filterValue.trim().toLowerCase();
+
+    if (this.players.paginator) {
+      this.players.paginator.firstPage();
+    }
   }
 
   ngOnDestroy() {

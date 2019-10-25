@@ -19,6 +19,7 @@ import { GoalieStatsComponent } from './stats/goalie-stats/goalie-stats.componen
 import { OverallTeamStatsComponent } from './stats/overall-team-stats/overall-team-stats.component';
 import { ChampionsComponent } from './history/champions/champions.component';
 import { DraftsComponent } from './history/drafts/drafts.component';
+import { TradesComponent } from './trades/trades.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { DraftsComponent } from './history/drafts/drafts.component';
     GoalieStatsComponent,
     OverallTeamStatsComponent,
     ChampionsComponent,
-    DraftsComponent
+    DraftsComponent,
+    TradesComponent
   ],
   imports: [
     BrowserModule,
