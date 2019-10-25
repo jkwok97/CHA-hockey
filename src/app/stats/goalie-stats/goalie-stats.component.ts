@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { TeamsService } from 'src/app/teams/teams.service';
+import { ActivatedRoute } from '@angular/router';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { takeWhile } from 'rxjs/operators';
 
 @Component({
   selector: 'app-goalie-stats',
@@ -7,9 +13,55 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GoalieStatsComponent implements OnInit {
 
-  constructor() { }
+  private _alive:boolean = true;
+  isLoading: boolean = false;
+
+  stats: any[];
+
+  short_team_name: string = '';
+
+  goalies: MatTableDataSource<any[]>;
+  goaliesColumnsToDisplay = [
+    'player_name', 'games_played','minutes_played', 'goals_against_avg', 'wins','loss', 'ties', 'en_goals',
+    'shutouts', 'goals_against', 'saves', 'shots_for', 'save_pct', 'goals', 'assists', 'points', 'penalty_minutes', 'pass_pct'
+  ];
+
+  page: number = 1;
+  pageSize: number = 10;
+  length: number = 0;
+
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
+
+  constructor(
+    private _teamsService: TeamsService,
+    private _route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
+    this.isLoading = true;
+    if (this._route.snapshot.routeConfig.path === "stats/goalies") {
+      this._teamsService.getGoalieStats().pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        console.log(resp);
+        this.stats = resp as [];
+        this.goalies = new MatTableDataSource<any[]>(this.stats);
+        this.length = this.stats.length;
+        this.isLoading = false;
+      });
+    } else if (this._route.snapshot.routeConfig.path === "teams/:params") {
+        this.short_team_name = this._route.snapshot.paramMap.get("params");
+        this._teamsService.getTeamGoalieStats(this.short_team_name).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        console.log(resp);
+        this.stats = resp as [];
+        this.goalies = new MatTableDataSource<any[]>(this.stats);
+        this.length = this.stats.length;
+        this.isLoading = false;  
+      });
+    }
+    setTimeout(() => {
+      this.goalies.paginator = this.paginator;
+      this.goalies.sort = this.sort;
+    }, 250);
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { TeamsService } from 'src/app/teams/teams.service';
 import { takeWhile } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './players-stats.component.html',
   styleUrls: ['./players-stats.component.css']
 })
-export class PlayersStatsComponent implements OnInit {
+export class PlayersStatsComponent implements OnInit, OnDestroy {
 
   private _alive:boolean = true;
   isLoading: boolean = false;
@@ -62,7 +62,10 @@ export class PlayersStatsComponent implements OnInit {
       this.players.paginator = this.paginator;
       this.players.sort = this.sort;
     }, 250);
-    
+  }
+
+  ngOnDestroy() {
+    this._alive = false;
   }
 
 }
