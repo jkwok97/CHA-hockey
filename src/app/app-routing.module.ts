@@ -12,6 +12,7 @@ import { PlayersStatsComponent } from './stats/players-stats/players-stats.compo
 import { GoalieStatsComponent } from './stats/goalie-stats/goalie-stats.component';
 import { OverallTeamStatsComponent } from './stats/overall-team-stats/overall-team-stats.component';
 import { ChampionsComponent } from './history/champions/champions.component';
+import { DraftsComponent } from './history/drafts/drafts.component';
 
 const routes: Routes = [
   { path: 'main', component: LeagueComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'teams/:params', component: TeamStatsComponent },
   { path: 'history', component: HistoryComponent },
   { path: 'history/champions', component: ChampionsComponent },
+  { path: 'history/drafts', component: DraftsComponent },
   { path: 'rules', component: RulesComponent },
   { path: 'schedule', component: ScheduleComponent },
 ];

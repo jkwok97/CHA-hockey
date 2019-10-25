@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TeamsService } from '../teams/teams.service';
 
 @Component({
   selector: 'app-history',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HistoryComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private _teamsService: TeamsService,
+  ) { }
 
   ngOnInit() {
   }

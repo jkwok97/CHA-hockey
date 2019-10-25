@@ -97,4 +97,8 @@ export class TeamsService {
   getChampions() {
     return this._http.get(`${environment.back_end_url}/champions/`);
   }
+
+  getDrafts() {
+    return this._http.get(`${environment.back_end_url}/drafts/`);
+  }
 }

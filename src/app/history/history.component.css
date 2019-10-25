@@ -44,3 +44,9 @@
     box-shadow: 0 0 50px lightsteelblue;
     cursor: pointer;
 }
+
+.random {
+    color: white;
+    font-size: large;
+    font-weight: 100;
+}
