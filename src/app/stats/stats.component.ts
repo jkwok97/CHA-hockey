@@ -12,9 +12,11 @@ export class StatsComponent implements OnInit {
   private _alive:boolean = true;
   isLeadersLoading: boolean = false;
   isGoaliesLoading: boolean = false;
+  isLeagueLoading: boolean = false;
 
   pointLeaders = [];
   goalieLeaders = [];
+  leagueLeaders = [];
 
   constructor(
     private _teamsService: TeamsService
@@ -23,6 +25,7 @@ export class StatsComponent implements OnInit {
   ngOnInit() {
     this.isLeadersLoading = true;
     this.isGoaliesLoading = true;
+    this.isLeagueLoading = true;
     this._teamsService.getPlayerStats().pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.getPointLeaders(resp);
       this.isLeadersLoading = false;
@@ -31,7 +34,10 @@ export class StatsComponent implements OnInit {
       this.getGoalieLeaders(resp);
       this.isGoaliesLoading = false;
     });
-
+    this._teamsService.getLeagueTeamsStats().pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      this.getLeagueLeaders(resp);
+      this.isLeagueLoading = false;
+    });
   }
 
   getPointLeaders(resp) {
@@ -44,6 +50,12 @@ export class StatsComponent implements OnInit {
     console.log(resp);
     this.goalieLeaders = resp as [];
     this.goalieLeaders.sort((a,b) => b.wins - a.wins).splice(10, this.goalieLeaders.length-10);
+  }
+
+  getLeagueLeaders(resp) {
+    console.log(resp);
+    this.leagueLeaders = resp as [];
+    this.leagueLeaders.sort((a,b) => b.points - a.points);
   }
 
 }

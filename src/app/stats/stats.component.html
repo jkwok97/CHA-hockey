@@ -1,7 +1,47 @@
 <div class="statsContainer">
+
     <div class="halfContainer">
+        <div class="overallTeamSection">
+            <div class="header">
+                <p>Team Stats</p>
+                <p routerLink="league" class="link">See Details ></p>
+            </div>
+            <div class="spinner" *ngIf="isLeagueLoading">
+                <mat-spinner color="accent"></mat-spinner>
+            </div>
+            <div class="card" *ngIf="!isLeagueLoading">
+                <div class="header">
+                    <p>League Standings</p>
+                </div> 
+                <div class="table">
+                    <table>
+                        <tr>
+                            <th>Team</th>
+                            <th>GP</th>
+                            <th>W</th>
+                            <th>L</th>
+                            <th>T</th>
+                            <th>Pts</th>
+                            <th>Goal Dif.</th>
+                            <th>Win %</th>
+                        </tr>
+                        <tr *ngFor="let league of leagueLeaders">
+                            <td>{{league.team_name}}</td>
+                            <td>{{league.games_played}}</td>
+                            <td>{{league.wins}}</td>
+                            <td>{{league.loss}}</td>
+                            <td>{{league.ties}}</td>
+                            <td>{{league.points}}</td>
+                            <td>{{league.goals_for - league.goals_against}}</td>
+                            <td>{{ ((league.wins / league.games_played) * 100).toFixed(1) }} %</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>   
+        </div>
 
     </div>
+
     <div class="halfContainer">
         <div class="section">
             <div class="header">
