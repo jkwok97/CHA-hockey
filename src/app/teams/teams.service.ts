@@ -93,4 +93,8 @@ export class TeamsService {
     })
     return this.currentTeam;
   }
+
+  getChampions() {
+    return this._http.get(`${environment.back_end_url}/champions/`);
+  }
 }

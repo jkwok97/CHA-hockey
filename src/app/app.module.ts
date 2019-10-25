@@ -17,6 +17,7 @@ import { TeamStatsComponent } from './teams/team-stats/team-stats.component';
 import { PlayersStatsComponent } from './stats/players-stats/players-stats.component';
 import { GoalieStatsComponent } from './stats/goalie-stats/goalie-stats.component';
 import { OverallTeamStatsComponent } from './stats/overall-team-stats/overall-team-stats.component';
+import { ChampionsComponent } from './history/champions/champions.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { OverallTeamStatsComponent } from './stats/overall-team-stats/overall-te
     TeamStatsComponent,
     PlayersStatsComponent,
     GoalieStatsComponent,
-    OverallTeamStatsComponent
+    OverallTeamStatsComponent,
+    ChampionsComponent
   ],
   imports: [
     BrowserModule,
