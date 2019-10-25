@@ -1,10 +1,9 @@
 .playerStatsTable {
     width: 100%;
-    height: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-content: center;
+    align-content: flex-start;
 }
 
 .tableHeader {
@@ -16,7 +15,7 @@
 }
 
 .table {
-    width: 90%;
+    width: 95%;
 }
 
 .full-width {

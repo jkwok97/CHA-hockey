@@ -47,6 +47,10 @@ export class PlayersStatsComponent implements OnInit, OnDestroy {
         this.players = new MatTableDataSource<any[]>(this.stats);
         this.length = this.stats.length;
         this.isLoading = false;
+        setTimeout(() => {
+          this.players.paginator = this.paginator;
+          this.players.sort = this.sort;
+        }, 350);
       });
     } else if (this._route.snapshot.routeConfig.path === "teams/:params") {
         this.short_team_name = this._route.snapshot.paramMap.get("params");
@@ -56,12 +60,13 @@ export class PlayersStatsComponent implements OnInit, OnDestroy {
         this.players = new MatTableDataSource<any[]>(this.stats);
         this.length = this.stats.length;
         this.isLoading = false;  
+        setTimeout(() => {
+          this.players.paginator = this.paginator;
+          this.players.sort = this.sort;
+        }, 350);
       });
     }
-    setTimeout(() => {
-      this.players.paginator = this.paginator;
-      this.players.sort = this.sort;
-    }, 250);
+    
   }
 
   ngOnDestroy() {

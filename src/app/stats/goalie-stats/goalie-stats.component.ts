@@ -47,6 +47,10 @@ export class GoalieStatsComponent implements OnInit {
         this.goalies = new MatTableDataSource<any[]>(this.stats);
         this.length = this.stats.length;
         this.isLoading = false;
+        setTimeout(() => {
+          this.goalies.paginator = this.paginator;
+          this.goalies.sort = this.sort;
+        }, 350);
       });
     } else if (this._route.snapshot.routeConfig.path === "teams/:params") {
         this.short_team_name = this._route.snapshot.paramMap.get("params");
@@ -56,12 +60,13 @@ export class GoalieStatsComponent implements OnInit {
         this.goalies = new MatTableDataSource<any[]>(this.stats);
         this.length = this.stats.length;
         this.isLoading = false;  
+        setTimeout(() => {
+          this.goalies.paginator = this.paginator;
+          this.goalies.sort = this.sort;
+        }, 350);
       });
     }
-    setTimeout(() => {
-      this.goalies.paginator = this.paginator;
-      this.goalies.sort = this.sort;
-    }, 250);
+    
   }
 
 }
