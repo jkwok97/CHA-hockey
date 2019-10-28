@@ -27,6 +27,13 @@ const routes: Routes = [
   { path: 'history/champions', component: ChampionsComponent },
   { path: 'history/drafts', component: DraftsComponent },
   { path: 'rules', component: RulesComponent },
+  { path: 'rules/equalization', component: RulesComponent },
+  { path: 'rules/lottery', component: RulesComponent },
+  { path: 'rules/egr', component: RulesComponent },
+  { path: 'rules/protection', component: RulesComponent },
+  { path: 'rules/rosters', component: RulesComponent },
+  { path: 'rules/waivers', component: RulesComponent },
+  { path: 'rules/winnings', component: RulesComponent },
   { path: 'schedule', component: ScheduleComponent },
   { path: 'trades-picks', component: TradesComponent },
 ];
