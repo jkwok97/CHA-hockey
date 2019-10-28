@@ -49,7 +49,13 @@ export class OverallTeamStatsComponent implements OnInit, OnDestroy, AfterViewIn
   pageSize: number = 20;
   length: number = 0;
 
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild("overallSort", {static: false}) overallSort: MatSort;
+  @ViewChild("westernSort", {static: false}) westernSort: MatSort;
+  @ViewChild("easternSort", {static: false}) easternSort: MatSort;
+  @ViewChild("nwSort", {static: false}) nwSort: MatSort;
+  @ViewChild("swSort", {static: false}) swSort: MatSort;
+  @ViewChild("neSort", {static: false}) neSort: MatSort;
+  @ViewChild("seSort", {static: false}) seSort: MatSort;
 
   constructor(
     private _teamsService: TeamsService,
@@ -71,7 +77,7 @@ export class OverallTeamStatsComponent implements OnInit, OnDestroy, AfterViewIn
         this.length = this.stats.length;
         this.isLoading = false;
         setTimeout(() => {
-          this.teams.sort = this.sort;
+          this.teams.sort = this.overallSort;
         }, 350);
       });
     } else if (this._route.snapshot.routeConfig.path === "teams/:params") {
@@ -83,7 +89,7 @@ export class OverallTeamStatsComponent implements OnInit, OnDestroy, AfterViewIn
         this.length = this.stats.length;
         this.isLoading = false;  
         setTimeout(() => {
-          this.teams.sort = this.sort;
+          this.teams.sort = this.overallSort;
         }, 350);
       });
     }
@@ -110,8 +116,8 @@ export class OverallTeamStatsComponent implements OnInit, OnDestroy, AfterViewIn
     this.easternTeams = new MatTableDataSource<any[]>(this.easternStats);
     setTimeout(() => {
       this.length = this.westernStats.length;
-      this.westernTeams.sort = this.sort;
-      this.easternTeams.sort = this.sort;
+      this.westernTeams.sort = this.westernSort;
+      this.easternTeams.sort = this.easternSort;
       this.pageSize = 10;
     }, 500);
   }
@@ -126,10 +132,10 @@ export class OverallTeamStatsComponent implements OnInit, OnDestroy, AfterViewIn
     this.northEasternTeams = new MatTableDataSource<any[]>(this.northEasternStats);
     this.southEasternTeams = new MatTableDataSource<any[]>(this.southEasternStats);
     setTimeout(() => {
-      this.northWesternTeams.sort = this.sort;
-      this.southWesternTeams.sort = this.sort;
-      this.northEasternTeams.sort = this.sort;
-      this.southEasternTeams.sort = this.sort;
+      this.northWesternTeams.sort = this.nwSort;
+      this.southWesternTeams.sort = this.swSort;
+      this.northEasternTeams.sort = this.neSort;
+      this.southEasternTeams.sort = this.seSort;
       this.pageSize = 5;
       this.length = this.northWesternStats.length;
     }, 500);
