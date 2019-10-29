@@ -2,7 +2,7 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-items: center;
     align-content: flex-start;
 }
 
@@ -15,7 +15,8 @@
 }
 
 .table {
-    width: 95%;
+    width: 100%;
+    margin-bottom: 30px;
 }
 
 .full-width {
@@ -32,4 +33,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.select {
+    width: 25%;
+    height: 5%;
+    background-color: white;
+}
+
+.mat-tab-group {
+    width: 100%;
+}
+
+.table img {
+    height: 25px;
+    width: 25px;
 }

@@ -23,7 +23,7 @@ $CHA-hockey-theme: mat-light-theme($CHA-hockey-primary, $CHA-hockey-accent, $CHA
 
 // Define an alternate dark theme.
 $dark-primary: mat-palette($mat-gray, 700);
-$dark-accent:  mat-palette($mat-light-green, 800);
+$dark-accent:  mat-palette($mat-red, A700, A100, A400);
 $dark-warn:    mat-palette($mat-deep-orange);
 
 $dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
@@ -40,7 +40,6 @@ $custom-typography: mat-typography-config(
 @include mat-base-typography($custom-typography);
 @include mat-button-typography($custom-typography);
 @include angular-material-typography($custom-typography);
-
 
 .cha-dark {
     @include angular-material-theme($dark-theme);

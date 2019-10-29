@@ -1,3 +1,9 @@
 <div class="container">
-    <p>Coming Soon!</p>
+    <div class="buttonContainer">
+        <div class="buttons" *ngFor="let route of routes">
+            <button mat-stroked-button color="primary" [ngClass]="{chosen: route.current, button: !route.current}" (click)="openBottomSheet(route)">
+                <span class="route-name">{{ route.name }}</span>
+            </button>
+        </div>
+    </div>
 </div>

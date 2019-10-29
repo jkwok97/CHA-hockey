@@ -1,0 +1,43 @@
+.mainContainer {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+}
+
+.header {
+    width: 100%;
+    text-align: center;
+    font-weight: 100;
+    font-size: xx-large;
+    color: white;
+}
+
+.body {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.list {
+    color: white;
+    width: 75%;
+    line-height: 1.8;
+    font-size: medium;
+    font-weight: 100;
+}
+
+.list li {
+    margin: 10px 0;
+}
+
+.max {
+    color: yellow;
+}
+
+.min {
+    color: green;
+}

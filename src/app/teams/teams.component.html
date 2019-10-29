@@ -1,1 +1,42 @@
-<p>teams works!</p>
+<div class="container">
+    <div class="card">
+        <div class="cardHeader">
+            <p>Overall Record</p>
+        </div>
+        <div class="record">
+            <p *ngIf="team">{{team.wins}}-{{team.loss}}-{{team.ties}}</p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="cardHeader">
+            <p>Points</p>
+        </div>
+        <div class="record">
+            <p *ngIf="team">{{team.points}}</p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="cardHeader">
+            <p>Home Record</p>
+        </div>
+        <div class="record">
+            <p *ngIf="team">{{team.home_wins}}-{{team.home_loss}}-{{team.home_ties}}</p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="cardHeader">
+            <p>Away Record</p>
+        </div>
+        <div class="record">
+            <p *ngIf="team">{{team.road_wins}}-{{team.road_loss}}-{{team.road_ties}}</p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="cardHeader">
+            <p>In Division Record</p>
+        </div>
+        <div class="record">
+            <p *ngIf="team">{{team.div_win}}-{{team.div_loss}}-{{team.div_tie}}</p>
+        </div>
+    </div>
+</div>

@@ -20,6 +20,13 @@ import { OverallTeamStatsComponent } from './stats/overall-team-stats/overall-te
 import { ChampionsComponent } from './history/champions/champions.component';
 import { DraftsComponent } from './history/drafts/drafts.component';
 import { TradesComponent } from './trades/trades.component';
+import { EqualizationComponent } from './rules/equalization/equalization.component';
+import { LotteryComponent } from './rules/lottery/lottery.component';
+import { EgrComponent } from './rules/egr/egr.component';
+import { ProtectionComponent } from './rules/protection/protection.component';
+import { RostersComponent } from './rules/rosters/rosters.component';
+import { WaiversComponent } from './rules/waivers/waivers.component';
+import { WinningsComponent } from './rules/winnings/winnings.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +44,14 @@ import { TradesComponent } from './trades/trades.component';
     OverallTeamStatsComponent,
     ChampionsComponent,
     DraftsComponent,
-    TradesComponent
+    TradesComponent,
+    EqualizationComponent,
+    LotteryComponent,
+    EgrComponent,
+    ProtectionComponent,
+    RostersComponent,
+    WaiversComponent,
+    WinningsComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +61,12 @@ import { TradesComponent } from './trades/trades.component';
     HttpClientModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    EqualizationComponent, LotteryComponent,
+    EgrComponent, ProtectionComponent,
+    RostersComponent, WaiversComponent,
+    WinningsComponent
+  ]
 })
 export class AppModule { }

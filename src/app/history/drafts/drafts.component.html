@@ -2,7 +2,7 @@
     <mat-spinner color="accent"></mat-spinner>
 </div>
 
-<div class="draftsTable" *ngIf="!isLoading">
+<div class="draftsTable cha-dark" *ngIf="!isLoading">
 
     <div class="tableHeader">
         <p>Drafts</p>
@@ -10,7 +10,7 @@
 
     <div class="table">
 
-        <mat-form-field>
+        <mat-form-field color="accent">
             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
         </mat-form-field>
 
