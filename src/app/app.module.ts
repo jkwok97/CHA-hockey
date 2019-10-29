@@ -27,6 +27,7 @@ import { ProtectionComponent } from './rules/protection/protection.component';
 import { RostersComponent } from './rules/rosters/rosters.component';
 import { WaiversComponent } from './rules/waivers/waivers.component';
 import { WinningsComponent } from './rules/winnings/winnings.component';
+import { WaiverPriorityComponent } from './waiver-priority/waiver-priority.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { WinningsComponent } from './rules/winnings/winnings.component';
     ProtectionComponent,
     RostersComponent,
     WaiversComponent,
-    WinningsComponent
+    WinningsComponent,
+    WaiverPriorityComponent
   ],
   imports: [
     BrowserModule,

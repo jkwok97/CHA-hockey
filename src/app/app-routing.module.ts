@@ -14,6 +14,7 @@ import { OverallTeamStatsComponent } from './stats/overall-team-stats/overall-te
 import { ChampionsComponent } from './history/champions/champions.component';
 import { DraftsComponent } from './history/drafts/drafts.component';
 import { TradesComponent } from './trades/trades.component';
+import { WaiverPriorityComponent } from './waiver-priority/waiver-priority.component';
 
 const routes: Routes = [
   { path: 'main', component: LeagueComponent },
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: 'rules/winnings', component: RulesComponent },
   { path: 'schedule', component: ScheduleComponent },
   { path: 'trades-picks', component: TradesComponent },
+  { path: 'waiver-priority', component: WaiverPriorityComponent },
 ];
 
 @NgModule({
