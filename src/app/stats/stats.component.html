@@ -1,4 +1,4 @@
-<div class="statsContainer">
+<div class="statsContainer cha-dark">
 
     <div class="halfContainer">
         <div class="overallTeamSection">
@@ -14,28 +14,61 @@
                     <p>League Standings</p>
                 </div> 
                 <div class="table">
-                    <table>
-                        <tr>
-                            <th>Team</th>
-                            <th>GP</th>
-                            <th>W</th>
-                            <th>L</th>
-                            <th>T</th>
-                            <th>Pts</th>
-                            <th>Goal Dif.</th>
-                            <th>Win %</th>
-                        </tr>
-                        <tr *ngFor="let league of leagueLeaders">
-                            <td>{{league.team_name}}</td>
-                            <td>{{league.games_played}}</td>
-                            <td>{{league.wins}}</td>
-                            <td>{{league.loss}}</td>
-                            <td>{{league.ties}}</td>
-                            <td>{{league.points}}</td>
-                            <td>{{league.goals_for - league.goals_against}}</td>
-                            <td>{{ ((league.wins / league.games_played) * 100).toFixed(1) }} %</td>
-                        </tr>
+
+                    <table mat-table [dataSource]="teamsLeaders" #overallSort="matSort" matSort class="mat-elevation-z8 full-width" matSortActive="points" matSortDirection="desc">
+    
+                        <ng-container matColumnDef="team_logo">
+                            <th mat-header-cell *matHeaderCellDef> </th>
+                            <td mat-cell *matCellDef="let team"> 
+                                <img src="{{ findLogo(team.team_name).image }}"> 
+                            </td>
+                        </ng-container>
+            
+                        <ng-container matColumnDef="team_name">
+                            <th mat-header-cell *matHeaderCellDef> Team </th>
+                            <td mat-cell *matCellDef="let team"> {{findLogo(team.team_name).name}} </td>
+                        </ng-container>
+            
+                        <ng-container matColumnDef="games_played">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true"> GP </th>
+                            <td mat-cell *matCellDef="let team"> {{team.games_played}} </td>
+                        </ng-container>
+            
+                        <ng-container matColumnDef="wins">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true"> W </th>
+                            <td mat-cell *matCellDef="let team"> {{team.wins}} </td>
+                        </ng-container>
+                        
+                        <ng-container matColumnDef="loss">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true"> L </th>
+                            <td mat-cell *matCellDef="let team"> {{team.loss}} </td>
+                        </ng-container>
+                        
+                        <ng-container matColumnDef="ties">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true"> T </th>
+                            <td mat-cell *matCellDef="let team"> {{team.ties}} </td>
+                        </ng-container>
+                        
+                        <ng-container matColumnDef="points">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true"> Pts </th>
+                            <td mat-cell *matCellDef="let team"> {{team.points}} </td>
+                        </ng-container>
+            
+                        <ng-container matColumnDef="goals_diff">
+                            <th mat-header-cell *matHeaderCellDef> Goal Diff </th>
+                            <td mat-cell *matCellDef="let team"> {{team.goals_for - team.goals_against}} </td>
+                        </ng-container>
+            
+                        <ng-container matColumnDef="win_pct">
+                            <th mat-header-cell *matHeaderCellDef> Win % </th>
+                            <td mat-cell *matCellDef="let team"> {{((team.wins / team.games_played) * 100).toFixed(1)}} %</td>
+                        </ng-container>
+            
+                        <tr mat-header-row *matHeaderRowDef="teamsColumnsToDisplay"></tr>
+                        <tr mat-row *matRowDef="let row; columns: teamsColumnsToDisplay;"></tr>
+            
                     </table>
+            
                 </div>
             </div>   
         </div>
@@ -43,7 +76,7 @@
     </div>
 
     <div class="halfContainer">
-        <div class="section">
+        <div class="overallTeamSection">
             <div class="header">
                 <p>Players Stats</p>
                 <p routerLink="players" class="link">See All ></p>
@@ -56,26 +89,50 @@
                     <p>Points Leaders</p>
                 </div> 
                 <div class="table">
-                    <table>
-                        <tr>
-                            <th>Player</th>
-                            <th>GP</th>
-                            <th>G</th>
-                            <th>A</th>
-                            <th>Pts</th>
-                        </tr>
-                        <tr *ngFor="let point of pointLeaders">
-                            <td>{{point.player_name}}</td>
-                            <td>{{point.games_played}}</td>
-                            <td>{{point.goals}}</td>
-                            <td>{{point.assists}}</td>
-                            <td>{{point.points}}</td>
-                        </tr>
+            
+                    <table mat-table [dataSource]="players" matSort class="mat-elevation-z8 full-width" matSortActive="points" matSortDirection="desc">
+            
+                        <ng-container matColumnDef="team_logo">
+                            <th mat-header-cell *matHeaderCellDef> Team </th>
+                            <td mat-cell *matCellDef="let player"> 
+                                <img src="{{ findLogo(player.team_name).image }}"> 
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="player_name">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                            <td mat-cell *matCellDef="let player"> {{player.player_name}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="games_played">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> GP </th>
+                            <td mat-cell *matCellDef="let player"> {{player.games_played}} </td>
+                        </ng-container>
+                        
+                        <ng-container matColumnDef="goals">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> G </th>
+                            <td mat-cell *matCellDef="let player"> {{player.goals}} </td>
+                        </ng-container>
+                        
+                        <ng-container matColumnDef="assists">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> A </th>
+                            <td mat-cell *matCellDef="let player"> {{player.assists}} </td>
+                        </ng-container>
+                        
+                        <ng-container matColumnDef="points">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Pts </th>
+                            <td mat-cell *matCellDef="let player"> {{player.points}} </td>
+                        </ng-container>
+            
+                        <tr mat-header-row *matHeaderRowDef="playersColumnsToDisplay"></tr>
+                        <tr mat-row *matRowDef="let row; columns: playersColumnsToDisplay;"></tr>
+            
                     </table>
+            
                 </div>
             </div>   
         </div>
-        <div class="section">
+        <div class="overallTeamSection">
             <div class="header">
                 <p>Goalie Stats</p>
                 <p routerLink="goalies" class="link">See All ></p>
@@ -88,24 +145,51 @@
                     <p>Wins Leaders</p>
                 </div> 
                 <div class="table">
-                    <table>
-                        <tr>
-                            <th>Player</th>
-                            <th>GP</th>
-                            <th>W</th>
-                            <th>L</th>
-                            <th>Save %</th>
-                            <th>SO</th>
-                        </tr>
-                        <tr *ngFor="let goalie of goalieLeaders">
-                            <td>{{goalie.player_name}}</td>
-                            <td>{{goalie.games_played}}</td>
-                            <td>{{goalie.wins}}</td>
-                            <td>{{goalie.loss}}</td>
-                            <td>{{goalie.save_pct}}%</td>
-                            <td>{{goalie.shutouts}}</td>
-                        </tr>
+
+                    <table mat-table [dataSource]="goalies" matSort class="mat-elevation-z8 full-width" matSortActive="wins" matSortDirection="desc">
+            
+                        <ng-container matColumnDef="team_logo">
+                            <th mat-header-cell *matHeaderCellDef> Team </th>
+                            <td mat-cell *matCellDef="let goalie"> 
+                                <img src="{{ findLogo(goalie.team_name).image }}"> 
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="player_name">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                            <td mat-cell *matCellDef="let player"> {{player.player_name}} </td>
+                        </ng-container>
+            
+                        <ng-container matColumnDef="games_played">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> GP </th>
+                            <td mat-cell *matCellDef="let player"> {{player.games_played}} </td>
+                        </ng-container>
+                        
+                        <ng-container matColumnDef="wins">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> W </th>
+                            <td mat-cell *matCellDef="let player"> {{player.wins}} </td>
+                        </ng-container>
+                        
+                        <ng-container matColumnDef="loss">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> L </th>
+                            <td mat-cell *matCellDef="let player"> {{player.loss}} </td>
+                        </ng-container>
+            
+                        <ng-container matColumnDef="ties">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> T </th>
+                            <td mat-cell *matCellDef="let player"> {{player.ties}} </td>
+                        </ng-container>
+            
+                        <ng-container matColumnDef="save_pct">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Sv% </th>
+                            <td mat-cell *matCellDef="let player"> {{player.save_pct}} </td>
+                        </ng-container>
+                        
+                        <tr mat-header-row *matHeaderRowDef="goaliesColumnsToDisplay"></tr>
+                        <tr mat-row *matRowDef="let row; columns: goaliesColumnsToDisplay;"></tr>
+            
                     </table>
+            
                 </div>
             </div>
         </div>
