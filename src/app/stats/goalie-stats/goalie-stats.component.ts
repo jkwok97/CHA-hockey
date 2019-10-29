@@ -15,6 +15,7 @@ export class GoalieStatsComponent implements OnInit, OnDestroy {
 
   private _alive:boolean = true;
   isLoading: boolean = false;
+  inAllPlayersStats: boolean = false;
 
   stats: any[];
 
@@ -23,6 +24,10 @@ export class GoalieStatsComponent implements OnInit, OnDestroy {
   goalies: MatTableDataSource<any[]>;
   goaliesColumnsToDisplay = [
     'team_logo', 'player_name', 'games_played','minutes_played', 'goals_against_avg', 'wins','loss', 'ties', 'en_goals',
+    'shutouts', 'goals_against', 'saves', 'shots_for', 'save_pct', 'goals', 'assists', 'points', 'penalty_minutes', 'pass_pct'
+  ];
+  teamGoaliesColumnsToDisplay = [
+    'player_name', 'games_played','minutes_played', 'goals_against_avg', 'wins','loss', 'ties', 'en_goals',
     'shutouts', 'goals_against', 'saves', 'shots_for', 'save_pct', 'goals', 'assists', 'points', 'penalty_minutes', 'pass_pct'
   ];
 
@@ -42,8 +47,10 @@ export class GoalieStatsComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     if (this._route.snapshot.routeConfig.path === "stats/goalies") {
       this._teamsService.getGoalieStats().pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        this.inAllPlayersStats = true;
         this.stats = resp as [];
         this.goalies = new MatTableDataSource<any[]>(this.stats);
+        this.pageSize = 25;
         this.length = this.stats.length;
         this.isLoading = false;
         setTimeout(() => {

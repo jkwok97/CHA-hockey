@@ -26,6 +26,10 @@ export class PlayersStatsComponent implements OnInit, OnDestroy {
     'team_logo', 'player_name', 'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'sh_goals',
     'gw_goals', 'gt_goals', 'shots', 'shooting_pct', 'minutes_per_game', 'fo_pct', 'pass_pct', 'corner_pct', 'hits', 'blocked_shots'
   ];
+  teamPlayersColumnsToDisplay = [
+    'player_name', 'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'sh_goals',
+    'gw_goals', 'gt_goals', 'shots', 'shooting_pct', 'minutes_per_game', 'fo_pct', 'pass_pct', 'corner_pct', 'hits', 'blocked_shots'
+  ];
 
   page: number = 1;
   pageSize: number = 10;
@@ -47,6 +51,7 @@ export class PlayersStatsComponent implements OnInit, OnDestroy {
         console.log(resp);
         this.stats = resp as [];
         this.players = new MatTableDataSource<any[]>(this.stats);
+        this.pageSize = 25;
         this.length = this.stats.length;
         this.isLoading = false;
         setTimeout(() => {
@@ -61,6 +66,7 @@ export class PlayersStatsComponent implements OnInit, OnDestroy {
         this.stats = resp as [];
         this.players = new MatTableDataSource<any[]>(this.stats);
         this.length = this.stats.length;
+        this.pageSize = 30;
         this.isLoading = false;  
         setTimeout(() => {
           this.players.paginator = this.paginator;

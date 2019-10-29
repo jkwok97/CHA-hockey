@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TeamsService } from '../teams/teams.service';
 import { takeWhile } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
@@ -9,14 +9,16 @@ import { Router } from '@angular/router';
   templateUrl: './stats.component.html',
   styleUrls: ['./stats.component.css']
 })
-export class StatsComponent implements OnInit {
+export class StatsComponent implements OnInit, OnDestroy {
 
   private _alive:boolean = true;
   isLeadersLoading: boolean = false;
   isGoaliesLoading: boolean = false;
   isLeagueLoading: boolean = false;
 
+  stats: any;
   pointLeaders = [];
+  currPointStreakLeaders = [];
   goalieLeaders = [];
   leagueLeaders = [];
 
@@ -26,6 +28,8 @@ export class StatsComponent implements OnInit {
   playersColumnsToDisplay = ['team_logo','player_name', 'games_played','goals', 'assists', 'points'];
   goalies: MatTableDataSource<any[]>;
   goaliesColumnsToDisplay = ['team_logo','player_name', 'games_played', 'wins','loss', 'ties','save_pct'];
+  currPointLeaders: MatTableDataSource<any[]>;
+  currPointLeadersColumnsToDisplay = ['team_logo','player_name', 'current_points_streak', 'points'];
 
   constructor(
     private _teamsService: TeamsService,
@@ -37,9 +41,17 @@ export class StatsComponent implements OnInit {
     this.isGoaliesLoading = true;
     this.isLeagueLoading = true;
     this._teamsService.getPlayerStats().pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      console.log(resp);
+      this.stats = resp;
       this.getPointLeaders(resp);
       this.isLeadersLoading = false;
     });
+    // this._teamsService.getPlayerStats().pipe(takeWhile(() => this._alive)).subscribe(resp => {
+    //   console.log(resp);
+    //   this.stats = resp;
+    //   this.getPointStreakLeaders(resp);
+    //   this.isLeadersLoading = false;
+    // });
     this._teamsService.getGoalieStats().pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.getGoalieLeaders(resp);
       this.isGoaliesLoading = false;
@@ -51,10 +63,22 @@ export class StatsComponent implements OnInit {
   }
 
   getPointLeaders(resp) {
-    console.log(resp);
-    this.pointLeaders = resp as [];
-    this.pointLeaders.sort((a,b) => b.points - a.points).splice(10, this.pointLeaders.length-10);
+    this.pointLeaders = resp.sort((a,b) => b.points - a.points);
+    this.pointLeaders.splice(10, this.pointLeaders.length-10);
     this.players = new MatTableDataSource<any[]>(this.pointLeaders);
+    console.log(this.stats);
+    console.log(this.pointLeaders);
+    console.log(resp);
+  }
+
+  getPointStreakLeaders(resp) {
+    console.log(resp);
+    // this.currPointStreakLeaders = resp as [];
+    this.currPointStreakLeaders = resp.sort((a,b) => b.current_points_streak - a.current_points_streak);
+    this.currPointStreakLeaders.splice(10, this.currPointStreakLeaders.length-10);
+    console.log(this.currPointStreakLeaders)
+    // this.currPointStreakLeaders.sort((a,b) => b.current_points_streak - a.current_points_streak).splice(10, this.currPointStreakLeaders.length-10);
+    this.currPointLeaders = new MatTableDataSource<any[]>(this.currPointStreakLeaders);
   }
 
   getGoalieLeaders(resp) {
@@ -78,6 +102,10 @@ export class StatsComponent implements OnInit {
 
   openTeam(shortName) {
     this._route.navigate([`teams/${shortName}`])
+  }
+
+  ngOnDestroy() {
+    this._alive = false;
   }
 
 }

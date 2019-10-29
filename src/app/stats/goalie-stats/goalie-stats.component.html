@@ -108,8 +108,8 @@
                 <td mat-cell *matCellDef="let player"> {{player.pass_pct}} </td>
             </ng-container>
             
-            <tr mat-header-row *matHeaderRowDef="goaliesColumnsToDisplay"></tr>
-            <tr mat-row *matRowDef="let row; columns: goaliesColumnsToDisplay;"></tr>
+            <tr mat-header-row *matHeaderRowDef="inAllPlayersStats ? goaliesColumnsToDisplay : teamGoaliesColumnsToDisplay;"></tr>
+            <tr mat-row *matRowDef="let row; columns: inAllPlayersStats ? goaliesColumnsToDisplay : teamGoaliesColumnsToDisplay;"></tr>
 
         </table>
 
