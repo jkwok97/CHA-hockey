@@ -77,6 +77,14 @@
     margin: 20px 0px;
 }
 
+.teamsTable {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px 0px;
+}
+
 table {
     border-collapse: collapse;
 }
@@ -100,6 +108,52 @@ tr:nth-child(even) {
     width: 30px;
 }
 
+.teamsTable img {
+    height: 30px;
+    width: 30px;
+}
+
 .full-width {
     width: 85%;
+}
+
+.mat-header-cell {
+    text-align: center;
+}
+
+:host ::ng-deep .mat-sort-header-container {
+    display: flex;
+    justify-content: center;
+}
+
+table {
+    text-align: center;
+}
+
+
+/* *************************** MEDIA QUERIES **************************** */
+
+
+@media screen and (max-width: 950px) {
+
+    .statsContainer {
+        flex-wrap: wrap;
+    }
+
+    .halfContainer {
+        width: 95%;
+        height: auto;
+        margin-top: 50px;
+    }
+}
+
+@media screen and (max-width: 460px) {
+
+    .card {
+        overflow-x: auto;
+    }
+
+    .teamsTable {
+        justify-content: flex-start;
+    }
 }

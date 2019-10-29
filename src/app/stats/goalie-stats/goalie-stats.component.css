@@ -38,3 +38,16 @@
     height: 30px;
     width: 30px;
 }
+
+.mat-header-cell {
+    text-align: center;
+}
+
+:host ::ng-deep .mat-sort-header-container {
+    display: flex;
+    justify-content: center;
+}
+
+table {
+    text-align: center;
+}
