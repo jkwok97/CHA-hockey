@@ -14,3 +14,7 @@
     justify-items: center;
     align-items: flex-start;
 }
+
+.click {
+    cursor: pointer;
+}
