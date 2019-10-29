@@ -17,6 +17,7 @@
 .table {
     width: 100%;
     margin-bottom: 30px;
+    overflow-x: auto;
 }
 
 .full-width {
@@ -52,6 +53,11 @@
 
 .mat-header-cell {
     text-align: center;
+}
+
+.mat-cell {
+    margin-left: 5px !important;
+    margin-right: 5px !important; 
 }
 
 :host ::ng-deep .mat-sort-header-container {
