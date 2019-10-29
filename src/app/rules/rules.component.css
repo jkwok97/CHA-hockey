@@ -48,3 +48,56 @@ button:hover {
     font-style: italic;
     color: #3D5AFE;
 }
+
+/* *************************** MEDIA QUERIES **************************** */
+
+
+/* ***** IPAD PRO ***** */
+@media screen and (max-width: 1366px) and (max-height: 1024px) and (orientation: landscape) {
+    
+}
+
+/* ***** IPAD ***** */
+@media screen and (max-width: 1024px) and (max-height: 768px) and (orientation: landscape) {
+    
+}
+
+@media screen and (max-width: 950px) {
+   .bodyContainer{
+       height: auto;
+   }
+
+   .container {
+       margin-top: 30px;
+   }
+}
+
+@media screen and (max-width: 550px) {
+    .bodyContainer{
+        height: auto;
+    }
+ 
+    .container {
+        margin-top: 50px;
+    }
+ }
+
+ @media screen and (max-width: 400px) {
+    .bodyContainer{
+        height: auto;
+    }
+ 
+    .container {
+        margin-top: 100px;
+    }
+ }
+
+ @media screen and (max-width: 350px) {
+    .bodyContainer{
+        height: auto;
+    }
+ 
+    .container {
+        margin-top: 150px;
+    }
+ }
