@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { TeamsService } from 'src/app/teams/teams.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { takeWhile } from 'rxjs/operators';
 
 @Component({
@@ -59,7 +59,8 @@ export class OverallTeamStatsComponent implements OnInit, OnDestroy, AfterViewIn
 
   constructor(
     private _teamsService: TeamsService,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute, 
+    private _router: Router
   ) { }
 
   ngOnInit() {
@@ -151,6 +152,10 @@ export class OverallTeamStatsComponent implements OnInit, OnDestroy, AfterViewIn
     } else if (event.tab.textLabel === "Division") {
       this.getDivisionStats();
     }
+  }
+
+  openTeam(shortName) {
+    this._router.navigate([`teams/${shortName}`])
   }
 
   ngOnDestroy() {

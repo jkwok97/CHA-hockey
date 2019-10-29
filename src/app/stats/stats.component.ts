@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TeamsService } from '../teams/teams.service';
 import { takeWhile } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-stats',
@@ -27,7 +28,8 @@ export class StatsComponent implements OnInit {
   goaliesColumnsToDisplay = ['team_logo','player_name', 'games_played', 'wins','loss', 'ties','save_pct'];
 
   constructor(
-    private _teamsService: TeamsService
+    private _teamsService: TeamsService,
+    private _route: Router
   ) { }
 
   ngOnInit() {
@@ -72,6 +74,10 @@ export class StatsComponent implements OnInit {
   findLogo(shortName) {
     let team = this._teamsService.getTeamInfo(shortName);
     return { image: team.image, name: team.name }
+  }
+
+  openTeam(shortName) {
+    this._route.navigate([`teams/${shortName}`])
   }
 
 }

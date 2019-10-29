@@ -130,6 +130,10 @@ table {
     text-align: center;
 }
 
+.mat-row:hover {
+    cursor: pointer;
+}
+
 
 /* *************************** MEDIA QUERIES **************************** */
 

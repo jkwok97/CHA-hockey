@@ -65,7 +65,7 @@
                         </ng-container>
             
                         <tr mat-header-row *matHeaderRowDef="teamsColumnsToDisplay"></tr>
-                        <tr mat-row *matRowDef="let row; columns: teamsColumnsToDisplay;"></tr>
+                        <tr mat-row *matRowDef="let team; columns: teamsColumnsToDisplay;" (click)="openTeam(team.team_name)"></tr>
             
                     </table>
             
