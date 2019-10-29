@@ -23,6 +23,7 @@
     display: flex;
     justify-content: center;
     align-content: center;
+    text-align: center;
 }
 
 .title {
@@ -51,6 +52,7 @@
     display: inline-block;
     border: 1px solid white;
     border-radius: 15px; 
+    margin: 5px 10px;
 }
 
 .buttons:hover {
@@ -94,9 +96,138 @@ button:hover {
     }
 }
 
-/* ***** IPHONE X ***** */
-@media screen and (max-width: 812px) and (max-height: 375px) and (orientation: landscape) {
+@media screen and (max-width: 1009px) {
     .button-container{
         width: 90%;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .button-container{
+        width: 90%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .header-container {
+        height: 30%;
+    }
+}
+
+/* ***** IPAD ***** */
+@media screen and (max-width: 768px) and (max-height: 1024px) and (orientation: portrait) {
+    .header-container {
+        height: 20%;
+    }
+
+    .header-text {
+        height: 40%;
+    }
+}
+
+@media screen and (max-width: 752px) {
+    .header-container {
+        height: 35%;
+    }
+
+    .header-text {
+        height: 40%;
+    }
+
+    .sub-title {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .header-container {
+        height: 35%;
+    }
+
+    .header-text {
+        height: 40%;
+    }
+}
+
+@media screen and (max-width: 474px) {
+    .header-container {
+        height: 45%;
+    }
+
+    .header-text {
+        height: 40%;
+    }
+}
+
+/* ***** IPHONE XS ***** */
+@media screen and (max-width: 414px) and (max-height: 896px) and (orientation: portrait) {
+    .header-container {
+        height: 55%;
+    }
+
+    .header-text {
+        height: 40%;
+    }
+
+    .sub-title {
+        display: none;
+    }
+}
+
+/* ***** IPHONE 6,7,8 plus ***** */
+@media screen and (max-width: 414px) and (max-height: 736px) and (orientation: portrait) {
+    .header-container {
+        height: 55%;
+    }
+
+    .header-text {
+        height: 45%;
+    }
+
+    .sub-title {
+        display: none;
+    }
+}
+
+/* ***** IPHONE XS ***** */
+@media screen and (max-width: 375px) and (max-height: 812px) and (orientation: portrait) {
+    .header-container {
+        height: 55%;
+    }
+
+    .header-text {
+        height: 40%;
+    }
+
+    .sub-title {
+        display: none;
+    }
+}
+
+/* ***** IPHONE XS ***** */
+@media screen and (max-width: 375px) and (max-height: 667px) and (orientation: portrait) {
+    .header-container {
+        height: 55%;
+    }
+
+    .header-text {
+        height: 50%;
+    }
+
+    .sub-title {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 349px) {
+    .header-container {
+        height: 50%;
+    }
+
+    .header-text {
+        height: 40%;
     }
 }
