@@ -41,13 +41,13 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .header p {
     color: white;
     font-weight: 100;
-    margin: 0 10px 0 10px;
+    margin: 5px 10px 0 10px;
 }
 
 .link {
@@ -94,13 +94,14 @@ th, td {
     color: white;
     text-align: center;
     font-weight: 100;
-    border: 1px solid #3D5AFE;
+    /* border-bottom: 1px solid #3D5AFE; */
     padding: 2px 15px;
 }
 
 tr:nth-child(even) {
     background-color: #3D5AFE;
 }
+
 
 .table p {
     width: 100%;

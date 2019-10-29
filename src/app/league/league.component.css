@@ -77,3 +77,36 @@ hr.line-style {
     border-top: 1px solid #3D5AFE;
     border-bottom: 1px solid #3D5AFE;
 }
+
+/* *************************** MEDIA QUERIES **************************** */
+
+/* ***** IPAD PRO ***** */
+@media screen and (max-width: 1366px) and (max-height: 1024px) and (orientation: landscape) {
+    .team-card {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+    }
+
+    .logo {
+        height: auto;
+        width: 100%;
+    }
+}
+
+/* ***** IPAD ***** */
+@media screen and (max-width: 1024px) and (max-height: 768px) and (orientation: landscape) {
+    .team-card {
+        /* border: 1px solid red; */
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: flex-start;
+    }
+
+    .logo {
+        height: auto;
+        width: 100%;
+    }
+}
