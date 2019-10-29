@@ -96,8 +96,12 @@ export class StatsComponent implements OnInit, OnDestroy {
   }
 
   findLogo(shortName) {
-    let team = this._teamsService.getTeamInfo(shortName);
-    return { image: team.image, name: team.name }
+    if (shortName) {
+      let team = this._teamsService.getTeamInfo(shortName);
+      return { image: team.image, name: team.name }
+    } else {
+      return { image: "../../assets/team_logos/Free_Agent_logo_square.jpg", name: "Free Agent"}
+    }
   }
 
   openTeam(shortName) {
