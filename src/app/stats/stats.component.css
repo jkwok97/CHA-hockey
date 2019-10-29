@@ -7,7 +7,6 @@
 }
 
 .halfContainer {
-    /* border: 1px solid blue; */
     width: 45%;
     height: 90%;
     display: flex;
@@ -17,25 +16,11 @@
 }
 
 .overallTeamSection{
-    /* border: 1px solid red; */
     width: 95%;
-    /* height: 95%; */
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: flex-start;
-    box-shadow: 0 0 50px red;
-    margin-bottom: 50px;
-}
-
-.section {
-    /* border: 1px solid red; */
-    width: 95%;
-    /* height: 45%; */
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    align-content: flex-start;
     box-shadow: 0 0 50px red;
     margin-bottom: 50px;
 }
@@ -100,8 +85,6 @@ th, td {
     color: white;
     text-align: center;
     font-weight: 100;
-    /* border-bottom: 1px solid #3D5AFE; */
-    /* padding: 2px 15px; */
 }
 
 tr:nth-child(even) {

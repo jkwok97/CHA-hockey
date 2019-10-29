@@ -38,4 +38,9 @@
     font-size: 14px;
     width: 100%;
     color: red;
-  }
+}
+
+.table img {
+    height: 30px;
+    width: 30px;
+}

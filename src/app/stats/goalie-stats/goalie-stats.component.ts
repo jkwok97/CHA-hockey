@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { TeamsService } from 'src/app/teams/teams.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
@@ -11,7 +11,7 @@ import { takeWhile } from 'rxjs/operators';
   templateUrl: './goalie-stats.component.html',
   styleUrls: ['./goalie-stats.component.css']
 })
-export class GoalieStatsComponent implements OnInit {
+export class GoalieStatsComponent implements OnInit, OnDestroy {
 
   private _alive:boolean = true;
   isLoading: boolean = false;
@@ -22,7 +22,7 @@ export class GoalieStatsComponent implements OnInit {
 
   goalies: MatTableDataSource<any[]>;
   goaliesColumnsToDisplay = [
-    'player_name', 'games_played','minutes_played', 'goals_against_avg', 'wins','loss', 'ties', 'en_goals',
+    'team_logo', 'player_name', 'games_played','minutes_played', 'goals_against_avg', 'wins','loss', 'ties', 'en_goals',
     'shutouts', 'goals_against', 'saves', 'shots_for', 'save_pct', 'goals', 'assists', 'points', 'penalty_minutes', 'pass_pct'
   ];
 
@@ -42,7 +42,6 @@ export class GoalieStatsComponent implements OnInit {
     this.isLoading = true;
     if (this._route.snapshot.routeConfig.path === "stats/goalies") {
       this._teamsService.getGoalieStats().pipe(takeWhile(() => this._alive)).subscribe(resp => {
-        console.log(resp);
         this.stats = resp as [];
         this.goalies = new MatTableDataSource<any[]>(this.stats);
         this.length = this.stats.length;
@@ -55,7 +54,6 @@ export class GoalieStatsComponent implements OnInit {
     } else if (this._route.snapshot.routeConfig.path === "teams/:params") {
         this.short_team_name = this._route.snapshot.paramMap.get("params");
         this._teamsService.getTeamGoalieStats(this.short_team_name).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-        console.log(resp);
         this.stats = resp as [];
         this.goalies = new MatTableDataSource<any[]>(this.stats);
         this.length = this.stats.length;
@@ -66,7 +64,15 @@ export class GoalieStatsComponent implements OnInit {
         }, 350);
       });
     }
-    
+  }
+
+  findLogo(shortName) {
+    let team = this._teamsService.getTeamInfo(shortName);
+    return { image: team.image, name: team.name }
+  }
+
+  ngOnDestroy() {
+    this._alive = false;
   }
 
 }

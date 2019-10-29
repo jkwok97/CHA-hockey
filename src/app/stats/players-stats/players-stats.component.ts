@@ -23,7 +23,7 @@ export class PlayersStatsComponent implements OnInit, OnDestroy {
 
   players: MatTableDataSource<any[]>;
   playersColumnsToDisplay = [
-    'player_name', 'team_name', 'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'sh_goals',
+    'team_logo', 'player_name', 'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'sh_goals',
     'gw_goals', 'gt_goals', 'shots', 'shooting_pct', 'minutes_per_game', 'fo_pct', 'pass_pct', 'corner_pct', 'hits', 'blocked_shots'
   ];
 
@@ -77,6 +77,11 @@ export class PlayersStatsComponent implements OnInit, OnDestroy {
     if (this.players.paginator) {
       this.players.paginator.firstPage();
     }
+  }
+
+  findLogo(shortName) {
+    let team = this._teamsService.getTeamInfo(shortName);
+    return { image: team.image, name: team.name }
   }
 
   ngOnDestroy() {
