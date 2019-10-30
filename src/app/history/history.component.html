@@ -1,37 +1,11 @@
-<div class="historyContainer">
-    <div class="container">
-        <div class="card">
-            <div class="header">
-                <p>Champions</p>
-            </div>
-            <div class="image">
-                <img src='../../assets/images/libertycup.jpg' routerLink="champions">
-            </div>
-        </div>
+<div class="historyContainer cha-dark">
+
+    <div class="body">
+        <mat-tab-group color="accent">
+            <mat-tab label="Champions"><app-champions></app-champions></mat-tab>
+            <mat-tab label="Drafts"><app-drafts></app-drafts></mat-tab>
+            <mat-tab label="Archives"><app-archives></app-archives></mat-tab>
+        </mat-tab-group>
     </div>
 
-    <div class="container">
-        <div class="card">
-            <div class="header">
-                <p>Drafts</p>
-            </div>
-            <div class="image">
-                <img src='../../assets/images/pettersson.jpg' routerLink="drafts">
-            </div>
-        </div> 
-    </div>
-
-    <div class="container">
-        <div class="card">
-            <div class="header">
-                <p>Archives</p>
-            </div>
-            <div class="image">
-                <img src='../../assets/images/cha_logo.jpg'>
-            </div>
-            <div class="random">
-                <p>Coming Soon!</p>
-            </div>
-        </div>
-    </div>
 </div>

@@ -15,6 +15,7 @@ import { ChampionsComponent } from './history/champions/champions.component';
 import { DraftsComponent } from './history/drafts/drafts.component';
 import { TradesComponent } from './trades/trades.component';
 import { WaiverPriorityComponent } from './waiver-priority/waiver-priority.component';
+import { ArchivesComponent } from './history/archives/archives.component';
 
 const routes: Routes = [
   { path: 'main', component: LeagueComponent },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'history', component: HistoryComponent },
   { path: 'history/champions', component: ChampionsComponent },
   { path: 'history/drafts', component: DraftsComponent },
+  { path: 'history/archives', component: ArchivesComponent },
   { path: 'rules', component: RulesComponent },
   { path: 'rules/equalization', component: RulesComponent },
   { path: 'rules/lottery', component: RulesComponent },
