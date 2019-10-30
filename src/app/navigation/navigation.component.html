@@ -7,19 +7,25 @@
             <p class="sub-title">est. 1995</p>
         </div>
 
-        <div class="button-container">
-            <div class="buttons" *ngFor="let route of routes">
-                <button mat-stroked-button color="primary" routerLink="{{ route.url }}" [ngClass]="{chosen: route.current, button: !route.current}">
-                    <span class="route-name">{{ route.name }}</span>
-                </button>
-            </div>
-        </div>
-
     </div>
 
-    <div class="body-container">
+    <div class="body-container cha-dark">
+
+        <nav mat-tab-nav-bar color="accent">
+            <a mat-tab-link
+                *ngFor="let route of routes"
+                [routerLink]="route.url"
+                routerLinkActive #rla="routerLinkActive"
+                [active]="rla.isActive">
+                {{route.name}}
+            </a>
+        </nav>
+        
         <router-outlet></router-outlet>
+
     </div>
 
 </div>
+
+
 

@@ -1,9 +1,21 @@
 <div class="container">
     <div class="buttonContainer">
-        <div class="buttons" *ngFor="let route of routes">
+        <!-- <div class="buttons" *ngFor="let route of routes">
             <button mat-stroked-button color="primary" [ngClass]="{chosen: route.current, button: !route.current}" (click)="openBottomSheet(route)">
                 <span class="route-name">{{ route.name }}</span>
             </button>
-        </div>
+        </div> -->
+
+        <nav mat-tab-nav-bar color="accent">
+            <a mat-tab-link
+                *ngFor="let route of routes"
+                routerLinkActive #rla="routerLinkActive"
+                [active]="rla.isActive"
+                (click)="openBottomSheet(route)"
+            >
+                {{route.name}}
+            </a>
+        </nav>
+
     </div>
 </div>

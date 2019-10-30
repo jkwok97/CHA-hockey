@@ -21,6 +21,8 @@ export class RulesComponent implements OnInit, OnDestroy {
 
   route: any;
 
+  activeLinkIndex = -1;
+
   routes = [
     {name: 'Player Equalization', url: 'equalization', current: false},
     {name: 'Draft Lottery', url: 'lottery', current: false},
@@ -35,15 +37,8 @@ export class RulesComponent implements OnInit, OnDestroy {
     private _router: Router,
     private _bottomSheet: MatBottomSheet
   ) { 
-    this._router.events.pipe(filter((event: any) => event instanceof NavigationEnd)).subscribe(event => {
-      this.routes.map((r) => {
-        if (event['url'].includes(r.url)) {
-          r.current = true;
-          this.route = event['url'];
-        } else {
-          r.current = false;
-        }
-      });
+    this._router.events.subscribe((res) => {
+      this.activeLinkIndex = this.routes.indexOf(this.routes.find(tab => tab.url === '.' + this._router.url));
     });
   }
 

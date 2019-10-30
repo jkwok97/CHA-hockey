@@ -11,6 +11,8 @@ export class NavigationComponent implements OnInit {
 
   route: string;
 
+  activeLinkIndex = -1;
+
   routes = [
     {name: 'Statistics', url: 'stats', current: false},
     {name: 'Teams', url: 'teams', current: false},
@@ -24,16 +26,20 @@ export class NavigationComponent implements OnInit {
   constructor(
     private _router: Router
   ) { 
-    _router.events.pipe(filter((event: any) => event instanceof NavigationEnd)).subscribe(event => {
-      this.routes.map((r) => {
-        if (event['url'].includes(r.url)) {
-          r.current = true;
-          this.route = event['url'];
-        } else {
-          r.current = false;
-        }
-      });
+    this._router.events.subscribe((res) => {
+      this.activeLinkIndex = this.routes.indexOf(this.routes.find(tab => tab.url === '.' + this._router.url));
     });
+  }
+
+  onTabChange(event) {
+    console.log(event);
+    if (event.tab.textLabel === "Statistics") {
+      this._router.navigate(['stats']);
+    } else if (event.tab.textLabel === "Conference") {
+      
+    } else if (event.tab.textLabel === "Division") {
+      
+    }
   }
 
   ngOnInit() {
