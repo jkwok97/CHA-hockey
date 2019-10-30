@@ -11,8 +11,8 @@
             <div class="headerText">
                 <p>North West Division</p>
             </div>
-            <div class="team-card" *ngFor="let northwestTeam of northwestTeams">
-                <img src="{{northwestTeam.image}}" class="logo" (click)="sendToTeam(northwestTeam.shortName)">
+            <div class="team-card" *ngFor="let northwestTeam of northwestTeams" (click)="sendToTeam(northwestTeam.shortName)">
+                <img src="{{northwestTeam.image}}" class="logo">
                 <p>{{northwestTeam.name}}</p>
             </div>
         </div>
@@ -21,8 +21,8 @@
             <div class="headerText">
                 <p>South West Division</p>
             </div>
-            <div class="team-card" *ngFor="let southwestTeam of southwestTeams">
-                <img src="{{southwestTeam.image}}" class="logo" (click)="sendToTeam(southwestTeam.shortName)">
+            <div class="team-card" *ngFor="let southwestTeam of southwestTeams" (click)="sendToTeam(southwestTeam.shortName)">
+                <img src="{{southwestTeam.image}}" class="logo">
                 <p>{{southwestTeam.name}}</p>
             </div>
         </div>
@@ -40,8 +40,8 @@
             <div class="headerText">
                 <p>North East Division</p>
             </div>
-            <div class="team-card" *ngFor="let northeastTeam of northeastTeams" >
-                <img src="{{northeastTeam.image}}" class="logo" (click)="sendToTeam(northeastTeam.shortName)">
+            <div class="team-card" *ngFor="let northeastTeam of northeastTeams" (click)="sendToTeam(northeastTeam.shortName)">
+                <img src="{{northeastTeam.image}}" class="logo" >
                 <p>{{northeastTeam.name}}</p>
             </div>
         </div>
@@ -50,8 +50,8 @@
             <div class="headerText">
                 <p>South East Division</p>
             </div>
-            <div class="team-card" *ngFor="let southeastTeam of southeastTeams">
-                <img src="{{southeastTeam.image}}" class="logo" (click)="sendToTeam(southeastTeam.shortName)">
+            <div class="team-card" *ngFor="let southeastTeam of southeastTeams" (click)="sendToTeam(southeastTeam.shortName)">
+                <img src="{{southeastTeam.image}}" class="logo" >
                 <p>{{southeastTeam.name}}</p>
             </div>
         </div>

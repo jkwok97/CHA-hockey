@@ -25,7 +25,7 @@ export class DraftsComponent implements OnInit {
   ];
 
   page: number = 1;
-  pageSize: number = 10;
+  pageSize: number = 20;
   length: number = 0;
 
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
