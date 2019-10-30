@@ -24,30 +24,6 @@
     align-content: center;
 }
 
-.buttons {
-    display: inline-block;
-    border: 1px solid white;
-    border-radius: 15px; 
-    margin: 5px 10px;
-}
-
-.buttons:hover {
-    border: 1px solid #3D5AFE;
-}
-
-button {
-    font-size: large;
-    padding: 5px 20px;
-}
-
-button:hover {
-    color: #3D5AFE;
-}
-
-.chosen {
-    font-style: italic;
-    color: #3D5AFE;
-}
 
 /* *************************** MEDIA QUERIES **************************** */
 
