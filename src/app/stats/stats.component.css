@@ -78,11 +78,12 @@
 }
 
 .teamsTable {
-    width: 100%;
+    width: 90%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     margin: 20px 0px;
+    overflow-x: auto;
 }
 
 table {
@@ -158,6 +159,6 @@ table {
     }
 
     .teamsTable {
-        justify-content: flex-start;
+        justify-content: center;
     }
 }

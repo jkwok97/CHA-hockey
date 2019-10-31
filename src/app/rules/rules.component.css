@@ -18,10 +18,6 @@
 .buttonContainer {
     width: 100%;
     height: 15%;
-    /* display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-content: center; */
 }
 
 
@@ -43,9 +39,6 @@
        height: auto;
    }
 
-   .container {
-       margin-top: 30px;
-   }
 }
 
 @media screen and (max-width: 550px) {
@@ -53,9 +46,6 @@
         height: auto;
     }
  
-    .container {
-        margin-top: 50px;
-    }
  }
 
  @media screen and (max-width: 400px) {
@@ -63,17 +53,11 @@
         height: auto;
     }
  
-    .container {
-        margin-top: 100px;
-    }
  }
 
  @media screen and (max-width: 350px) {
     .bodyContainer{
         height: auto;
     }
- 
-    .container {
-        margin-top: 150px;
-    }
+
  }

@@ -16,6 +16,7 @@
 
 .table {
     width: 95%;
+    overflow-x: auto;
 }
 
 .full-width {

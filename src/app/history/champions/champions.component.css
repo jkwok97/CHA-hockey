@@ -95,6 +95,8 @@ tr:nth-child(even) {
     .championsContainer {
         height: auto;
         flex-direction: column-reverse;
+        justify-content: center;
+        align-content: center;
     }
 
     .halfContainer {
