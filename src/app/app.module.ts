@@ -30,6 +30,9 @@ import { WinningsComponent } from './rules/winnings/winnings.component';
 import { WaiverPriorityComponent } from './waiver-priority/waiver-priority.component';
 import { ArchivesComponent } from './history/archives/archives.component';
 import { MainComponent } from './main/main.component';
+import { LoginComponent } from './main/login/login.component';
+import { AuthService } from './main/auth.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -57,7 +60,8 @@ import { MainComponent } from './main/main.component';
     WinningsComponent,
     WaiverPriorityComponent,
     ArchivesComponent,
-    MainComponent
+    MainComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -65,8 +69,9 @@ import { MainComponent } from './main/main.component';
     MaterialModule, 
     BrowserAnimationsModule,
     HttpClientModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent],
   entryComponents: [
     EqualizationComponent, LotteryComponent,

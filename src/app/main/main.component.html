@@ -1,9 +1,14 @@
 <div class="container">
 
-    <div class="header">
+    <!-- <div class="header">
         <div class="headerImage">
             <img src="../../assets/images/team_cha_logo.jpg" class="logoImage">
         </div>
+    </div> -->
+
+    <div class="welcome">
+        <p>Welcome {{currentUser[0].f_name}} {{currentUser[0].l_name}}!</p>
+        <button mat-raised-button color="accent" (click)="logout()" class="welcome-button">Logout</button>
     </div>
 
 </div>

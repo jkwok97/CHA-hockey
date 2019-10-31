@@ -11,7 +11,7 @@
 
     <div class="body-container cha-dark">
 
-        <nav mat-tab-nav-bar color="accent">
+        <nav mat-tab-nav-bar color="accent" *ngIf="currentUser">
             <a mat-tab-link
                 *ngFor="let route of routes"
                 [routerLink]="route.url"

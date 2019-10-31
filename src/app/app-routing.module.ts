@@ -17,30 +17,33 @@ import { TradesComponent } from './trades/trades.component';
 import { WaiverPriorityComponent } from './waiver-priority/waiver-priority.component';
 import { ArchivesComponent } from './history/archives/archives.component';
 import { MainComponent } from './main/main.component';
+import { LoginComponent } from './main/login/login.component';
+import { AuthGuard } from './main/auth.guard';
 
 const routes: Routes = [
-  { path: 'main', component: MainComponent },
-  { path: 'stats', component: StatsComponent },
-  { path: 'stats/players', component: PlayersStatsComponent },
-  { path: 'stats/goalies', component: GoalieStatsComponent },
-  { path: 'stats/league', component: OverallTeamStatsComponent },
-  { path: 'teams', component: LeagueComponent },
-  { path: 'teams/:params', component: TeamStatsComponent },
-  { path: 'history', component: HistoryComponent },
-  { path: 'history/champions', component: ChampionsComponent },
-  { path: 'history/drafts', component: DraftsComponent },
-  { path: 'history/archives', component: ArchivesComponent },
-  { path: 'rules', component: RulesComponent },
-  { path: 'rules/equalization', component: RulesComponent },
-  { path: 'rules/lottery', component: RulesComponent },
-  { path: 'rules/egr', component: RulesComponent },
-  { path: 'rules/protection', component: RulesComponent },
-  { path: 'rules/rosters', component: RulesComponent },
-  { path: 'rules/waivers', component: RulesComponent },
-  { path: 'rules/winnings', component: RulesComponent },
-  { path: 'schedule', component: ScheduleComponent },
-  { path: 'trades-picks', component: TradesComponent },
-  { path: 'waiver-priority', component: WaiverPriorityComponent },
+  { path: 'main', component: MainComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent},
+  { path: 'stats', component: StatsComponent, canActivate: [AuthGuard] },
+  { path: 'stats/players', component: PlayersStatsComponent, canActivate: [AuthGuard] },
+  { path: 'stats/goalies', component: GoalieStatsComponent, canActivate: [AuthGuard] },
+  { path: 'stats/league', component: OverallTeamStatsComponent, canActivate: [AuthGuard] },
+  { path: 'teams', component: LeagueComponent, canActivate: [AuthGuard] },
+  { path: 'teams/:params', component: TeamStatsComponent, canActivate: [AuthGuard] },
+  { path: 'history', component: HistoryComponent, canActivate: [AuthGuard] },
+  { path: 'history/champions', component: ChampionsComponent, canActivate: [AuthGuard] },
+  { path: 'history/drafts', component: DraftsComponent, canActivate: [AuthGuard] },
+  { path: 'history/archives', component: ArchivesComponent, canActivate: [AuthGuard] },
+  { path: 'rules', component: RulesComponent, canActivate: [AuthGuard] },
+  { path: 'rules/equalization', component: RulesComponent, canActivate: [AuthGuard] },
+  { path: 'rules/lottery', component: RulesComponent, canActivate: [AuthGuard] },
+  { path: 'rules/egr', component: RulesComponent, canActivate: [AuthGuard] },
+  { path: 'rules/protection', component: RulesComponent, canActivate: [AuthGuard] },
+  { path: 'rules/rosters', component: RulesComponent, canActivate: [AuthGuard] },
+  { path: 'rules/waivers', component: RulesComponent, canActivate: [AuthGuard] },
+  { path: 'rules/winnings', component: RulesComponent, canActivate: [AuthGuard] },
+  { path: 'schedule', component: ScheduleComponent, canActivate: [AuthGuard] },
+  { path: 'trades-picks', component: TradesComponent, canActivate: [AuthGuard] },
+  { path: 'waiver-priority', component: WaiverPriorityComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

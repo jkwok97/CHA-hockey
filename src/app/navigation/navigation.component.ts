@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { takeWhile, filter } from 'rxjs/operators';
+import { AuthService } from '../main/auth.service';
+import { User } from '../_models/user';
 
 @Component({
   selector: 'app-navigation',
@@ -8,6 +10,10 @@ import { takeWhile, filter } from 'rxjs/operators';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
+
+  loggedIn: boolean = false;
+
+  currentUser: User;
 
   route: string;
 
@@ -24,8 +30,23 @@ export class NavigationComponent implements OnInit {
   ];
 
   constructor(
-    private _router: Router
+    private _router: Router, 
+    private _authService: AuthService
   ) { 
+
+    // redirect to home if already logged in
+    if (this._authService.currentUserValue) { 
+      console.log(this._authService.currentUserValue)
+      this.loggedIn = true;
+      console.log(this.loggedIn);
+      this._router.navigate(['login']);
+    } else {
+      console.log(this.loggedIn);
+
+      this._router.navigate(['login']);
+    }
+
+    this._authService.currentUser.subscribe(x => this.currentUser = x);
     this._router.events.subscribe((res) => {
       this.activeLinkIndex = this.routes.indexOf(this.routes.find(tab => tab.url === '.' + this._router.url));
     });
@@ -43,7 +64,7 @@ export class NavigationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._router.navigate(['main']);
+    this._router.navigate(['login']);
   }
 
 }

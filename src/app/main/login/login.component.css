@@ -1,0 +1,81 @@
+.container {
+    height: 100%;
+    width: 100%;
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+}
+
+.image {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.card {
+    border: 1px solid lightgray;
+    border-radius: 20px;
+    box-shadow: 0 0 50px lightsteelblue;
+    width: 50%;
+    color: white;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+}
+
+.card-header {
+    width: 100%;
+    font-size: xx-large;
+    text-align: center;
+    font-weight: 100;
+}
+
+.card-body {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.form {
+    width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.form-field {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.icons {
+    margin-right: 10px;
+    color: blue;
+}
+
+.verified {
+    color: green;
+}
+
+.unverified {
+    color: red;
+}
+
+.spinner {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.error {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
