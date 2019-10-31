@@ -16,6 +16,7 @@
 
 .table {
     width: 90%;
+    overflow-x: auto;
 }
 
 .full-width {
@@ -24,6 +25,14 @@
 
 .mat-row:hover {
     background-color: rgba(61, 90, 254, 0.4);
+}
+
+.mat-table {
+    border-spacing: 5px;
+}
+
+.mat-cell {
+    white-space: nowrap;
 }
 
 .spinner {

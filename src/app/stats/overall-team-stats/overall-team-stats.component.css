@@ -47,6 +47,12 @@
     width: 100%;
 }
 
+.mat-cell {
+    white-space: nowrap;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
 .table img {
     height: 30px;
     width: 30px;
