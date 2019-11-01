@@ -1,14 +1,61 @@
 <div class="container">
 
-    <!-- <div class="header">
-        <div class="headerImage">
-            <img src="../../assets/images/team_cha_logo.jpg" class="logoImage">
-        </div>
-    </div> -->
-
     <div class="welcome">
-        <p>Welcome {{currentUser[0].f_name}} {{currentUser[0].l_name}}!</p>
-        <button mat-raised-button color="accent" (click)="logout()" class="welcome-button">Logout</button>
+        <mat-form-field color="accent">
+            <mat-label>Welcome {{currentUser[0].f_name}} {{currentUser[0].l_name}}!</mat-label>
+            <mat-select>
+                <mat-option (click)="logout()">Logout</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="team-header">
+        <div class="image">
+            <img src="{{team.image}}">
+            <div class="team-name">
+                <p>{{team.name}}</p>
+                <button mat-raised-button color="accent" (click)="toSalaryPage(team.link)">Salary Page</button>
+            </div>
+            <img src="{{team.image}}">
+        </div>
+    </div>
+
+    <div class="stat-container">
+
+        <div class="stat-card">
+            <div class="chart-container">
+                <canvas id="pointsChart"></canvas>
+            </div>
+            
+            <div class="stat-card-rank">
+                <p>Points: <span class="stats">{{team.points}}</span></p>
+                <p>Overall Rank: <span class="stats">{{pointsRank}}</span> of 20</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="chart-container">
+                <canvas id="goalDiffChart"></canvas>
+            </div>
+            
+            <div class="stat-card-rank">
+                <p>Goals Diff: <span class="stats">{{team.goal_diff}}</span></p>
+                <p>Overall Rank: <span class="stats">{{goalDiffRank}}</span> of 20</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <p>shot diff</p>
+        </div>
+
+        <div class="stat-card">
+            <p>pp%</p>
+        </div>
+
+        <div class="stat-card">
+            <p>pk%</p>
+        </div>
+
     </div>
 
 </div>

@@ -85,6 +85,7 @@ export class TeamsService {
   }
 
   getTeamInfo(short) {
+    console.log(short);
     this.league.conference.forEach( conference => {
       conference.division.forEach(division => {
         let found = division.teams.find(team => team.shortName === short);
