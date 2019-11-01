@@ -708,7 +708,7 @@ export class MainComponent implements OnInit, OnDestroy {
     let playersPpGoalsData = [];
     let colors = [];
     let opacity = "90";
-    this.goalPpLeader = this.checkPlayerRank("goals");
+    this.goalPpLeader = this.checkPlayerRank("pp_goals");
     this.playerStats.forEach( (player) => {
       labels.push(player.player_name);
       playersPpGoalsData.push(player.pp_goals);
