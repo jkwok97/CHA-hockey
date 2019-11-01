@@ -90,6 +90,7 @@
     border-radius: 50px;
     box-shadow: 0 0 50px red;
     width: 45%;
+    margin-bottom: 15px;
 }
 
 .stat-card-rank {
