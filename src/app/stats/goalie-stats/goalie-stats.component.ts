@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { TeamsService } from 'src/app/teams/teams.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -40,7 +40,8 @@ export class GoalieStatsComponent implements OnInit, OnDestroy {
 
   constructor(
     private _teamsService: TeamsService,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _router: Router
   ) { }
 
   ngOnInit() {
@@ -80,6 +81,11 @@ export class GoalieStatsComponent implements OnInit, OnDestroy {
     } else {
       return { image: "../../assets/team_logos/Free_Agent_logo_square.jpg", name: "Free Agent"}
     }
+  }
+
+  openGoaliePlayer(name, team) {
+    this._router.navigate([`/stats/players/${name}`]);
+    this._teamsService.sendPlayerStatsTrigger(this.stats);
   }
 
   ngOnDestroy() {

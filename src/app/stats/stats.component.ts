@@ -18,6 +18,7 @@ export class StatsComponent implements OnInit, OnDestroy {
   isLeagueLoading: boolean = false;
 
   stats: any;
+  goalieStats: any;
   pointLeaders = [];
   currPointStreakLeaders = [];
   longPointStreakLeaders = [];
@@ -53,19 +54,12 @@ export class StatsComponent implements OnInit, OnDestroy {
     this._teamsService.getPlayerStats().pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.stats = resp;
       this.getPointLeaders(resp);
-      this.isLeadersLoading = false;
-    });
-    this._teamsService.getPlayerStats().pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      this.stats = resp;
       this.getPointStreakLeaders(resp);
-      this.isLeadersLoading = false;
-    });
-    this._teamsService.getPlayerStats().pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      this.stats = resp;
       this.getLongPointStreakLeaders(resp);
       this.isLeadersLoading = false;
     });
     this._teamsService.getGoalieStats().pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      this.goalieStats = resp;
       this.getGoalieLeaders(resp);
       this.isGoaliesLoading = false;
     });
@@ -80,27 +74,35 @@ export class StatsComponent implements OnInit, OnDestroy {
   }
 
   getPointLeaders(resp) {
-    this.pointLeaders = resp.sort((a,b) => b.points - a.points);
-    this.pointLeaders.splice(10, this.pointLeaders.length-10);
-    this.players = new MatTableDataSource<any[]>(this.pointLeaders);
+    let tempLeaders = resp;
+    tempLeaders.forEach(element => { this.pointLeaders.push(element) });
+    this.pointLeaders.sort((a,b) => b.points - a.points);
+    let leaders = this.pointLeaders.splice(0, 10);
+    this.players = new MatTableDataSource<any[]>(leaders);
   }
 
   getPointStreakLeaders(resp) {
-    this.currPointStreakLeaders = resp.sort((a,b) => b.current_points_streak - a.current_points_streak);
-    this.currPointStreakLeaders.splice(10, this.currPointStreakLeaders.length-10);
-    this.currPointLeaders = new MatTableDataSource<any[]>(this.currPointStreakLeaders);
+    let tempLeaders = resp;
+    tempLeaders.forEach(element => { this.currPointStreakLeaders.push(element); });
+    this.currPointStreakLeaders.sort((a,b) => b.current_points_streak - a.current_points_streak);
+    let leaders = this.currPointStreakLeaders.splice(0, 10);
+    this.currPointLeaders = new MatTableDataSource<any[]>(leaders);
   }
 
   getLongPointStreakLeaders(resp) {
-    this.longPointStreakLeaders = resp.sort((a,b) => b.longest_points_streak - a.longest_points_streak);
-    this.longPointStreakLeaders.splice(10, this.longPointStreakLeaders.length-10);
-    this.longPointLeaders = new MatTableDataSource<any[]>(this.longPointStreakLeaders);
+    let tempLeaders = resp;
+    tempLeaders.forEach(element => { this.longPointStreakLeaders.push(element); });
+    this.longPointStreakLeaders.sort((a,b) => b.longest_points_streak - a.longest_points_streak);
+    let leaders = this.longPointStreakLeaders.splice(0, 10);
+    this.longPointLeaders = new MatTableDataSource<any[]>(leaders);
   }
 
   getGoalieLeaders(resp) {
-    this.goalieLeaders = resp as [];
-    this.goalieLeaders.sort((a,b) => b.wins - a.wins).splice(10, this.goalieLeaders.length-10);
-    this.goalies = new MatTableDataSource<any[]>(this.goalieLeaders);
+    let tempLeaders = resp;
+    tempLeaders.forEach(element => { this.goalieLeaders.push(element); });
+    this.goalieLeaders.sort((a,b) => b.wins - a.wins);
+    let leaders = this.goalieLeaders.splice(0, 10);
+    this.goalies = new MatTableDataSource<any[]>(leaders);
   }
 
   getLeagueLeaders(resp) {
@@ -126,6 +128,16 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   openTeam(shortName) {
     this._route.navigate([`teams/${shortName}`])
+  }
+
+  openPlayer(name, team) {
+    this._route.navigate([`/stats/players/${name}`]);
+    this._teamsService.sendPlayerStatsTrigger(this.stats);
+  }
+
+  openGoaliePlayer(name, team) {
+    this._route.navigate([`/stats/players/${name}`]);
+    this._teamsService.sendPlayerStatsTrigger(this.goalieStats);
   }
 
   ngOnDestroy() {

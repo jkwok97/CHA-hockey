@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   ) {
     // redirect to home if already logged in
       if (this._authService.currentUserValue) { 
-        console.log(this._authService.currentUserValue)
+        // console.log(this._authService.currentUserValue)
         this.router.navigate(['main']);
       } 
    }
@@ -75,7 +75,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.router.navigate(['main']);
       },
       error => {
-        console.log(error);
+        // console.log(error);
           this.error = error.error;
           this.showNotification = true;
           this.isLoading = false;

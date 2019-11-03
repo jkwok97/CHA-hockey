@@ -62,9 +62,9 @@ export class MainComponent implements OnInit, OnDestroy {
     if (!this.currentUser) {
       this._router.navigate(['/login']);
     }
-    console.log(this.currentUser);
+    // console.log(this.currentUser);
     this.team = this._teamsService.getTeamInfo(this.currentUser[0].short_name);
-    console.log(this.team);
+    // console.log(this.team);
    }
 
   ngOnInit() {
@@ -82,11 +82,11 @@ export class MainComponent implements OnInit, OnDestroy {
     });
     this._teamsService.getTeamPlayerStats(this.team.shortName).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.playerStats = resp as [];
-      console.log(this.playerStats);
+      // console.log(this.playerStats);
     });
     this._teamsService.getTeamGoalieStats(this.team.shortName).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.goalieStats = resp as [];
-      console.log(this.goalieStats);
+      // console.log(this.goalieStats);
     });
   }
 
@@ -95,7 +95,7 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   onTabChange(event) {
-    console.log(event);
+    // console.log(event);
     if (event.tab.textLabel === "Players") {
       this.playerGoalChart();
       this.playerAssistChart();

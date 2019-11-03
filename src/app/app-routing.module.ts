@@ -19,12 +19,14 @@ import { ArchivesComponent } from './history/archives/archives.component';
 import { MainComponent } from './main/main.component';
 import { LoginComponent } from './main/login/login.component';
 import { AuthGuard } from './main/auth.guard';
+import { PlayerInfoComponent } from './stats/player-info/player-info.component';
 
 const routes: Routes = [
   { path: 'main', component: MainComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent},
   { path: 'stats', component: StatsComponent, canActivate: [AuthGuard] },
   { path: 'stats/players', component: PlayersStatsComponent, canActivate: [AuthGuard] },
+  { path: 'stats/players/:params', component: PlayerInfoComponent, canActivate: [AuthGuard] },
   { path: 'stats/goalies', component: GoalieStatsComponent, canActivate: [AuthGuard] },
   { path: 'stats/league', component: OverallTeamStatsComponent, canActivate: [AuthGuard] },
   { path: 'teams', component: LeagueComponent, canActivate: [AuthGuard] },

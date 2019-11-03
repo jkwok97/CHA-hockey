@@ -36,12 +36,12 @@ export class NavigationComponent implements OnInit {
 
     // redirect to home if already logged in
     if (this._authService.currentUserValue) { 
-      console.log(this._authService.currentUserValue)
+      // console.log(this._authService.currentUserValue)
       this.loggedIn = true;
-      console.log(this.loggedIn);
+      // console.log(this.loggedIn);
       this._router.navigate(['login']);
     } else {
-      console.log(this.loggedIn);
+      // console.log(this.loggedIn);
 
       this._router.navigate(['login']);
     }
@@ -53,7 +53,7 @@ export class NavigationComponent implements OnInit {
   }
 
   onTabChange(event) {
-    console.log(event);
+    // console.log(event);
     if (event.tab.textLabel === "Statistics") {
       this._router.navigate(['stats']);
     } else if (event.tab.textLabel === "Conference") {

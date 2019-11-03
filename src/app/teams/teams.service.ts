@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpParams, HttpClient } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
+import { Subject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,10 @@ import { environment } from 'src/environments/environment';
 export class TeamsService {
 
   currentTeam: any;
+  allPlayerInfo: any;
+  teamPlayerStats: any;
+
+  private _subjectPlayerStats = new Subject<any>();
 
   league = {
     conference: [{
@@ -58,7 +63,11 @@ export class TeamsService {
 
   constructor(
     private _http: HttpClient
-  ) { }
+  ) { 
+    this.getPlayerInfo().subscribe(resp => {
+      this.allPlayerInfo = resp;
+    });
+  }
 
   getTeamPlayerStats(team) {
     return this._http.get(`${environment.back_end_url}/players-stats/${team}`);
@@ -85,7 +94,6 @@ export class TeamsService {
   }
 
   getTeamInfo(short) {
-    console.log(short);
     this.league.conference.forEach( conference => {
       conference.division.forEach(division => {
         let found = division.teams.find(team => team.shortName === short);
@@ -102,4 +110,19 @@ export class TeamsService {
   getDrafts() {
     return this._http.get(`${environment.back_end_url}/drafts/`);
   }
+
+  getPlayerInfo() {
+    return this._http.get(`${environment.back_end_url}/player-info/`);
+  }
+
+  sendPlayerStatsTrigger(stats) {
+    // console.log(stats);
+    this.teamPlayerStats = stats;
+    this._subjectPlayerStats.next(stats);
+  }
+
+  sendPlayerStatsListener(): Observable<any> {
+    return this._subjectPlayerStats.asObservable();
+  }
+
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TeamsService } from '../teams.service';
 
@@ -7,7 +7,7 @@ import { TeamsService } from '../teams.service';
   templateUrl: './team-stats.component.html',
   styleUrls: ['./team-stats.component.css']
 })
-export class TeamStatsComponent implements OnInit {
+export class TeamStatsComponent implements OnInit, OnDestroy {
 
   private _alive:boolean = true;
   isLoading: boolean = false;
@@ -30,6 +30,10 @@ export class TeamStatsComponent implements OnInit {
 
   toSalaryPage() {
     window.open(this.team.link);
+  }
+
+  ngOnDestroy() {
+    this._alive = false;
   }
 
 }

@@ -38,7 +38,7 @@ export class DraftsComponent implements OnInit {
   ngOnInit() {
     this.isLoading = true;
     this._teamsService.getDrafts().pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       this.drafts = resp as [];
       this.players = new MatTableDataSource<any[]>(this.drafts);
       this.length = this.drafts.length;

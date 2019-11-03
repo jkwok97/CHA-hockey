@@ -1,0 +1,44 @@
+.container {
+    height: 100%;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.player-header {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 150px;
+}
+
+.logo {
+    height: 75%;
+    object-fit: scale-down;
+    margin-right: 50px;
+    margin-left: 50px;
+}
+
+.headshot {
+    height: 100%;
+    box-shadow: 0 0 30px lightsteelblue;
+}
+
+.player-info {
+    margin-left: 50px;
+}
+
+.player-info p {
+    margin: 10px 0;;
+    color: white;
+}
+
+.playerName {
+    font-size: xx-large;
+    font-weight: 100;
+}
+
+.player-desc {
+    font-size: medium;
+    font-weight: 200;
+}

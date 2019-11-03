@@ -72,7 +72,7 @@ export class OverallTeamStatsComponent implements OnInit, OnDestroy, AfterViewIn
     this.southeastTeams = this._teamsService.league.conference[1].division[1].teams;
     if (this._route.snapshot.routeConfig.path === "stats/league") {
       this._teamsService.getLeagueTeamsStats().pipe(takeWhile(() => this._alive)).subscribe(resp => {
-        console.log(resp);
+        // console.log(resp);
         this.stats = resp as [];
         this.teams = new MatTableDataSource<any[]>(this.stats);
         this.length = this.stats.length;
@@ -84,7 +84,7 @@ export class OverallTeamStatsComponent implements OnInit, OnDestroy, AfterViewIn
     } else if (this._route.snapshot.routeConfig.path === "teams/:params") {
         this.short_team_name = this._route.snapshot.paramMap.get("params");
         this._teamsService.getTeamStats(this.short_team_name).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-        console.log(resp);
+        // console.log(resp);
         this.stats = resp as [];
         this.teams = new MatTableDataSource<any[]>(this.stats);
         this.length = this.stats.length;
@@ -147,7 +147,7 @@ export class OverallTeamStatsComponent implements OnInit, OnDestroy, AfterViewIn
   }
 
   onTabChange(event) {
-    console.log(event);
+    // console.log(event);
     if (event.tab.textLabel === "League") {
       this.pageSize = 5;
       this.length = 20;

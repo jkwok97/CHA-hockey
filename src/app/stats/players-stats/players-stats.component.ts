@@ -4,7 +4,7 @@ import { takeWhile } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-players-stats',
@@ -40,7 +40,8 @@ export class PlayersStatsComponent implements OnInit, OnDestroy {
 
   constructor(
     private _teamsService: TeamsService,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _router: Router
   ) { }
 
   ngOnInit() {
@@ -48,7 +49,7 @@ export class PlayersStatsComponent implements OnInit, OnDestroy {
     if (this._route.snapshot.routeConfig.path === "stats/players") {
       this.inAllPlayersStats = true;
       this._teamsService.getPlayerStats().pipe(takeWhile(() => this._alive)).subscribe(resp => {
-        console.log(resp);
+        // console.log(resp);
         this.stats = resp as [];
         this.players = new MatTableDataSource<any[]>(this.stats);
         this.pageSize = 25;
@@ -62,24 +63,24 @@ export class PlayersStatsComponent implements OnInit, OnDestroy {
     } else if (this._route.snapshot.routeConfig.path === "teams/:params") {
         this.short_team_name = this._route.snapshot.paramMap.get("params");
         this._teamsService.getTeamPlayerStats(this.short_team_name).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-        console.log(resp);
-        this.stats = resp as [];
-        this.players = new MatTableDataSource<any[]>(this.stats);
-        this.length = this.stats.length;
-        this.pageSize = 30;
-        this.isLoading = false;  
-        setTimeout(() => {
-          this.players.paginator = this.paginator;
-          this.players.sort = this.sort;
-        }, 350);
-      });
+          // console.log(resp);
+          this.stats = resp as [];
+          this.players = new MatTableDataSource<any[]>(this.stats);
+          this.length = this.stats.length;
+          this.pageSize = 30;
+          this.isLoading = false;
+          setTimeout(() => {
+            this.players.paginator = this.paginator;
+            this.players.sort = this.sort;
+          }, 350);
+        });
+        
     }
     
   }
 
   applyFilter(filterValue: string) {
     this.players.filter = filterValue.trim().toLowerCase();
-
     if (this.players.paginator) {
       this.players.paginator.firstPage();
     }
@@ -92,6 +93,11 @@ export class PlayersStatsComponent implements OnInit, OnDestroy {
     } else {
       return { image: "../../assets/team_logos/Free_Agent_logo_square.jpg", name: "Free Agent"}
     }
+  }
+
+  openPlayer(name, team) {
+    this._router.navigate([`/stats/players/${name}`]);
+    this._teamsService.sendPlayerStatsTrigger(this.stats);
   }
 
   ngOnDestroy() {

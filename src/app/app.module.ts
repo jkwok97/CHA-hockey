@@ -33,6 +33,7 @@ import { MainComponent } from './main/main.component';
 import { LoginComponent } from './main/login/login.component';
 import { AuthService } from './main/auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PlayerInfoComponent } from './stats/player-info/player-info.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     WaiverPriorityComponent,
     ArchivesComponent,
     MainComponent,
-    LoginComponent
+    LoginComponent,
+    PlayerInfoComponent
   ],
   imports: [
     BrowserModule,

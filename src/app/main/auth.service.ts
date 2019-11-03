@@ -23,10 +23,10 @@ export class AuthService {
     }
 
     login(email: string) {
-      console.log(email);
+      // console.log(email);
       return this.http.get<any>(`${environment.back_end_url}/users/${email}`)
           .pipe(map(user => {
-            console.log(user);
+            // console.log(user);
               // store user details and basic auth credentials in local storage to keep user logged in between page refreshes
               user.authdata = window.btoa(email);
               localStorage.setItem('currentUser', JSON.stringify(user));

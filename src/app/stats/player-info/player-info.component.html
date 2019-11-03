@@ -1,0 +1,15 @@
+<div class="container">
+
+    <div class="player-header">
+        <img src="{{playerInfo.team.image}}" class="logo">
+        <img src="{{playerInfo.picture.image}}" class="headshot">
+        <div class="player-info">
+            <p class="playerName">{{playerInfo.picture.playerName}}</p>
+            <p class="player-desc">Team: {{playerInfo.team.name }}</p>
+            <p class="player-desc">Birth Date: {{playerInfo.picture.birthdate | date }}</p>
+            <p class="player-desc">Position: {{playerInfo.picture.position}}</p>
+        </div>
+        
+    </div>
+    
+</div>
