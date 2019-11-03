@@ -29,12 +29,34 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.player = this.splitName(this._route.snapshot.params.params);
-    if (this.player[0].includes(". ")) {
+    console.log(this.player);
+    if (this.player[0].includes(". ") && this.player[1].includes("*")) {
+      console.log("hi");
+      let temp = this.player[0].lastIndexOf(". ");
+      this.player[0].slice(0, temp+2);
+      let tempString1 = this.player[0].slice(temp+1);
+      let tempString2 = this.player[1].slice(0, -1);
+      console.log(tempString1);
+      console.log(tempString2)
+      this.playerInfo = this.playerStats.find( player => (player.player_name.toLowerCase().includes(this.player[0].toLowerCase())) && (player.player_name.toLowerCase().includes(this.player[1].toLowerCase())));
+      this.playerInfo.picture = this.allPlayersInfo.find( player => (player.playerName.toLowerCase().includes(tempString1.toLowerCase())) && (player.playerName.toLowerCase().includes(tempString2.toLowerCase())));
+      this.playerInfo.team = this.findLogo(this.playerInfo.team_name);
+    } else if (this.player[0].includes(". ")) {
       let temp = this.player[0].lastIndexOf(". ");
       this.player[0].slice(0, temp+2);
       let tempString = this.player[0].slice(temp+1);
+      console.log(tempString);
       this.playerInfo = this.playerStats.find( player => (player.player_name.toLowerCase().includes(this.player[0].toLowerCase())) && (player.player_name.toLowerCase().includes(this.player[1].toLowerCase())));
       this.playerInfo.picture = this.allPlayersInfo.find( player => (player.playerName.toLowerCase().includes(tempString.toLowerCase())) && (player.playerName.toLowerCase().includes(this.player[1].toLowerCase())));
+      this.playerInfo.team = this.findLogo(this.playerInfo.team_name);
+    } else if (this.player[1].includes("*")) {
+      let tempString = this.player[1].slice(0, -1);
+      console.log(tempString)
+      console.log(this.playerStats);
+      this.playerInfo = this.playerStats.find( player => (player.player_name.toLowerCase().includes(this.player[0].toLowerCase())) && (player.player_name.toLowerCase().includes(this.player[1].toLowerCase())));
+      console.log(this.playerInfo);
+      console.log(this.allPlayersInfo);
+      this.playerInfo.picture = this.allPlayersInfo.find( player => (player.playerName.toLowerCase().includes(this.player[0].toLowerCase())) && (player.playerName.toLowerCase().includes(tempString.toLowerCase())));
       this.playerInfo.team = this.findLogo(this.playerInfo.team_name);
     } else {
       // console.log(this.playerStats);

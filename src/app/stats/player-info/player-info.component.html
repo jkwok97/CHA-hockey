@@ -2,12 +2,14 @@
 
     <div class="player-header">
         <img src="{{playerInfo.team.image}}" class="logo">
-        <img src="{{playerInfo.picture.image}}" class="headshot">
+        <img src="{{playerInfo.picture.image}}" class="headshot" *ngIf="playerInfo.picture">
         <div class="player-info">
-            <p class="playerName">{{playerInfo.picture.playerName}}</p>
+            <p class="playerName" *ngIf="playerInfo.picture">{{playerInfo.picture.playerName}}</p>
+            <p class="playerName" *ngIf="!playerInfo.picture">{{playerInfo.player_name}}</p>
             <p class="player-desc">Team: {{playerInfo.team.name }}</p>
-            <p class="player-desc">Birth Date: {{playerInfo.picture.birthdate | date }}</p>
-            <p class="player-desc">Position: {{playerInfo.picture.position}}</p>
+            <p class="player-desc" *ngIf="playerInfo.picture">Birth Date: {{playerInfo.picture.birthdate | date }}</p>
+            <p class="player-desc" *ngIf="playerInfo.picture">Position: {{playerInfo.picture.position}}</p>
+            <p class="player-desc" *ngIf="!playerInfo.picture">Position: {{playerInfo.position}}</p>
         </div>
         
     </div>
