@@ -116,7 +116,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
   onTabChange(event) {
     // console.log(event);
-    if (event.tab.textLabel === "Players") {
+    if (event.tab.textLabel === "Player Charts") {
       this.playerGoalChart();
       this.playerAssistChart();
       this.playerPpGoalChart();
