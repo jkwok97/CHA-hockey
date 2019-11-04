@@ -10,14 +10,14 @@
 
                 <table mat-table [dataSource]="teams" #overallSort="matSort" matSort class="mat-elevation-z8 full-width" matSortActive="points" matSortDirection="desc">
 
-                    <ng-container matColumnDef="team_logo">
+                    <ng-container matColumnDef="team_logo" sticky>
                         <th mat-header-cell *matHeaderCellDef> </th>
                         <td mat-cell *matCellDef="let team"> 
                             <img src="{{ findLogo(team.team_name).image }}"> 
                         </td>
                     </ng-container>
         
-                    <ng-container matColumnDef="team_name">
+                    <ng-container matColumnDef="team_name" sticky>
                         <th mat-header-cell *matHeaderCellDef> Team </th>
                         <td mat-cell *matCellDef="let team"> {{findLogo(team.team_name).name}} </td>
                     </ng-container>
@@ -139,14 +139,14 @@
 
                 <table mat-table [dataSource]="westernTeams" #westernSort="matSort" matSort class="mat-elevation-z8 full-width" matSortActive="points" matSortDirection="desc">
 
-                    <ng-container matColumnDef="team_logo">
+                    <ng-container matColumnDef="team_logo" sticky>
                         <th mat-header-cell *matHeaderCellDef> </th>
                         <td mat-cell *matCellDef="let team"> 
                             <img src="{{ findLogo(team.team_name).image }}"> 
                         </td>
                     </ng-container>
         
-                    <ng-container matColumnDef="team_name">
+                    <ng-container matColumnDef="team_name" sticky>
                         <th mat-header-cell *matHeaderCellDef> Team </th>
                         <td mat-cell *matCellDef="let team"> {{findLogo(team.team_name).name}} </td>
                     </ng-container>
@@ -266,14 +266,14 @@
 
                 <table mat-table [dataSource]="easternTeams" #easternSort="matSort" matSort class="mat-elevation-z8 full-width" matSortActive="points" matSortDirection="desc">
 
-                    <ng-container matColumnDef="team_logo">
+                    <ng-container matColumnDef="team_logo" sticky>
                         <th mat-header-cell *matHeaderCellDef> </th>
                         <td mat-cell *matCellDef="let team"> 
                             <img src="{{ findLogo(team.team_name).image }}"> 
                         </td>
                     </ng-container>
         
-                    <ng-container matColumnDef="team_name">
+                    <ng-container matColumnDef="team_name" sticky>
                         <th mat-header-cell *matHeaderCellDef> Team </th>
                         <td mat-cell *matCellDef="let team"> {{findLogo(team.team_name).name}} </td>
                     </ng-container>
@@ -395,14 +395,14 @@
 
                 <table mat-table [dataSource]="northWesternTeams" #nwSort="matSort" matSort class="mat-elevation-z8 full-width" matSortActive="points" matSortDirection="desc">
 
-                    <ng-container matColumnDef="team_logo">
+                    <ng-container matColumnDef="team_logo" sticky>
                         <th mat-header-cell *matHeaderCellDef> </th>
                         <td mat-cell *matCellDef="let team"> 
                             <img src="{{ findLogo(team.team_name).image }}"> 
                         </td>
                     </ng-container>
         
-                    <ng-container matColumnDef="team_name">
+                    <ng-container matColumnDef="team_name" sticky>
                         <th mat-header-cell *matHeaderCellDef> Team </th>
                         <td mat-cell *matCellDef="let team"> {{findLogo(team.team_name).name}} </td>
                     </ng-container>
@@ -522,14 +522,14 @@
 
                 <table mat-table [dataSource]="southWesternTeams" #swSort="matSort" matSort class="mat-elevation-z8 full-width" matSortActive="points" matSortDirection="desc">
 
-                    <ng-container matColumnDef="team_logo">
+                    <ng-container matColumnDef="team_logo" sticky>
                         <th mat-header-cell *matHeaderCellDef> </th>
                         <td mat-cell *matCellDef="let team"> 
                             <img src="{{ findLogo(team.team_name).image }}"> 
                         </td>
                     </ng-container>
         
-                    <ng-container matColumnDef="team_name">
+                    <ng-container matColumnDef="team_name" sticky>
                         <th mat-header-cell *matHeaderCellDef> Team </th>
                         <td mat-cell *matCellDef="let team"> {{findLogo(team.team_name).name}} </td>
                     </ng-container>
@@ -649,14 +649,14 @@
 
                 <table mat-table [dataSource]="northEasternTeams" #neSort="matSort" matSort class="mat-elevation-z8 full-width" matSortActive="points" matSortDirection="desc">
 
-                    <ng-container matColumnDef="team_logo">
+                    <ng-container matColumnDef="team_logo" sticky>
                         <th mat-header-cell *matHeaderCellDef> </th>
                         <td mat-cell *matCellDef="let team"> 
                             <img src="{{ findLogo(team.team_name).image }}"> 
                         </td>
                     </ng-container>
         
-                    <ng-container matColumnDef="team_name">
+                    <ng-container matColumnDef="team_name" sticky>
                         <th mat-header-cell *matHeaderCellDef> Team </th>
                         <td mat-cell *matCellDef="let team"> {{findLogo(team.team_name).name}} </td>
                     </ng-container>
@@ -776,14 +776,14 @@
 
                 <table mat-table [dataSource]="southEasternTeams" #seSort="matSort" matSort class="mat-elevation-z8 full-width" matSortActive="points" matSortDirection="desc">
 
-                    <ng-container matColumnDef="team_logo">
+                    <ng-container matColumnDef="team_logo" sticky>
                         <th mat-header-cell *matHeaderCellDef> </th>
                         <td mat-cell *matCellDef="let team"> 
                             <img src="{{ findLogo(team.team_name).image }}"> 
                         </td>
                     </ng-container>
         
-                    <ng-container matColumnDef="team_name">
+                    <ng-container matColumnDef="team_name" sticky>
                         <th mat-header-cell *matHeaderCellDef> Team </th>
                         <td mat-cell *matCellDef="let team"> {{findLogo(team.team_name).name}} </td>
                     </ng-container>
