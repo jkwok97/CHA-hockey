@@ -3,7 +3,11 @@
     height: 100%;
     display: flex;
     justify-content: space-evenly;
-    align-items: center;
+    align-items: flex-start;
+}
+
+.group-container {
+    width: 100%;
 }
 
 .halfContainer {
@@ -16,13 +20,12 @@
 }
 
 .overallTeamSection{
-    width: 95%;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: flex-start;
-    box-shadow: 0 0 50px red;
-    margin-bottom: 50px;
+    
 }
 
 .header {
@@ -30,14 +33,15 @@
     height: 10%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: flex-start;
 }
 
 .header p {
     color: white;
     font-weight: 100;
-    margin: 5px 10px 0 10px;
+    margin: 5px 30px 0 10px;
+    font-size: x-large;
 }
 
 .link {
@@ -54,11 +58,15 @@
 }
 
 .card {
-    width: 100%;
+    width: 90%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-content: space-evenly;
+    box-shadow: 0 0 50px red;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    padding-top: 20px;
 }
 
 .card p {
