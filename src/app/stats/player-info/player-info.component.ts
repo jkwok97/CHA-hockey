@@ -12,6 +12,7 @@ import { MatTableDataSource } from '@angular/material/table';
 export class PlayerInfoComponent implements OnInit, OnDestroy {
 
   private _alive:boolean = true;
+  isPlayerGoalie: boolean = false;
 
   allPlayersInfo: any[];
   playerInfo: any;
@@ -23,6 +24,11 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
   playersColumnsToDisplay = [
     'team_logo', 'playing_year', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals',
     'gw_goals', 'gt_goals', 'shooting_pct', 'minutes_per_game'
+  ];
+
+  goalieColumnsToDisplay = [
+    'team_logo', 'playing_year', 'games_played','wins', 'loss', 'ties','goals_against', 'goals_against_avg', 'shots_for', 'save_pct',
+    'shutouts', 'penalty_minutes', 'minutes_played'
   ];
 
   constructor(
@@ -60,8 +66,8 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
       // console.log(tempString)
       // console.log(this.playerStats);
       this.playerInfo = this.teamPlayersStats.find( player => (player.player_name.toLowerCase().includes(this.player[0].toLowerCase())) && (player.player_name.toLowerCase().includes(this.player[1].toLowerCase())));
-      // console.log(this.playerInfo);
-      // console.log(this.allPlayersInfo);
+      console.log(this.playerInfo);
+      console.log(this.allPlayersInfo);
       this.playerInfo.picture = this.allPlayersInfo.find( player => (player.playerName.toLowerCase().includes(this.player[0].toLowerCase())) && (player.playerName.toLowerCase().includes(tempString.toLowerCase())));
       this.playerInfo.team = this.findLogo(this.playerInfo.team_name);
     } else {
@@ -70,9 +76,12 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
       this.playerInfo.picture = this.allPlayersInfo.find( player => (player.playerName.toLowerCase().includes(this.player[0].toLowerCase())) && (player.playerName.toLowerCase().includes(this.player[1].toLowerCase())));
       this.playerInfo.team = this.findLogo(this.playerInfo.team_name);
     }
-    console.log([this.playerInfo]);
-    this.playerStats = new MatTableDataSource<any[]>([this.playerInfo]);
-    console.log(this.playerStats);
+    if ( this.playerInfo.picture && (this.playerInfo.picture.position === "G")) {
+      this.isPlayerGoalie = true;
+      this.playerStats = new MatTableDataSource<any[]>([this.playerInfo]);
+    } else {
+      this.playerStats = new MatTableDataSource<any[]>([this.playerInfo]);
+    }
   }
 
   findLogo(shortName) {
