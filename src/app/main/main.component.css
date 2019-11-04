@@ -86,6 +86,7 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-content: flex-start;
+    margin-top: 30px;
 }
 
 .stat-card {
@@ -131,6 +132,38 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-content: flex-start;
+}
+
+.playerStatsTable {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+}
+
+.table {
+    width: 95%;
+    overflow-x: auto;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.mat-row:hover {
+    background-color: rgba(61, 90, 254, 0.4);
+    cursor: pointer;
+}
+
+.mat-cell, .mat-header-cell {
+    white-space: nowrap;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+table {
+    text-align: center;
 }
 
 

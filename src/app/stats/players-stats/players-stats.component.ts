@@ -73,10 +73,8 @@ export class PlayersStatsComponent implements OnInit, OnDestroy {
             this.players.paginator = this.paginator;
             this.players.sort = this.sort;
           }, 350);
-        });
-        
-    }
-    
+        }); 
+    } 
   }
 
   applyFilter(filterValue: string) {

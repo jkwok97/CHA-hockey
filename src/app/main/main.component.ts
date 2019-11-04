@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { TeamsService } from '../teams/teams.service';
 import { takeWhile } from 'rxjs/operators';
 import { Chart } from 'chart.js';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-main',
@@ -53,6 +54,18 @@ export class MainComponent implements OnInit, OnDestroy {
   playerShGoalsData = [];
   playerPlusMinusData = [];
 
+  players: MatTableDataSource<any[]>;
+  playersColumnsToDisplay = [
+    'player_name', 'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'sh_goals',
+    'gw_goals', 'gt_goals', 'shots', 'shooting_pct', 'minutes_per_game', 'fo_pct', 'pass_pct', 'corner_pct', 'hits', 'blocked_shots'
+  ];
+
+  goalies: MatTableDataSource<any[]>;
+  goaliesColumnsToDisplay = [
+    'player_name', 'games_played','minutes_played', 'goals_against_avg', 'wins','loss', 'ties', 'en_goals',
+    'shutouts', 'goals_against', 'saves', 'shots_for', 'save_pct', 'goals', 'assists', 'points', 'penalty_minutes', 'pass_pct'
+  ];
+
   constructor(
     private _authService: AuthService,
     private _router: Router,
@@ -83,10 +96,12 @@ export class MainComponent implements OnInit, OnDestroy {
     this._teamsService.getTeamPlayerStats(this.team.shortName).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.playerStats = resp as [];
       // console.log(this.playerStats);
+      this.players = new MatTableDataSource<any[]>(this.playerStats);
     });
     this._teamsService.getTeamGoalieStats(this.team.shortName).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.goalieStats = resp as [];
       // console.log(this.goalieStats);
+      this.goalies = new MatTableDataSource<any[]>(this.goalieStats);
     });
   }
 
@@ -108,6 +123,16 @@ export class MainComponent implements OnInit, OnDestroy {
     } else if (event.tab.textLabel === "Division") {
       
     }
+  }
+
+  openPlayer(name, team) {
+    this._router.navigate([`/stats/players/${name}`]);
+    this._teamsService.sendPlayerStatsTrigger(this.playerStats);
+  }
+
+  openGoaliePlayer(name, team) {
+    this._router.navigate([`/stats/players/${name}`]);
+    this._teamsService.sendPlayerStatsTrigger(this.goalieStats);
   }
 
   logout() {
