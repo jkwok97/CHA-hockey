@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { AuthService } from './auth.service';
 import { User } from '../_models/user';
 import { Router } from '@angular/router';
@@ -6,6 +6,7 @@ import { TeamsService } from '../teams/teams.service';
 import { takeWhile } from 'rxjs/operators';
 import { Chart } from 'chart.js';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-main',
@@ -66,6 +67,8 @@ export class MainComponent implements OnInit, OnDestroy {
     'shutouts', 'goals_against', 'saves', 'shots_for', 'save_pct', 'goals', 'assists', 'points', 'penalty_minutes', 'pass_pct'
   ];
 
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
+
   constructor(
     private _authService: AuthService,
     private _router: Router,
@@ -97,11 +100,13 @@ export class MainComponent implements OnInit, OnDestroy {
       this.playerStats = resp as [];
       // console.log(this.playerStats);
       this.players = new MatTableDataSource<any[]>(this.playerStats);
+      this.players.sort = this.sort;
     });
     this._teamsService.getTeamGoalieStats(this.team.shortName).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.goalieStats = resp as [];
       // console.log(this.goalieStats);
       this.goalies = new MatTableDataSource<any[]>(this.goalieStats);
+      this.goalies.sort = this.sort;
     });
   }
 
