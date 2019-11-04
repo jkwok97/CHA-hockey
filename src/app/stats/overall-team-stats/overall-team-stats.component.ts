@@ -16,7 +16,7 @@ export class OverallTeamStatsComponent implements OnInit, OnDestroy, AfterViewIn
   private _alive:boolean = true;
   isLoading: boolean = false;
 
-  stats: any[];
+  stats = [];
   westernStats: any[];
   easternStats: any[];
   northWesternStats: any[];
@@ -26,6 +26,8 @@ export class OverallTeamStatsComponent implements OnInit, OnDestroy, AfterViewIn
   league: any;
 
   short_team_name: string = '';
+  currentSeason: string;
+  currentSeasonType: string;
 
   northwestTeams = [];
   southwestTeams = [];
@@ -70,10 +72,17 @@ export class OverallTeamStatsComponent implements OnInit, OnDestroy, AfterViewIn
     this.southwestTeams = this._teamsService.league.conference[0].division[1].teams;
     this.northeastTeams = this._teamsService.league.conference[1].division[0].teams;
     this.southeastTeams = this._teamsService.league.conference[1].division[1].teams;
+    this.currentSeason = this._teamsService.currentSeason;
+    this.currentSeasonType = this._teamsService.currentSeasonType;
     if (this._route.snapshot.routeConfig.path === "stats/league") {
       this._teamsService.getLeagueTeamsStats().pipe(takeWhile(() => this._alive)).subscribe(resp => {
         // console.log(resp);
-        this.stats = resp as [];
+        let tempLeaders = resp as [];
+        tempLeaders.forEach(element => {
+          if (element['playing_year'] === this.currentSeason && element['season_type'] === this.currentSeasonType) {
+            this.stats.push(element);
+          }
+        })
         this.teams = new MatTableDataSource<any[]>(this.stats);
         this.length = this.stats.length;
         this.isLoading = false;
@@ -85,7 +94,12 @@ export class OverallTeamStatsComponent implements OnInit, OnDestroy, AfterViewIn
         this.short_team_name = this._route.snapshot.paramMap.get("params");
         this._teamsService.getTeamStats(this.short_team_name).pipe(takeWhile(() => this._alive)).subscribe(resp => {
         // console.log(resp);
-        this.stats = resp as [];
+        let tempLeaders = resp as [];
+        tempLeaders.forEach(element => {
+          if (element['playing_year'] === this.currentSeason && element['season_type'] === this.currentSeasonType) {
+            this.stats.push(element);
+          }
+        })
         this.teams = new MatTableDataSource<any[]>(this.stats);
         this.length = this.stats.length;
         this.isLoading = false;  

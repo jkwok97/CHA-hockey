@@ -21,7 +21,7 @@ export class MainComponent implements OnInit, OnDestroy {
   currentUser: User;
 
   team: any;
-  stats: any;
+  stats = [];
   player: any;
   playerStats: any;
   goalieStats: any;
@@ -40,6 +40,8 @@ export class MainComponent implements OnInit, OnDestroy {
   pkRank: string;
   goalsForRank: string;
   goalsAgainstRank: string;
+  currentSeason: string;
+  currentSeasonType: string;
 
   goalDiffData = [];
   shotDiffData = [];
@@ -85,7 +87,10 @@ export class MainComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this._teamsService.getLeagueTeamsStats().pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      this.stats = resp as [];
+      let allTeams = resp as [];
+      allTeams.forEach(team => {
+        if (team['playing_year'] === this.currentSeason && team['season_type'] === this.currentSeasonType) { this.stats.push(team); }
+      });
       this.pointsChart(this.team.shortName);
       this.goalDiffChart(this.team.shortName);
       this.shotDiffChart(this.team.shortName);
@@ -108,6 +113,8 @@ export class MainComponent implements OnInit, OnDestroy {
       this.goalies = new MatTableDataSource<any[]>(this.goalieStats);
       this.goalies.sort = this.sort;
     });
+    this.currentSeason = this._teamsService.currentSeason;
+    this.currentSeasonType = this._teamsService.currentSeasonType;
   }
 
   toSalaryPage(link) {

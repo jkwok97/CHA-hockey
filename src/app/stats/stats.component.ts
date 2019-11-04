@@ -26,6 +26,9 @@ export class StatsComponent implements OnInit, OnDestroy {
   leagueLeaders = [];
   diffLeagueLeaders = [];
 
+  currentSeason: string;
+  currentSeasonType: string;
+
   teamsLeaders: MatTableDataSource<any[]>;
   teamsColumnsToDisplay = [ 'team_logo','team_name', 'games_played', 'wins', 'loss', 'ties', 'points', 'win_pct' ];
   teamsDiffLeaders: MatTableDataSource<any[]>;
@@ -65,12 +68,11 @@ export class StatsComponent implements OnInit, OnDestroy {
     });
     this._teamsService.getLeagueTeamsStats().pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.getLeagueLeaders(resp);
-      this.isLeagueLoading = false;
-    });
-    this._teamsService.getLeagueTeamsStats().pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.getDiffLeagueLeaders(resp);
       this.isLeagueLoading = false;
     });
+    this.currentSeason = this._teamsService.currentSeason;
+    this.currentSeasonType = this._teamsService.currentSeasonType;
   }
 
   getPointLeaders(resp) {
@@ -106,13 +108,23 @@ export class StatsComponent implements OnInit, OnDestroy {
   }
 
   getLeagueLeaders(resp) {
-    this.leagueLeaders = resp as [];
+    let tempLeaders = resp;
+    tempLeaders.forEach(element => {
+      if (element.playing_year === this.currentSeason && element.season_type === this.currentSeasonType) {
+        this.leagueLeaders.push(element);
+      }
+    })
     this.leagueLeaders.sort((a,b) => b.points - a.points);
     this.teamsLeaders = new MatTableDataSource<any[]>(this.leagueLeaders);
   }
 
   getDiffLeagueLeaders(resp) {
-    this.diffLeagueLeaders = resp as [];
+    let tempLeaders = resp;
+    tempLeaders.forEach(element => {
+      if (element.playing_year === this.currentSeason && element.season_type === this.currentSeasonType) {
+        this.diffLeagueLeaders.push(element);
+      }
+    })
     this.diffLeagueLeaders.sort((a,b) => b.goals_for - a.goals_for);
     this.teamsDiffLeaders = new MatTableDataSource<any[]>(this.diffLeagueLeaders);
   }

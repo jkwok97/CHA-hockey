@@ -12,6 +12,8 @@ export class TeamsService {
   currentTeam: any;
   allPlayerInfo: any;
   teamPlayerStats: any;
+  currentSeason: string = "2019-20";
+  currentSeasonType: string = "Regular"
 
   private _subjectPlayerStats = new Subject<any>();
 
