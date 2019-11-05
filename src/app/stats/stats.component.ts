@@ -54,6 +54,8 @@ export class StatsComponent implements OnInit, OnDestroy {
     this.isLeadersLoading = true;
     this.isGoaliesLoading = true;
     this.isLeagueLoading = true;
+    this.currentSeason = this._teamsService.currentSeason;
+    this.currentSeasonType = this._teamsService.currentSeasonType;
     this._teamsService.getPlayerStats().pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.stats = resp;
       this.getPointLeaders(resp);
@@ -66,13 +68,11 @@ export class StatsComponent implements OnInit, OnDestroy {
       this.getGoalieLeaders(resp);
       this.isGoaliesLoading = false;
     });
-    this._teamsService.getLeagueTeamsStats().pipe(takeWhile(() => this._alive)).subscribe(resp => {
+    this._teamsService.getLeagueTeamsStats(this.currentSeason).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.getLeagueLeaders(resp);
       this.getDiffLeagueLeaders(resp);
       this.isLeagueLoading = false;
     });
-    this.currentSeason = this._teamsService.currentSeason;
-    this.currentSeasonType = this._teamsService.currentSeasonType;
   }
 
   getPointLeaders(resp) {

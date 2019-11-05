@@ -69,7 +69,17 @@ export class MainComponent implements OnInit, OnDestroy {
     'shutouts', 'goals_against', 'saves', 'shots_for', 'save_pct', 'goals', 'assists', 'points', 'penalty_minutes', 'pass_pct'
   ];
 
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  teams: MatTableDataSource<any[]>;
+  teamsColumnsToDisplay = [
+    'playing_year', 'season_type', 'team_logo','team_name', 'games_played', 'wins', 'loss', 'ties', 'points', 'goals_for', 'goals_for_game', 'goals_against', 'goals_against_game', 
+    'goals_diff', 'win_pct', 'pp_pct', 'pk_pct', 'sh_goals', 'penalty_minutes_game', 'shot_diff', 'div_record',
+    'home_record', 'away_record', 'trail_record'
+  ];
+
+  // @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild("overallSort", {static: false}) overallSort: MatSort;
+  @ViewChild("playerSort", {static: false}) playerSort: MatSort;
+  @ViewChild("goalieSort", {static: false}) goalieSort: MatSort;
 
   constructor(
     private _authService: AuthService,
@@ -86,7 +96,10 @@ export class MainComponent implements OnInit, OnDestroy {
    }
 
   ngOnInit() {
-    this._teamsService.getLeagueTeamsStats().pipe(takeWhile(() => this._alive)).subscribe(resp => {
+    this.currentSeason = this._teamsService.currentSeason;
+    this.currentSeasonType = this._teamsService.currentSeasonType;
+    this._teamsService.getLeagueTeamsStats(this.currentSeason).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      console.log(resp);
       let allTeams = resp as [];
       allTeams.forEach(team => {
         if (team['playing_year'] === this.currentSeason && team['season_type'] === this.currentSeasonType) { this.stats.push(team); }
@@ -105,20 +118,28 @@ export class MainComponent implements OnInit, OnDestroy {
       this.playerStats = resp as [];
       // console.log(this.playerStats);
       this.players = new MatTableDataSource<any[]>(this.playerStats);
-      this.players.sort = this.sort;
+      this.players.sort = this.playerSort;
     });
     this._teamsService.getTeamGoalieStats(this.team.shortName).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.goalieStats = resp as [];
       // console.log(this.goalieStats);
       this.goalies = new MatTableDataSource<any[]>(this.goalieStats);
-      this.goalies.sort = this.sort;
+      this.goalies.sort = this.goalieSort;
     });
-    this.currentSeason = this._teamsService.currentSeason;
-    this.currentSeasonType = this._teamsService.currentSeasonType;
+    
   }
 
   toSalaryPage(link) {
     window.open(link);
+  }
+
+  findLogo(shortName) {
+    if (shortName) {
+      let team = this._teamsService.getTeamInfo(shortName);
+      return { image: team.image, name: team.name }
+    } else {
+      return { image: "../../assets/team_logos/Free_Agent_logo_square.jpg", name: "Free Agent"}
+    }
   }
 
   onTabChange(event) {
@@ -130,8 +151,29 @@ export class MainComponent implements OnInit, OnDestroy {
       this.playerPointsChart();
       this.playerShgGoalChart();
       this.playerPlusMinusChart();
-    } else if (event.tab.textLabel === "") {
-      
+    } else if (event.tab.textLabel === "Team History") {
+      if (this.team.shortName === "STA") {
+        this._teamsService.getTeamStats(this.team.shortName).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+          let teamStats = resp as [];
+          this._teamsService.getTeamStats("MIS").pipe(takeWhile(() => this._alive)).subscribe(resp => {
+            let oldTeamStats = resp as [];
+            oldTeamStats.forEach(element => {
+              teamStats.push(element);
+            })
+            console.log(teamStats);
+            teamStats.sort((a,b) => b['playing_year'] - a['playing_year']);
+            this.teams = new MatTableDataSource<any[]>(teamStats);
+            this.teams.sort = this.overallSort;
+          });          
+        });
+      } else {
+        this._teamsService.getTeamStats(this.team.shortName).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+          console.log(resp);
+          let teamStats = resp as [];
+          this.teams = new MatTableDataSource<any[]>(teamStats);
+          this.teams.sort = this.overallSort;
+        });
+      }
     } else if (event.tab.textLabel === "Division") {
       
     }

@@ -75,7 +75,7 @@ export class OverallTeamStatsComponent implements OnInit, OnDestroy, AfterViewIn
     this.currentSeason = this._teamsService.currentSeason;
     this.currentSeasonType = this._teamsService.currentSeasonType;
     if (this._route.snapshot.routeConfig.path === "stats/league") {
-      this._teamsService.getLeagueTeamsStats().pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      this._teamsService.getLeagueTeamsStats(this.currentSeason).pipe(takeWhile(() => this._alive)).subscribe(resp => {
         // console.log(resp);
         let tempLeaders = resp as [];
         tempLeaders.forEach(element => {

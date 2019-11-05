@@ -63,6 +63,12 @@ export class TeamsService {
     }]
   }
 
+  archivedLeague = {
+    teams: [
+      { name: "Mississippi Mudbugs", shortName: "MIS", image: "../../assets/team_logos/Free_Agent_logo_square.jpg", owner: "Jeff Kwok" }
+    ]
+  }
+
   constructor(
     private _http: HttpClient
   ) { 
@@ -91,15 +97,27 @@ export class TeamsService {
     return this._http.get(`${environment.back_end_url}/team-stats/${team}`);
   }
 
-  getLeagueTeamsStats() {
-    return this._http.get(`${environment.back_end_url}/team-stats/`);
+  getTeamStatsByYear(team, year) {
+    let options = {params: new HttpParams()
+      .set('year', year)}
+    return this._http.get(`${environment.back_end_url}/team-stats/${team}`, options);
+  }
+
+  getLeagueTeamsStats(year) {
+    let options = {params: new HttpParams()
+      .set('year', year)}
+    return this._http.get(`${environment.back_end_url}/team-stats/`, options);
   }
 
   getTeamInfo(short) {
     this.league.conference.forEach( conference => {
       conference.division.forEach(division => {
         let found = division.teams.find(team => team.shortName === short);
-        if (found !== undefined) { this.currentTeam = found; } 
+        if (found !== undefined) {
+          this.currentTeam = found; 
+        } else {
+          this.currentTeam = this.archivedLeague.teams.find( team => team.shortName === short);
+        }
       })
     })
     return this.currentTeam;
@@ -125,6 +143,10 @@ export class TeamsService {
 
   sendPlayerStatsListener(): Observable<any> {
     return this._subjectPlayerStats.asObservable();
+  }
+
+  getAllTeamStats(name) {
+    
   }
 
 }

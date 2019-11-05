@@ -162,6 +162,11 @@
     padding-right: 5px;
 }
 
+.table img {
+    height: 30px;
+    width: 30px;
+}
+
 table {
     text-align: center;
 }
