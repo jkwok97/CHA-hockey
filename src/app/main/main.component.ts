@@ -77,7 +77,7 @@ export class MainComponent implements OnInit, OnDestroy {
     'home_record', 'away_record', 'trail_record'
   ];
 
-  // @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
   @ViewChild("overallSort", {static: false}) overallSort: MatSort;
   @ViewChild("playerSort", {static: false}) playerSort: MatSort;
   @ViewChild("goalieSort", {static: false}) goalieSort: MatSort;
@@ -157,6 +157,12 @@ export class MainComponent implements OnInit, OnDestroy {
         this.getKillerBeesStats(this.team);
       } else if (this.team.shortName === "ATL") {
         this.getFlashersStats(this.team);
+      } else if (this.team.shortName === "CHY") {
+        this.getDesperadosStats(this.team);
+      } else if (this.team.shortName === "SCS") {
+        this.getStringraysStats(this.team);
+      } else if (this.team.shortName === "OAK") {
+        this.getAssassinsStats(this.team);
       } else {
         this._teamsService.getTeamStats(this.team.shortName).pipe(takeWhile(() => this._alive)).subscribe(resp => {
           console.log(resp);
@@ -190,6 +196,54 @@ export class MainComponent implements OnInit, OnDestroy {
     this._teamsService.getTeamStats(team.shortName).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       let teamStats = resp as [];
       this._teamsService.getTeamStats("CHA").pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        let oldTeamStats = resp as [];
+        oldTeamStats.forEach(element => {
+          teamStats.push(element);
+        })
+        console.log(teamStats);
+        teamStats.sort((a,b) => b['playing_year'] - a['playing_year']);
+        this.teams = new MatTableDataSource<any[]>(teamStats);
+        this.teams.sort = this.overallSort;
+      });          
+    });
+  }
+
+  getDesperadosStats(team) {
+    this._teamsService.getTeamStats(team.shortName).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      let teamStats = resp as [];
+      this._teamsService.getTeamStats("LVD").pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        let oldTeamStats = resp as [];
+        oldTeamStats.forEach(element => {
+          teamStats.push(element);
+        })
+        console.log(teamStats);
+        teamStats.sort((a,b) => b['playing_year'] - a['playing_year']);
+        this.teams = new MatTableDataSource<any[]>(teamStats);
+        this.teams.sort = this.overallSort;
+      });          
+    });
+  }
+
+  getStringraysStats(team) {
+    this._teamsService.getTeamStats(team.shortName).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      let teamStats = resp as [];
+      this._teamsService.getTeamStats("SAO").pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        let oldTeamStats = resp as [];
+        oldTeamStats.forEach(element => {
+          teamStats.push(element);
+        })
+        console.log(teamStats);
+        teamStats.sort((a,b) => b['playing_year'] - a['playing_year']);
+        this.teams = new MatTableDataSource<any[]>(teamStats);
+        this.teams.sort = this.overallSort;
+      });          
+    });
+  }
+
+  getAssassinsStats(team) {
+    this._teamsService.getTeamStats(team.shortName).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      let teamStats = resp as [];
+      this._teamsService.getTeamStats("OAO").pipe(takeWhile(() => this._alive)).subscribe(resp => {
         let oldTeamStats = resp as [];
         oldTeamStats.forEach(element => {
           teamStats.push(element);

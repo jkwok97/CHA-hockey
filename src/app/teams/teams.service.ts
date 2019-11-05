@@ -65,7 +65,12 @@ export class TeamsService {
 
   archivedLeague = {
     teams: [
-      { name: "Mississippi Mudbugs", shortName: "MIS", image: "../../assets/team_logos/Free_Agent_logo_square.jpg", owner: "Jeff Kwok" }
+      { name: "Mississippi Mudbugs", shortName: "MIS", image: "../../assets/team_logos/Free_Agent_logo_square.jpg", owner: "Jeff Kwok" },
+      { name: "Charlotte Storm", shortName: "CHA", image: "../../assets/team_logos/Free_Agent_logo_square.jpg", owner: "Patrick Ryan" },
+      { name: "Seattle Surge", shortName: "STS", image: "../../assets/team_logos/Free_Agent_logo_square.jpg", owner: "Corey Abbott" },
+      { name: "Las Vegas Desperado", shortName: "LVD", image: "../../assets/team_logos/Free_Agent_logo_square.jpg", owner: "Ferrel Hedberg" },
+      { name: "San Antonio Outlaws", shortName: "SAO", image: "../../assets/team_logos/Free_Agent_logo_square.jpg", owner: "Kelly Gardner" },
+      { name: "Oakland Oceanus", shortName: "OAO", image: "../../assets/team_logos/Free_Agent_logo_square.jpg", owner: "Joseph Sutherland" },
     ]
   }
 
