@@ -7,6 +7,7 @@ import { takeWhile } from 'rxjs/operators';
 import { Chart } from 'chart.js';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-main',
@@ -153,19 +154,9 @@ export class MainComponent implements OnInit, OnDestroy {
       this.playerPlusMinusChart();
     } else if (event.tab.textLabel === "Team History") {
       if (this.team.shortName === "STA") {
-        this._teamsService.getTeamStats(this.team.shortName).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-          let teamStats = resp as [];
-          this._teamsService.getTeamStats("MIS").pipe(takeWhile(() => this._alive)).subscribe(resp => {
-            let oldTeamStats = resp as [];
-            oldTeamStats.forEach(element => {
-              teamStats.push(element);
-            })
-            console.log(teamStats);
-            teamStats.sort((a,b) => b['playing_year'] - a['playing_year']);
-            this.teams = new MatTableDataSource<any[]>(teamStats);
-            this.teams.sort = this.overallSort;
-          });          
-        });
+        this.getKillerBeesStats(this.team);
+      } else if (this.team.shortName === "ATL") {
+        this.getFlashersStats(this.team);
       } else {
         this._teamsService.getTeamStats(this.team.shortName).pipe(takeWhile(() => this._alive)).subscribe(resp => {
           console.log(resp);
@@ -177,6 +168,38 @@ export class MainComponent implements OnInit, OnDestroy {
     } else if (event.tab.textLabel === "Division") {
       
     }
+  }
+
+  getKillerBeesStats(team) {
+    this._teamsService.getTeamStats(team.shortName).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      let teamStats = resp as [];
+      this._teamsService.getTeamStats("MIS").pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        let oldTeamStats = resp as [];
+        oldTeamStats.forEach(element => {
+          teamStats.push(element);
+        })
+        console.log(teamStats);
+        teamStats.sort((a,b) => b['playing_year'] - a['playing_year']);
+        this.teams = new MatTableDataSource<any[]>(teamStats);
+        this.teams.sort = this.overallSort;
+      });          
+    });
+  }
+
+  getFlashersStats(team) {
+    this._teamsService.getTeamStats(team.shortName).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      let teamStats = resp as [];
+      this._teamsService.getTeamStats("CHA").pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        let oldTeamStats = resp as [];
+        oldTeamStats.forEach(element => {
+          teamStats.push(element);
+        })
+        console.log(teamStats);
+        teamStats.sort((a,b) => b['playing_year'] - a['playing_year']);
+        this.teams = new MatTableDataSource<any[]>(teamStats);
+        this.teams.sort = this.overallSort;
+      });          
+    });
   }
 
   openPlayer(name, team) {
