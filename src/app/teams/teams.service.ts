@@ -110,13 +110,14 @@ export class TeamsService {
   }
 
   getTeamInfo(short) {
+    let found;
     this.league.conference.forEach( conference => {
       conference.division.forEach(division => {
-        let found = division.teams.find(team => team.shortName === short);
-        if (found !== undefined) {
-          this.currentTeam = found; 
-        } else {
-          this.currentTeam = this.archivedLeague.teams.find( team => team.shortName === short);
+        found = division.teams.find(team => team.shortName === short);
+        if (found !== undefined) { this.currentTeam = found; }
+        else { 
+          found = this.archivedLeague.teams.find(element => element.shortName === short);
+          if (found) { this.currentTeam = found; } 
         }
       })
     })
