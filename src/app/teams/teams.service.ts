@@ -77,7 +77,7 @@ export class TeamsService {
       { name: "Cleveland Barons", shortName: "CLE", image: "../../assets/team_logos/barons.png", owner: "Kevin Schmitz" },
       { name: "Albuquerque Chupacabras", shortName: "ALB", image: "../../assets/team_logos/chupacabras.png", owner: "Chad Fisher" },
       { name: "Halifax Conquerers", shortName: "HAL", image: "../../assets/team_logos/conquerers.png", owner: "Greg Abbott" },
-      { name: "San Diego Crush", shortName: "SDC", image: "../../assets/team_logos/crush.png", owner: "Elliot Cole" },
+      { name: "San Diego Crush", shortName: "SDC", image: "../../assets/team_logos/crush.png", owner: "Ferrel Hedberg" },
       { name: "Winnepeg Hellcats", shortName: "WIN", image: "../../assets/team_logos/hellcats.png", owner: "TBD" },
       { name: "Mississauga Indians", shortName: "MGA", image: "../../assets/team_logos/indians.png", owner: "Tim Ross" },
       { name: "Salem Indians", shortName: "SAL", image: "../../assets/team_logos/indians.png", owner: "Tim Ross" },

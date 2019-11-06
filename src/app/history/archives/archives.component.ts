@@ -58,6 +58,13 @@ export class ArchivesComponent implements OnInit, OnDestroy {
     }
   }
 
+  applyFilter(filterValue: string) {
+    this.teams.filter = filterValue.trim().toLowerCase();
+    if (this.teams.paginator) {
+      this.teams.paginator.firstPage();
+    }
+  }
+
   ngOnDestroy() {
     this._alive = false;
   }

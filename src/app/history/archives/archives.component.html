@@ -4,6 +4,11 @@
     </div>
     
     <div class="playerStatsTable cha-dark" *ngIf="!isLoading">
+
+        <mat-form-field color="accent">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+        </mat-form-field>
+
         <div class="table">
     
             <table mat-table [dataSource]="teams" matSort class="mat-elevation-z8 full-width" matSortActive="points" matSortDirection="desc">
