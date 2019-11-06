@@ -81,7 +81,7 @@ export class TeamsService {
       { name: "Winnepeg Hellcats", shortName: "WIN", image: "../../assets/team_logos/hellcats.png", owner: "TBD" },
       { name: "Mississauga Indians", shortName: "MGA", image: "../../assets/team_logos/indians.png", owner: "Tim Ross" },
       { name: "Salem Indians", shortName: "SAL", image: "../../assets/team_logos/indians.png", owner: "Tim Ross" },
-      { name: "Jacksonville Jokers", shortName: "JAC", image: "../../assets/team_logos/jokers.png", owner: "TBD" },
+      { name: "Jacksonville Jokers", shortName: "JAC", image: "../../assets/team_logos/jokers.png", owner: "Scott Cochrane" },
       { name: "Louisville Lionhearts", shortName: "LVL", image: "../../assets/team_logos/lionhearts.png", owner: "Nick McCurry" },
       { name: "Abbotsford Loggerheads", shortName: "ABB", image: "../../assets/team_logos/loggerheads.png", owner: "Kyle Einar" },
       { name: "Hamilton Predators", shortName: "HAM", image: "../../assets/team_logos/predators.png", owner: "Matt Beatty" },
@@ -133,6 +133,10 @@ export class TeamsService {
     let options = {params: new HttpParams()
       .set('year', year)}
     return this._http.get(`${environment.back_end_url}/team-stats/`, options);
+  }
+
+  getAlltimeLeagueTeamsStats() {
+    return this._http.get(`${environment.back_end_url}/team-stats/`);
   }
 
   getTeamInfo(short) {
