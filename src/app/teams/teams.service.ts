@@ -78,7 +78,7 @@ export class TeamsService {
       { name: "Albuquerque Chupacabras", shortName: "ALB", image: "../../assets/team_logos/chupacabras.png", owner: "Chad Fisher" },
       { name: "Halifax Conquerers", shortName: "HAL", image: "../../assets/team_logos/conquerers.png", owner: "Greg Abbott" },
       { name: "San Diego Crush", shortName: "SDC", image: "../../assets/team_logos/crush.png", owner: "Ferrel Hedberg" },
-      { name: "Winnepeg Hellcats", shortName: "WIN", image: "../../assets/team_logos/hellcats.png", owner: "TBD" },
+      { name: "Winnepeg Hellcats", shortName: "WIN", image: "../../assets/team_logos/hellcats.png", owner: "Ciaran Murtagh" },
       { name: "Mississauga Indians", shortName: "MGA", image: "../../assets/team_logos/indians.png", owner: "Tim Ross" },
       { name: "Salem Indians", shortName: "SAL", image: "../../assets/team_logos/indians.png", owner: "Tim Ross" },
       { name: "Jacksonville Jokers", shortName: "JAC", image: "../../assets/team_logos/jokers.png", owner: "Scott Cochrane" },
@@ -92,7 +92,7 @@ export class TeamsService {
       { name: "Quebec City Thundercats", shortName: "QUE", image: "../../assets/team_logos/thundercats.png", owner: "Jordan Schartner/Kirk Stokes" },
       { name: "Louisiana Voodoo", shortName: "LOU", image: "../../assets/team_logos/voodoo.png", owner: "Ryan Pollock" },
       { name: "Washington Whiskeyjacks", shortName: "WAS", image: "../../assets/team_logos/whiskeyjacks.png", owner: "Randy Lazzarotto" },
-      { name: "Tallahasse Crimsontide", shortName: "TAL", image: "../../assets/team_logos/crimsontide.png", owner: "Darren " },
+      { name: "Tallahasse Crimsontide", shortName: "TAL", image: "../../assets/team_logos/crimsontide.png", owner: "Darren Ward" },
     ]
   }
 

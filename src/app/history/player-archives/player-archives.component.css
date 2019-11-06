@@ -1,5 +1,72 @@
-.text {
+.container {
+    width: 100%;
+}
+
+.playerStatsTable {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+}
+
+.tableHeader {
     color: white;
-    font-size: xx-large;
+    font-size: x-large;
     font-weight: 100;
+    text-align: center;
+    width: 100%;
+}
+
+.table {
+    width: 95%;
+    overflow-x: auto;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.mat-row:hover {
+    background-color: rgba(61, 90, 254, 0.4);
+    cursor: pointer;
+}
+
+.spinner {
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mat-form-field {
+    margin-top: 30px;
+    font-size: 14px;
+    width: 50%;
+    color: red;
+}
+
+.table img {
+    height: 30px;
+    width: 30px;
+}
+
+.mat-header-cell {
+    text-align: center;
+}
+
+.mat-cell, .mat-header-cell {
+    white-space: nowrap;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+:host ::ng-deep .mat-sort-header-container {
+    display: flex;
+    justify-content: center;
+}
+
+table {
+    text-align: center;
 }
