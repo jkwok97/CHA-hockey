@@ -56,14 +56,14 @@ export class StatsComponent implements OnInit, OnDestroy {
     this.isLeagueLoading = true;
     this.currentSeason = this._teamsService.currentSeason;
     this.currentSeasonType = this._teamsService.currentSeasonType;
-    this._teamsService.getPlayerStats().pipe(takeWhile(() => this._alive)).subscribe(resp => {
+    this._teamsService.getPlayerStatsByYearByType(this.currentSeason, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.stats = resp;
       this.getPointLeaders(resp);
       this.getPointStreakLeaders(resp);
       this.getLongPointStreakLeaders(resp);
       this.isLeadersLoading = false;
     });
-    this._teamsService.getGoalieStats().pipe(takeWhile(() => this._alive)).subscribe(resp => {
+    this._teamsService.getGoalieStatsByYearByType(this.currentSeason, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.goalieStats = resp;
       this.getGoalieLeaders(resp);
       this.isGoaliesLoading = false;

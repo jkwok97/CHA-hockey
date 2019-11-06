@@ -20,6 +20,8 @@ export class PlayersStatsComponent implements OnInit, OnDestroy {
   stats: any[];
 
   short_team_name: string = '';
+  currentSeason: string;
+  currentSeasonType: string;
 
   players: MatTableDataSource<any[]>;
   playersColumnsToDisplay = [
@@ -46,10 +48,12 @@ export class PlayersStatsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isLoading = true;
+    this.currentSeason = this._teamsService.currentSeason;
+    this.currentSeasonType = this._teamsService.currentSeasonType;
     if (this._route.snapshot.routeConfig.path === "stats/players") {
       this.inAllPlayersStats = true;
-      this._teamsService.getPlayerStats().pipe(takeWhile(() => this._alive)).subscribe(resp => {
-        // console.log(resp);
+      this._teamsService.getPlayerStatsByYearByType(this.currentSeason,this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        console.log(resp);
         this.stats = resp as [];
         this.players = new MatTableDataSource<any[]>(this.stats);
         this.pageSize = 25;
@@ -62,7 +66,7 @@ export class PlayersStatsComponent implements OnInit, OnDestroy {
       });
     } else if (this._route.snapshot.routeConfig.path === "teams/:params") {
         this.short_team_name = this._route.snapshot.paramMap.get("params");
-        this._teamsService.getTeamPlayerStats(this.short_team_name).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        this._teamsService.getTeamPlayerStatsByYearByType(this.short_team_name, this.currentSeason, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
           // console.log(resp);
           this.stats = resp as [];
           this.players = new MatTableDataSource<any[]>(this.stats);

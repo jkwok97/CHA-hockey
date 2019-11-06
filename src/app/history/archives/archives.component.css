@@ -54,3 +54,11 @@ table {
     width: 50%;
     color: red;
 }
+
+.mat-button-toggle-group {
+    margin-bottom: 20px;
+}
+
+.mat-button-toggle-checked {
+    background-color: red;
+}

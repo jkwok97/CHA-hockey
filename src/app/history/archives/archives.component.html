@@ -10,6 +10,15 @@
         </mat-form-field>
 
         <div class="table">
+
+            <mat-button-toggle-group #group="matButtonToggleGroup" [value]="seasonType" (change)="changeSeason(group.value)">
+                <mat-button-toggle value="Regular" color="accent">
+                    Regular
+                </mat-button-toggle>
+                <mat-button-toggle value="Playoffs" color="accent">
+                    Playoffs
+                </mat-button-toggle>
+            </mat-button-toggle-group>
     
             <table mat-table [dataSource]="teams" matSort class="mat-elevation-z8 full-width" matSortActive="points" matSortDirection="desc">
     

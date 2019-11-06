@@ -19,6 +19,8 @@ export class ArchivesComponent implements OnInit, OnDestroy {
   pageSize: number = 20;
   length: number = 0;
 
+  seasonType: string = 'Regular';
+
   teams: MatTableDataSource<any[]>;
   teamsColumnsToDisplay = [
     'playing_year', 'season_type', 'team_logo','team_name', 'games_played', 'wins', 'loss', 'ties', 'points', 'goals_for', 'goals_for_game', 'goals_against', 'goals_against_game', 
@@ -35,7 +37,11 @@ export class ArchivesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isLoading = true;
-    this._teamsService.getAlltimeLeagueTeamsStats().pipe(takeWhile(() => this._alive)).subscribe(resp => {
+    this.getStats(this.seasonType);
+  }
+
+  getStats(type) {
+    this._teamsService.getAlltimeLeagueTeamsStatsByType(this.seasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       console.log(resp);
       let teamStats = resp as [];
       teamStats.sort((a,b) => b['points'] - a['points']);
@@ -47,6 +53,18 @@ export class ArchivesComponent implements OnInit, OnDestroy {
         this.teams.sort = this.sort;
       }, 350);
     });
+  }
+
+  changeSeason(value) {
+    if (value === 'Playoffs') {
+      this.isLoading = true;
+      this.seasonType = value;
+      this.getStats(value);
+    } else {
+      this.isLoading = true;
+      this.seasonType = value;
+      this.getStats(value);
+    }
   }
 
   findLogo(shortName) {

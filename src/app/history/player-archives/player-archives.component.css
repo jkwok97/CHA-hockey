@@ -70,3 +70,11 @@
 table {
     text-align: center;
 }
+
+.mat-button-toggle-group {
+    margin-bottom: 20px;
+}
+
+.mat-button-toggle-checked {
+    background-color: red;
+}

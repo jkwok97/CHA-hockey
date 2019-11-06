@@ -1,13 +1,12 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { AuthService } from './auth.service';
 import { User } from '../_models/user';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { TeamsService } from '../teams/teams.service';
 import { takeWhile } from 'rxjs/operators';
 import { Chart } from 'chart.js';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-main',
@@ -85,7 +84,8 @@ export class MainComponent implements OnInit, OnDestroy {
   constructor(
     private _authService: AuthService,
     private _router: Router,
-    private _teamsService: TeamsService
+    private _teamsService: TeamsService,
+    private _route: ActivatedRoute,
   ) {
     this._authService.currentUser.subscribe(x => this.currentUser = x);
     if (!this.currentUser) {
@@ -94,13 +94,19 @@ export class MainComponent implements OnInit, OnDestroy {
     // console.log(this.currentUser);
     this.team = this._teamsService.getTeamInfo(this.currentUser[0].short_name);
     // console.log(this.team);
+    this._router.navigate([`/main/`], {
+      relativeTo: this._route,
+      queryParams: { team: this.team.shortName },
+      queryParamsHandling: 'merge',
+      skipLocationChange: false
+    })
    }
 
   ngOnInit() {
     this.currentSeason = this._teamsService.currentSeason;
     this.currentSeasonType = this._teamsService.currentSeasonType;
     this._teamsService.getLeagueTeamsStats(this.currentSeason).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       let allTeams = resp as [];
       allTeams.forEach(team => {
         if (team['playing_year'] === this.currentSeason && team['season_type'] === this.currentSeasonType) { this.stats.push(team); }
@@ -115,13 +121,13 @@ export class MainComponent implements OnInit, OnDestroy {
       this.goalsAgainstChart(this.team.shortName);
       this.isLoading = false;
     });
-    this._teamsService.getTeamPlayerStats(this.team.shortName).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+    this._teamsService.getTeamPlayerStatsByYearByType(this.team.shortName, this.currentSeason, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.playerStats = resp as [];
       // console.log(this.playerStats);
       this.players = new MatTableDataSource<any[]>(this.playerStats);
       this.players.sort = this.playerSort;
     });
-    this._teamsService.getTeamGoalieStats(this.team.shortName).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+    this._teamsService.getTeamGoalieStatsByYearByType(this.team.shortName, this.currentSeason, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.goalieStats = resp as [];
       // console.log(this.goalieStats);
       this.goalies = new MatTableDataSource<any[]>(this.goalieStats);

@@ -177,8 +177,68 @@ export class TeamsService {
     return this._subjectPlayerStats.asObservable();
   }
 
-  getAllTeamStats(name) {
-    
+  getPlayerStatsByType(type) {
+    let options = {params: new HttpParams()
+      .set('type', type)}
+    return this._http.get(`${environment.back_end_url}/players-stats/`, options);
+  }
+
+  getGoalieStatsByType(type) {
+    let options = {params: new HttpParams()
+      .set('type', type)}
+    return this._http.get(`${environment.back_end_url}/goalies-stats/`, options);
+  }
+
+  getAlltimeLeagueTeamsStatsByType(type) {
+    let options = {params: new HttpParams()
+      .set('type', type)}
+    return this._http.get(`${environment.back_end_url}/team-stats/`, options);
+  }
+
+  getPlayerStatsByYearByType(year, type) {
+    // console.log(year, type)
+    let options = {params: new HttpParams()
+      .set('year', year)
+      .set('type', type)}
+    return this._http.get(`${environment.back_end_url}/players-stats/`, options);
+  }
+
+  getGoalieStatsByYearByType(year, type) {
+    // console.log(year, type)
+    let options = {params: new HttpParams()
+      .set('year', year)
+      .set('type', type)}
+    return this._http.get(`${environment.back_end_url}/goalies-stats/`, options)
+  }
+
+  getTeamPlayerStatsByYearByType(team, year, type) {
+    // console.log(team, year, type)
+    let options = {params: new HttpParams()
+      .set('year', year)
+      .set('type', type)}
+    return this._http.get(`${environment.back_end_url}/players-stats/${team}`, options);
+  }
+
+  getTeamGoalieStatsByYearByType(team, year, type) {
+    // console.log(team, year, type)
+    let options = {params: new HttpParams()
+      .set('year', year)
+      .set('type', type)}
+    return this._http.get(`${environment.back_end_url}/goalies-stats/${team}`, options);
+  }
+
+  getAlltimeTeamPlayerStatsByType(team, type) {
+    // console.log(team, type)
+    let options = {params: new HttpParams()
+      .set('type', type)}
+    return this._http.get(`${environment.back_end_url}/players-stats/${team}`, options);
+  }
+
+  getAlltimeTeamGoalieStatsByType(team, type) {
+    // console.log(team, type)
+    let options = {params: new HttpParams()
+      .set('type', type)}
+    return this._http.get(`${environment.back_end_url}/goalies-stats/${team}`, options);
   }
 
 }

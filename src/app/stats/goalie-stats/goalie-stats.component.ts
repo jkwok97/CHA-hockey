@@ -20,6 +20,8 @@ export class GoalieStatsComponent implements OnInit, OnDestroy {
   stats: any[];
 
   short_team_name: string = '';
+  currentSeason: string;
+  currentSeasonType: string;
 
   goalies: MatTableDataSource<any[]>;
   goaliesColumnsToDisplay = [
@@ -46,8 +48,10 @@ export class GoalieStatsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isLoading = true;
+    this.currentSeason = this._teamsService.currentSeason;
+    this.currentSeasonType = this._teamsService.currentSeasonType;
     if (this._route.snapshot.routeConfig.path === "stats/goalies") {
-      this._teamsService.getGoalieStats().pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      this._teamsService.getGoalieStatsByYearByType(this.currentSeason, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
         this.inAllPlayersStats = true;
         this.stats = resp as [];
         this.goalies = new MatTableDataSource<any[]>(this.stats);
@@ -61,7 +65,7 @@ export class GoalieStatsComponent implements OnInit, OnDestroy {
       });
     } else if (this._route.snapshot.routeConfig.path === "teams/:params") {
         this.short_team_name = this._route.snapshot.paramMap.get("params");
-        this._teamsService.getTeamGoalieStats(this.short_team_name).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        this._teamsService.getTeamGoalieStatsByYearByType(this.short_team_name, this.currentSeason, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
         this.stats = resp as [];
         this.goalies = new MatTableDataSource<any[]>(this.stats);
         this.length = this.stats.length;
