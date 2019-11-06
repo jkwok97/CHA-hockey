@@ -108,3 +108,8 @@ mat-paginator {
 .stats {
     overflow-y: auto;
 }
+
+.text {
+    font-size: xx-large;
+    color: white;
+}

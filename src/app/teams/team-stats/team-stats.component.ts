@@ -11,20 +11,33 @@ export class TeamStatsComponent implements OnInit, OnDestroy {
 
   private _alive:boolean = true;
   isLoading: boolean = false;
+  currentTeam: boolean = false;
 
   short_team_name: string = '';
+
+  currentTeams = [];
 
   team: any;
   
   constructor(
     private _route: ActivatedRoute,
     private _teamsService: TeamsService
-  ) { }
+  ) { 
+    this._teamsService.league.conference[0].division[0].teams.forEach(team => { this.currentTeams.push(team) });
+    this._teamsService.league.conference[0].division[1].teams.forEach(team => { this.currentTeams.push(team) });
+    this._teamsService.league.conference[1].division[0].teams.forEach(team => { this.currentTeams.push(team) });
+    this._teamsService.league.conference[1].division[1].teams.forEach(team => { this.currentTeams.push(team) });
+    console.log(this.currentTeams);
+  }
 
   ngOnInit() {
     this.isLoading = true;
     this.short_team_name = this._route.snapshot.paramMap.get("params");
     this.team = this._teamsService.getTeamInfo(this.short_team_name);
+    if (this.currentTeams.find(team => team.shortName === this.team.shortName)) {
+      this.currentTeam = true;
+    }
+    console.log(this.currentTeam);
     this.isLoading = false;
   }
 

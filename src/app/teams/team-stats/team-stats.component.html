@@ -22,11 +22,22 @@
         </div>
 
         <div class="stats">
-            <app-teams></app-teams>
 
-            <app-players-stats></app-players-stats>
+            <mat-tab-group color="accent">
+
+                <mat-tab label="Current" *ngIf="currentTeam">
+                    <app-teams></app-teams>
+
+                    <app-players-stats></app-players-stats>
+                    
+                    <app-goalie-stats></app-goalie-stats> 
+                </mat-tab>
+
+                <mat-tab label="Historical">
+                     <p class="text">Coming Soon!</p> 
+                </mat-tab>
+            </mat-tab-group>
             
-            <app-goalie-stats></app-goalie-stats>
         </div>
 
     </div>
