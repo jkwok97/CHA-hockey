@@ -34,6 +34,8 @@ import { LoginComponent } from './main/login/login.component';
 import { AuthService } from './main/auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PlayerInfoComponent } from './stats/player-info/player-info.component';
+import { PlayerArchivesComponent } from './history/player-archives/player-archives.component';
+import { GoalieArchivesComponent } from './history/goalie-archives/goalie-archives.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,9 @@ import { PlayerInfoComponent } from './stats/player-info/player-info.component';
     ArchivesComponent,
     MainComponent,
     LoginComponent,
-    PlayerInfoComponent
+    PlayerInfoComponent,
+    PlayerArchivesComponent,
+    GoalieArchivesComponent
   ],
   imports: [
     BrowserModule,

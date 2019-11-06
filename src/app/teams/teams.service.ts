@@ -92,6 +92,7 @@ export class TeamsService {
       { name: "Quebec City Thundercats", shortName: "QUE", image: "../../assets/team_logos/thundercats.png", owner: "Jordan Schartner/Kirk Stokes" },
       { name: "Louisiana Voodoo", shortName: "LOU", image: "../../assets/team_logos/voodoo.png", owner: "Ryan Pollock" },
       { name: "Washington Whiskeyjacks", shortName: "WAS", image: "../../assets/team_logos/whiskeyjacks.png", owner: "Randy Lazzarotto" },
+      { name: "Tallahasse Crimsontide", shortName: "TAL", image: "../../assets/team_logos/crimsontide.png", owner: "Darren " },
     ]
   }
 
