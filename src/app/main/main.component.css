@@ -140,6 +140,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-content: flex-start;
+    margin-bottom: 30px;
 }
 
 .table {
