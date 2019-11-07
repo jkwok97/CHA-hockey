@@ -89,7 +89,7 @@ export class TeamsService {
       { name: "Cape Breton Royals", shortName: "CBR", image: "../../assets/team_logos/royals.png", owner: "Ben Bruchet" },
       { name: "Red Deer Rustlers", shortName: "RDR", image: "../../assets/team_logos/rustlers.png", owner: "Dan Wood" },
       { name: "Halifax Schooners", shortName: "HAS", image: "../../assets/team_logos/schooners.png", owner: "Adam Martin" },
-      { name: "Quebec City Thundercats", shortName: "QUE", image: "../../assets/team_logos/thundercats.png", owner: "Jordan Schartner/Kirk Stokes" },
+      { name: "Quebec City Thundercats", shortName: "QUE", image: "../../assets/team_logos/thundercats.png", owner: "Jordan Schartner" },
       { name: "Louisiana Voodoo", shortName: "LOU", image: "../../assets/team_logos/voodoo.png", owner: "Ryan Pollock" },
       { name: "Washington Whiskeyjacks", shortName: "WAS", image: "../../assets/team_logos/whiskeyjacks.png", owner: "Randy Lazzarotto" },
       { name: "Tallahasse Crimsontide", shortName: "TAL", image: "../../assets/team_logos/crimsontide.png", owner: "Darren Ward" },
