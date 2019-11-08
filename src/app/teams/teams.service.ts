@@ -177,9 +177,10 @@ export class TeamsService {
     return this._subjectPlayerStats.asObservable();
   }
 
-  getPlayerStatsByType(type) {
+  getPlayerStatsByType(type, group) {
     let options = {params: new HttpParams()
-      .set('type', type)}
+      .set('type', type)
+      .set('group', group)}
     return this._http.get(`${environment.back_end_url}/players-stats/`, options);
   }
 
@@ -227,10 +228,11 @@ export class TeamsService {
     return this._http.get(`${environment.back_end_url}/goalies-stats/${team}`, options);
   }
 
-  getAlltimeTeamPlayerStatsByType(team, type) {
+  getAlltimeTeamPlayerStatsByType(team, type, group) {
     // console.log(team, type)
     let options = {params: new HttpParams()
-      .set('type', type)}
+      .set('type', type)
+      .set('group', group)}
     return this._http.get(`${environment.back_end_url}/players-stats/${team}`, options);
   }
 
