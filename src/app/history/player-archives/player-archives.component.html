@@ -12,14 +12,14 @@
                 </mat-button-toggle>
             </mat-button-toggle-group>
     
-            <mat-button-toggle-group #byShow="matButtonToggleGroup" [value]="showType" (change)="changeShow(byShow.value)">
+            <!-- <mat-button-toggle-group #byShow="matButtonToggleGroup" [value]="showType" (change)="changeShow(byShow.value)">
                 <mat-button-toggle value="Season" color="accent">
                     Per Season
                 </mat-button-toggle>
                 <mat-button-toggle value="Alltime" color="accent">
                     All-time
                 </mat-button-toggle>
-            </mat-button-toggle-group>
+            </mat-button-toggle-group> -->
     
             <mat-form-field color="accent">
                 <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
