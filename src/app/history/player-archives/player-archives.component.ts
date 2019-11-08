@@ -32,6 +32,7 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
   ];
 
   seasonType: string = 'Regular';
+  showType: string = 'Season';
   currentSeason: string;
 
   teamString: any;
@@ -51,10 +52,26 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
     if (this._route.snapshot.routeConfig.path === "history") {
       this.getStats(this.seasonType);
     } else if (this._route.snapshot.routeConfig.path === "main") {
-      this.inMainPage = true;
       // console.log(this._route.snapshot.queryParams.team)
-      this.teamString = this._route.snapshot.queryParams.team
-      this.getTeamStats(this.teamString, this.seasonType);
+      this.teamString = this._route.snapshot.queryParams.team;
+      this.checkString(this.teamString, this.seasonType);
+    }
+  }
+
+  checkString(team, type) {
+    if (team === "STA") {
+      this.getKillerBeesStats(team, type);
+    } else if (team === "ATL") {
+      this.getFlashersStats(team, type);
+    } else if (team === "CHY") {
+      this.getDesperadosStats(team, type);
+    } else if (team === "SCS") {
+      this.getStringraysStats(team, type);
+    } else if (team === "OAK") {
+      this.getAssassinsStats(team, type);
+    } else {
+      this.inMainPage = true;
+      this.getTeamStats(team, type);
     }
   }
 
@@ -88,6 +105,112 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
     });
   }
 
+  getKillerBeesStats(team, type) {
+    this._teamsService.getAlltimeTeamPlayerStatsByType(team, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      let stats = resp as [];
+      this._teamsService.getAlltimeTeamPlayerStatsByType("MIS", type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        let oldTeamStats = resp as [];
+        oldTeamStats.forEach(element => {
+          stats.push(element);
+        })
+        this.players = new MatTableDataSource<any[]>(stats);
+        this.pageSize = 25;
+        this.length = stats.length;
+        this.isLoading = false;
+        setTimeout(() => {
+          this.players.paginator = this.paginator;
+          this.players.sort = this.sort;
+        }, 350);
+      });
+    });
+  }
+
+  getFlashersStats(team, type) {
+    this._teamsService.getAlltimeTeamPlayerStatsByType(team, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      let stats = resp as [];
+      this._teamsService.getAlltimeTeamPlayerStatsByType("CHA", type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        let oldTeamStats = resp as [];
+        oldTeamStats.forEach(element => {
+          stats.push(element);
+        })
+        this.players = new MatTableDataSource<any[]>(stats);
+        this.pageSize = 25;
+        this.length = stats.length;
+        this.isLoading = false;
+        setTimeout(() => {
+          this.players.paginator = this.paginator;
+          this.players.sort = this.sort;
+        }, 350);
+      });
+    });
+  }
+
+  getDesperadosStats(team, type) {
+    this._teamsService.getAlltimeTeamPlayerStatsByType(team, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      let teamStats = resp as [];
+      this._teamsService.getAlltimeTeamPlayerStatsByType("LVD", type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        let oldTeamStats = resp as [];
+        oldTeamStats.forEach(element => {
+          teamStats.push(element);
+        })
+        this._teamsService.getAlltimeTeamPlayerStatsByType("SDC", type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+          let oldTeamStats = resp as [];
+          oldTeamStats.forEach(element => {
+            teamStats.push(element);
+          })
+          this.players = new MatTableDataSource<any[]>(teamStats);
+          this.pageSize = 25;
+          this.length = teamStats.length;
+          this.isLoading = false;
+          setTimeout(() => {
+            this.players.paginator = this.paginator;
+            this.players.sort = this.sort;
+          }, 350);
+        });
+      });          
+    });
+  }
+
+  getStringraysStats(team, type) {
+    this._teamsService.getAlltimeTeamPlayerStatsByType(team, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      let stats = resp as [];
+      this._teamsService.getAlltimeTeamPlayerStatsByType("SAO", type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        let oldTeamStats = resp as [];
+        oldTeamStats.forEach(element => {
+          stats.push(element);
+        })
+        this.players = new MatTableDataSource<any[]>(stats);
+        this.pageSize = 25;
+        this.length = stats.length;
+        this.isLoading = false;
+        setTimeout(() => {
+          this.players.paginator = this.paginator;
+          this.players.sort = this.sort;
+        }, 350);
+      });
+    });
+  }
+
+  getAssassinsStats(team, type) {
+    this._teamsService.getAlltimeTeamPlayerStatsByType(team, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      let stats = resp as [];
+      this._teamsService.getAlltimeTeamPlayerStatsByType("OAO", type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        let oldTeamStats = resp as [];
+        oldTeamStats.forEach(element => {
+          stats.push(element);
+        })
+        this.players = new MatTableDataSource<any[]>(stats);
+        this.pageSize = 25;
+        this.length = stats.length;
+        this.isLoading = false;
+        setTimeout(() => {
+          this.players.paginator = this.paginator;
+          this.players.sort = this.sort;
+        }, 350);
+      });
+    });
+  }
+
   findLogo(shortName) {
     if (shortName) {
       let team = this._teamsService.getTeamInfo(shortName);
@@ -112,11 +235,35 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
       if (value === 'Playoffs') {
         this.isLoading = true;
         this.seasonType = value;
-        this.getTeamStats(this.teamString, value);
+        this.checkString(this.teamString, value);
       } else {
         this.isLoading = true;
         this.seasonType = value;
-        this.getTeamStats(this.teamString, value);
+        this.checkString(this.teamString, value);
+      }
+    }
+  }
+
+  changeShow(value) {
+    if (this._route.snapshot.routeConfig.path === "history") {
+      if (value === 'Playoffs') {
+        this.isLoading = true;
+        this.seasonType = value;
+        this.getStats(value);
+      } else {
+        this.isLoading = true;
+        this.seasonType = value;
+        this.getStats(value);
+      }
+    } else if (this._route.snapshot.routeConfig.path === "main") {
+      if (value === 'Alltime') {
+        this.isLoading = true;
+        this.showType = value;
+        
+      } else {
+        this.isLoading = true;
+        this.showType = value;
+        console.log(this.players);
       }
     }
   }
