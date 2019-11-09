@@ -38,7 +38,7 @@
 
 .mat-form-field {
     font-size: 14px;
-    width: 100%;
+    width: 75%;
     color: red;
 }
 
@@ -64,4 +64,8 @@
 
 table {
     text-align: center;
+}
+
+.mat-paginator {
+    width: 95%;
 }

@@ -23,9 +23,10 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
   length: number = 0;
 
   players: MatTableDataSource<any[]>;
-  playersColumnsToDisplay = [ 'playing_year', 'season_type',
-    'team_logo', 'player_name', 'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'sh_goals',
-    'gw_goals', 'gt_goals', 'shots', 'shooting_pct', 'minutes_per_game', 'fo_pct', 'pass_pct', 'corner_pct', 'hits', 'blocked_shots'
+  playersColumnsToDisplay = [ 'team_logo', 'player_name',
+    'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'sh_goals',
+    'gw_goals', 'gt_goals', 'shots', 'shooting_pct', 'minutes_per_game', 'fo_pct', 'pass_pct', 'corner_pct', 'hits', 'blocked_shots',
+    'playing_year', 'season_type'
   ];
   playersTeamColumnsToDisplay = [ 'playing_year', 'season_type',
     'player_name', 'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'sh_goals',

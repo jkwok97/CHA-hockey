@@ -86,3 +86,7 @@ table {
     justify-content: space-evenly;
     align-items: center;
 }
+
+.mat-paginator {
+    width: 95%;
+}
