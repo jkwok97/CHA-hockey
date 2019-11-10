@@ -140,6 +140,11 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Pas% </th>
                     <td mat-cell *matCellDef="let player"> {{player.pass_pct}} </td>
                 </ng-container>
+
+                <ng-container matColumnDef="player_status">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+                    <td mat-cell *matCellDef="let player"> {{player.player_status}} </td>
+                </ng-container>
                 
                 <tr mat-header-row *matHeaderRowDef="inMainPage ? goaliesTeamColumnsToDisplay : goaliesColumnsToDisplay;"></tr>
                 <tr mat-row *matRowDef="let goalie; columns:inMainPage ? goaliesTeamColumnsToDisplay : goaliesColumnsToDisplay;"></tr>

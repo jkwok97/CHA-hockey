@@ -30,11 +30,11 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
   goaliesColumnsToDisplay = [ 
     'team_logo', 'player_name', 'games_played','minutes_played', 'goals_against_avg', 'wins','loss', 'ties', 'en_goals',
     'shutouts', 'goals_against', 'saves', 'shots_for', 'save_pct', 'goals', 'assists', 'points', 'penalty_minutes', 'pass_pct',
-    'playing_year', 'season_type'
+    'playing_year', 'season_type', 'player_status'
   ];
   goaliesTeamColumnsToDisplay = [ 'playing_year', 'season_type',
     'player_name', 'games_played','minutes_played', 'goals_against_avg', 'wins','loss', 'ties', 'en_goals',
-    'shutouts', 'goals_against', 'saves', 'shots_for', 'save_pct', 'goals', 'assists', 'points', 'penalty_minutes', 'pass_pct'
+    'shutouts', 'goals_against', 'saves', 'shots_for', 'save_pct', 'goals', 'assists', 'points', 'penalty_minutes', 'pass_pct', 'player_status'
   ];
 
   @ViewChild(MatSort, {static: false}) sort: MatSort;

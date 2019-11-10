@@ -26,11 +26,11 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
   playersColumnsToDisplay = [ 'team_logo', 'player_name',
     'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'sh_goals',
     'gw_goals', 'gt_goals', 'shots', 'shooting_pct', 'minutes_per_game', 'fo_pct', 'pass_pct', 'corner_pct', 'hits', 'blocked_shots',
-    'playing_year', 'season_type'
+    'playing_year', 'season_type', 'player_status'
   ];
   playersTeamColumnsToDisplay = [ 'playing_year', 'season_type',
     'player_name', 'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'sh_goals',
-    'gw_goals', 'gt_goals', 'shots', 'shooting_pct', 'minutes_per_game', 'fo_pct', 'pass_pct', 'corner_pct', 'hits', 'blocked_shots'
+    'gw_goals', 'gt_goals', 'shots', 'shooting_pct', 'minutes_per_game', 'fo_pct', 'pass_pct', 'corner_pct', 'hits', 'blocked_shots', 'player_status'
   ];
 
   seasonType: string = 'Regular';
@@ -61,28 +61,50 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
   }
 
   checkString(team, type, group) {
-    if (team === "STA") {
-      this.getKillerBeesStats(team, type, group);
-    } else if (team === "ATL") {
-      this.getFlashersStats(team, type, group);
-    } else if (team === "CHY") {
-      this.getDesperadosStats(team, type, group);
-    } else if (team === "SCS") {
-      this.getStringraysStats(team, type, group);
-    } else if (team === "OAK") {
-      this.getAssassinsStats(team, type, group);
-    } else {
-      this.inMainPage = true;
-      this.getTeamStats(team, type, group);
+    if (group === "Season") {
+      if (team === "STA") {
+        this.getKillerBeesStats(team, type, group);
+      } else if (team === "ATL") {
+        this.getFlashersStats(team, type, group);
+      } else if (team === "CHY") {
+        this.getDesperadosStats(team, type, group);
+      } else if (team === "SCS") {
+        this.getStringraysStats(team, type, group);
+      } else if (team === "OAK") {
+        this.getAssassinsStats(team, type, group);
+      } else {
+        this.inMainPage = true;
+        this.getTeamStats(team, type, group);
+      }
+    } else if (group === "Alltime") {
+      if (team === "STA") {
+        this.getKillerBeesRawStats(team, type, group);
+      } else if (team === "ATL") {
+        this.getFlashersRawStats(team, type, group);
+      } else if (team === "CHY") {
+        this.getDesperadosRawStats(team, type, group);
+      } else if (team === "SCS") {
+        this.getStringraysRawStats(team, type, group);
+      } else if (team === "OAK") {
+        this.getAssassinsRawStats(team, type, group);
+      } else {
+        this.inMainPage = true;
+        this.getRawTeamStats(team, type, group);
+      }
     }
+    
   }
 
   getStats(type, group) {
     if (group === "Season") {
+      console.log("by season");
       this._teamsService.getPlayerStatsByType(type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
         console.log(resp);
         let stats = resp as [];
         this.players = new MatTableDataSource<any[]>(stats);
+        this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'sh_goals',
+                                          'gw_goals', 'gt_goals', 'shots', 'shooting_pct', 'minutes_per_game', 'fo_pct', 'pass_pct', 'corner_pct', 'hits', 'blocked_shots',
+                                          'playing_year', 'season_type', 'player_status'];
         this.pageSize = 25;
         this.length = stats.length;
         this.isLoading = false;
@@ -92,10 +114,14 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
         }, 350);
       });
     } else {
+      console.log(" by alltime");
+      console.log(type, group);
       this._teamsService.getPlayerStatsByType(type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
         console.log(resp);
         let stats = resp['rows'] as [];
         this.players = new MatTableDataSource<any[]>(stats);
+        this.playersColumnsToDisplay = [ 'player_name', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals',
+                                          'gw_goals', 'gt_goals', 'shots', 'hits', 'blocked_shots' ];
         this.pageSize = 25;
         this.length = stats.length;
         this.isLoading = false;
@@ -113,6 +139,27 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
       console.log(resp);
       let stats = resp as [];
       this.players = new MatTableDataSource<any[]>(stats);
+      this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'sh_goals',
+                                        'gw_goals', 'gt_goals', 'shots', 'shooting_pct', 'minutes_per_game', 'fo_pct', 'pass_pct', 'corner_pct', 'hits', 'blocked_shots',
+                                        'playing_year', 'season_type', 'player_status'
+                                      ];
+      this.pageSize = 25;
+      this.length = stats.length;
+      this.isLoading = false;
+      setTimeout(() => {
+        this.players.paginator = this.paginator;
+        this.players.sort = this.sort;
+      }, 350);
+    });
+  }
+
+  getRawTeamStats(team, type, group) {
+    this._teamsService.getAlltimeTeamPlayerStatsByType(team, type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      console.log(resp);
+      let stats = resp['rows'] as [];
+      this.players = new MatTableDataSource<any[]>(stats);
+      this.playersColumnsToDisplay = [ 'player_name', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals',
+                                        'gw_goals', 'gt_goals', 'shots', 'hits', 'blocked_shots' ];
       this.pageSize = 25;
       this.length = stats.length;
       this.isLoading = false;
@@ -128,10 +175,37 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
       let stats = resp as [];
       this._teamsService.getAlltimeTeamPlayerStatsByType("MIS", type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
         let oldTeamStats = resp as [];
+        console.log(oldTeamStats);
         oldTeamStats.forEach(element => {
           stats.push(element);
         })
         this.players = new MatTableDataSource<any[]>(stats);
+        this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'sh_goals',
+                                        'gw_goals', 'gt_goals', 'shots', 'shooting_pct', 'minutes_per_game', 'fo_pct', 'pass_pct', 'corner_pct', 'hits', 'blocked_shots',
+                                        'playing_year', 'season_type', 'player_status'
+                                      ];
+        this.pageSize = 25;
+        this.length = stats.length;
+        this.isLoading = false;
+        setTimeout(() => {
+          this.players.paginator = this.paginator;
+          this.players.sort = this.sort;
+        }, 350);
+      });
+    });
+  }
+
+  getKillerBeesRawStats(team, type, group) {
+    this._teamsService.getAlltimeTeamPlayerStatsByType(team, type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      let stats = resp['rows'] as [];
+      this._teamsService.getAlltimeTeamPlayerStatsByType("MIS", type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        let oldTeamStats = resp['rows'] as [];
+        oldTeamStats.forEach(element => {
+          stats.push(element);
+        })
+        this.players = new MatTableDataSource<any[]>(stats);
+        this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals',
+                                          'gw_goals', 'gt_goals', 'shots', 'hits', 'blocked_shots' ];
         this.pageSize = 25;
         this.length = stats.length;
         this.isLoading = false;
@@ -152,6 +226,10 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
           stats.push(element);
         })
         this.players = new MatTableDataSource<any[]>(stats);
+        this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'sh_goals',
+                                        'gw_goals', 'gt_goals', 'shots', 'shooting_pct', 'minutes_per_game', 'fo_pct', 'pass_pct', 'corner_pct', 'hits', 'blocked_shots',
+                                        'playing_year', 'season_type', 'player_status'
+                                      ];
         this.pageSize = 25;
         this.length = stats.length;
         this.isLoading = false;
@@ -162,6 +240,28 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
       });
     });
   }
+
+  getFlashersRawStats(team, type, group) {
+    this._teamsService.getAlltimeTeamPlayerStatsByType(team, type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+    let stats = resp['rows'] as [];
+    this._teamsService.getAlltimeTeamPlayerStatsByType("CHA", type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      let oldTeamStats = resp['rows'] as [];
+      oldTeamStats.forEach(element => {
+        stats.push(element);
+      })
+      this.players = new MatTableDataSource<any[]>(stats);
+      this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals',
+                                          'gw_goals', 'gt_goals', 'shots', 'hits', 'blocked_shots' ];
+      this.pageSize = 25;
+      this.length = stats.length;
+      this.isLoading = false;
+      setTimeout(() => {
+        this.players.paginator = this.paginator;
+        this.players.sort = this.sort;
+      }, 350);
+    });
+  });
+}
 
   getDesperadosStats(team, type, group) {
     this._teamsService.getAlltimeTeamPlayerStatsByType(team, type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
@@ -177,6 +277,38 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
             teamStats.push(element);
           })
           this.players = new MatTableDataSource<any[]>(teamStats);
+          this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'sh_goals',
+                                        'gw_goals', 'gt_goals', 'shots', 'shooting_pct', 'minutes_per_game', 'fo_pct', 'pass_pct', 'corner_pct', 'hits', 'blocked_shots',
+                                        'playing_year', 'season_type', 'player_status'
+                                      ];
+          this.pageSize = 25;
+          this.length = teamStats.length;
+          this.isLoading = false;
+          setTimeout(() => {
+            this.players.paginator = this.paginator;
+            this.players.sort = this.sort;
+          }, 350);
+        });
+      });          
+    });
+  }
+
+  getDesperadosRawStats(team, type, group) {
+    this._teamsService.getAlltimeTeamPlayerStatsByType(team, type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      let teamStats = resp['rows'] as [];
+      this._teamsService.getAlltimeTeamPlayerStatsByType("LVD", type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        let oldTeamStats = resp['rows'] as [];
+        oldTeamStats.forEach(element => {
+          teamStats.push(element);
+        })
+        this._teamsService.getAlltimeTeamPlayerStatsByType("SDC", type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+          let oldTeamStats = resp['rows'] as [];
+          oldTeamStats.forEach(element => {
+            teamStats.push(element);
+          })
+          this.players = new MatTableDataSource<any[]>(teamStats);
+          this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals',
+                                          'gw_goals', 'gt_goals', 'shots', 'hits', 'blocked_shots' ];
           this.pageSize = 25;
           this.length = teamStats.length;
           this.isLoading = false;
@@ -198,6 +330,32 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
           stats.push(element);
         })
         this.players = new MatTableDataSource<any[]>(stats);
+        this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'sh_goals',
+                                        'gw_goals', 'gt_goals', 'shots', 'shooting_pct', 'minutes_per_game', 'fo_pct', 'pass_pct', 'corner_pct', 'hits', 'blocked_shots',
+                                        'playing_year', 'season_type', 'player_status'
+                                      ];
+        this.pageSize = 25;
+        this.length = stats.length;
+        this.isLoading = false;
+        setTimeout(() => {
+          this.players.paginator = this.paginator;
+          this.players.sort = this.sort;
+        }, 350);
+      });
+    });
+  }
+
+  getStringraysRawStats(team, type, group) {
+    this._teamsService.getAlltimeTeamPlayerStatsByType(team, type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      let stats = resp['rows'] as [];
+      this._teamsService.getAlltimeTeamPlayerStatsByType("SAO", type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        let oldTeamStats = resp['rows'] as [];
+        oldTeamStats.forEach(element => {
+          stats.push(element);
+        })
+        this.players = new MatTableDataSource<any[]>(stats);
+        this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals',
+                                          'gw_goals', 'gt_goals', 'shots', 'hits', 'blocked_shots' ];
         this.pageSize = 25;
         this.length = stats.length;
         this.isLoading = false;
@@ -218,6 +376,32 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
           stats.push(element);
         })
         this.players = new MatTableDataSource<any[]>(stats);
+        this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'sh_goals',
+                                        'gw_goals', 'gt_goals', 'shots', 'shooting_pct', 'minutes_per_game', 'fo_pct', 'pass_pct', 'corner_pct', 'hits', 'blocked_shots',
+                                        'playing_year', 'season_type', 'player_status'
+                                      ];
+        this.pageSize = 25;
+        this.length = stats.length;
+        this.isLoading = false;
+        setTimeout(() => {
+          this.players.paginator = this.paginator;
+          this.players.sort = this.sort;
+        }, 350);
+      });
+    });
+  }
+
+  getAssassinsRawStats(team, type, group) {
+    this._teamsService.getAlltimeTeamPlayerStatsByType(team, type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      let stats = resp['rows'] as [];
+      this._teamsService.getAlltimeTeamPlayerStatsByType("OAO", type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        let oldTeamStats = resp['rows'] as [];
+        oldTeamStats.forEach(element => {
+          stats.push(element);
+        })
+        this.players = new MatTableDataSource<any[]>(stats);
+        this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals',
+                                          'gw_goals', 'gt_goals', 'shots', 'hits', 'blocked_shots' ];
         this.pageSize = 25;
         this.length = stats.length;
         this.isLoading = false;
