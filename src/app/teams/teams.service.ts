@@ -221,9 +221,10 @@ export class TeamsService {
     return this._http.get(`${environment.back_end_url}/players-stats/`, options);
   }
 
-  getGoalieStatsByType(type) {
+  getGoalieStatsByType(type, group) {
     let options = {params: new HttpParams()
-      .set('type', type)}
+      .set('type', type)
+      .set('group', group)}
     return this._http.get(`${environment.back_end_url}/goalies-stats/`, options);
   }
 
@@ -273,10 +274,11 @@ export class TeamsService {
     return this._http.get(`${environment.back_end_url}/players-stats/${team}`, options);
   }
 
-  getAlltimeTeamGoalieStatsByType(team, type) {
+  getAlltimeTeamGoalieStatsByType(team, type, group) {
     // console.log(team, type)
     let options = {params: new HttpParams()
-      .set('type', type)}
+      .set('type', type)
+      .set('group', group)}
     return this._http.get(`${environment.back_end_url}/goalies-stats/${team}`, options);
   }
 

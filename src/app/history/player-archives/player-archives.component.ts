@@ -5,7 +5,6 @@ import { TeamsService } from 'src/app/teams/teams.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { takeWhile } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
-import { MatButtonToggleGroup } from '@angular/material/button-toggle';
 
 @Component({
   selector: 'app-player-archives',
@@ -92,7 +91,6 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
         this.getRawTeamStats(team, type, group);
       }
     }
-    
   }
 
   getStats(type, group) {
@@ -114,8 +112,6 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
         }, 350);
       });
     } else {
-      console.log(" by alltime");
-      console.log(type, group);
       this._teamsService.getPlayerStatsByType(type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
         console.log(resp);
         let stats = resp['rows'] as [];

@@ -3,7 +3,7 @@
     <div class="goalieStatsTable cha-dark">
 
         <div class="button-container">
-            <mat-button-toggle-group #group="matButtonToggleGroup" [value]="seasonType" (change)="changeSeason(group.value)">
+            <mat-button-toggle-group #bySeason="matButtonToggleGroup" [value]="seasonType" (change)="changeSeason(bySeason.value)">
                 <mat-button-toggle value="Regular" color="accent">
                     Regular
                 </mat-button-toggle>
@@ -12,14 +12,14 @@
                 </mat-button-toggle>
             </mat-button-toggle-group>
     
-            <!-- <mat-button-toggle-group #group="matButtonToggleGroup" [value]="seasonType" (change)="changeSeason(group.value)">
-                <mat-button-toggle value="Regular" color="accent">
-                    Regular
+            <mat-button-toggle-group #byShow="matButtonToggleGroup" [value]="showType" (change)="changeShow(byShow.value)">
+                <mat-button-toggle value="Season" color="accent">
+                    Per Season
                 </mat-button-toggle>
-                <mat-button-toggle value="Playoffs" color="accent">
-                    Playoffs
+                <mat-button-toggle value="Alltime" color="accent">
+                    All-time
                 </mat-button-toggle>
-            </mat-button-toggle-group> -->
+            </mat-button-toggle-group>
     
             <mat-form-field color="accent">
                 <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
@@ -70,6 +70,11 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> GAA </th>
                     <td mat-cell *matCellDef="let player"> {{player.goals_against_avg}} </td>
                 </ng-container>
+
+                <ng-container matColumnDef="calc_goals_against_avg">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> GAA </th>
+                    <td mat-cell *matCellDef="let player"> {{ calcGAA(player.goals_against, player.minutes_played).toFixed(2)}} </td>
+                </ng-container>
                 
                 <ng-container matColumnDef="wins">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> W </th>
@@ -115,6 +120,11 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Sv% </th>
                     <td mat-cell *matCellDef="let player"> {{player.save_pct}} </td>
                 </ng-container>
+
+                <ng-container matColumnDef="calc_save_pct">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Sv% </th>
+                        <td mat-cell *matCellDef="let player"> {{ calcSvPct(player.saves, player.shots_for).toFixed(3)}} </td>
+                    </ng-container>
     
                 <ng-container matColumnDef="goals">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> G </th>
