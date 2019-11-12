@@ -168,6 +168,14 @@ export class TeamsService {
     return this._http.get(`${environment.back_end_url}/team-stats/`);
   }
 
+  // getAlltimeTeamStatsByType(team, type, group) {
+  //   // console.log(team, type)
+  //   let options = {params: new HttpParams()
+  //     .set('type', type)
+  //     .set('group', group)}
+  //   return this._http.get(`${environment.back_end_url}/teams-stats/${team}`, options);
+  // }
+
   getTeamInfo(short) {
     let found;
     found = this.currentLeague.teams.find(team => team.shortName === short);
