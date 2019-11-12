@@ -193,7 +193,7 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
       let stats = resp as [];
       this._teamsService.getAlltimeTeamPlayerStatsByType("MIS", type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
         let oldTeamStats = resp as [];
-        console.log(oldTeamStats);
+        // console.log(oldTeamStats);
         oldTeamStats.forEach(element => {
           stats.push(element);
         })

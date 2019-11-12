@@ -159,6 +159,11 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
         'shutouts', 'saves', 'shots_for', 'save_pct', 'minutes_played', 'goals', 'assists', 'points', 'penalty_minutes', 'pass_pct',
         'playing_year', 'season_type', 'player_status'
       ];
+      this.goaliesTeamColumnsToDisplay = [ 
+        'player_name', 'games_played','wins','loss', 'ties', 'goals_against_avg', 'goals_against', 'en_goals',
+        'shutouts', 'saves', 'shots_for', 'save_pct', 'minutes_played', 'goals', 'assists', 'points', 'penalty_minutes', 'pass_pct',
+        'playing_year', 'season_type', 'player_status'
+      ];
       this.pageSize = 25;
       this.length = stats.length;
       this.isLoading = false;
