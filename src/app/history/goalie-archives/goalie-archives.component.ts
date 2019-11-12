@@ -54,11 +54,9 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
     if (this._route.snapshot.routeConfig.path === "history") {
       this.getStats(this.seasonType, this.showType);
     } else if (this._route.snapshot.routeConfig.path === "main") {
-      // console.log(this._route.snapshot.queryParams.team)
       this.teamString = this._route.snapshot.queryParams.team;
       this.checkString(this.teamString, this.seasonType, this.showType);
     } else if (this._route.snapshot.routeConfig.path === "teams/:params") {
-      console.log(this._route.snapshot.params.params)
       this.teamString = this._route.snapshot.params.params;
       this.checkString(this.teamString, this.seasonType, this.showType);
     }
@@ -115,7 +113,7 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
   getStats(type, group) {
     if (group === "Season") {
       this._teamsService.getGoalieStatsByType(type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-        console.log(resp);
+        // console.log(resp);
         let stats = resp as [];
         this.goalies = new MatTableDataSource<any[]>(stats);
         this.goaliesColumnsToDisplay = [ 
@@ -133,7 +131,7 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
       });
     } else {
       this._teamsService.getGoalieStatsByType(type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-        console.log(resp);
+        // console.log(resp);
         let stats = resp['rows'] as [];
         this.goalies = new MatTableDataSource<any[]>(stats);
         this.goaliesColumnsToDisplay = [ 'player_name', 'games_played','wins','loss', 'ties', 'calc_goals_against_avg', 'goals_against', 'en_goals',
@@ -153,7 +151,7 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
 
   getTeamStats(team, type, group) {
     this._teamsService.getAlltimeTeamGoalieStatsByType(team, type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       let stats = resp as [];
       this.goalies = new MatTableDataSource<any[]>(stats);
       this.goaliesColumnsToDisplay = [ 

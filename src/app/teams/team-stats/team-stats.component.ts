@@ -27,7 +27,7 @@ export class TeamStatsComponent implements OnInit, OnDestroy {
     this._teamsService.league.conference[0].division[1].teams.forEach(team => { this.currentTeams.push(team) });
     this._teamsService.league.conference[1].division[0].teams.forEach(team => { this.currentTeams.push(team) });
     this._teamsService.league.conference[1].division[1].teams.forEach(team => { this.currentTeams.push(team) });
-    console.log(this.currentTeams);
+    // console.log(this.currentTeams);
   }
 
   ngOnInit() {
@@ -37,7 +37,7 @@ export class TeamStatsComponent implements OnInit, OnDestroy {
     if (this.currentTeams.find(team => team.shortName === this.team.shortName)) {
       this.currentTeam = true;
     }
-    console.log(this.currentTeam);
+    // console.log(this.currentTeam);
     this.isLoading = false;
   }
 

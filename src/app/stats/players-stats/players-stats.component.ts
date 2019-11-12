@@ -53,7 +53,7 @@ export class PlayersStatsComponent implements OnInit, OnDestroy {
     if (this._route.snapshot.routeConfig.path === "stats/players") {
       this.inAllPlayersStats = true;
       this._teamsService.getPlayerStatsByYearByType(this.currentSeason,this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-        console.log(resp);
+        // console.log(resp);
         this.stats = resp as [];
         this.players = new MatTableDataSource<any[]>(this.stats);
         this.pageSize = 25;

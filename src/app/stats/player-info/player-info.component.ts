@@ -169,7 +169,7 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
 
   getGoalieStats(type) {
     this._teamsService.getAllIndividualGoalieStatsByType(this._route.snapshot.params.params, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       this.playerStatsFetched = resp as [];
       this.getGoalieTotals(this.playerStatsFetched);
       this.playerStats = new MatTableDataSource<any[]>(this.playerStatsFetched);
@@ -178,7 +178,7 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
 
   getPlayerStats(type) {
     this._teamsService.getAllIndividualPlayerStatsByType(this._route.snapshot.params.params, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       this.playerStatsFetched = resp as [];
       this.getPlayerTotals(this.playerStatsFetched);
       this.playerStats = new MatTableDataSource<any[]>(this.playerStatsFetched);

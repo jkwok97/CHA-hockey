@@ -44,7 +44,7 @@ export class ArchivesComponent implements OnInit, OnDestroy {
 
   getStats(type) {
     this._teamsService.getAlltimeLeagueTeamsStatsByType(this.seasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       let teamStats = resp as [];
       teamStats.sort((a,b) => b['points'] - a['points']);
       this.teams = new MatTableDataSource<any[]>(teamStats);

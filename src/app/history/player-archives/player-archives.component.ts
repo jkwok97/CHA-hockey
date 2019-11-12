@@ -52,16 +52,12 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.currentSeason = this._teamsService.currentSeason;
     this.seasonType = this._teamsService.currentSeasonType;
-    console.log(this._route.snapshot.routeConfig.path)
     if (this._route.snapshot.routeConfig.path === "history") {
       this.getStats(this.seasonType, this.showType);
     } else if (this._route.snapshot.routeConfig.path === "main") {
-      // console.log(this._route.snapshot.queryParams.team)
-      console.log("in here")
       this.teamString = this._route.snapshot.queryParams.team;
       this.checkString(this.teamString, this.seasonType, this.showType);
     } else if (this._route.snapshot.routeConfig.path === "teams/:params") {
-      console.log(this._route.snapshot.params.params)
       this.teamString = this._route.snapshot.params.params;
       this.checkString(this.teamString, this.seasonType, this.showType);
     }
@@ -103,9 +99,8 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
 
   getStats(type, group) {
     if (group === "Season") {
-      console.log("by season");
       this._teamsService.getPlayerStatsByType(type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-        console.log(resp);
+        // console.log(resp);
         let stats = resp as [];
         this.players = new MatTableDataSource<any[]>(stats);
         this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'sh_goals',
@@ -121,7 +116,7 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
       });
     } else {
       this._teamsService.getPlayerStatsByType(type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-        console.log(resp);
+        // console.log(resp);
         let stats = resp['rows'] as [];
         this.players = new MatTableDataSource<any[]>(stats);
         this.playersColumnsToDisplay = [ 'player_name', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals',
@@ -153,7 +148,7 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
 
   getTeamStats(team, type, group) {
     this._teamsService.getAlltimeTeamPlayerStatsByType(team, type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       let stats = resp as [];
       this.players = new MatTableDataSource<any[]>(stats);
       this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'sh_goals',
