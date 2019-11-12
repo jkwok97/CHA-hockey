@@ -12,7 +12,8 @@
                     <img src="{{team.image}}">
                 </div>
                 <div class="teamNameHeader">
-                    <h1 matTooltip="To Salary Page" matTooltipPosition="above" (click)="toSalaryPage()">{{team.name}}</h1>
+                    <h1 matTooltip="To Salary Page" matTooltipPosition="above" (click)="toSalaryPage()" *ngIf="currentTeam">{{team.name}}</h1>
+                    <h1 *ngIf="!currentTeam">{{team.name}}</h1>
                     <p>owner: {{team.owner}}</p>
                 </div>
                 <div class="teamImage">
@@ -33,9 +34,14 @@
                     <app-goalie-stats></app-goalie-stats> 
                 </mat-tab>
 
-                <mat-tab label="Historical">
-                     <p class="text">Coming Soon!</p> 
+                <mat-tab label="Players Archives">
+                    <app-player-archives></app-player-archives>
                 </mat-tab>
+
+                <mat-tab label="Goalies Archives">
+                    <app-goalie-archives></app-goalie-archives>
+                </mat-tab>
+                
             </mat-tab-group>
             
         </div>

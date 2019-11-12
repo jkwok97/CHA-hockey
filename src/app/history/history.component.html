@@ -2,12 +2,17 @@
 
     <div class="body">
         <mat-tab-group color="accent" animationDuration="0ms">
-            <mat-tab label="Champions"><app-champions></app-champions></mat-tab>
+
+            <mat-tab label="Champions">
+                <app-champions></app-champions>
+            </mat-tab>
+
             <mat-tab label="Drafts">
                 <ng-template matTabContent>
                     <app-drafts></app-drafts>
                 </ng-template>
             </mat-tab>
+            
             <mat-tab label="Team Archives">
                 <ng-template matTabContent>
                     <app-archives></app-archives>

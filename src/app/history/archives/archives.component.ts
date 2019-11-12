@@ -4,6 +4,7 @@ import { takeWhile } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-archives',
@@ -32,7 +33,8 @@ export class ArchivesComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
 
   constructor(
-    private _teamsService: TeamsService
+    private _teamsService: TeamsService,
+    private _router: Router
   ) { }
 
   ngOnInit() {
@@ -81,6 +83,11 @@ export class ArchivesComponent implements OnInit, OnDestroy {
     if (this.teams.paginator) {
       this.teams.paginator.firstPage();
     }
+  }
+
+  openTeam(shortName) {
+    this._router.navigate([`teams/${shortName}`])
+    window.scrollTo(0,0);
   }
 
   ngOnDestroy() {

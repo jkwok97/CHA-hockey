@@ -56,6 +56,10 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
       // console.log(this._route.snapshot.queryParams.team)
       this.teamString = this._route.snapshot.queryParams.team;
       this.checkString(this.teamString, this.seasonType, this.showType);
+    } else if (this._route.snapshot.routeConfig.path === "teams/:params") {
+      console.log(this._route.snapshot.params.params)
+      this.teamString = this._route.snapshot.params.params;
+      this.checkString(this.teamString, this.seasonType, this.showType);
     }
   }
 
@@ -162,12 +166,13 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
 
   getRawTeamStats(team, type, group) {
     this._teamsService.getAlltimeTeamGoalieStatsByType(team, type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       let stats = resp['rows'] as [];
       this.goalies = new MatTableDataSource<any[]>(stats);
       this.goaliesColumnsToDisplay = [ 'team_logo', 'player_name', 'games_played','wins','loss', 'ties', 'calc_goals_against_avg', 'goals_against', 'en_goals',
-                                          'shutouts', 'saves', 'shots_for', 'calc_save_pct', 'minutes_played', 'goals', 'assists', 'points', 'penalty_minutes','season_type',
-                                        ];
+                                        'shutouts', 'saves', 'shots_for', 'calc_save_pct', 'minutes_played', 'goals', 'assists', 'points', 'penalty_minutes','season_type'];
+      this.goaliesTeamColumnsToDisplay = [ 'player_name', 'games_played','wins','loss', 'ties', 'calc_goals_against_avg', 'goals_against', 'en_goals',
+                                        'shutouts', 'saves', 'shots_for', 'calc_save_pct', 'minutes_played', 'goals', 'assists', 'points', 'penalty_minutes','season_type'];
       this.pageSize = 25;
       this.length = stats.length;
       this.isLoading = false;
@@ -451,6 +456,16 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
         this.seasonType = value;
         this.checkString(this.teamString, value, this.showType);
       }
+    } else if (this._route.snapshot.routeConfig.path === "teams/:params") {
+      if (value === 'Playoffs') {
+        this.isLoading = true;
+        this.seasonType = value;
+        this.checkString(this.teamString, value, this.showType);
+      } else {
+        this.isLoading = true;
+        this.seasonType = value;
+        this.checkString(this.teamString, value, this.showType);
+      }
     }
   }
 
@@ -466,6 +481,16 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
         this.getStats(this.seasonType, value);
       }
     } else if (this._route.snapshot.routeConfig.path === "main") {
+      if (value === 'Alltime') {
+        this.isLoading = true;
+        this.showType = value;
+        this.checkString(this.teamString, this.seasonType, value);
+      } else {
+        this.isLoading = true;
+        this.showType = value;
+        this.checkString(this.teamString, this.seasonType, value);
+      }
+    } else if (this._route.snapshot.routeConfig.path === "teams/:params") {
       if (value === 'Alltime') {
         this.isLoading = true;
         this.showType = value;

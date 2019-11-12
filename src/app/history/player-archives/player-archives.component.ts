@@ -28,7 +28,7 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
     'playing_year', 'season_type', 'player_status'
   ];
   playersTeamColumnsToDisplay = [ 'playing_year', 'season_type',
-    'player_name', 'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'sh_goals',
+    'player_name', 'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals',
     'gw_goals', 'gt_goals', 'shots', 'shooting_pct', 'minutes_per_game', 'fo_pct', 'pass_pct', 'corner_pct', 'hits', 'blocked_shots', 'player_status'
   ];
 
@@ -50,11 +50,17 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.currentSeason = this._teamsService.currentSeason;
     this.seasonType = this._teamsService.currentSeasonType;
+    console.log(this._route.snapshot.routeConfig.path)
     if (this._route.snapshot.routeConfig.path === "history") {
       this.getStats(this.seasonType, this.showType);
     } else if (this._route.snapshot.routeConfig.path === "main") {
       // console.log(this._route.snapshot.queryParams.team)
+      console.log("in here")
       this.teamString = this._route.snapshot.queryParams.team;
+      this.checkString(this.teamString, this.seasonType, this.showType);
+    } else if (this._route.snapshot.routeConfig.path === "teams/:params") {
+      console.log(this._route.snapshot.params.params)
+      this.teamString = this._route.snapshot.params.params;
       this.checkString(this.teamString, this.seasonType, this.showType);
     }
   }
@@ -127,7 +133,14 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
         }, 350);
       });
     }
-    
+  }
+
+  calcShPct(goals, shots) {
+    return ((goals / shots) * 100)
+  }
+
+  calcMin(gamesPlayed, minutes) {
+    return (minutes / gamesPlayed)
   }
 
   getTeamStats(team, type, group) {
@@ -139,6 +152,10 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
                                         'gw_goals', 'gt_goals', 'shots', 'shooting_pct', 'minutes_per_game', 'fo_pct', 'pass_pct', 'corner_pct', 'hits', 'blocked_shots',
                                         'playing_year', 'season_type', 'player_status'
                                       ];
+      this.playersTeamColumnsToDisplay = [ 'player_name', 'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'sh_goals',
+                                      'gw_goals', 'gt_goals', 'shots', 'shooting_pct', 'minutes_per_game', 'fo_pct', 'pass_pct', 'corner_pct', 'hits', 'blocked_shots',
+                                      'playing_year', 'season_type', 'player_status'
+                                    ];                                
       this.pageSize = 25;
       this.length = stats.length;
       this.isLoading = false;
@@ -151,11 +168,13 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
 
   getRawTeamStats(team, type, group) {
     this._teamsService.getAlltimeTeamPlayerStatsByType(team, type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       let stats = resp['rows'] as [];
       this.players = new MatTableDataSource<any[]>(stats);
       this.playersColumnsToDisplay = [ 'player_name', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals',
                                         'gw_goals', 'gt_goals', 'shots', 'hits', 'blocked_shots' ];
+      this.playersTeamColumnsToDisplay = [ 'player_name', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'pp_goals','sh_goals',
+                                        'gw_goals', 'gt_goals', 'shots', 'calc_shooting_pct', 'calc_minutes_per_game', 'hits', 'blocked_shots', 'season_type' ];
       this.pageSize = 25;
       this.length = stats.length;
       this.isLoading = false;
@@ -201,7 +220,7 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
         })
         this.players = new MatTableDataSource<any[]>(stats);
         this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals',
-                                          'gw_goals', 'gt_goals', 'shots', 'hits', 'blocked_shots' ];
+                                          'gw_goals', 'gt_goals', 'shots', 'calc_shooting_pct', 'calc_minutes_per_game', 'hits', 'blocked_shots' ];
         this.pageSize = 25;
         this.length = stats.length;
         this.isLoading = false;
@@ -247,7 +266,7 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
       })
       this.players = new MatTableDataSource<any[]>(stats);
       this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals',
-                                          'gw_goals', 'gt_goals', 'shots', 'hits', 'blocked_shots' ];
+                                          'gw_goals', 'gt_goals', 'shots', 'calc_shooting_pct', 'calc_minutes_per_game', 'hits', 'blocked_shots' ];
       this.pageSize = 25;
       this.length = stats.length;
       this.isLoading = false;
@@ -304,7 +323,7 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
           })
           this.players = new MatTableDataSource<any[]>(teamStats);
           this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals',
-                                          'gw_goals', 'gt_goals', 'shots', 'hits', 'blocked_shots' ];
+                                          'gw_goals', 'gt_goals', 'shots', 'calc_shooting_pct', 'calc_minutes_per_game', 'hits', 'blocked_shots' ];
           this.pageSize = 25;
           this.length = teamStats.length;
           this.isLoading = false;
@@ -351,7 +370,7 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
         })
         this.players = new MatTableDataSource<any[]>(stats);
         this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals',
-                                          'gw_goals', 'gt_goals', 'shots', 'hits', 'blocked_shots' ];
+                                          'gw_goals', 'gt_goals', 'shots', 'calc_shooting_pct', 'calc_minutes_per_game', 'hits', 'blocked_shots' ];
         this.pageSize = 25;
         this.length = stats.length;
         this.isLoading = false;
@@ -397,7 +416,7 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
         })
         this.players = new MatTableDataSource<any[]>(stats);
         this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals',
-                                          'gw_goals', 'gt_goals', 'shots', 'hits', 'blocked_shots' ];
+                                          'gw_goals', 'gt_goals', 'shots', 'calc_shooting_pct', 'calc_minutes_per_game', 'hits', 'blocked_shots' ];
         this.pageSize = 25;
         this.length = stats.length;
         this.isLoading = false;
@@ -439,6 +458,16 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
         this.seasonType = value;
         this.checkString(this.teamString, value, this.showType);
       }
+    } else if (this._route.snapshot.routeConfig.path === "teams/:params") {
+      if (value === 'Playoffs') {
+        this.isLoading = true;
+        this.seasonType = value;
+        this.checkString(this.teamString, value, this.showType);
+      } else {
+        this.isLoading = true;
+        this.seasonType = value;
+        this.checkString(this.teamString, value, this.showType);
+      }
     }
   }
 
@@ -454,6 +483,16 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
         this.getStats(this.seasonType, value);
       }
     } else if (this._route.snapshot.routeConfig.path === "main") {
+      if (value === 'Alltime') {
+        this.isLoading = true;
+        this.showType = value;
+        this.checkString(this.teamString, this.seasonType, value);
+      } else {
+        this.isLoading = true;
+        this.showType = value;
+        this.checkString(this.teamString, this.seasonType, value);
+      }
+    } else if (this._route.snapshot.routeConfig.path === "teams/:params") {
       if (value === 'Alltime') {
         this.isLoading = true;
         this.showType = value;

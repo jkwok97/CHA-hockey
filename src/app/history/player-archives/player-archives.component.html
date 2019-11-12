@@ -120,10 +120,20 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Sh% </th>
                     <td mat-cell *matCellDef="let player"> {{player.shooting_pct}} </td>
                 </ng-container>
+
+                <ng-container matColumnDef="calc_shooting_pct">
+                    <th mat-header-cell *matHeaderCellDef> Sh% </th>
+                    <td mat-cell *matCellDef="let player"> {{ calcShPct(player.goals, player.shots).toFixed(1)}} </td>
+                </ng-container>
     
                 <ng-container matColumnDef="minutes_per_game">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Min/G </th>
                     <td mat-cell *matCellDef="let player"> {{player.minutes_per_game}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="calc_minutes_per_game">
+                    <th mat-header-cell *matHeaderCellDef> Min/G </th>
+                    <td mat-cell *matCellDef="let player"> {{ calcMin(player.games_played, player.minutes_played).toFixed(1)}} </td>
                 </ng-container>
     
                 <ng-container matColumnDef="fo_pct">
