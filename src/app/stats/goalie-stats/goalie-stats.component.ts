@@ -87,9 +87,10 @@ export class GoalieStatsComponent implements OnInit, OnDestroy {
     }
   }
 
-  openGoaliePlayer(name, team) {
+  openGoaliePlayer(name, team, position) {
     this._router.navigate([`/stats/players/${name}`]);
-    this._teamsService.sendPlayerStatsTrigger(this.stats);
+    this._teamsService.setPlayerPosition(position);
+    window.scrollTo(0,0);
   }
 
   ngOnDestroy() {

@@ -139,17 +139,20 @@ export class StatsComponent implements OnInit, OnDestroy {
   }
 
   openTeam(shortName) {
-    this._route.navigate([`teams/${shortName}`])
+    this._route.navigate([`teams/${shortName}`]);
+    window.scrollTo(0,0);
   }
 
-  openPlayer(name, team) {
+  openPlayer(name, team, position) {
     this._route.navigate([`/stats/players/${name}`]);
-    this._teamsService.sendPlayerStatsTrigger(this.stats);
+    this._teamsService.setPlayerPosition(position);
+    window.scrollTo(0,0);
   }
 
-  openGoaliePlayer(name, team) {
+  openGoaliePlayer(name, team, position) {
     this._route.navigate([`/stats/players/${name}`]);
-    this._teamsService.sendPlayerStatsTrigger(this.goalieStats);
+    this._teamsService.setPlayerPosition(position);
+    window.scrollTo(0,0);
   }
 
   ngOnDestroy() {

@@ -4,7 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { takeWhile } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-goalie-archives',
@@ -43,7 +43,8 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
 
   constructor(
     private _teamsService: TeamsService, 
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _router: Router
   ) { }
 
   ngOnInit() {
@@ -69,6 +70,12 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
 
   calcSvPct(saves, shots) {
     return (saves / shots);
+  }
+
+  openGoaliePlayer(name, team, position) {
+    this._router.navigate([`/stats/players/${name}`]);
+    this._teamsService.setPlayerPosition(position);
+    window.scrollTo(0,0);
   }
 
   checkString(team, type, group) {

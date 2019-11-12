@@ -173,7 +173,8 @@ export class OverallTeamStatsComponent implements OnInit, OnDestroy, AfterViewIn
   }
 
   openTeam(shortName) {
-    this._router.navigate([`teams/${shortName}`])
+    this._router.navigate([`teams/${shortName}`]);
+    window.scrollTo(0,0);
   }
 
   ngOnDestroy() {

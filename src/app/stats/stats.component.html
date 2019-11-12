@@ -182,7 +182,7 @@
                                 </ng-container>
                     
                                 <tr mat-header-row *matHeaderRowDef="playersColumnsToDisplay"></tr>
-                                <tr mat-row *matRowDef="let player; columns: playersColumnsToDisplay;" (click)="openPlayer(player.player_name, player.team_name)"></tr>
+                                <tr mat-row *matRowDef="let player; columns: playersColumnsToDisplay;" (click)="openPlayer(player.player_name, player.team_name, player.position)"></tr>
                     
                             </table>
                     
@@ -220,7 +220,7 @@
                                 </ng-container>
                     
                                 <tr mat-header-row *matHeaderRowDef="currPointLeadersColumnsToDisplay"></tr>
-                                <tr mat-row *matRowDef="let player; columns: currPointLeadersColumnsToDisplay;" (click)="openPlayer(player.player_name, player.team_name)"></tr>
+                                <tr mat-row *matRowDef="let player; columns: currPointLeadersColumnsToDisplay;" (click)="openPlayer(player.player_name, player.team_name, player.position)"></tr>
                     
                             </table>
                     
@@ -258,7 +258,7 @@
                                 </ng-container>
                     
                                 <tr mat-header-row *matHeaderRowDef="longPointLeadersColumnsToDisplay"></tr>
-                                <tr mat-row *matRowDef="let player; columns: longPointLeadersColumnsToDisplay;" (click)="openPlayer(player.player_name, player.team_name)"></tr>
+                                <tr mat-row *matRowDef="let player; columns: longPointLeadersColumnsToDisplay;" (click)="openPlayer(player.player_name, player.team_name, player.position)"></tr>
                     
                             </table>
                     
@@ -323,7 +323,7 @@
                                 </ng-container>
                                 
                                 <tr mat-header-row *matHeaderRowDef="goaliesColumnsToDisplay"></tr>
-                                <tr mat-row *matRowDef="let goalie; columns: goaliesColumnsToDisplay;" (click)="openGoaliePlayer(goalie.player_name, goalie.team_name)"></tr>
+                                <tr mat-row *matRowDef="let goalie; columns: goaliesColumnsToDisplay;" (click)="openGoaliePlayer(goalie.player_name, goalie.team_name, goalie.position)"></tr>
                     
                             </table>
                     

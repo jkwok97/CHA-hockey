@@ -129,7 +129,7 @@ export class MainComponent implements OnInit, OnDestroy {
     });
     this._teamsService.getTeamGoalieStatsByYearByType(this.team.shortName, this.currentSeason, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.goalieStats = resp as [];
-      // console.log(this.goalieStats);
+      console.log(this.goalieStats);
       this.goalies = new MatTableDataSource<any[]>(this.goalieStats);
       this.goalies.sort = this.goalieSort;
     });
@@ -268,14 +268,16 @@ export class MainComponent implements OnInit, OnDestroy {
     });
   }
 
-  openPlayer(name, team) {
+  openPlayer(name, team, position) {
     this._router.navigate([`/stats/players/${name}`]);
-    this._teamsService.sendPlayerStatsTrigger(this.playerStats);
+    this._teamsService.setPlayerPosition(position);
+    window.scrollTo(0,0);
   }
 
-  openGoaliePlayer(name, team) {
+  openGoaliePlayer(name, team, position) {
     this._router.navigate([`/stats/players/${name}`]);
-    this._teamsService.sendPlayerStatsTrigger(this.goalieStats);
+    this._teamsService.setPlayerPosition(position);
+    window.scrollTo(0,0);
   }
 
   logout() {

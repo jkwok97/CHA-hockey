@@ -14,6 +14,7 @@ export class TeamsService {
   teamPlayerStats: any;
   currentSeason: string = "2019-20";
   currentSeasonType: string = "Regular"
+  playerPosition: string;
 
   private _subjectPlayerStats = new Subject<any>();
 
@@ -210,6 +211,12 @@ export class TeamsService {
     this._subjectPlayerStats.next(stats);
   }
 
+  setPlayerPosition(position) {
+    // console.log(stats);
+    this.playerPosition = position;
+    // this._subjectPlayerStats.next(stats);
+  }
+
   sendPlayerStatsListener(): Observable<any> {
     return this._subjectPlayerStats.asObservable();
   }
@@ -280,6 +287,26 @@ export class TeamsService {
       .set('type', type)
       .set('group', group)}
     return this._http.get(`${environment.back_end_url}/goalies-stats/${team}`, options);
+  }
+
+  getAllIndividualPlayerStats(name) {
+    return this._http.get(`${environment.back_end_url}/players/${name}`);
+  }
+
+  getAllIndividualPlayerStatsByType(name, type) {
+    let options = {params: new HttpParams()
+      .set('type', type)}
+    return this._http.get(`${environment.back_end_url}/players/${name}`, options);
+  }
+
+  getAllIndividualGoalieStats(name) {
+    return this._http.get(`${environment.back_end_url}/goalies/${name}`);
+  }
+
+  getAllIndividualGoalieStatsByType(name, type) {
+    let options = {params: new HttpParams()
+      .set('type', type)}
+    return this._http.get(`${environment.back_end_url}/goalies/${name}`, options);
   }
 
 }

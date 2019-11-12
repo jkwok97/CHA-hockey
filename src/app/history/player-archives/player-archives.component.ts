@@ -4,7 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { TeamsService } from 'src/app/teams/teams.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { takeWhile } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-player-archives',
@@ -37,6 +37,7 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
   currentSeason: string;
 
   teamString: any;
+  // stats: any
 
   @ViewChild(MatSort, {static: false}) sort: MatSort;
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
@@ -44,6 +45,7 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
   constructor(
     private _teamsService: TeamsService,
     private _route: ActivatedRoute,
+    private _router: Router
   ) { }
 
   ngOnInit() {
@@ -141,6 +143,12 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
 
   calcMin(gamesPlayed, minutes) {
     return (minutes / gamesPlayed)
+  }
+
+  openPlayer(name, team, position) {
+    this._router.navigate([`/stats/players/${name}`]);
+    this._teamsService.setPlayerPosition(position);
+    window.scrollTo(0,0);
   }
 
   getTeamStats(team, type, group) {
