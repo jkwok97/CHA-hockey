@@ -8,11 +8,11 @@
         <p>Drafts</p>
     </div>
 
-    <div class="table">
+    <mat-form-field color="accent">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+    </mat-form-field>
 
-        <mat-form-field color="accent">
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
-        </mat-form-field>
+    <div class="table">
 
         <table mat-table [dataSource]="players" matSort class="mat-elevation-z8 full-width" matSortActive="draft_year" matSortDirection="desc">
 
@@ -51,15 +51,15 @@
 
         </table>
 
-        <mat-paginator
-            [pageSizeOptions]="[20]"
-            [pageSize]="pageSize"
-            [length]="length"
-            color="accent"
-            showFirstLastButtons
-        ></mat-paginator>
-
     </div>
+
+    <mat-paginator
+        [pageSizeOptions]="[20]"
+        [pageSize]="pageSize"
+        [length]="length"
+        color="accent"
+        showFirstLastButtons
+    ></mat-paginator>
 
 </div>
     

@@ -5,12 +5,7 @@
     
     <div class="playerStatsTable cha-dark" *ngIf="!isLoading">
 
-        <mat-form-field color="accent">
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
-        </mat-form-field>
-
-        <div class="table">
-
+        <div class="button-container">
             <mat-button-toggle-group #group="matButtonToggleGroup" [value]="seasonType" (change)="changeSeason(group.value)">
                 <mat-button-toggle value="Regular" color="accent">
                     Regular
@@ -20,6 +15,13 @@
                 </mat-button-toggle>
             </mat-button-toggle-group>
     
+            <mat-form-field color="accent">
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+            </mat-form-field>
+        </div>
+
+        <div class="table">
+
             <table mat-table [dataSource]="teams" matSort class="mat-elevation-z8 full-width" matSortActive="points" matSortDirection="desc">
     
                 <ng-container matColumnDef="playing_year" sticky>
@@ -148,15 +150,15 @@
                 <tr mat-row *matRowDef="let team; columns: teamsColumnsToDisplay;" (click)="openTeam(team.team_name)"></tr>
     
             </table>
-
-            <mat-paginator
-                [pageSizeOptions]="[20]"
-                [pageSize]="pageSize"
-                [length]="length"
-                color="accent"
-                showFirstLastButtons
-            ></mat-paginator>
     
         </div>
+
+        <mat-paginator
+            [pageSizeOptions]="[20]"
+            [pageSize]="pageSize"
+            [length]="length"
+            color="accent"
+            showFirstLastButtons
+        ></mat-paginator>
     </div>
 </div>
