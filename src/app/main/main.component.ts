@@ -129,7 +129,7 @@ export class MainComponent implements OnInit, OnDestroy {
     });
     this._teamsService.getTeamGoalieStatsByYearByType(this.team.shortName, this.currentSeason, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.goalieStats = resp as [];
-      console.log(this.goalieStats);
+      // console.log(this.goalieStats);
       this.goalies = new MatTableDataSource<any[]>(this.goalieStats);
       this.goalies.sort = this.goalieSort;
     });
@@ -171,7 +171,7 @@ export class MainComponent implements OnInit, OnDestroy {
         this.getAssassinsStats(this.team);
       } else {
         this._teamsService.getTeamStats(this.team.shortName).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-          console.log(resp);
+          // console.log(resp);
           let teamStats = resp as [];
           this.teams = new MatTableDataSource<any[]>(teamStats);
           this.teams.sort = this.overallSort;
@@ -190,7 +190,7 @@ export class MainComponent implements OnInit, OnDestroy {
         oldTeamStats.forEach(element => {
           teamStats.push(element);
         })
-        console.log(teamStats);
+        // console.log(teamStats);
         teamStats.sort((a,b) => b['playing_year'] - a['playing_year']);
         this.teams = new MatTableDataSource<any[]>(teamStats);
         this.teams.sort = this.overallSort;
@@ -206,7 +206,7 @@ export class MainComponent implements OnInit, OnDestroy {
         oldTeamStats.forEach(element => {
           teamStats.push(element);
         })
-        console.log(teamStats);
+        // console.log(teamStats);
         teamStats.sort((a,b) => b['playing_year'] - a['playing_year']);
         this.teams = new MatTableDataSource<any[]>(teamStats);
         this.teams.sort = this.overallSort;
@@ -227,7 +227,7 @@ export class MainComponent implements OnInit, OnDestroy {
           oldTeamStats.forEach(element => {
             teamStats.push(element);
           })
-          console.log(teamStats);
+          // console.log(teamStats);
           teamStats.sort((a,b) => b['playing_year'] - a['playing_year']);
           this.teams = new MatTableDataSource<any[]>(teamStats);
           this.teams.sort = this.overallSort;
@@ -244,7 +244,7 @@ export class MainComponent implements OnInit, OnDestroy {
         oldTeamStats.forEach(element => {
           teamStats.push(element);
         })
-        console.log(teamStats);
+        // console.log(teamStats);
         teamStats.sort((a,b) => b['playing_year'] - a['playing_year']);
         this.teams = new MatTableDataSource<any[]>(teamStats);
         this.teams.sort = this.overallSort;
@@ -260,7 +260,7 @@ export class MainComponent implements OnInit, OnDestroy {
         oldTeamStats.forEach(element => {
           teamStats.push(element);
         })
-        console.log(teamStats);
+        // console.log(teamStats);
         teamStats.sort((a,b) => b['playing_year'] - a['playing_year']);
         this.teams = new MatTableDataSource<any[]>(teamStats);
         this.teams.sort = this.overallSort;
