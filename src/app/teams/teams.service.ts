@@ -127,11 +127,7 @@ export class TeamsService {
 
   constructor(
     private _http: HttpClient
-  ) { 
-    this.getPlayerInfo().subscribe(resp => {
-      this.allPlayerInfo = resp;
-    });
-  }
+  ) { }
 
   getTeamPlayerStats(team) {
     return this._http.get(`${environment.back_end_url}/players-stats/${team}`);
@@ -210,6 +206,10 @@ export class TeamsService {
   getDrafts() {
     return this._http.get(`${environment.back_end_url}/drafts/`);
   }
+
+  // this.getPlayerInfo().subscribe(resp => {
+  //   this.allPlayerInfo = resp;
+  // });
 
   getPlayerInfo() {
     return this._http.get(`${environment.back_end_url}/player-info/`);

@@ -67,8 +67,10 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
     private _teamsService: TeamsService,
     private _route: ActivatedRoute
   ) {
-    this.allPlayersInfo = this._teamsService.allPlayerInfo;
-    console.log(this.allPlayersInfo);
+    this._teamsService.getPlayerInfo().pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      this.allPlayersInfo = resp as [];
+      console.log(this.allPlayersInfo);
+    });
     this.position = this._teamsService.playerPosition;
     this.hits = this._teamsService.playerHits;
     if ((!this.position && !this.hits) || this.position === "G") {
