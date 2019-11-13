@@ -160,6 +160,10 @@ export class MainComponent implements OnInit, OnDestroy {
     });
   }
 
+  openTeam(shortName, season, type) {
+    this._router.navigate([`/teams/${shortName}/${season}/${type}`]);
+    window.scrollTo(0,0);
+  }
 
   toSalaryPage(link) {
     window.open(link);
