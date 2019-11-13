@@ -73,6 +73,8 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
     });
     this.position = this._teamsService.playerPosition;
     this.hits = this._teamsService.playerHits;
+    console.log(this.position);
+    console.log(this.hits);
     if ((!this.position && !this.hits) || this.position === "G") {
       this.isPlayerGoalie = true;
       this._teamsService.getAllIndividualGoalieStatsByType(this._route.snapshot.params.params, this.seasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
