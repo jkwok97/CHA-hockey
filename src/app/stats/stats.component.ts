@@ -143,9 +143,10 @@ export class StatsComponent implements OnInit, OnDestroy {
     window.scrollTo(0,0);
   }
 
-  openPlayer(name, team, position) {
+  openPlayer(name, team, position, hits) {
     this._route.navigate([`/stats/players/${name}`]);
     this._teamsService.setPlayerPosition(position);
+    this._teamsService.setPlayerHits(hits);
     window.scrollTo(0,0);
   }
 

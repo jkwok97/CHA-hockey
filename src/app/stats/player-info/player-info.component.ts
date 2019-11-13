@@ -47,6 +47,7 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
   savePCT: string;
   player: string;
   position: string;
+  hits: string;
   seasonType: string = 'Regular';
 
   playerStats: MatTableDataSource<any[]>;
@@ -68,7 +69,8 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
   ) {
     this.allPlayersInfo = this._teamsService.allPlayerInfo;
     this.position = this._teamsService.playerPosition;
-    if (!this.position) {
+    this.hits = this._teamsService.playerHits;
+    if (!this.position && !this.hits) {
       this.isPlayerGoalie = true;
       this._teamsService.getAllIndividualGoalieStatsByType(this._route.snapshot.params.params, this.seasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
         this.playerStatsFetched = resp as [];

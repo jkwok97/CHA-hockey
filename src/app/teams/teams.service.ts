@@ -15,6 +15,7 @@ export class TeamsService {
   currentSeason: string = "2019-20";
   currentSeasonType: string = "Regular"
   playerPosition: string;
+  playerHits: string;
 
   private _subjectPlayerStats = new Subject<any>();
 
@@ -225,6 +226,10 @@ export class TeamsService {
     // console.log(stats);
     this.playerPosition = position;
     // this._subjectPlayerStats.next(stats);
+  }
+
+  setPlayerHits(hits) {
+    this.playerHits = hits;
   }
 
   sendPlayerStatsListener(): Observable<any> {
