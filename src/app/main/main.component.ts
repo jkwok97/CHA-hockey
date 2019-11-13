@@ -42,7 +42,32 @@ export class MainComponent implements OnInit, OnDestroy {
   goalsAgainstRank: string;
   currentSeason: string;
   currentSeasonType: string;
+  goalsForPerGame: string;
+  goalsAgainstPerGame: string;
+  winPct: string;
+  pimPerGame: string;
+  goalDiff: string;
+  ppPct: string;
+  pkPct: string;
+  totalShotDiff: string;
+  seasonType: string = 'Regular';
 
+  totalGP: number = 0;
+  totalWins: number = 0;
+  totalLoss: number = 0;
+  totalTies: number = 0;
+  totalPoints: number = 0;
+  totalGF: number = 0;
+  totalGA: number = 0;
+  totalPP: number = 0;
+  totalPPA: number = 0;
+  totalPK: number = 0;
+  totalPKA: number = 0;
+  totalSHG: number = 0;
+  totalPIM: number = 0;
+  totalShotsFor: number = 0;
+  totalShotsAgainst: number = 0;
+  
   goalDiffData = [];
   shotDiffData = [];
   winPctData = [];
@@ -133,8 +158,8 @@ export class MainComponent implements OnInit, OnDestroy {
       this.goalies = new MatTableDataSource<any[]>(this.goalieStats);
       this.goalies.sort = this.goalieSort;
     });
-    
   }
+
 
   toSalaryPage(link) {
     window.open(link);
@@ -149,6 +174,47 @@ export class MainComponent implements OnInit, OnDestroy {
     }
   }
 
+  checkString(team) {
+    if (team.shortName === "STA") {
+      this.resetStats();
+      this.getKillerBeesStats(team, this.seasonType);
+    } else if (team.shortName === "ATL") {
+      this.resetStats();
+      this.getFlashersStats(team, this.seasonType);
+    } else if (team.shortName === "CHY") {
+      this.resetStats();
+      this.getDesperadosStats(team, this.seasonType);
+    } else if (team.shortName === "SCS") {
+      this.resetStats();
+      this.getStringraysStats(team, this.seasonType);
+    } else if (team.shortName === "OAK") {
+      this.resetStats();
+      this.getAssassinsStats(team, this.seasonType);
+    } else {
+      this._teamsService.getAlltimeTeamStatsByType(team.shortName, this.seasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        // console.log(resp);
+        let teamStats = resp as [];
+        this.resetStats();
+        this.getTeamTotals(teamStats);
+        this.teams = new MatTableDataSource<any[]>(teamStats);
+        this.teams.sort = this.overallSort;
+      });
+    }
+  }
+
+  changeSeason(value) {
+    if (value === 'Playoffs') {
+      this.isLoading = true;
+      this.seasonType = value;
+      this.checkString(this.team);
+    } else {
+      this.isLoading = true;
+      this.seasonType = value;
+      this.resetStats();
+      this.checkString(this.team);
+    }
+  }
+
   onTabChange(event) {
     // console.log(event);
     if (event.tab.textLabel === "Player Charts") {
@@ -159,65 +225,95 @@ export class MainComponent implements OnInit, OnDestroy {
       this.playerShgGoalChart();
       this.playerPlusMinusChart();
     } else if (event.tab.textLabel === "Team History") {
-      if (this.team.shortName === "STA") {
-        this.getKillerBeesStats(this.team);
-      } else if (this.team.shortName === "ATL") {
-        this.getFlashersStats(this.team);
-      } else if (this.team.shortName === "CHY") {
-        this.getDesperadosStats(this.team);
-      } else if (this.team.shortName === "SCS") {
-        this.getStringraysStats(this.team);
-      } else if (this.team.shortName === "OAK") {
-        this.getAssassinsStats(this.team);
-      } else {
-        this._teamsService.getTeamStats(this.team.shortName).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-          // console.log(resp);
-          let teamStats = resp as [];
-          this.teams = new MatTableDataSource<any[]>(teamStats);
-          this.teams.sort = this.overallSort;
-        });
-      }
+      this.checkString(this.team);
     } else if (event.tab.textLabel === "Division") {
       
     }
   }
 
-  getKillerBeesStats(team) {
-    this._teamsService.getTeamStats(team.shortName).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+  getTeamTotals(stats) {
+    stats.forEach(year => {
+      this.totalGP += Number(year.games_played);
+      this.totalWins += Number(year.wins);
+      this.totalLoss += Number(year.loss);
+      this.totalTies += Number(year.ties);
+      this.totalPoints += Number(year.points);
+      this.totalGF += Number(year.goals_for);
+      this.totalGA += Number(year.goals_against);
+      this.totalPP += Number(year.pp_goals);
+      this.totalPPA += Number(year.pp_attempts);
+      this.totalPK += Number(year.pk_goals);
+      this.totalPKA += Number(year.pk_attempts);
+      this.totalSHG += Number(year.sh_goals);
+      this.totalPIM += Number(year.penalty_minutes);
+      this.totalShotsFor += Number(year.shots_for);
+      this.totalShotsAgainst += Number(year.shots_against);
+    });
+    this.goalsForPerGame = (this.totalGF / this.totalGP).toFixed(2);
+    this.goalsAgainstPerGame = (this.totalGA / this.totalGP).toFixed(2);
+    this.goalDiff = (this.totalGF - this.totalGA).toString();
+    this.winPct = ((this.totalWins / this.totalGP) * 100).toFixed(1);
+    this.ppPct = ((this.totalPP / this.totalPPA) * 100).toFixed(1);
+    this.pkPct = (((this.totalPKA - this.totalPK) / this.totalPKA) * 100).toFixed(1);
+    this.pimPerGame = (this.totalPIM / this.totalGP).toFixed(1);
+    this.totalShotDiff = (this.totalShotsFor - this.totalShotsAgainst).toString();
+  }
+
+  resetStats() {
+    this.totalGP = 0;
+    this.totalWins = 0;
+    this.totalLoss = 0;
+    this.totalTies = 0;
+    this.totalGF = 0;
+    this.totalGA = 0;
+    this.totalPP = 0;
+    this.totalPPA = 0;
+    this.totalPK = 0;
+    this.totalPKA = 0;
+    this.totalSHG = 0;
+    this.totalPIM = 0;
+    this.totalShotsFor = 0;
+    this.totalShotsAgainst = 0;
+  }
+
+  getKillerBeesStats(team, type) {
+    this._teamsService.getAlltimeTeamStatsByType(team.shortName, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       let teamStats = resp as [];
-      this._teamsService.getTeamStats("MIS").pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      this._teamsService.getAlltimeTeamStatsByType("MIS", type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
         let oldTeamStats = resp as [];
         oldTeamStats.forEach(element => {
           teamStats.push(element);
         })
         // console.log(teamStats);
         teamStats.sort((a,b) => b['playing_year'] - a['playing_year']);
+        this.getTeamTotals(teamStats);
         this.teams = new MatTableDataSource<any[]>(teamStats);
         this.teams.sort = this.overallSort;
       });          
     });
   }
 
-  getFlashersStats(team) {
-    this._teamsService.getTeamStats(team.shortName).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+  getFlashersStats(team, type) {
+    this._teamsService.getAlltimeTeamStatsByType(team.shortName, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       let teamStats = resp as [];
-      this._teamsService.getTeamStats("CHA").pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      this._teamsService.getAlltimeTeamStatsByType("CHA", type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
         let oldTeamStats = resp as [];
         oldTeamStats.forEach(element => {
           teamStats.push(element);
         })
         // console.log(teamStats);
         teamStats.sort((a,b) => b['playing_year'] - a['playing_year']);
+        this.getTeamTotals(teamStats);
         this.teams = new MatTableDataSource<any[]>(teamStats);
         this.teams.sort = this.overallSort;
       });          
     });
   }
 
-  getDesperadosStats(team) {
-    this._teamsService.getTeamStats(team.shortName).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+  getDesperadosStats(team, type) {
+    this._teamsService.getAlltimeTeamStatsByType(team.shortName, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       let teamStats = resp as [];
-      this._teamsService.getTeamStats("LVD").pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      this._teamsService.getAlltimeTeamStatsByType("LVD", type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
         let oldTeamStats = resp as [];
         oldTeamStats.forEach(element => {
           teamStats.push(element);
@@ -229,6 +325,7 @@ export class MainComponent implements OnInit, OnDestroy {
           })
           // console.log(teamStats);
           teamStats.sort((a,b) => b['playing_year'] - a['playing_year']);
+          this.getTeamTotals(teamStats);
           this.teams = new MatTableDataSource<any[]>(teamStats);
           this.teams.sort = this.overallSort;
         });
@@ -236,32 +333,34 @@ export class MainComponent implements OnInit, OnDestroy {
     });
   }
 
-  getStringraysStats(team) {
-    this._teamsService.getTeamStats(team.shortName).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+  getStringraysStats(team, type) {
+    this._teamsService.getAlltimeTeamStatsByType(team.shortName, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       let teamStats = resp as [];
-      this._teamsService.getTeamStats("SAO").pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      this._teamsService.getAlltimeTeamStatsByType("SAO", type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
         let oldTeamStats = resp as [];
         oldTeamStats.forEach(element => {
           teamStats.push(element);
         })
         // console.log(teamStats);
         teamStats.sort((a,b) => b['playing_year'] - a['playing_year']);
+        this.getTeamTotals(teamStats);
         this.teams = new MatTableDataSource<any[]>(teamStats);
         this.teams.sort = this.overallSort;
       });          
     });
   }
 
-  getAssassinsStats(team) {
-    this._teamsService.getTeamStats(team.shortName).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+  getAssassinsStats(team, type) {
+    this._teamsService.getAlltimeTeamStatsByType(team.shortName, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       let teamStats = resp as [];
-      this._teamsService.getTeamStats("OAO").pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      this._teamsService.getAlltimeTeamStatsByType("OAO", type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
         let oldTeamStats = resp as [];
         oldTeamStats.forEach(element => {
           teamStats.push(element);
         })
         // console.log(teamStats);
         teamStats.sort((a,b) => b['playing_year'] - a['playing_year']);
+        this.getTeamTotals(teamStats);
         this.teams = new MatTableDataSource<any[]>(teamStats);
         this.teams.sort = this.overallSort;
       });          

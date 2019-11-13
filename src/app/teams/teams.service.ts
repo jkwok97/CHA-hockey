@@ -169,13 +169,12 @@ export class TeamsService {
     return this._http.get(`${environment.back_end_url}/team-stats/`);
   }
 
-  // getAlltimeTeamStatsByType(team, type, group) {
-  //   // console.log(team, type)
-  //   let options = {params: new HttpParams()
-  //     .set('type', type)
-  //     .set('group', group)}
-  //   return this._http.get(`${environment.back_end_url}/teams-stats/${team}`, options);
-  // }
+  getAlltimeTeamStatsByType(team, type) {
+    // console.log(team, type)
+    let options = {params: new HttpParams()
+      .set('type', type)}
+    return this._http.get(`${environment.back_end_url}/team-stats/${team}`, options);
+  }
 
   getTeamInfo(short) {
     let found;

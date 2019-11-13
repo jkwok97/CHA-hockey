@@ -172,6 +172,20 @@ table {
     text-align: center;
 }
 
+.button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.mat-button-toggle-group {
+    margin: 20px 20px;
+}
+
+.mat-button-toggle-checked {
+    background-color: red;
+}
+
 
 /* *************************** MEDIA QUERIES **************************** */
 
