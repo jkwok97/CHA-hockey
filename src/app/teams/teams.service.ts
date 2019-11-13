@@ -245,9 +245,10 @@ export class TeamsService {
     return this._http.get(`${environment.back_end_url}/goalies-stats/`, options);
   }
 
-  getAlltimeLeagueTeamsStatsByType(type) {
+  getAlltimeLeagueTeamsStatsByType(type, group) {
     let options = {params: new HttpParams()
-      .set('type', type)}
+      .set('type', type)
+      .set('group', group)}
     return this._http.get(`${environment.back_end_url}/team-stats/`, options);
   }
 

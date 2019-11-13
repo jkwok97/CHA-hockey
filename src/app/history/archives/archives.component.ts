@@ -21,6 +21,7 @@ export class ArchivesComponent implements OnInit, OnDestroy {
   length: number = 0;
 
   seasonType: string = 'Regular';
+  showType: string = 'Season';
 
   teams: MatTableDataSource<any[]>;
   teamsColumnsToDisplay = [
@@ -39,33 +40,69 @@ export class ArchivesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isLoading = true;
-    this.getStats(this.seasonType);
+    this.getStats(this.seasonType, this.showType);
   }
 
-  getStats(type) {
-    this._teamsService.getAlltimeLeagueTeamsStatsByType(this.seasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      // console.log(resp);
-      let teamStats = resp as [];
-      teamStats.sort((a,b) => b['points'] - a['points']);
-      this.teams = new MatTableDataSource<any[]>(teamStats);
-      this.length = teamStats.length;
-      this.isLoading = false;
-      setTimeout(() => {
-        this.teams.paginator = this.paginator;
-        this.teams.sort = this.sort;
-      }, 350);
-    });
+  getStats(type, group) {
+    if (group === "Season") {
+      this._teamsService.getAlltimeLeagueTeamsStatsByType(type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        // console.log(resp);
+        let teamStats = resp as [];
+        teamStats.sort((a,b) => b['points'] - a['points']);
+        this.teams = new MatTableDataSource<any[]>(teamStats);
+        this.teamsColumnsToDisplay = [
+          'playing_year', 'season_type', 'team_logo','team_name', 'games_played', 'wins', 'loss', 'ties', 'points', 'goals_for', 'goals_for_game', 'goals_against', 'goals_against_game', 
+          'goals_diff', 'win_pct', 'pp_pct', 'pk_pct', 'sh_goals', 'penalty_minutes_game', 'shot_diff', 'div_record',
+          'home_record', 'away_record', 'trail_record'
+        ];
+        this.length = teamStats.length;
+        this.isLoading = false;
+        setTimeout(() => {
+          this.teams.paginator = this.paginator;
+          this.teams.sort = this.sort;
+        }, 350);
+      });
+    } else {
+      this._teamsService.getAlltimeLeagueTeamsStatsByType(type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        // console.log(resp);
+        let teamStats = resp['rows'] as [];
+        teamStats.sort((a,b) => b['points'] - a['points']);
+        this.teams = new MatTableDataSource<any[]>(teamStats);
+        this.teamsColumnsToDisplay = [
+          'season_type', 'team_logo','team_name', 'games_played', 'wins', 'loss', 'ties', 'points', 'goals_for', 'goals_for_game', 'goals_against', 'goals_against_game', 
+          'goals_diff', 'win_pct', 'pp_pct', 'pk_pct', 'sh_goals', 'penalty_minutes_game', 'shot_diff'
+        ];
+        this.length = teamStats.length;
+        this.isLoading = false;
+        setTimeout(() => {
+          this.teams.paginator = this.paginator;
+          this.teams.sort = this.sort;
+        }, 350);
+      });
+    }
   }
 
   changeSeason(value) {
     if (value === 'Playoffs') {
       this.isLoading = true;
       this.seasonType = value;
-      this.getStats(value);
+      this.getStats(value, this.showType);
     } else {
       this.isLoading = true;
       this.seasonType = value;
-      this.getStats(value);
+      this.getStats(value, this.showType);
+    }
+  }
+
+  changeShow(value) {
+    if (value === 'Alltime') {
+      this.isLoading = true;
+      this.showType = value;
+      this.getStats(this.seasonType, value);
+    } else {
+      this.isLoading = true;
+      this.showType = value;
+      this.getStats(this.seasonType, value);
     }
   }
 

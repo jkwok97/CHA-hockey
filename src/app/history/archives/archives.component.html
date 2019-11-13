@@ -6,12 +6,21 @@
     <div class="playerStatsTable cha-dark" *ngIf="!isLoading">
 
         <div class="button-container">
-            <mat-button-toggle-group #group="matButtonToggleGroup" [value]="seasonType" (change)="changeSeason(group.value)">
+            <mat-button-toggle-group #bySeason="matButtonToggleGroup" [value]="seasonType" (change)="changeSeason(bySeason.value)">
                 <mat-button-toggle value="Regular" color="accent">
                     Regular
                 </mat-button-toggle>
                 <mat-button-toggle value="Playoffs" color="accent">
                     Playoffs
+                </mat-button-toggle>
+            </mat-button-toggle-group>
+
+            <mat-button-toggle-group #byShow="matButtonToggleGroup" [value]="showType" (change)="changeShow(byShow.value)">
+                <mat-button-toggle value="Season" color="accent">
+                    Per Season
+                </mat-button-toggle>
+                <mat-button-toggle value="Alltime" color="accent">
+                    All-time
                 </mat-button-toggle>
             </mat-button-toggle-group>
     
