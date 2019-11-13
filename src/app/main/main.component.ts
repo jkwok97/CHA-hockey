@@ -285,6 +285,7 @@ export class MainComponent implements OnInit, OnDestroy {
           teamStats.push(element);
         })
         // console.log(teamStats);
+        this.isLoading = false;
         teamStats.sort((a,b) => b['playing_year'] - a['playing_year']);
         this.getTeamTotals(teamStats);
         this.teams = new MatTableDataSource<any[]>(teamStats);
@@ -302,6 +303,7 @@ export class MainComponent implements OnInit, OnDestroy {
           teamStats.push(element);
         })
         // console.log(teamStats);
+        this.isLoading = false;
         teamStats.sort((a,b) => b['playing_year'] - a['playing_year']);
         this.getTeamTotals(teamStats);
         this.teams = new MatTableDataSource<any[]>(teamStats);
@@ -324,6 +326,7 @@ export class MainComponent implements OnInit, OnDestroy {
             teamStats.push(element);
           })
           // console.log(teamStats);
+          this.isLoading = false;
           teamStats.sort((a,b) => b['playing_year'] - a['playing_year']);
           this.getTeamTotals(teamStats);
           this.teams = new MatTableDataSource<any[]>(teamStats);
@@ -342,6 +345,7 @@ export class MainComponent implements OnInit, OnDestroy {
           teamStats.push(element);
         })
         // console.log(teamStats);
+        this.isLoading = false;
         teamStats.sort((a,b) => b['playing_year'] - a['playing_year']);
         this.getTeamTotals(teamStats);
         this.teams = new MatTableDataSource<any[]>(teamStats);
@@ -359,6 +363,7 @@ export class MainComponent implements OnInit, OnDestroy {
           teamStats.push(element);
         })
         // console.log(teamStats);
+        this.isLoading = false;
         teamStats.sort((a,b) => b['playing_year'] - a['playing_year']);
         this.getTeamTotals(teamStats);
         this.teams = new MatTableDataSource<any[]>(teamStats);
