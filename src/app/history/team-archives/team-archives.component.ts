@@ -3,7 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { takeWhile } from 'rxjs/operators';
 import { TeamsService } from 'src/app/teams/teams.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-team-archives',
@@ -55,7 +55,8 @@ export class TeamArchivesComponent implements OnInit, OnDestroy {
 
   constructor(
     private _teamsService: TeamsService,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _router: Router
   ) { 
     this.short_team_name = this._route.snapshot.paramMap.get("params");
     this.team = this._teamsService.getTeamInfo(this.short_team_name); 
@@ -63,6 +64,11 @@ export class TeamArchivesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.checkString(this.team);
+  }
+
+  openTeam(shortName, season, type) {
+    this._router.navigate([`/teams/${shortName}/${season}/${type}`]);
+    window.scrollTo(0,0);
   }
 
   checkString(team) {
