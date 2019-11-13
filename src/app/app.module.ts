@@ -37,6 +37,7 @@ import { PlayerInfoComponent } from './stats/player-info/player-info.component';
 import { PlayerArchivesComponent } from './history/player-archives/player-archives.component';
 import { GoalieArchivesComponent } from './history/goalie-archives/goalie-archives.component';
 import { HistoricalTeamStatsComponent } from './teams/historical-team-stats/historical-team-stats.component';
+import { TeamArchivesComponent } from './history/team-archives/team-archives.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { HistoricalTeamStatsComponent } from './teams/historical-team-stats/hist
     PlayerInfoComponent,
     PlayerArchivesComponent,
     GoalieArchivesComponent,
-    HistoricalTeamStatsComponent
+    HistoricalTeamStatsComponent,
+    TeamArchivesComponent
   ],
   imports: [
     BrowserModule,

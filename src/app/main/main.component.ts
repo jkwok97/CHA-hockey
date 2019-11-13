@@ -194,6 +194,7 @@ export class MainComponent implements OnInit, OnDestroy {
       this._teamsService.getAlltimeTeamStatsByType(team.shortName, this.seasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
         // console.log(resp);
         let teamStats = resp as [];
+        this.isLoading = false;
         this.resetStats();
         this.getTeamTotals(teamStats);
         this.teams = new MatTableDataSource<any[]>(teamStats);
@@ -320,7 +321,7 @@ export class MainComponent implements OnInit, OnDestroy {
         oldTeamStats.forEach(element => {
           teamStats.push(element);
         })
-        this._teamsService.getTeamStats("SDC").pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        this._teamsService.getAlltimeTeamStatsByType("SDC", type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
           let oldTeamStats = resp as [];
           oldTeamStats.forEach(element => {
             teamStats.push(element);
