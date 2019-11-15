@@ -202,7 +202,7 @@
                     <mat-spinner color="accent"></mat-spinner>
                 </div>
 
-                <p class="white-text">2019-2020 NHL Season</p>
+                <p class="white-text" *ngIf="!isLoading && isCurrentPlayer">2019-2020 NHL Season</p>
 
                 <p class="white-text" *ngIf="!isLoading && !isCurrentPlayer">No NHL Stats This Season!</p>
                 
@@ -375,7 +375,7 @@
                     </div>
                 </div>
 
-                <p class="white-text">2019-2020 NHL Season On Pace</p>
+                <p class="white-text" *ngIf="!isLoading && isCurrentPlayer">2019-2020 NHL Season On Pace</p>
 
                 <div class="table-container" *ngIf="!isLoading && isCurrentPlayer">
     
