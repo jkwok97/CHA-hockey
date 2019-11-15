@@ -256,6 +256,7 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
     if (event.tab.textLabel === "NHL") {
       console.log(this.position);
       console.log(this.hits);
+      this.resetValues();
       if ((!this.position && !this.hits) || this.position === "G") {
         this.isPlayerGoalie = true;
         this._teamsService.getAllIndividualGoalieStatsByTypeReal(this._route.snapshot.params.params, this.seasonType, "NHL").pipe(takeWhile(() => this._alive)).subscribe(resp => {
@@ -285,6 +286,7 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
     } else if (event.tab.textLabel === "Ratings") {
       console.log(this.position);
       console.log(this.hits);
+      this.resetValues();
       if ((!this.position && !this.hits) || this.position === "G") {
         this.isPlayerGoalie = true;
         this.isLoading = true;
@@ -382,6 +384,7 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
     this.totalSA = 0;
     this.totalSO = 0;
     this.totalSaves = 0;
+    this.ratings = [];
   }
 
   ngOnDestroy() {
