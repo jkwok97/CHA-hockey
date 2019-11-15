@@ -202,6 +202,8 @@
                     <mat-spinner color="accent"></mat-spinner>
                 </div>
 
+                <p class="white-text">2019-2020 NHL Season</p>
+
                 <p class="white-text" *ngIf="!isLoading && !isCurrentPlayer">No NHL Stats This Season!</p>
                 
                 <div class="table-container" *ngIf="!isLoading && isCurrentPlayer">
@@ -220,9 +222,9 @@
                                 <td mat-cell *matCellDef="let player"> {{player.wins}} </td>
                             </ng-container>
 
-                            <ng-container matColumnDef="loss">
+                            <ng-container matColumnDef="losses">
                                 <th mat-header-cell *matHeaderCellDef> Loss </th>
-                                <td mat-cell *matCellDef="let player"> {{player.loss}} </td>
+                                <td mat-cell *matCellDef="let player"> {{player.losses}} </td>
                             </ng-container>
 
                             <ng-container matColumnDef="ties">
@@ -230,24 +232,39 @@
                                 <td mat-cell *matCellDef="let player"> {{player.ties}} </td>
                             </ng-container>
 
-                            <ng-container matColumnDef="goals_against">
+                            <ng-container matColumnDef="goalsAgainst">
                                 <th mat-header-cell *matHeaderCellDef> GA </th>
-                                <td mat-cell *matCellDef="let player"> {{player.goals_against}} </td>
+                                <td mat-cell *matCellDef="let player"> {{player.goalsAgainst}} </td>
                             </ng-container>
 
-                            <ng-container matColumnDef="goals_against_avg">
+                            <ng-container matColumnDef="goalAgainstAverage">
                                 <th mat-header-cell *matHeaderCellDef> GAA </th>
-                                <td mat-cell *matCellDef="let player"> {{player.goals_against_avg}} </td>
+                                <td mat-cell *matCellDef="let player"> {{player.goalAgainstAverage}} </td>
                             </ng-container>
 
-                            <ng-container matColumnDef="shots_for">
+                            <ng-container matColumnDef="shotsAgainst">
                                 <th mat-header-cell *matHeaderCellDef> SA </th>
-                                <td mat-cell *matCellDef="let player"> {{player.shots_for}} </td>
+                                <td mat-cell *matCellDef="let player"> {{player.shotsAgainst}} </td>
                             </ng-container>
 
-                            <ng-container matColumnDef="save_pct">
+                            <ng-container matColumnDef="saves">
+                                <th mat-header-cell *matHeaderCellDef> Sv </th>
+                                <td mat-cell *matCellDef="let player"> {{player.saves}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="savePercentage">
                                 <th mat-header-cell *matHeaderCellDef> Sv% </th>
-                                <td mat-cell *matCellDef="let player"> {{player.save_pct}}% </td>
+                                <td mat-cell *matCellDef="let player"> {{player.savePercentage}}% </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="powerPlaySavePercentage">
+                                <th mat-header-cell *matHeaderCellDef matTooltip="Power Play Save Pct"> SvPP% </th>
+                                <td mat-cell *matCellDef="let player"> {{ (player.powerPlaySavePercentage).toFixed(1) }}% </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="evenStrengthSavePercentage">
+                                <th mat-header-cell *matHeaderCellDef matTooltip="Even Strength Save Pct"> SvES% </th>
+                                <td mat-cell *matCellDef="let player"> {{ (player.evenStrengthSavePercentage).toFixed(1) }}% </td>
                             </ng-container>
 
                             <ng-container matColumnDef="shutouts">

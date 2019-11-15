@@ -384,9 +384,10 @@ export class MainComponent implements OnInit, OnDestroy {
     window.scrollTo(0,0);
   }
 
-  openGoaliePlayer(name, team, position) {
+  openGoaliePlayer(name, team, position, hits) {
     this._router.navigate([`/stats/players/${name}`]);
     this._teamsService.setPlayerPosition(position);
+    this._teamsService.setPlayerHits(hits);
     window.scrollTo(0,0);
   }
 

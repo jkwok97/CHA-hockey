@@ -71,8 +71,8 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
   ];
 
   goalieRealColumnsToDisplay = [
-    'team_logo', 'season_type', 'playing_year', 'games_played','wins', 'loss', 'ties','goals_against', 'goals_against_avg', 'shots_for', 'save_pct',
-    'shutouts', 'penalty_minutes', 'minutes_played'
+    'games', 'wins', 'losses', 'ties', 'goalsAgainst', 'goalAgainstAverage', 'shutouts', 'shotsAgainst', 'saves', 'savePercentage',
+    'powerPlaySavePercentage', 'evenStrengthSavePercentage'
   ];
 
   @ViewChild(MatSort, {static: false}) sort: MatSort;
@@ -234,6 +234,23 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
         this.isPlayerGoalie = true;
         this._teamsService.getAllIndividualGoalieStatsByTypeReal(this._route.snapshot.params.params, this.seasonType, "NHL").pipe(takeWhile(() => this._alive)).subscribe(resp => {
           console.log(resp);
+          if (resp[0]['player_nhl_id']) {
+            let playerId = resp[0]['player_nhl_id'];
+            this._teamsService.getIndividualNHLRealStats(playerId).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+              this.isCurrentPlayer = true;
+              this.realPlayerStatsFetched = resp['stats'][0]['splits'][0]['stat'] as [];
+              console.log([this.realPlayerStatsFetched]);
+              this.isLoading = false;
+              this.realPlayerStats = new MatTableDataSource<any[]>([this.realPlayerStatsFetched]);
+              setTimeout(() => {
+                this.realPlayerStats.sort = this.sort;
+              });
+            }, error => {
+              
+            })
+          } else {
+            this.isLoading = false;
+          }
         });
       } else {
         this._teamsService.getAllIndividualPlayerStatsByTypeReal(this._route.snapshot.params.params, this.seasonType, "NHL").pipe(takeWhile(() => this._alive)).subscribe(resp => {
@@ -242,7 +259,6 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
           if (resp[0]['player_nhl_id']) {
             let playerId = resp[0]['player_nhl_id'];
             this._teamsService.getIndividualNHLRealStats(playerId).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-              console.log(resp);
               this.isCurrentPlayer = true;
               this.realPlayerStatsFetched = resp['stats'][0]['splits'][0]['stat'] as [];
               console.log([this.realPlayerStatsFetched]);

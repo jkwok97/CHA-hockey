@@ -57,7 +57,8 @@
 
 .white-text {
     color: white;
-    font-size: xx-large;
+    font-size: x-large;
+    margin-left: 50px;
 }
 
 .table-container {

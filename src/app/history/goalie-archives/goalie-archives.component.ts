@@ -70,9 +70,10 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
     return (saves / shots);
   }
 
-  openGoaliePlayer(name, team, position) {
+  openGoaliePlayer(name, team, position, hits) {
     this._router.navigate([`/stats/players/${name}`]);
     this._teamsService.setPlayerPosition(position);
+    this._teamsService.setPlayerHits(hits);
     window.scrollTo(0,0);
   }
 
