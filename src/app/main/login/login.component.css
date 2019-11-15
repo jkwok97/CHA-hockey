@@ -91,10 +91,13 @@
     .image {
         display: none;
     }
- 
+    .card-header {
+        font-size: large;
+    }
     .card {
          margin-top: 30px;
          width: 90%;
+         height: auto;
      } 
 }
 
@@ -103,10 +106,13 @@
     .image {
         display: none;
     }
- 
+    .card-header {
+        font-size: large;
+    }
     .card {
          margin-top: 30px;
          width: 90%;
+         height: auto;
      }   
  }
 
@@ -115,9 +121,12 @@
    .image {
        display: none;
    }
-
+   .card-header {
+    font-size: large;
+}
    .card {
         margin-top: 30px;
         width: 90%;
+        height: auto;
     }   
 }
