@@ -320,6 +320,7 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
     this.ratings.push({name: "Shooting", value: player.shooting});
     this.ratings.push({name: "Skating", value: player.skating});
     this.ratings.push({name: "Speed", value: player.speed});
+    this.ratings.push({name: "Passing", value: player.passing});
     this.ratings.push({name: "Forecheck", value: player.forecheck});
     this.ratings.push({name: "Physical", value: player.physical});
     this.ratings.push({name: "Intimidation", value: player.intimidation});
@@ -329,7 +330,6 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
     this.ratings.push({name: "Shot Block", value: player.shot_block});
     this.ratings.push({name: "Face Off", value: player.face_off});
     this.ratings.push({name: "Assist Rating", value: player.assist_rating});
-    this.ratings.push({name: "Passing", value: player.passing});
     this.ratings.push({name: "Game Fatigue", value: player.game_fatigue});
     this.ratings.push({name: "Shift Fatigue", value: player.shift_fatigue});
   }
