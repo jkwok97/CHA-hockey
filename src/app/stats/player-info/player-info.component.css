@@ -114,6 +114,43 @@
     align-items: center;
 }
 
+.ratings-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+    width: 100%;
+}
+
+.ratings-card {
+    width: 150px;
+    height: 60px;
+    background-color: lightsteelblue;
+    box-shadow: 0 0 50px lightsteelblue;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: space-around;
+    margin: 10px 20px;
+}
+
+.red-text {
+    color: red;
+    font-weight: 300;
+}
+
+.black-text {
+    color: black;
+    font-weight: 200;
+}
+
+.ratings-card p {
+    width: 100%;
+    margin: 0;
+    text-align: center;
+}
+
 /* *************************** MEDIA QUERIES **************************** */
 
 /* ***** IPHONE XS MAX***** */

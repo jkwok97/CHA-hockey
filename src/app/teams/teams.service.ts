@@ -363,4 +363,12 @@ export class TeamsService {
     return this._http.get(`${environment.back_end_url}/real-stats/`, options);
   }
 
+  getPlayerRatings(name) {
+    return this._http.get(`${environment.back_end_url}/player-ratings/${name}`);
+  }
+
+  getGoalieRatings(name) {
+    return this._http.get(`${environment.back_end_url}/goalie-ratings/${name}`);
+  }
+
 }

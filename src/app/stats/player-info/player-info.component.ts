@@ -16,12 +16,15 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
   isPlayerGoalie: boolean = false;
   isLoading: boolean = false;
   isCurrentPlayer: boolean = false;
+  hasRatings: boolean = false;
 
   allPlayersInfo: any[];
   playerInfo: any;
   playerStatsFetched: any;
   realPlayerStatsFetched: any[];
   realPlayerStatsOnPaceFetched: any[];
+  playerRatingsFetched: any[];
+  ratings = [];
 
   totalGamesPlayed: number = 0;
   totalGoals: number = 0;
@@ -84,6 +87,16 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
   goalieOnPaceRealColumnsToDisplay = [
     'games', 'wins', 'losses', 'ties', 'goalsAgainst', 'goalAgainstAverage', 'shutouts', 'shotsAgainst', 'saves', 'savePercentage',
     'powerPlaySavePercentage', 'evenStrengthSavePercentage'
+  ];
+
+  playerRatingsStats: MatTableDataSource<any[]>;
+  playersRatingsStatsColumnsToDisplay = [
+    'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals', 'gw_goals', 'shots', 'shooting_pct'
+  ];
+
+  goalieRatingsStatsColumnsToDisplay = [
+    'games_played','wins', 'loss', 'ties','goals_against', 'goals_against_avg', 'shots_for', 'saves', 'save_pct',
+    'shutouts', 'penalty_minutes', 'minutes_played'
   ];
 
   realPlayerStatsOnPace: MatTableDataSource<any[]>;
@@ -247,6 +260,7 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
         this.isPlayerGoalie = true;
         this._teamsService.getAllIndividualGoalieStatsByTypeReal(this._route.snapshot.params.params, this.seasonType, "NHL").pipe(takeWhile(() => this._alive)).subscribe(resp => {
           console.log(resp);
+          this.isLoading = true;
           if (resp[0]['player_nhl_id']) {
             let playerId = resp[0]['player_nhl_id'];
             this.getRealNHLStats(playerId);
@@ -268,7 +282,54 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
           }
         });
       }
+    } else if (event.tab.textLabel === "Ratings") {
+      console.log(this.position);
+      console.log(this.hits);
+      if ((!this.position && !this.hits) || this.position === "G") {
+        this.isPlayerGoalie = true;
+        this.isLoading = true;
+        this._teamsService.getGoalieRatings(this._route.snapshot.params.params).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+          this.playerRatingsFetched = resp[0] as [];
+          this.hasRatings = true;
+          this.populateRatings(this.playerRatingsFetched);
+          // console.log(this.playerRatingsFetched)
+          this.playerRatingsStats = new MatTableDataSource<any[]>([this.playerRatingsFetched]);
+          this.isLoading = false;
+        });
+      } else {
+        this._teamsService.getPlayerRatings(this._route.snapshot.params.params).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+          this.playerRatingsFetched = resp[0] as [];
+          this.hasRatings = true;
+          this.populateRatings(this.playerRatingsFetched);
+          // console.log(this.playerRatingsFetched)
+          this.playerRatingsStats = new MatTableDataSource<any[]>([this.playerRatingsFetched]);
+          this.isLoading = false;
+        });
+      }
     }
+  }
+
+  populateRatings(player) {
+    this.ratings.push({name: "Center", value: player.c_rate});
+    this.ratings.push({name: "LW", value: player.l_rate});
+    this.ratings.push({name: "RW", value: player.r_rate});
+    this.ratings.push({name: "LD", value: player.ld_rate});
+    this.ratings.push({name: "RD", value: player.rd_rate});
+    this.ratings.push({name: "Shooting", value: player.shooting});
+    this.ratings.push({name: "Skating", value: player.skating});
+    this.ratings.push({name: "Speed", value: player.speed});
+    this.ratings.push({name: "Forecheck", value: player.forecheck});
+    this.ratings.push({name: "Physical", value: player.physical});
+    this.ratings.push({name: "Intimidation", value: player.intimidation});
+    this.ratings.push({name: "Clear Crease", value: player.clear_crease});
+    this.ratings.push({name: "Rock", value: player.rock});
+    this.ratings.push({name: "PK", value: player.pk});
+    this.ratings.push({name: "Shot Block", value: player.shot_block});
+    this.ratings.push({name: "Face Off", value: player.face_off});
+    this.ratings.push({name: "Assist Rating", value: player.assist_rating});
+    this.ratings.push({name: "Passing", value: player.passing});
+    this.ratings.push({name: "Game Fatigue", value: player.game_fatigue});
+    this.ratings.push({name: "Shift Fatigue", value: player.shift_fatigue});
   }
 
   getRealNHLStats(id) {
