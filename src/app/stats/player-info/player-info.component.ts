@@ -21,6 +21,7 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
   playerInfo: any;
   playerStatsFetched: any;
   realPlayerStatsFetched: any[];
+  realPlayerStatsOnPaceFetched: any[];
 
   totalGamesPlayed: number = 0;
   totalGoals: number = 0;
@@ -74,6 +75,18 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
     'games', 'wins', 'losses', 'ties', 'goalsAgainst', 'goalAgainstAverage', 'shutouts', 'shotsAgainst', 'saves', 'savePercentage',
     'powerPlaySavePercentage', 'evenStrengthSavePercentage'
   ];
+
+  playersOnPaceRealColumnsToDisplay = [
+    'games', 'goals', 'assists', 'points', 'powerPlayGoals', 'powerPlayPoints', 'shortHandedGoals', 'shortHandedPoints', 'gameWinningGoals', 
+    'plusMinus', 'penaltyMinutes', 'shots', 'shotPct', 'faceOffPct', 'hits', 'blocked'
+  ];
+
+  goalieOnPaceRealColumnsToDisplay = [
+    'games', 'wins', 'losses', 'ties', 'goalsAgainst', 'goalAgainstAverage', 'shutouts', 'shotsAgainst', 'saves', 'savePercentage',
+    'powerPlaySavePercentage', 'evenStrengthSavePercentage'
+  ];
+
+  realPlayerStatsOnPace: MatTableDataSource<any[]>;
 
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 
@@ -236,18 +249,8 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
           console.log(resp);
           if (resp[0]['player_nhl_id']) {
             let playerId = resp[0]['player_nhl_id'];
-            this._teamsService.getIndividualNHLRealStats(playerId).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-              this.isCurrentPlayer = true;
-              this.realPlayerStatsFetched = resp['stats'][0]['splits'][0]['stat'] as [];
-              console.log([this.realPlayerStatsFetched]);
-              this.isLoading = false;
-              this.realPlayerStats = new MatTableDataSource<any[]>([this.realPlayerStatsFetched]);
-              setTimeout(() => {
-                this.realPlayerStats.sort = this.sort;
-              });
-            }, error => {
-              
-            })
+            this.getRealNHLStats(playerId);
+            this.getOnPaceNHLStats(playerId, "Pace");
           } else {
             this.isLoading = false;
           }
@@ -258,24 +261,44 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
           this.isLoading = true;
           if (resp[0]['player_nhl_id']) {
             let playerId = resp[0]['player_nhl_id'];
-            this._teamsService.getIndividualNHLRealStats(playerId).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-              this.isCurrentPlayer = true;
-              this.realPlayerStatsFetched = resp['stats'][0]['splits'][0]['stat'] as [];
-              console.log([this.realPlayerStatsFetched]);
-              this.isLoading = false;
-              this.realPlayerStats = new MatTableDataSource<any[]>([this.realPlayerStatsFetched]);
-              setTimeout(() => {
-                this.realPlayerStats.sort = this.sort;
-              });
-            }, error => {
-              
-            })
+            this.getRealNHLStats(playerId);
+            this.getOnPaceNHLStats(playerId, "Pace");
           } else {
             this.isLoading = false;
           }
         });
       }
     }
+  }
+
+  getRealNHLStats(id) {
+    this._teamsService.getIndividualNHLRealStats(id).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      this.isCurrentPlayer = true;
+      this.realPlayerStatsFetched = resp['stats'][0]['splits'][0]['stat'] as [];
+      console.log([this.realPlayerStatsFetched]);
+      this.isLoading = false;
+      this.realPlayerStats = new MatTableDataSource<any[]>([this.realPlayerStatsFetched]);
+      setTimeout(() => {
+        this.realPlayerStats.sort = this.sort;
+      });
+    }, error => {
+      
+    })
+  }
+
+  getOnPaceNHLStats(id, pace) {
+    this._teamsService.getIndividualOnPaceNHLRealStats(id, pace).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      this.isCurrentPlayer = true;
+      this.realPlayerStatsOnPaceFetched = resp['stats'][0]['splits'][0]['stat'] as [];
+      console.log([this.realPlayerStatsOnPaceFetched]);
+      this.isLoading = false;
+      this.realPlayerStatsOnPace = new MatTableDataSource<any[]>([this.realPlayerStatsOnPaceFetched]);
+      setTimeout(() => {
+        this.realPlayerStats.sort = this.sort;
+      });
+    }, error => {
+      
+    })
   }
 
   resetValues() {
