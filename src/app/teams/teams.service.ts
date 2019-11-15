@@ -324,4 +324,36 @@ export class TeamsService {
     return this._http.get(`${environment.back_end_url}/goalies/${name}`, options);
   }
 
+  getAllIndividualPlayerStatsReal(name, league) {
+    let options = {params: new HttpParams()
+      .set('league', league)}
+    return this._http.get(`${environment.back_end_url}/players/${name}`, options);
+  }
+
+  getAllIndividualPlayerStatsByTypeReal(name, type, league) {
+    let options = {params: new HttpParams()
+      .set('type', type)
+      .set('league', league)}
+    return this._http.get(`${environment.back_end_url}/players/${name}`, options);
+  }
+
+  getAllIndividualGoalieStatsReal(name, league) {
+    let options = {params: new HttpParams()
+      .set('league', league)}
+    return this._http.get(`${environment.back_end_url}/goalies/${name}`, options);
+  }
+
+  getAllIndividualGoalieStatsByTypeReal(name, type, league) {
+    let options = {params: new HttpParams()
+      .set('type', type)
+      .set('league', league)}
+    return this._http.get(`${environment.back_end_url}/goalies/${name}`, options);
+  }
+
+  getIndividualNHLRealStats(id) {
+    let options = {params: new HttpParams()
+      .set('id', id)}
+    return this._http.get(`${environment.back_end_url}/real-stats/`, options);
+  }
+
 }

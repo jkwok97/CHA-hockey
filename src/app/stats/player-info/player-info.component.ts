@@ -15,10 +15,12 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
   private _alive:boolean = true;
   isPlayerGoalie: boolean = false;
   isLoading: boolean = false;
+  isCurrentPlayer: boolean = false;
 
   allPlayersInfo: any[];
   playerInfo: any;
   playerStatsFetched: any;
+  realPlayerStatsFetched: any[];
 
   totalGamesPlayed: number = 0;
   totalGoals: number = 0;
@@ -60,6 +62,18 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
     'team_logo', 'season_type', 'playing_year', 'games_played','wins', 'loss', 'ties','goals_against', 'goals_against_avg', 'shots_for', 'save_pct',
     'shutouts', 'penalty_minutes', 'minutes_played'
   ];
+  
+  realPlayerStats: MatTableDataSource<any[]>;
+  playersRealColumnsToDisplay = [
+    'games', 'goals', 'assists', 'points', 'powerPlayGoals', 'powerPlayPoints', 'shortHandedGoals', 'shortHandedPoints', 'gameWinningGoals', 
+    'plusMinus', 'penaltyMinutes', 'shots', 'shotPct', 'faceOffPct', 'hits', 'blocked', 'powerPlayTimeOnIcePerGame', 'shortHandedTimeOnIcePerGame',
+    'timeOnIcePerGame'
+  ];
+
+  goalieRealColumnsToDisplay = [
+    'team_logo', 'season_type', 'playing_year', 'games_played','wins', 'loss', 'ties','goals_against', 'goals_against_avg', 'shots_for', 'save_pct',
+    'shutouts', 'penalty_minutes', 'minutes_played'
+  ];
 
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 
@@ -78,6 +92,7 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
     if ((!this.position && !this.hits) || this.position === "G") {
       this.isPlayerGoalie = true;
       this._teamsService.getAllIndividualGoalieStatsByType(this._route.snapshot.params.params, this.seasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        console.log(resp);
         this.playerStatsFetched = resp as [];
         this.playerInfo = resp as [];
         if (this.allPlayersInfo) {
@@ -92,6 +107,7 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
       });
     } else {
       this._teamsService.getAllIndividualPlayerStatsByType(this._route.snapshot.params.params, this.seasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        console.log(resp);
         this.playerInfo = resp as [];
         this.playerStatsFetched = resp as [];
         if (this.allPlayersInfo) {
@@ -211,6 +227,38 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
 
   onTabChange(event) {
     console.log(event);
+    if (event.tab.textLabel === "NHL") {
+      console.log(this.position);
+      console.log(this.hits);
+      if ((!this.position && !this.hits) || this.position === "G") {
+        this.isPlayerGoalie = true;
+        this._teamsService.getAllIndividualGoalieStatsByTypeReal(this._route.snapshot.params.params, this.seasonType, "NHL").pipe(takeWhile(() => this._alive)).subscribe(resp => {
+          console.log(resp);
+        });
+      } else {
+        this._teamsService.getAllIndividualPlayerStatsByTypeReal(this._route.snapshot.params.params, this.seasonType, "NHL").pipe(takeWhile(() => this._alive)).subscribe(resp => {
+          console.log(resp[0]['player_nhl_id']);
+          this.isLoading = true;
+          if (resp[0]['player_nhl_id']) {
+            let playerId = resp[0]['player_nhl_id'];
+            this._teamsService.getIndividualNHLRealStats(playerId).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+              console.log(resp);
+              this.isCurrentPlayer = true;
+              this.realPlayerStatsFetched = resp as [];
+              this.isLoading = false;
+              this.realPlayerStats = new MatTableDataSource<any[]>(this.realPlayerStatsFetched);
+              setTimeout(() => {
+                this.realPlayerStats.sort = this.sort;
+              });
+            }, error => {
+              
+            })
+          } else {
+            this.isLoading = false;
+          }
+        });
+      }
+    }
   }
 
   resetValues() {

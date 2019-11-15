@@ -197,12 +197,154 @@
             </mat-tab>
 
             <mat-tab label="NHL"> 
-                <p class="white-text">Coming Soon!</p>
+
+                <div class="spinner" *ngIf="isLoading">
+                    <mat-spinner color="accent"></mat-spinner>
+                </div>
+
+                <p class="white-text" *ngIf="!isLoading && !isCurrentPlayer">No NHL Stats This Season!</p>
+                
+                <div class="table-container" *ngIf="!isLoading && isCurrentPlayer">
+    
+                    <div class="table">
+            
+                        <table mat-table [dataSource]="playerStats" matSort class="mat-elevation-z8 full-width" matSortActive="playing_year" matSortDirection="desc">
+                
+                            <ng-container matColumnDef="team_logo" sticky>
+                                <th mat-header-cell *matHeaderCellDef> Team </th>
+                                <td mat-cell *matCellDef="let player"> 
+                                    <img src="{{ findLogo(player.team_name).image }}" matTooltip="{{findLogo(player.team_name).name}}"> 
+                                </td>
+                            </ng-container>
+    
+                            <ng-container matColumnDef="playing_year" sticky>
+                                <th mat-header-cell *matHeaderCellDef> Year </th>
+                                <td mat-cell *matCellDef="let player"> {{player.playing_year}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="season_type" sticky>
+                                <th mat-header-cell *matHeaderCellDef> Season </th>
+                                <td mat-cell *matCellDef="let player"> {{player.season_type}} </td>
+                            </ng-container>
+                
+                            <ng-container matColumnDef="games_played">
+                                <th mat-header-cell *matHeaderCellDef> GP </th>
+                                <td mat-cell *matCellDef="let player"> {{player.games_played}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="wins">
+                                <th mat-header-cell *matHeaderCellDef> Wins </th>
+                                <td mat-cell *matCellDef="let player"> {{player.wins}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="loss">
+                                <th mat-header-cell *matHeaderCellDef> Loss </th>
+                                <td mat-cell *matCellDef="let player"> {{player.loss}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="ties">
+                                <th mat-header-cell *matHeaderCellDef> Ties </th>
+                                <td mat-cell *matCellDef="let player"> {{player.ties}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="goals_against">
+                                <th mat-header-cell *matHeaderCellDef> GA </th>
+                                <td mat-cell *matCellDef="let player"> {{player.goals_against}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="goals_against_avg">
+                                <th mat-header-cell *matHeaderCellDef> GAA </th>
+                                <td mat-cell *matCellDef="let player"> {{player.goals_against_avg}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="shots_for">
+                                <th mat-header-cell *matHeaderCellDef> SA </th>
+                                <td mat-cell *matCellDef="let player"> {{player.shots_for}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="save_pct">
+                                <th mat-header-cell *matHeaderCellDef> Sv% </th>
+                                <td mat-cell *matCellDef="let player"> {{player.save_pct}}% </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="shutouts">
+                                <th mat-header-cell *matHeaderCellDef> SO </th>
+                                <td mat-cell *matCellDef="let player"> {{player.shutouts}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="minutes_played">
+                                <th mat-header-cell *matHeaderCellDef> MIN </th>
+                                <td mat-cell *matCellDef="let player"> {{player.minutes_played}} </td>
+                            </ng-container>
+                            
+                            <ng-container matColumnDef="goals">
+                                <th mat-header-cell *matHeaderCellDef> G </th>
+                                <td mat-cell *matCellDef="let player"> {{player.goals}} </td>
+                            </ng-container>
+                            
+                            <ng-container matColumnDef="assists">
+                                <th mat-header-cell *matHeaderCellDef> A </th>
+                                <td mat-cell *matCellDef="let player"> {{player.assists}} </td>
+                            </ng-container>
+                            
+                            <ng-container matColumnDef="points">
+                                <th mat-header-cell *matHeaderCellDef> Pts </th>
+                                <td mat-cell *matCellDef="let player"> {{player.points}} </td>
+                            </ng-container>
+                
+                            <ng-container matColumnDef="plus_minus">
+                                <th mat-header-cell *matHeaderCellDef> +/- </th>
+                                <td mat-cell *matCellDef="let player"> {{player.plus_minus}} </td>
+                            </ng-container>
+                
+                            <ng-container matColumnDef="penalty_minutes">
+                                <th mat-header-cell *matHeaderCellDef> PIM </th>
+                                <td mat-cell *matCellDef="let player"> {{player.penalty_minutes}} </td>
+                            </ng-container>
+                
+                            <ng-container matColumnDef="pp_goals">
+                                <th mat-header-cell *matHeaderCellDef> PPG </th>
+                                <td mat-cell *matCellDef="let player"> {{player.pp_goals}} </td>
+                            </ng-container>
+                
+                            <ng-container matColumnDef="sh_goals">
+                                <th mat-header-cell *matHeaderCellDef> SHG </th>
+                                <td mat-cell *matCellDef="let player"> {{player.sh_goals}} </td>
+                            </ng-container>
+                
+                            <ng-container matColumnDef="gw_goals">
+                                <th mat-header-cell *matHeaderCellDef> GWG </th>
+                                <td mat-cell *matCellDef="let player"> {{player.gw_goals}} </td>
+                            </ng-container>
+                
+                            <ng-container matColumnDef="gt_goals">
+                                <th mat-header-cell *matHeaderCellDef> GTG </th>
+                                <td mat-cell *matCellDef="let player"> {{player.gt_goals}} </td>
+                            </ng-container>
+                
+                            <ng-container matColumnDef="shooting_pct">
+                                <th mat-header-cell *matHeaderCellDef> Sh% </th>
+                                <td mat-cell *matCellDef="let player"> {{player.shooting_pct}} </td>
+                            </ng-container>
+                
+                            <ng-container matColumnDef="minutes_per_game">
+                                <th mat-header-cell *matHeaderCellDef> Min/G </th>
+                                <td mat-cell *matCellDef="let player"> {{player.minutes_per_game}} </td>
+                            </ng-container>
+                            
+                            <tr mat-header-row *matHeaderRowDef="isPlayerGoalie ? goalieRealColumnsToDisplay : playersRealColumnsToDisplay"></tr>
+                            <tr mat-row *matRowDef="let player; columns: isPlayerGoalie ? goalieRealColumnsToDisplay : playersRealColumnsToDisplay"></tr>
+
+                        </table>
+                
+                    </div>
+                </div>
+
             </mat-tab>
 
-            <mat-tab label="Compare"> 
+            <!-- <mat-tab label="Compare"> 
                 <p class="white-text">Coming Soon!</p>
-            </mat-tab>
+            </mat-tab> -->
 
         </mat-tab-group>
     </div>
