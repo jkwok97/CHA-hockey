@@ -244,9 +244,10 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
             this._teamsService.getIndividualNHLRealStats(playerId).pipe(takeWhile(() => this._alive)).subscribe(resp => {
               console.log(resp);
               this.isCurrentPlayer = true;
-              this.realPlayerStatsFetched = resp as [];
+              this.realPlayerStatsFetched = resp['stats'][0]['splits'][0]['stat'] as [];
+              console.log([this.realPlayerStatsFetched]);
               this.isLoading = false;
-              this.realPlayerStats = new MatTableDataSource<any[]>(this.realPlayerStatsFetched);
+              this.realPlayerStats = new MatTableDataSource<any[]>([this.realPlayerStatsFetched]);
               setTimeout(() => {
                 this.realPlayerStats.sort = this.sort;
               });
