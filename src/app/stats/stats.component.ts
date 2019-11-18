@@ -30,6 +30,10 @@ export class StatsComponent implements OnInit, OnDestroy {
   currPointStreakLeaders = [];
   longPointStreakLeaders = [];
   goalieLeaders = [];
+  goaliesGAALeaders = [];
+  goaliesSvPctLeaders = [];
+  goaliesShutOutsLeaders = [];
+  goaliesShotsFacedLeaders = [];
   leagueLeaders = [];
   diffLeagueLeaders = [];
 
@@ -46,6 +50,15 @@ export class StatsComponent implements OnInit, OnDestroy {
   dmenColumnsToDisplay = ['team_logo','player_name', 'games_played', 'goals', 'assists', 'points'];
   goalies: MatTableDataSource<any[]>;
   goaliesColumnsToDisplay = ['team_logo','player_name', 'games_played', 'wins','loss', 'ties','save_pct'];
+  goaliesGAA: MatTableDataSource<any[]>;
+  goaliesGAAColumnsToDisplay = ['team_logo','player_name', 'goals_against_avg'];
+  goaliesSvPct: MatTableDataSource<any[]>;
+  goaliesSvPctColumnsToDisplay = ['team_logo','player_name', 'save_pct'];
+  goaliesShotsFaced: MatTableDataSource<any[]>;
+  goaliesShotsFacedColumnsToDisplay = ['team_logo','player_name', 'shots_for'];
+  goaliesShutOuts: MatTableDataSource<any[]>;
+  goaliesShutOutsColumnsToDisplay = ['team_logo','player_name', 'shutouts'];
+
   currPointLeaders: MatTableDataSource<any[]>;
   currPointLeadersColumnsToDisplay = ['team_logo','player_name', 'current_points_streak'];
   longPointLeaders: MatTableDataSource<any[]>;
@@ -94,6 +107,10 @@ export class StatsComponent implements OnInit, OnDestroy {
     this._teamsService.getGoalieStatsByYearByType(this.currentSeason, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.goalieStats = resp;
       this.getGoalieLeaders(resp);
+      this.getGAALeaders(resp);
+      this.getSvPctLeaders(resp);
+      this.getShotsFacedLeaders(resp);
+      this.getShutOutsLeaders(resp);
       this.isGoaliesLoading = false;
     });
     this._teamsService.getLeagueTeamsStats(this.currentSeason).pipe(takeWhile(() => this._alive)).subscribe(resp => {
@@ -101,6 +118,54 @@ export class StatsComponent implements OnInit, OnDestroy {
       this.getDiffLeagueLeaders(resp);
       this.isLeagueLoading = false;
     });
+  }
+
+  getShutOutsLeaders(resp) {
+    let tempLeaders = resp;
+    tempLeaders.forEach(element => { 
+      if (element.games_played > 0) {
+        this.goaliesShutOutsLeaders.push(element);
+      }
+    });
+    this.goaliesShutOutsLeaders.sort((a,b) => b.shutouts - a.shutouts);
+    let leaders = this.goaliesShutOutsLeaders.splice(0, 10);
+    this.goaliesShutOuts = new MatTableDataSource<any[]>(leaders);
+  }
+
+  getShotsFacedLeaders(resp) {
+    let tempLeaders = resp;
+    tempLeaders.forEach(element => { 
+      if (element.games_played > 0) {
+        this.goaliesShotsFacedLeaders.push(element);
+      }
+    });
+    this.goaliesShotsFacedLeaders.sort((a,b) => b.shots_for - a.shots_for);
+    let leaders = this.goaliesShotsFacedLeaders.splice(0, 10);
+    this.goaliesShotsFaced = new MatTableDataSource<any[]>(leaders);
+  }
+
+  getSvPctLeaders(resp) {
+    let tempLeaders = resp;
+    tempLeaders.forEach(element => { 
+      if (element.games_played > 0) {
+        this.goaliesSvPctLeaders.push(element);
+      }
+    });
+    this.goaliesSvPctLeaders.sort((a,b) => b.save_pct - a.save_pct);
+    let leaders = this.goaliesSvPctLeaders.splice(0, 10);
+    this.goaliesSvPct = new MatTableDataSource<any[]>(leaders);
+  }
+
+  getGAALeaders(resp) {
+    let tempLeaders = resp;
+    tempLeaders.forEach(element => { 
+      if (element.games_played > 0) {
+        this.goaliesGAALeaders.push(element);
+      }
+    });
+    this.goaliesGAALeaders.sort((a,b) => a.goals_against_avg - b.goals_against_avg);
+    let leaders = this.goaliesGAALeaders.splice(0, 10);
+    this.goaliesGAA = new MatTableDataSource<any[]>(leaders);
   }
 
   getBlockedLeaders(resp) {

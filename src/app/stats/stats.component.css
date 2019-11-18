@@ -188,6 +188,7 @@ tr:nth-child(even) {
         width: 90%;
         justify-content: flex-start;
         overflow-x: auto;
+        overflow-y: hidden;
     }
 
     tr:nth-child(even) {
@@ -200,6 +201,9 @@ tr:nth-child(even) {
     }
     .card {
         width: 90%;
+    }
+    .full-width {
+        width: 100%;
     }
 }
 
@@ -219,6 +223,10 @@ tr:nth-child(even) {
         padding-left: 10px;
         padding-right: 10px;
     }
+    .card {
+        width: 90%;
+        overflow-y: hidden;
+    }
 }
 
 /* ***** IPHONE X ***** */
@@ -227,6 +235,7 @@ tr:nth-child(even) {
         width: 90%;
         justify-content: flex-start;
         overflow-x: auto;
+        
     }
 
     tr:nth-child(even) {
@@ -236,5 +245,8 @@ tr:nth-child(even) {
     .mat-cell, .mat-header-cell {
         padding-left: 10px;
         padding-right: 10px;
+    }
+    .card {
+        width: 90%;
     }
 }
