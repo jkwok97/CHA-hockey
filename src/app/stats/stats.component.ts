@@ -20,6 +20,13 @@ export class StatsComponent implements OnInit, OnDestroy {
   stats: any;
   goalieStats: any;
   pointLeaders = [];
+  dmenLeaders = [];
+  goalLeaders = [];
+  assistLeaders = [];
+  plusMinusLeader = [];
+  penaltyLeader = [];
+  hitLeader = [];
+  blockedLeader = [];
   currPointStreakLeaders = [];
   longPointStreakLeaders = [];
   goalieLeaders = [];
@@ -34,13 +41,27 @@ export class StatsComponent implements OnInit, OnDestroy {
   teamsDiffLeaders: MatTableDataSource<any[]>;
   teamsDiffColumnsToDisplay = [ 'team_logo','team_name', 'goals_for', 'goals_against', 'goals_diff', 'shots_for', 'shots_against', 'shots_diff' ];
   players: MatTableDataSource<any[]>;
-  playersColumnsToDisplay = ['team_logo','player_name', 'games_played','goals', 'assists', 'points'];
+  playersColumnsToDisplay = ['team_logo','player_name', 'games_played', 'goals', 'assists', 'points'];
+  dmen: MatTableDataSource<any[]>;
+  dmenColumnsToDisplay = ['team_logo','player_name', 'games_played', 'goals', 'assists', 'points'];
   goalies: MatTableDataSource<any[]>;
   goaliesColumnsToDisplay = ['team_logo','player_name', 'games_played', 'wins','loss', 'ties','save_pct'];
   currPointLeaders: MatTableDataSource<any[]>;
-  currPointLeadersColumnsToDisplay = ['team_logo','player_name', 'current_points_streak', 'points'];
+  currPointLeadersColumnsToDisplay = ['team_logo','player_name', 'current_points_streak'];
   longPointLeaders: MatTableDataSource<any[]>;
-  longPointLeadersColumnsToDisplay = ['team_logo','player_name', 'longest_points_streak', 'points'];
+  longPointLeadersColumnsToDisplay = ['team_logo','player_name', 'longest_points_streak'];
+  goalsLeaders: MatTableDataSource<any[]>;
+  playersGoalsColumnsToDisplay = ['team_logo','player_name','goals'];
+  assistsLeaders: MatTableDataSource<any[]>;
+  playersAssistsColumnsToDisplay = ['team_logo','player_name','assists'];
+  plusMinusLeaders: MatTableDataSource<any[]>;
+  playersPlusMinusColumnsToDisplay = ['team_logo','player_name','plus_minus'];
+  penaltiesLeaders: MatTableDataSource<any[]>;
+  playersPenaltiesColumnsToDisplay = ['team_logo','player_name','penalty_minutes'];
+  hitsLeaders: MatTableDataSource<any[]>;
+  playersHitsColumnsToDisplay = ['team_logo','player_name','hits'];
+  blockedLeaders: MatTableDataSource<any[]>;
+  playersBlockedColumnsToDisplay = ['team_logo','player_name','blocked_shots'];
 
   @ViewChild("overallSort", {static: false}) overallSort: MatSort;
   @ViewChild("diffSort", {static: false}) diffSort: MatSort;
@@ -59,8 +80,15 @@ export class StatsComponent implements OnInit, OnDestroy {
     this._teamsService.getPlayerStatsByYearByType(this.currentSeason, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.stats = resp;
       this.getPointLeaders(resp);
+      this.getDmanPointLeaders(resp);
       this.getPointStreakLeaders(resp);
       this.getLongPointStreakLeaders(resp);
+      this.getGoalsLeaders(resp);
+      this.getAssistsLeaders(resp);
+      this.getPlusMinusLeaders(resp);
+      this.getPenaltiesLeaders(resp);
+      this.getHitsLeaders(resp);
+      this.getBlockedLeaders(resp);
       this.isLeadersLoading = false;
     });
     this._teamsService.getGoalieStatsByYearByType(this.currentSeason, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
@@ -73,6 +101,66 @@ export class StatsComponent implements OnInit, OnDestroy {
       this.getDiffLeagueLeaders(resp);
       this.isLeagueLoading = false;
     });
+  }
+
+  getBlockedLeaders(resp) {
+    let tempLeaders = resp;
+    tempLeaders.forEach(element => { this.blockedLeader.push(element) });
+    this.blockedLeader.sort((a,b) => b.blocked_shots - a.blocked_shots);
+    let leaders = this.blockedLeader.splice(0, 10);
+    this.blockedLeaders = new MatTableDataSource<any[]>(leaders);
+  }
+
+  getHitsLeaders(resp) {
+    let tempLeaders = resp;
+    tempLeaders.forEach(element => { this.hitLeader.push(element) });
+    this.hitLeader.sort((a,b) => b.hits - a.hits);
+    let leaders = this.hitLeader.splice(0, 10);
+    this.hitsLeaders = new MatTableDataSource<any[]>(leaders);
+  }
+
+  getPenaltiesLeaders(resp) {
+    let tempLeaders = resp;
+    tempLeaders.forEach(element => { this.penaltyLeader.push(element) });
+    this.penaltyLeader.sort((a,b) => b.penalty_minutes - a.penalty_minutes);
+    let leaders = this.penaltyLeader.splice(0, 10);
+    this.penaltiesLeaders = new MatTableDataSource<any[]>(leaders);
+  }
+
+  getPlusMinusLeaders(resp) {
+    let tempLeaders = resp;
+    tempLeaders.forEach(element => { this.plusMinusLeader.push(element) });
+    this.plusMinusLeader.sort((a,b) => b.plus_minus - a.plus_minus);
+    let leaders = this.plusMinusLeader.splice(0, 10);
+    this.plusMinusLeaders = new MatTableDataSource<any[]>(leaders);
+  }
+
+  getAssistsLeaders(resp) {
+    let tempLeaders = resp;
+    tempLeaders.forEach(element => { this.assistLeaders.push(element) });
+    this.assistLeaders.sort((a,b) => b.assists - a.assists);
+    let leaders = this.assistLeaders.splice(0, 10);
+    this.assistsLeaders = new MatTableDataSource<any[]>(leaders);
+  }
+
+  getDmanPointLeaders(resp) {
+    let tempLeaders = resp;
+    tempLeaders.forEach(element => { 
+      if (element.position === "RD" || element.position === "LD") {
+        this.dmenLeaders.push(element) 
+      }
+    });
+    this.dmenLeaders.sort((a,b) => b.points - a.points);
+    let leaders = this.dmenLeaders.splice(0, 10);
+    this.dmen = new MatTableDataSource<any[]>(leaders);
+  }
+
+  getGoalsLeaders(resp) {
+    let tempLeaders = resp;
+    tempLeaders.forEach(element => { this.goalLeaders.push(element) });
+    this.goalLeaders.sort((a,b) => b.goals - a.goals);
+    let leaders = this.goalLeaders.splice(0, 10);
+    this.goalsLeaders = new MatTableDataSource<any[]>(leaders);
   }
 
   getPointLeaders(resp) {
