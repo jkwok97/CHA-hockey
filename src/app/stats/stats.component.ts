@@ -35,15 +35,28 @@ export class StatsComponent implements OnInit, OnDestroy {
   goaliesShutOutsLeaders = [];
   goaliesShotsFacedLeaders = [];
   leagueLeaders = [];
-  diffLeagueLeaders = [];
+  goalDiffLeagueLeaders = [];
+  shotDiffLeagueLeaders = [];
+  ppLeagueLeaders = [];
+  pkLeagueLeaders = [];
+  pimLeagueLeaders = [];
 
   currentSeason: string;
   currentSeasonType: string;
 
   teamsLeaders: MatTableDataSource<any[]>;
   teamsColumnsToDisplay = [ 'team_logo','team_name', 'games_played', 'wins', 'loss', 'ties', 'points', 'win_pct' ];
-  teamsDiffLeaders: MatTableDataSource<any[]>;
-  teamsDiffColumnsToDisplay = [ 'team_logo','team_name', 'goals_for', 'goals_against', 'goals_diff', 'shots_for', 'shots_against', 'shots_diff' ];
+  teamsGoalDiffLeaders: MatTableDataSource<any[]>;
+  teamsGoalDiffColumnsToDisplay = [ 'team_logo','team_name', 'goals_for', 'goals_against', 'goals_diff' ];
+  teamsShotDiffLeaders: MatTableDataSource<any[]>;
+  teamsShotDiffColumnsToDisplay = [ 'team_logo','team_name', 'shots_for', 'shots_against', 'shots_diff' ];
+  teamsPPLeaders: MatTableDataSource<any[]>;
+  teamsPPColumnsToDisplay = [ 'team_logo','team_name', 'pp_attempts', 'pp_goals', 'pp_pct' ];
+  teamsPKLeaders: MatTableDataSource<any[]>;
+  teamsPKColumnsToDisplay = [ 'team_logo','team_name', 'pk_attempts', 'pk_goals', 'pk_pct' ];
+  teamsPIMLeaders: MatTableDataSource<any[]>;
+  teamsPIMColumnsToDisplay = [ 'team_logo','team_name', 'penalty_minutes', 'pim_game' ];
+
   players: MatTableDataSource<any[]>;
   playersColumnsToDisplay = ['team_logo','player_name', 'games_played', 'goals', 'assists', 'points'];
   dmen: MatTableDataSource<any[]>;
@@ -114,8 +127,13 @@ export class StatsComponent implements OnInit, OnDestroy {
       this.isGoaliesLoading = false;
     });
     this._teamsService.getLeagueTeamsStats(this.currentSeason).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      console.log(resp)
       this.getLeagueLeaders(resp);
-      this.getDiffLeagueLeaders(resp);
+      this.getGoalDiffLeagueLeaders(resp);
+      this.getShotDiffLeagueLeaders(resp);
+      this.getPPLeagueLeaders(resp);
+      this.getPKLeagueLeaders(resp);
+      this.getPimLeagueLeaders(resp);
       this.isLeagueLoading = false;
     });
   }
@@ -271,15 +289,64 @@ export class StatsComponent implements OnInit, OnDestroy {
     this.teamsLeaders = new MatTableDataSource<any[]>(this.leagueLeaders);
   }
 
-  getDiffLeagueLeaders(resp) {
+  getGoalDiffLeagueLeaders(resp) {
     let tempLeaders = resp;
     tempLeaders.forEach(element => {
       if (element.playing_year === this.currentSeason && element.season_type === this.currentSeasonType) {
-        this.diffLeagueLeaders.push(element);
+        element.goal_diff = element.goals_for - element.goals_against;
+        this.goalDiffLeagueLeaders.push(element);
       }
     })
-    this.diffLeagueLeaders.sort((a,b) => b.goals_for - a.goals_for);
-    this.teamsDiffLeaders = new MatTableDataSource<any[]>(this.diffLeagueLeaders);
+    this.goalDiffLeagueLeaders.sort((a,b) => b.goal_diff - a.goal_diff);
+    this.teamsGoalDiffLeaders = new MatTableDataSource<any[]>(this.goalDiffLeagueLeaders);
+  }
+
+  getShotDiffLeagueLeaders(resp) {
+    let tempLeaders = resp;
+    tempLeaders.forEach(element => {
+      if (element.playing_year === this.currentSeason && element.season_type === this.currentSeasonType) {
+        element.shot_diff = element.shots_for - element.shots_against
+        this.shotDiffLeagueLeaders.push(element);
+      }
+    })
+    this.shotDiffLeagueLeaders.sort((a,b) => b.shot_diff - a.shot_diff);
+    this.teamsShotDiffLeaders = new MatTableDataSource<any[]>(this.shotDiffLeagueLeaders);
+  }
+
+  getPPLeagueLeaders(resp) {
+    let tempLeaders = resp;
+    tempLeaders.forEach(element => {
+      if (element.playing_year === this.currentSeason && element.season_type === this.currentSeasonType) {
+        element.pp_pct = ((element.pp_goals / element.pp_attempts) * 100).toFixed(1)
+        this.ppLeagueLeaders.push(element);
+      }
+    })
+    this.ppLeagueLeaders.sort((a,b) => b.pp_pct - a.pp_pct);
+    this.teamsPPLeaders = new MatTableDataSource<any[]>(this.ppLeagueLeaders);
+  }
+
+  getPKLeagueLeaders(resp) {
+    let tempLeaders = resp;
+    tempLeaders.forEach(element => {
+      if (element.playing_year === this.currentSeason && element.season_type === this.currentSeasonType) {
+        element.pk_pct = (((element.pk_attempts - element.pk_goals) / element.pk_attempts) * 100).toFixed(1) 
+        this.pkLeagueLeaders.push(element);
+      }
+    })
+    this.pkLeagueLeaders.sort((a,b) => b.pk_pct - a.pk_pct);
+    this.teamsPKLeaders = new MatTableDataSource<any[]>(this.pkLeagueLeaders);
+  }
+
+  getPimLeagueLeaders(resp) {
+    let tempLeaders = resp;
+    tempLeaders.forEach(element => {
+      if (element.playing_year === this.currentSeason && element.season_type === this.currentSeasonType) {
+        element.pim_game = (element.penalty_minutes / element.games_played).toFixed(1)
+        this.pimLeagueLeaders.push(element);
+      }
+    })
+    this.pimLeagueLeaders.sort((a,b) => b.pim_game - a.pim_game);
+    this.teamsPIMLeaders = new MatTableDataSource<any[]>(this.pimLeagueLeaders);
   }
 
   findLogo(shortName) {

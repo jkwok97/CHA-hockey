@@ -70,14 +70,52 @@
                     
                         </div>
                     </div>   
-        
+
                     <div class="card" *ngIf="!isLeagueLoading">
                         <div class="header">
-                            <p>League Differentials</p>
+                            <p>Team Penalties</p>
                         </div> 
                         <div class="table">
         
-                            <table mat-table [dataSource]="teamsDiffLeaders" #diffSort="matSort" matSort class="mat-elevation-z8 full-width" matSortActive="goals_for" matSortDirection="desc">
+                            <table mat-table [dataSource]="teamsPIMLeaders" class="mat-elevation-z8 full-width">
+            
+                                <ng-container matColumnDef="team_logo">
+                                    <th mat-header-cell *matHeaderCellDef> </th>
+                                    <td mat-cell *matCellDef="let team"> 
+                                        <img src="{{ findLogo(team.team_name).image }}"> 
+                                    </td>
+                                </ng-container>
+                    
+                                <ng-container matColumnDef="team_name">
+                                    <th mat-header-cell *matHeaderCellDef> Team </th>
+                                    <td mat-cell *matCellDef="let team"> {{findLogo(team.team_name).name}} </td>
+                                </ng-container>
+                    
+                                <ng-container matColumnDef="penalty_minutes">
+                                    <th mat-header-cell *matHeaderCellDef> PIM </th>
+                                    <td mat-cell *matCellDef="let team"> {{team.penalty_minutes}} </td>
+                                </ng-container>
+                                
+                                <ng-container matColumnDef="pim_game">
+                                    <th mat-header-cell *matHeaderCellDef> PIM/G </th>
+                                    <td mat-cell *matCellDef="let team"> {{team.pim_game}} </td>
+                                </ng-container>
+                    
+                                <tr mat-header-row *matHeaderRowDef="teamsPIMColumnsToDisplay"></tr>
+                                <tr mat-row *matRowDef="let team; columns: teamsPIMColumnsToDisplay;" (click)="openTeam(team.team_name)"></tr>
+                    
+                            </table>
+                    
+                        </div>
+                    </div>
+        
+                    <div class="card" *ngIf="!isLeagueLoading">
+                        <div class="header">
+                            <p>League Goal Differentials</p>
+                        </div> 
+                        <div class="table">
+        
+                            <table mat-table [dataSource]="teamsGoalDiffLeaders" class="mat-elevation-z8 full-width">
             
                                 <ng-container matColumnDef="team_logo">
                                     <th mat-header-cell *matHeaderCellDef> </th>
@@ -92,37 +130,151 @@
                                 </ng-container>
                     
                                 <ng-container matColumnDef="goals_for">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true"> GF </th>
+                                    <th mat-header-cell *matHeaderCellDef> GF </th>
                                     <td mat-cell *matCellDef="let team"> {{team.goals_for}} </td>
                                 </ng-container>
                                 
                                 <ng-container matColumnDef="goals_against">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true"> GA </th>
+                                    <th mat-header-cell *matHeaderCellDef> GA </th>
                                     <td mat-cell *matCellDef="let team"> {{team.goals_against}} </td>
-                                </ng-container>
-                                
-                                <ng-container matColumnDef="shots_for">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true"> SF </th>
-                                    <td mat-cell *matCellDef="let team"> {{team.shots_for}} </td>
-                                </ng-container>
-                                
-                                <ng-container matColumnDef="shots_against">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true"> SA </th>
-                                    <td mat-cell *matCellDef="let team"> {{team.shots_against}} </td>
                                 </ng-container>
                     
                                 <ng-container matColumnDef="goals_diff">
                                     <th mat-header-cell *matHeaderCellDef> Goal Diff </th>
-                                    <td mat-cell *matCellDef="let team"> {{team.goals_for - team.goals_against}} </td>
+                                    <td mat-cell *matCellDef="let team"> {{team.goal_diff}} </td>
+                                </ng-container>
+                    
+                                <tr mat-header-row *matHeaderRowDef="teamsGoalDiffColumnsToDisplay"></tr>
+                                <tr mat-row *matRowDef="let team; columns: teamsGoalDiffColumnsToDisplay;" (click)="openTeam(team.team_name)"></tr>
+                    
+                            </table>
+                    
+                        </div>
+                    </div>
+
+                    <div class="card" *ngIf="!isLeagueLoading">
+                        <div class="header">
+                            <p>League Shot Differentials</p>
+                        </div> 
+                        <div class="table">
+        
+                            <table mat-table [dataSource]="teamsShotDiffLeaders" class="mat-elevation-z8 full-width">
+            
+                                <ng-container matColumnDef="team_logo">
+                                    <th mat-header-cell *matHeaderCellDef> </th>
+                                    <td mat-cell *matCellDef="let team"> 
+                                        <img src="{{ findLogo(team.team_name).image }}"> 
+                                    </td>
+                                </ng-container>
+                    
+                                <ng-container matColumnDef="team_name">
+                                    <th mat-header-cell *matHeaderCellDef> Team </th>
+                                    <td mat-cell *matCellDef="let team"> {{findLogo(team.team_name).name}} </td>
+                                </ng-container>
+                                
+                                <ng-container matColumnDef="shots_for">
+                                    <th mat-header-cell *matHeaderCellDef> SF </th>
+                                    <td mat-cell *matCellDef="let team"> {{team.shots_for}} </td>
+                                </ng-container>
+                                
+                                <ng-container matColumnDef="shots_against">
+                                    <th mat-header-cell *matHeaderCellDef> SA </th>
+                                    <td mat-cell *matCellDef="let team"> {{team.shots_against}} </td>
                                 </ng-container>
                     
                                 <ng-container matColumnDef="shots_diff">
                                     <th mat-header-cell *matHeaderCellDef> Shot Diff </th>
-                                    <td mat-cell *matCellDef="let team"> {{team.shots_for - team.shots_against}}</td>
+                                    <td mat-cell *matCellDef="let team"> {{team.shot_diff}}</td>
                                 </ng-container>
                     
-                                <tr mat-header-row *matHeaderRowDef="teamsDiffColumnsToDisplay"></tr>
-                                <tr mat-row *matRowDef="let team; columns: teamsDiffColumnsToDisplay;" (click)="openTeam(team.team_name)"></tr>
+                                <tr mat-header-row *matHeaderRowDef="teamsShotDiffColumnsToDisplay"></tr>
+                                <tr mat-row *matRowDef="let team; columns: teamsShotDiffColumnsToDisplay;" (click)="openTeam(team.team_name)"></tr>
+                    
+                            </table>
+                    
+                        </div>
+                    </div>
+
+                    <div class="card" *ngIf="!isLeagueLoading">
+                        <div class="header">
+                            <p>Power Play Efficiency</p>
+                        </div> 
+                        <div class="table">
+        
+                            <table mat-table [dataSource]="teamsPPLeaders" class="mat-elevation-z8 full-width">
+            
+                                <ng-container matColumnDef="team_logo">
+                                    <th mat-header-cell *matHeaderCellDef> </th>
+                                    <td mat-cell *matCellDef="let team"> 
+                                        <img src="{{ findLogo(team.team_name).image }}"> 
+                                    </td>
+                                </ng-container>
+                    
+                                <ng-container matColumnDef="team_name">
+                                    <th mat-header-cell *matHeaderCellDef> Team </th>
+                                    <td mat-cell *matCellDef="let team"> {{findLogo(team.team_name).name}} </td>
+                                </ng-container>
+                                
+                                <ng-container matColumnDef="pp_attempts">
+                                    <th mat-header-cell *matHeaderCellDef> PPA </th>
+                                    <td mat-cell *matCellDef="let team"> {{team.pp_attempts}} </td>
+                                </ng-container>
+                                
+                                <ng-container matColumnDef="pp_goals">
+                                    <th mat-header-cell *matHeaderCellDef> PPG </th>
+                                    <td mat-cell *matCellDef="let team"> {{team.pp_goals}} </td>
+                                </ng-container>
+                    
+                                <ng-container matColumnDef="pp_pct">
+                                    <th mat-header-cell *matHeaderCellDef> PP% </th>
+                                    <td mat-cell *matCellDef="let team"> {{team.pp_pct}}%</td>
+                                </ng-container>
+                    
+                                <tr mat-header-row *matHeaderRowDef="teamsPPColumnsToDisplay"></tr>
+                                <tr mat-row *matRowDef="let team; columns: teamsPPColumnsToDisplay;" (click)="openTeam(team.team_name)"></tr>
+                    
+                            </table>
+                    
+                        </div>
+                    </div>
+
+                    <div class="card" *ngIf="!isLeagueLoading">
+                        <div class="header">
+                            <p>Penalty Kill Efficiency</p>
+                        </div> 
+                        <div class="table">
+        
+                            <table mat-table [dataSource]="teamsPKLeaders" class="mat-elevation-z8 full-width">
+            
+                                <ng-container matColumnDef="team_logo">
+                                    <th mat-header-cell *matHeaderCellDef> </th>
+                                    <td mat-cell *matCellDef="let team"> 
+                                        <img src="{{ findLogo(team.team_name).image }}"> 
+                                    </td>
+                                </ng-container>
+                    
+                                <ng-container matColumnDef="team_name">
+                                    <th mat-header-cell *matHeaderCellDef> Team </th>
+                                    <td mat-cell *matCellDef="let team"> {{findLogo(team.team_name).name}} </td>
+                                </ng-container>
+                                
+                                <ng-container matColumnDef="pk_attempts">
+                                    <th mat-header-cell *matHeaderCellDef> PKA </th>
+                                    <td mat-cell *matCellDef="let team"> {{team.pk_attempts}} </td>
+                                </ng-container>
+                                
+                                <ng-container matColumnDef="pk_goals">
+                                    <th mat-header-cell *matHeaderCellDef> PKG </th>
+                                    <td mat-cell *matCellDef="let team"> {{team.pk_goals}} </td>
+                                </ng-container>
+                    
+                                <ng-container matColumnDef="pk_pct">
+                                    <th mat-header-cell *matHeaderCellDef> PK% </th>
+                                    <td mat-cell *matCellDef="let team"> {{team.pk_pct}}%</td>
+                                </ng-container>
+                    
+                                <tr mat-header-row *matHeaderRowDef="teamsPKColumnsToDisplay"></tr>
+                                <tr mat-row *matRowDef="let team; columns: teamsPKColumnsToDisplay;" (click)="openTeam(team.team_name)"></tr>
                     
                             </table>
                     
