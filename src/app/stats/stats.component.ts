@@ -21,11 +21,13 @@ export class StatsComponent implements OnInit, OnDestroy {
   goalieStats: any;
   pointLeaders = [];
   dmenLeaders = [];
+  rookieLeaders = [];
   goalLeaders = [];
   assistLeaders = [];
   plusMinusLeader = [];
   penaltyLeader = [];
   hitLeader = [];
+  shotLeaders = [];
   blockedLeader = [];
   currPointStreakLeaders = [];
   longPointStreakLeaders = [];
@@ -61,6 +63,8 @@ export class StatsComponent implements OnInit, OnDestroy {
   playersColumnsToDisplay = ['team_logo','player_name', 'games_played', 'goals', 'assists', 'points'];
   dmen: MatTableDataSource<any[]>;
   dmenColumnsToDisplay = ['team_logo','player_name', 'games_played', 'goals', 'assists', 'points'];
+  rookies: MatTableDataSource<any[]>;
+  rookieColumnsToDisplay = ['team_logo','player_name', 'games_played', 'goals', 'assists', 'points'];
   goalies: MatTableDataSource<any[]>;
   goaliesColumnsToDisplay = ['team_logo','player_name', 'games_played', 'wins','loss', 'ties','save_pct'];
   goaliesGAA: MatTableDataSource<any[]>;
@@ -88,6 +92,8 @@ export class StatsComponent implements OnInit, OnDestroy {
   playersHitsColumnsToDisplay = ['team_logo','player_name','hits'];
   blockedLeaders: MatTableDataSource<any[]>;
   playersBlockedColumnsToDisplay = ['team_logo','player_name','blocked_shots'];
+  shotsLeaders: MatTableDataSource<any[]>;
+  playersShotsColumnsToDisplay = ['team_logo','player_name','shots'];
 
   @ViewChild("overallSort", {static: false}) overallSort: MatSort;
   @ViewChild("diffSort", {static: false}) diffSort: MatSort;
@@ -105,8 +111,10 @@ export class StatsComponent implements OnInit, OnDestroy {
     this.currentSeasonType = this._teamsService.currentSeasonType;
     this._teamsService.getPlayerStatsByYearByType(this.currentSeason, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.stats = resp;
+      console.log(resp);
       this.getPointLeaders(resp);
       this.getDmanPointLeaders(resp);
+      this.getRookiePointLeaders(resp);
       this.getPointStreakLeaders(resp);
       this.getLongPointStreakLeaders(resp);
       this.getGoalsLeaders(resp);
@@ -115,6 +123,7 @@ export class StatsComponent implements OnInit, OnDestroy {
       this.getPenaltiesLeaders(resp);
       this.getHitsLeaders(resp);
       this.getBlockedLeaders(resp);
+      this.getShotsLeaders(resp);
       this.isLeadersLoading = false;
     });
     this._teamsService.getGoalieStatsByYearByType(this.currentSeason, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
@@ -225,6 +234,18 @@ export class StatsComponent implements OnInit, OnDestroy {
     this.assistsLeaders = new MatTableDataSource<any[]>(leaders);
   }
 
+  getRookiePointLeaders(resp) {
+    let tempLeaders = resp;
+    tempLeaders.forEach(element => { 
+      if (element.player_status === "Rookie") {
+        this.rookieLeaders.push(element) 
+      }
+    });
+    this.rookieLeaders.sort((a,b) => b.points - a.points);
+    let leaders = this.rookieLeaders.splice(0, 10);
+    this.rookies = new MatTableDataSource<any[]>(leaders);
+  }
+
   getDmanPointLeaders(resp) {
     let tempLeaders = resp;
     tempLeaders.forEach(element => { 
@@ -235,6 +256,14 @@ export class StatsComponent implements OnInit, OnDestroy {
     this.dmenLeaders.sort((a,b) => b.points - a.points);
     let leaders = this.dmenLeaders.splice(0, 10);
     this.dmen = new MatTableDataSource<any[]>(leaders);
+  }
+
+  getShotsLeaders(resp) {
+    let tempLeaders = resp;
+    tempLeaders.forEach(element => { this.shotLeaders.push(element) });
+    this.shotLeaders.sort((a,b) => b.shots - a.shots);
+    let leaders = this.shotLeaders.splice(0, 10);
+    this.shotsLeaders = new MatTableDataSource<any[]>(leaders);
   }
 
   getGoalsLeaders(resp) {
