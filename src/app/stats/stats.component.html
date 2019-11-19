@@ -19,7 +19,7 @@
                         </div> 
                         <div class="table">
         
-                            <table mat-table [dataSource]="teamsLeaders" #overallSort="matSort" matSort class="mat-elevation-z8 full-width" matSortActive="points" matSortDirection="desc">
+                            <table mat-table [dataSource]="teamsLeaders" class="mat-elevation-z8 full-width">
             
                                 <ng-container matColumnDef="team_logo">
                                     <th mat-header-cell *matHeaderCellDef> </th>
@@ -34,27 +34,27 @@
                                 </ng-container>
                     
                                 <ng-container matColumnDef="games_played">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true"> GP </th>
+                                    <th mat-header-cell *matHeaderCellDef> GP </th>
                                     <td mat-cell *matCellDef="let team"> {{team.games_played}} </td>
                                 </ng-container>
                     
                                 <ng-container matColumnDef="wins">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true"> W </th>
+                                    <th mat-header-cell *matHeaderCellDef> W </th>
                                     <td mat-cell *matCellDef="let team"> {{team.wins}} </td>
                                 </ng-container>
                                 
                                 <ng-container matColumnDef="loss">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true"> L </th>
+                                    <th mat-header-cell *matHeaderCellDef> L </th>
                                     <td mat-cell *matCellDef="let team"> {{team.loss}} </td>
                                 </ng-container>
                                 
                                 <ng-container matColumnDef="ties">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true"> T </th>
+                                    <th mat-header-cell *matHeaderCellDef> T </th>
                                     <td mat-cell *matCellDef="let team"> {{team.ties}} </td>
                                 </ng-container>
                                 
                                 <ng-container matColumnDef="points">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true"> Pts </th>
+                                    <th mat-header-cell *matHeaderCellDef> Pts </th>
                                     <td mat-cell *matCellDef="let team"> {{team.points}} </td>
                                 </ng-container>
                     
