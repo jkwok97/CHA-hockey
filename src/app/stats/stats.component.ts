@@ -127,7 +127,6 @@ export class StatsComponent implements OnInit, OnDestroy {
       this.isGoaliesLoading = false;
     });
     this._teamsService.getLeagueTeamsStats(this.currentSeason).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      console.log(resp)
       this.getLeagueLeaders(resp);
       this.getGoalDiffLeagueLeaders(resp);
       this.getShotDiffLeagueLeaders(resp);

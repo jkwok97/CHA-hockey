@@ -77,9 +77,17 @@ export class OverallTeamStatsComponent implements OnInit, OnDestroy, AfterViewIn
     if (this._route.snapshot.routeConfig.path === "stats/league") {
       this._teamsService.getLeagueTeamsStats(this.currentSeason).pipe(takeWhile(() => this._alive)).subscribe(resp => {
         // console.log(resp);
-        let tempLeaders = resp as [];
+        let tempLeaders = resp as any;
         tempLeaders.forEach(element => {
           if (element['playing_year'] === this.currentSeason && element['season_type'] === this.currentSeasonType) {
+            element.win_pct = ((element.wins / element.games_played) * 100).toFixed(1);
+            element.goals_against_game = (element.goals_against / element.games_played).toFixed(2);
+            element.goals_diff = element.goals_for - element.goals_against;
+            element.goals_for_game = (element.goals_for / element.games_played).toFixed(2);
+            element.pp_pct = ((element.pp_goals / element.pp_attempts) * 100).toFixed(1);
+            element.pk_pct = (((element.pk_attempts - element.pk_goals) / element.pk_attempts) * 100).toFixed(1);
+            element.penalty_minutes_game = (element.penalty_minutes / element.games_played).toFixed(1);
+            element.shot_diff = (element.shots_for - element.shots_against);
             this.stats.push(element);
           }
         })
@@ -94,9 +102,17 @@ export class OverallTeamStatsComponent implements OnInit, OnDestroy, AfterViewIn
         this.short_team_name = this._route.snapshot.paramMap.get("params");
         this._teamsService.getTeamStats(this.short_team_name).pipe(takeWhile(() => this._alive)).subscribe(resp => {
         // console.log(resp);
-        let tempLeaders = resp as [];
+        let tempLeaders = resp as any;
         tempLeaders.forEach(element => {
           if (element['playing_year'] === this.currentSeason && element['season_type'] === this.currentSeasonType) {
+            element.win_pct = ((element.wins / element.games_played) * 100).toFixed(1);
+            element.goals_against_game = (element.goals_against / element.games_played).toFixed(2);
+            element.goals_diff = element.goals_for - element.goals_against;
+            element.goals_for_game = (element.goals_for / element.games_played).toFixed(2);
+            element.pp_pct = ((element.pp_goals / element.pp_attempts) * 100).toFixed(1);
+            element.pk_pct = (((element.pk_attempts - element.pk_goals) / element.pk_attempts) * 100).toFixed(1);
+            element.penalty_minutes_game = (element.penalty_minutes / element.games_played).toFixed(1);
+            element.shot_diff = (element.shots_for - element.shots_against);
             this.stats.push(element);
           }
         })
