@@ -23,6 +23,7 @@ export class StatsComponent implements OnInit, OnDestroy {
   dmenLeaders = [];
   rookieLeaders = [];
   goalLeaders = [];
+  shGoalLeaders = [];
   assistLeaders = [];
   plusMinusLeader = [];
   penaltyLeader = [];
@@ -42,6 +43,7 @@ export class StatsComponent implements OnInit, OnDestroy {
   ppLeagueLeaders = [];
   pkLeagueLeaders = [];
   pimLeagueLeaders = [];
+  pointsPerSixtyLeaders = [];
 
   currentSeason: string;
   currentSeasonType: string;
@@ -82,6 +84,8 @@ export class StatsComponent implements OnInit, OnDestroy {
   longPointLeadersColumnsToDisplay = ['team_logo','player_name', 'longest_points_streak'];
   goalsLeaders: MatTableDataSource<any[]>;
   playersGoalsColumnsToDisplay = ['team_logo','player_name','goals'];
+  shGoalsLeaders: MatTableDataSource<any[]>;
+  playersShGoalsColumnsToDisplay = ['team_logo','player_name','sh_goals'];
   assistsLeaders: MatTableDataSource<any[]>;
   playersAssistsColumnsToDisplay = ['team_logo','player_name','assists'];
   plusMinusLeaders: MatTableDataSource<any[]>;
@@ -94,6 +98,8 @@ export class StatsComponent implements OnInit, OnDestroy {
   playersBlockedColumnsToDisplay = ['team_logo','player_name','blocked_shots'];
   shotsLeaders: MatTableDataSource<any[]>;
   playersShotsColumnsToDisplay = ['team_logo','player_name','shots'];
+  pointsSixtyLeaders: MatTableDataSource<any[]>;
+  playersPointsSixtyColumnsToDisplay = ['team_logo','player_name', 'minutes_played', 'points_per_sixty'];
 
   @ViewChild("overallSort", {static: false}) overallSort: MatSort;
   @ViewChild("diffSort", {static: false}) diffSort: MatSort;
@@ -111,7 +117,7 @@ export class StatsComponent implements OnInit, OnDestroy {
     this.currentSeasonType = this._teamsService.currentSeasonType;
     this._teamsService.getPlayerStatsByYearByType(this.currentSeason, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.stats = resp;
-      // console.log(resp);
+      console.log(resp);
       this.getPointLeaders(resp);
       this.getDmanPointLeaders(resp);
       this.getRookiePointLeaders(resp);
@@ -124,6 +130,8 @@ export class StatsComponent implements OnInit, OnDestroy {
       this.getHitsLeaders(resp);
       this.getBlockedLeaders(resp);
       this.getShotsLeaders(resp);
+      this.getPointsPerSixtyLeaders(resp);
+      this.getShGoalsLeaders(resp);
       this.isLeadersLoading = false;
     });
     this._teamsService.getGoalieStatsByYearByType(this.currentSeason, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
@@ -274,6 +282,14 @@ export class StatsComponent implements OnInit, OnDestroy {
     this.goalsLeaders = new MatTableDataSource<any[]>(leaders);
   }
 
+  getShGoalsLeaders(resp) {
+    let tempLeaders = resp;
+    tempLeaders.forEach(element => { this.shGoalLeaders.push(element) });
+    this.shGoalLeaders.sort((a,b) => b.sh_goals - a.sh_goals);
+    let leaders = this.shGoalLeaders.splice(0, 10);
+    this.shGoalsLeaders = new MatTableDataSource<any[]>(leaders);
+  }
+
   getPointLeaders(resp) {
     let tempLeaders = resp;
     tempLeaders.forEach(element => { this.pointLeaders.push(element) });
@@ -375,6 +391,21 @@ export class StatsComponent implements OnInit, OnDestroy {
     })
     this.pimLeagueLeaders.sort((a,b) => b.pim_game - a.pim_game);
     this.teamsPIMLeaders = new MatTableDataSource<any[]>(this.pimLeagueLeaders);
+  }
+
+  getPointsPerSixtyLeaders(resp) {
+    let tempLeaders = resp;
+    tempLeaders.forEach(element => {
+      if (element.playing_year === this.currentSeason && element.season_type === this.currentSeasonType) {
+        if (element.minutes_played > 0) {
+          element.points_per_sixty = ((element.points/element.minutes_played) * 60).toFixed(2);
+          this.pointsPerSixtyLeaders.push(element);
+        }
+      }
+    })
+    this.pointsPerSixtyLeaders.sort((a,b) => b.points_per_sixty - a.points_per_sixty);
+    let leaders = this.pointsPerSixtyLeaders.splice(0, 10);
+    this.pointsSixtyLeaders = new MatTableDataSource<any[]>(leaders);
   }
 
   findLogo(shortName) {
