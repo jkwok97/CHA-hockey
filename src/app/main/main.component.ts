@@ -23,7 +23,7 @@ export class MainComponent implements OnInit, OnDestroy {
   team: any;
   stats = [];
   player: any;
-  playerStats: any;
+  playerStats = [];
   goalieStats: any;
   goalLeader: any;
   assistLeader: any;
@@ -84,7 +84,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
   players: MatTableDataSource<any[]>;
   playersColumnsToDisplay = [
-    'player_name', 'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'sh_goals',
+    'player_name', 'position', 'games_played','goals', 'assists', 'points', 'points_per_sixty', 'plus_minus', 'penalty_minutes', 'sh_goals',
     'gw_goals', 'gt_goals', 'shots', 'shooting_pct', 'minutes_per_game', 'fo_pct', 'pass_pct', 'corner_pct', 'hits', 'blocked_shots'
   ];
 
@@ -147,8 +147,13 @@ export class MainComponent implements OnInit, OnDestroy {
       this.isLoading = false;
     });
     this._teamsService.getTeamPlayerStatsByYearByType(this.team.shortName, this.currentSeason, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      this.playerStats = resp as [];
+      // this.playerStats = resp as [];
       // console.log(this.playerStats);
+      let stats = resp as any;
+      stats.forEach(player => {
+        player.points_per_sixty = ((player.points/player.minutes_played) * 60).toFixed(2);
+        this.playerStats.push(player);
+      });
       this.players = new MatTableDataSource<any[]>(this.playerStats);
       this.players.sort = this.playerSort;
     });

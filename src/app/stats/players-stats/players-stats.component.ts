@@ -17,7 +17,7 @@ export class PlayersStatsComponent implements OnInit, OnDestroy {
   isLoading: boolean = false;
   inAllPlayersStats: boolean = false;
 
-  stats: any[];
+  stats = [];
 
   short_team_name: string = '';
   currentSeason: string;
@@ -25,11 +25,11 @@ export class PlayersStatsComponent implements OnInit, OnDestroy {
 
   players: MatTableDataSource<any[]>;
   playersColumnsToDisplay = [
-    'team_logo', 'player_name', 'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals',
+    'team_logo', 'player_name', 'position', 'games_played','goals', 'assists', 'points', 'points_per_sixty', 'plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals',
     'gw_goals', 'gt_goals', 'shots', 'shooting_pct', 'minutes_per_game', 'fo_pct', 'pass_pct', 'corner_pct', 'hits', 'blocked_shots'
   ];
   teamPlayersColumnsToDisplay = [
-    'player_name', 'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals',
+    'player_name', 'position', 'games_played','goals', 'assists', 'points', 'points_per_sixty', 'plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals',
     'gw_goals', 'gt_goals', 'shots', 'shooting_pct', 'minutes_per_game', 'fo_pct', 'pass_pct', 'corner_pct', 'hits', 'blocked_shots'
   ];
 
@@ -54,7 +54,13 @@ export class PlayersStatsComponent implements OnInit, OnDestroy {
       this.inAllPlayersStats = true;
       this._teamsService.getPlayerStatsByYearByType(this.currentSeason,this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
         // console.log(resp);
-        this.stats = resp as [];
+        let stats = resp as any;
+        stats.forEach(player => {
+          if (player.minutes_played > 0) {
+            player.points_per_sixty = ((player.points/player.minutes_played) * 60).toFixed(2);
+            this.stats.push(player);
+          }
+        });
         this.players = new MatTableDataSource<any[]>(this.stats);
         this.pageSize = 25;
         this.length = this.stats.length;
@@ -68,7 +74,13 @@ export class PlayersStatsComponent implements OnInit, OnDestroy {
         this.short_team_name = this._route.snapshot.paramMap.get("params");
         this._teamsService.getTeamPlayerStatsByYearByType(this.short_team_name, this.currentSeason, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
           // console.log(resp);
-          this.stats = resp as [];
+          let stats = resp as any;
+          stats.forEach(player => {
+            if (player.minutes_played > 0) {
+              player.points_per_sixty = ((player.points/player.minutes_played) * 60).toFixed(2);
+              this.stats.push(player);
+            }
+          });
           this.players = new MatTableDataSource<any[]>(this.stats);
           this.length = this.stats.length;
           this.pageSize = 30;

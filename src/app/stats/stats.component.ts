@@ -117,7 +117,7 @@ export class StatsComponent implements OnInit, OnDestroy {
     this.currentSeasonType = this._teamsService.currentSeasonType;
     this._teamsService.getPlayerStatsByYearByType(this.currentSeason, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.stats = resp;
-      console.log(resp);
+      // console.log(resp);
       this.getPointLeaders(resp);
       this.getDmanPointLeaders(resp);
       this.getRookiePointLeaders(resp);

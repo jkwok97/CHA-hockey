@@ -53,6 +53,14 @@
                 <td mat-cell *matCellDef="let player"> {{player.points}} </td>
             </ng-container>
 
+            <ng-container matColumnDef="points_per_sixty">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Pts/60 </th>
+                <td mat-cell *matCellDef="let player"> 
+                    <span *ngIf="player.minutes_played > 0"> {{player.points_per_sixty}} </span>
+                    <span *ngIf="player.minutes_played == 0"> N/A </span>
+                </td>
+            </ng-container>
+
             <ng-container matColumnDef="plus_minus">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> +/- </th>
                 <td mat-cell *matCellDef="let player"> {{player.plus_minus}} </td>
