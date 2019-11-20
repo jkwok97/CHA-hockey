@@ -199,8 +199,10 @@ export class TeamsService {
     return this.currentTeam;
   }
 
-  getChampions() {
-    return this._http.get(`${environment.back_end_url}/champions/`);
+  getChampions(type) {
+    let options = {params: new HttpParams()
+      .set('type', type)}
+    return this._http.get(`${environment.back_end_url}/champions/`, options);
   }
 
   getDrafts() {
