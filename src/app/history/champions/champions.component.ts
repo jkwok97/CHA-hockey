@@ -24,7 +24,7 @@ export class ChampionsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.currentChamp = this._teamsService.getTeamInfo("STA");
-    this._teamsService.getChampions("champs").pipe(takeWhile(() => this._alive)).subscribe(resp => {
+    this._teamsService.getChampions("champ").pipe(takeWhile(() => this._alive)).subscribe(resp => {
       // console.log(resp);
       this.champions = resp as [];
       this.champs = new MatTableDataSource<any[]>(this.champions);
