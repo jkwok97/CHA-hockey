@@ -10,7 +10,7 @@
 
 .halfContainer {
     height: 95%;
-    width: 45%;
+    width: 48%;
 }
 
 .header {
@@ -58,18 +58,6 @@
     margin: 50px 0;
 }
 
-table {
-    border-collapse: collapse;
-}
-
-th, td {
-    color: white;
-    text-align: center;
-    font-weight: 100;
-    border-bottom: 1px solid #3D5AFE;
-    padding: 5px 25px;
-}
-
 tr:nth-child(even) {
     background-color: rgba(61, 90, 254, 0.5);
 }
@@ -84,7 +72,23 @@ tr:nth-child(even) {
 }
 
 .full-width {
-    width: 75%;
+    width: 90%;
+}
+
+.mat-cell, .mat-header-cell {
+    white-space: nowrap;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+}
+
+:host ::ng-deep .mat-sort-header-container {
+    display: flex;
+    justify-content: center;
+}
+
+table {
+    text-align: center;
 }
 
 /* *************************** MEDIA QUERIES **************************** */

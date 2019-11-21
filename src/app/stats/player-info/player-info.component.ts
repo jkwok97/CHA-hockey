@@ -118,7 +118,7 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
     if ((!this.position && !this.hits) || this.position === "G") {
       this.isPlayerGoalie = true;
       this._teamsService.getAllIndividualGoalieStatsByType(this._route.snapshot.params.params, this.seasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-        console.log(resp);
+        // console.log(resp);
         this.playerStatsFetched = resp as [];
         this.playerInfo = resp as [];
         if (this.allPlayersInfo) {
@@ -133,7 +133,7 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
       });
     } else {
       this._teamsService.getAllIndividualPlayerStatsByType(this._route.snapshot.params.params, this.seasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-        console.log(resp);
+        // console.log(resp);
         this.playerInfo = resp as [];
         this.playerStatsFetched = resp as [];
         if (this.allPlayersInfo) {
@@ -252,7 +252,7 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
   }
 
   onTabChange(event) {
-    console.log(event);
+    // console.log(event);
     if (event.tab.textLabel === "NHL") {
       console.log(this.position);
       console.log(this.hits);
@@ -338,7 +338,7 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
     this._teamsService.getIndividualNHLRealStats(id).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.isCurrentPlayer = true;
       this.realPlayerStatsFetched = resp['stats'][0]['splits'][0]['stat'] as [];
-      console.log([this.realPlayerStatsFetched]);
+      // console.log([this.realPlayerStatsFetched]);
       this.isLoading = false;
       this.realPlayerStats = new MatTableDataSource<any[]>([this.realPlayerStatsFetched]);
       setTimeout(() => {

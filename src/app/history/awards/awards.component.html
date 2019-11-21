@@ -1,0 +1,57 @@
+<div class="container cha-dark">
+
+    <div class="spinner" *ngIf="isLoading">
+        <mat-spinner color="accent"></mat-spinner>
+    </div>
+
+    <div class="awards-container" *ngIf="awards.length > 0 && !isLoading">
+        <mat-accordion multi="true" >
+            <mat-expansion-panel *ngFor="let award of awards" expanded="true">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        {{ award.title }}
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        {{award.description}}
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="award-container">
+                    <div class="image">
+                        <img src="{{award.picture}}">
+                    </div>
+                    <div class="winners">
+                        <div class="award-row">
+                            <table class="table">
+                                <tr>
+                                    <th>Year</th>
+                                    <th>Name</th>
+                                    <th>Team</th>
+                                </tr>
+                                <tr *ngFor="let winner of award.winners">
+                                    <td>{{winner.year_won}}</td>
+                                    <td 
+                                        *ngIf="winner.player_name && (winner.award_type !== 'goalie')" 
+                                        class="point" 
+                                        (click)="openPlayer(winner.player_name, winner.team_name, 'C', 1)"
+                                    >
+                                        {{winner.player_name}}
+                                    </td>
+                                    <td 
+                                        *ngIf="winner.player_name && (winner.award_type === 'goalie')" 
+                                        class="point" 
+                                        (click)="openPlayer(winner.player_name, winner.team_name, 'G', winner.hits)"
+                                    >
+                                        {{winner.player_name}}
+                                    </td>
+                                    <td *ngIf="winner.owner_name">{{winner.owner_name}}</td>
+                                    <td><img src="{{ findLogo(winner.team_short).image }}"> {{winner.team_name}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+ 
+</div>
