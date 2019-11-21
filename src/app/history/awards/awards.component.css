@@ -60,7 +60,7 @@
 
 td, th {
     text-align: center;
-    padding: 8px;
+    /* padding: 8px; */
 }
 
 tr:nth-child(even) {
@@ -69,4 +69,60 @@ tr:nth-child(even) {
 
 .point {
     cursor: pointer;
+}
+
+/* *************************** MEDIA QUERIES **************************** */
+
+
+/* ***** IPAD PRO ***** */
+@media screen and (max-width: 1366px) and (max-height: 1024px) and (orientation: landscape) {
+    
+}
+
+/* ***** IPAD ***** */
+@media screen and (max-width: 1024px) and (max-height: 768px) and (orientation: landscape) {
+    
+}
+
+@media screen and (max-width: 850px) {
+    
+}
+
+/* ***** IPHONE XS Max ***** */
+@media screen and (max-width: 414px) and (max-height: 896px) and (orientation: portrait) {
+    .image {
+        width: 100%;
+        margin: 15px 0;
+    }
+    
+    .winners {
+        /* border: 1px solid blue; */
+        width: 100%;
+    }
+}
+
+/* ***** IPHONE 6,7,8 plus ***** */
+@media screen and (max-width: 414px) and (max-height: 736px) and (orientation: portrait) {
+    .image {
+        width: 100%;
+        margin: 15px 0;
+    }
+    
+    .winners {
+        /* border: 1px solid blue; */
+        width: 100%;
+    }
+}
+
+/* ***** IPHONE X ***** */
+@media screen and (max-width: 375px) and (max-height: 812px) and (orientation: portrait) {
+    .image {
+        width: 100%;
+        margin: 15px 0;
+    }
+    
+    .winners {
+        /* border: 1px solid blue; */
+        width: 100%;
+    }
 }
