@@ -44,7 +44,10 @@
                                         {{winner.player_name}}
                                     </td>
                                     <td *ngIf="winner.owner_name">{{winner.owner_name}}</td>
-                                    <td><img src="{{ findLogo(winner.team_short).image }}"> {{winner.team_name}}</td>
+                                    <td>
+                                        <img src="{{ findLogo(winner.team_short).image }}" matTooltip="{{findLogo(winner.team_short).name}}" matTooltipPosition="left">
+                                    </td>
+                                    <!-- <td>{{winner.team_name}}</td> -->
                                 </tr>
                             </table>
                         </div>
