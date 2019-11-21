@@ -22,16 +22,19 @@ export class AwardsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isLoading = true;
-    this._teamsService.getChampions("defense").pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      this.awards.push({title: "Norris Trophy", picture: "../../../assets/images/dman.jpg", description: "Best Defenseman", winners: resp});
-      this._teamsService.getChampions("rookie").pipe(takeWhile(() => this._alive)).subscribe(resp => {
-        this.awards.push({title: "Calder Trophy", picture: "../../../assets/images/rookie.jpg", description: "Best Rookie", winners: resp});
-        this._teamsService.getChampions("goalie").pipe(takeWhile(() => this._alive)).subscribe(resp => {
-          this.awards.push({title: "Vezina Trophy", picture: "../../../assets/images/goalie.jpg", description: "Best Goalie", winners: resp});
-          this._teamsService.getChampions("gm").pipe(takeWhile(() => this._alive)).subscribe(resp => {
-            this.awards.push({title: "Muggleston Trophy", picture: "../../../assets/images/gm.jpg", description: "Best GM", winners: resp});
-            // console.log(this.awards);
-            this.isLoading = false;
+    this._teamsService.getChampions("scorer").pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      this.awards.push({title: "Wayne Gretzky Trophy", picture: "../../../assets/images/scorer.jpg", description: "Leading Scorer", winners: resp});
+      this._teamsService.getChampions("defense").pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        this.awards.push({title: "Bobby Orr Trophy", picture: "../../../assets/images/dman.jpg", description: "Best Defenseman", winners: resp});
+        this._teamsService.getChampions("rookie").pipe(takeWhile(() => this._alive)).subscribe(resp => {
+          this.awards.push({title: "Teemu Selanne Trophy", picture: "../../../assets/images/rookie.jpg", description: "Best Rookie", winners: resp});
+          this._teamsService.getChampions("goalie").pipe(takeWhile(() => this._alive)).subscribe(resp => {
+            this.awards.push({title: "Martin Brodeur Trophy", picture: "../../../assets/images/goalie.jpg", description: "Best Goalie", winners: resp});
+            this._teamsService.getChampions("gm").pipe(takeWhile(() => this._alive)).subscribe(resp => {
+              this.awards.push({title: "Muggleston Trophy", picture: "../../../assets/images/gm.jpg", description: "Best GM", winners: resp});
+              // console.log(this.awards);
+              this.isLoading = false;
+            });
           });
         });
       });
