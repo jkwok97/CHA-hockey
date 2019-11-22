@@ -24,8 +24,10 @@ export class StatsComponent implements OnInit, OnDestroy {
   rookieLeaders = [];
   goalLeaders = [];
   shGoalLeaders = [];
+  ppGoalLeaders = [];
   assistLeaders = [];
   plusMinusLeader = [];
+  plusMinusLoser = [];
   penaltyLeader = [];
   hitLeader = [];
   shotLeaders = [];
@@ -86,9 +88,12 @@ export class StatsComponent implements OnInit, OnDestroy {
   playersGoalsColumnsToDisplay = ['team_logo','player_name','goals'];
   shGoalsLeaders: MatTableDataSource<any[]>;
   playersShGoalsColumnsToDisplay = ['team_logo','player_name','sh_goals'];
+  ppGoalsLeaders: MatTableDataSource<any[]>;
+  playersPpGoalsColumnsToDisplay = ['team_logo','player_name','pp_goals'];
   assistsLeaders: MatTableDataSource<any[]>;
   playersAssistsColumnsToDisplay = ['team_logo','player_name','assists'];
   plusMinusLeaders: MatTableDataSource<any[]>;
+  plusMinusLosers: MatTableDataSource<any[]>;
   playersPlusMinusColumnsToDisplay = ['team_logo','player_name','plus_minus'];
   penaltiesLeaders: MatTableDataSource<any[]>;
   playersPenaltiesColumnsToDisplay = ['team_logo','player_name','penalty_minutes'];
@@ -126,12 +131,14 @@ export class StatsComponent implements OnInit, OnDestroy {
       this.getGoalsLeaders(resp);
       this.getAssistsLeaders(resp);
       this.getPlusMinusLeaders(resp);
+      this.getPlusMinusLosers(resp);
       this.getPenaltiesLeaders(resp);
       this.getHitsLeaders(resp);
       this.getBlockedLeaders(resp);
       this.getShotsLeaders(resp);
       this.getPointsPerSixtyLeaders(resp);
       this.getShGoalsLeaders(resp);
+      this.getPpGoalsLeaders(resp);
       this.isLeadersLoading = false;
     });
     this._teamsService.getGoalieStatsByYearByType(this.currentSeason, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
@@ -234,6 +241,14 @@ export class StatsComponent implements OnInit, OnDestroy {
     this.plusMinusLeaders = new MatTableDataSource<any[]>(leaders);
   }
 
+  getPlusMinusLosers(resp) {
+    let tempLeaders = resp;
+    tempLeaders.forEach(element => { this.plusMinusLoser.push(element) });
+    this.plusMinusLoser.sort((a,b) => a.plus_minus - b.plus_minus);
+    let leaders = this.plusMinusLoser.splice(0, 10);
+    this.plusMinusLosers = new MatTableDataSource<any[]>(leaders);
+  }
+
   getAssistsLeaders(resp) {
     let tempLeaders = resp;
     tempLeaders.forEach(element => { this.assistLeaders.push(element) });
@@ -288,6 +303,14 @@ export class StatsComponent implements OnInit, OnDestroy {
     this.shGoalLeaders.sort((a,b) => b.sh_goals - a.sh_goals);
     let leaders = this.shGoalLeaders.splice(0, 10);
     this.shGoalsLeaders = new MatTableDataSource<any[]>(leaders);
+  }
+
+  getPpGoalsLeaders(resp) {
+    let tempLeaders = resp;
+    tempLeaders.forEach(element => { this.ppGoalLeaders.push(element) });
+    this.ppGoalLeaders.sort((a,b) => b.pp_goals - a.pp_goals);
+    let leaders = this.ppGoalLeaders.splice(0, 10);
+    this.ppGoalsLeaders = new MatTableDataSource<any[]>(leaders);
   }
 
   getPointLeaders(resp) {
