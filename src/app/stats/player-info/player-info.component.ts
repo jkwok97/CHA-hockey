@@ -115,43 +115,46 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
     this.hits = this._teamsService.playerHits;
     console.log(this.position);
     console.log(this.hits);
-    if ((!this.position && !this.hits) || this.position === "G") {
-      this.isPlayerGoalie = true;
-      this._teamsService.getAllIndividualGoalieStatsByType(this._route.snapshot.params.params, this.seasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-        // console.log(resp);
-        this.playerStatsFetched = resp as [];
-        this.playerInfo = resp as [];
-        if (this.allPlayersInfo) {
-          this.playerInfo.picture = this.allPlayersInfo.find( player => (player.playerName.toLowerCase().includes(this.player[0].toLowerCase())) && (player.playerName.toLowerCase().includes(this.player[1].toLowerCase())));
-        }
-        this.playerInfo.team = this.findLogo(this.playerInfo[0].team_name);
-        this.getGoalieTotals(this.playerStatsFetched)
-        this.playerStats = new MatTableDataSource<any[]>(this.playerStatsFetched);
-        setTimeout(() => {
-          this.playerStats.sort = this.sort;
-        })
-      });
-    } else {
-      this._teamsService.getAllIndividualPlayerStatsByType(this._route.snapshot.params.params, this.seasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-        // console.log(resp);
-        this.playerInfo = resp as [];
-        this.playerStatsFetched = resp as [];
-        if (this.allPlayersInfo) {
-          this.playerInfo.picture = this.allPlayersInfo.find( player => (player.playerName.toLowerCase().includes(this.player[0].toLowerCase())) && (player.playerName.toLowerCase().includes(this.player[1].toLowerCase())));
-        }
-        this.playerInfo.team = this.findLogo(this.playerInfo[0].team_name);
-        this.getPlayerTotals(this.playerStatsFetched);
-        this.playerStats = new MatTableDataSource<any[]>(this.playerStatsFetched);
-        setTimeout(() => {
-          this.playerStats.sort = this.sort;
-        })
-      });
-    }
+    setTimeout(() => {
+      if ((!this.position && !this.hits) || this.position === "G") {
+        this.isPlayerGoalie = true;
+        this._teamsService.getAllIndividualGoalieStatsByType(this._route.snapshot.params.params, this.seasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+          // console.log(resp);
+          this.playerStatsFetched = resp as [];
+          this.playerInfo = resp as [];
+          if (this.allPlayersInfo) {
+            this.playerInfo.picture = this.allPlayersInfo.find( player => (player.playerName.toLowerCase().includes(this.player[0].toLowerCase())) && (player.playerName.toLowerCase().includes(this.player[1].toLowerCase())));
+          }
+          console.log(this.playerInfo)
+          this.playerInfo.team = this.findLogo(this.playerInfo[0].team_name);
+          this.getGoalieTotals(this.playerStatsFetched)
+          this.playerStats = new MatTableDataSource<any[]>(this.playerStatsFetched);
+          setTimeout(() => {
+            this.playerStats.sort = this.sort;
+          })
+        });
+      } else {
+        this._teamsService.getAllIndividualPlayerStatsByType(this._route.snapshot.params.params, this.seasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+          // console.log(resp);
+          this.playerInfo = resp as [];
+          this.playerStatsFetched = resp as [];
+          if (this.allPlayersInfo) {
+            this.playerInfo.picture = this.allPlayersInfo.find( player => (player.playerName.toLowerCase().includes(this.player[0].toLowerCase())) && (player.playerName.toLowerCase().includes(this.player[1].toLowerCase())));
+          }
+          console.log(this.playerInfo)
+          this.playerInfo.team = this.findLogo(this.playerInfo[0].team_name);
+          this.getPlayerTotals(this.playerStatsFetched);
+          this.playerStats = new MatTableDataSource<any[]>(this.playerStatsFetched);
+          setTimeout(() => {
+            this.playerStats.sort = this.sort;
+          })
+        });
+      }
+    }, 500);
   }
 
   ngOnInit() {
     this.player = this.splitName(this._route.snapshot.params.params);
-   
   }
 
   getGoalieTotals(allStats) {
