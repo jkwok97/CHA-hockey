@@ -22,7 +22,7 @@
                             <table mat-table [dataSource]="teamsLeaders" class="mat-elevation-z8 full-width">
             
                                 <ng-container matColumnDef="team_logo">
-                                    <th mat-header-cell *matHeaderCellDef> </th>
+                                    <th mat-header-cell *matHeaderCellDef><span *ngIf="isMobile">Team</span></th>
                                     <td mat-cell *matCellDef="let team"> 
                                         <img src="{{ findLogo(team.team_name).image }}"> 
                                     </td>
@@ -80,7 +80,7 @@
                             <table mat-table [dataSource]="teamsPIMLeaders" class="mat-elevation-z8 full-width">
             
                                 <ng-container matColumnDef="team_logo">
-                                    <th mat-header-cell *matHeaderCellDef> </th>
+                                    <th mat-header-cell *matHeaderCellDef><span *ngIf="isMobile">Team</span></th>
                                     <td mat-cell *matCellDef="let team"> 
                                         <img src="{{ findLogo(team.team_name).image }}"> 
                                     </td>
@@ -118,7 +118,7 @@
                             <table mat-table [dataSource]="teamsGoalDiffLeaders" class="mat-elevation-z8 full-width">
             
                                 <ng-container matColumnDef="team_logo">
-                                    <th mat-header-cell *matHeaderCellDef> </th>
+                                    <th mat-header-cell *matHeaderCellDef><span *ngIf="isMobile">Team</span></th>
                                     <td mat-cell *matCellDef="let team"> 
                                         <img src="{{ findLogo(team.team_name).image }}"> 
                                     </td>
@@ -161,7 +161,7 @@
                             <table mat-table [dataSource]="teamsShotDiffLeaders" class="mat-elevation-z8 full-width">
             
                                 <ng-container matColumnDef="team_logo">
-                                    <th mat-header-cell *matHeaderCellDef> </th>
+                                    <th mat-header-cell *matHeaderCellDef><span *ngIf="isMobile">Team</span></th>
                                     <td mat-cell *matCellDef="let team"> 
                                         <img src="{{ findLogo(team.team_name).image }}"> 
                                     </td>
@@ -204,7 +204,7 @@
                             <table mat-table [dataSource]="teamsPPLeaders" class="mat-elevation-z8 full-width">
             
                                 <ng-container matColumnDef="team_logo">
-                                    <th mat-header-cell *matHeaderCellDef> </th>
+                                    <th mat-header-cell *matHeaderCellDef><span *ngIf="isMobile">Team</span> </th>
                                     <td mat-cell *matCellDef="let team"> 
                                         <img src="{{ findLogo(team.team_name).image }}"> 
                                     </td>
@@ -247,7 +247,7 @@
                             <table mat-table [dataSource]="teamsPKLeaders" class="mat-elevation-z8 full-width">
             
                                 <ng-container matColumnDef="team_logo">
-                                    <th mat-header-cell *matHeaderCellDef> </th>
+                                    <th mat-header-cell *matHeaderCellDef><span *ngIf="isMobile">Team</span></th>
                                     <td mat-cell *matCellDef="let team"> 
                                         <img src="{{ findLogo(team.team_name).image }}"> 
                                     </td>

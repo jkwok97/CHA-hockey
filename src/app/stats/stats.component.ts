@@ -52,7 +52,7 @@ export class StatsComponent implements OnInit, OnDestroy {
   currentSeasonType: string;
 
   teamsLeaders: MatTableDataSource<any[]>;
-  mobileTeamsColumnsToDisplay = ['team_logo', 'games_played', 'wins', 'points']
+  mobileTeamsColumnsToDisplay = ['team_logo', 'games_played', 'wins', 'loss', 'ties', 'points']
   teamsColumnsToDisplay = [ 'team_logo','team_name', 'games_played', 'wins', 'loss', 'ties', 'points', 'win_pct' ];
 
   teamsGoalDiffLeaders: MatTableDataSource<any[]>;
@@ -128,6 +128,7 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.checkMobile();
+    console.log(this.isMobile);
     this.isLeadersLoading = true;
     this.isGoaliesLoading = true;
     this.isLeagueLoading = true;

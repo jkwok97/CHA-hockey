@@ -167,7 +167,7 @@ tr:nth-child(even) {
     .card {
         overflow-x: auto;
         overflow-y: hidden;
-        justify-content: flex-start;
+        /* justify-content: flex-start; */
     }
 
     .table {
@@ -186,7 +186,7 @@ tr:nth-child(even) {
 @media screen and (max-width: 414px) and (max-height: 896px) and (orientation: portrait) {
     .table {
         width: 90%;
-        justify-content: flex-start;
+        /* justify-content: flex-start; */
         overflow-x: auto;
         overflow-y: hidden;
     }
@@ -211,7 +211,7 @@ tr:nth-child(even) {
 @media screen and (max-width: 414px) and (max-height: 736px) and (orientation: portrait) {
     .table {
         width: 90%;
-        justify-content: flex-start;
+        /* justify-content: flex-start; */
         overflow-x: auto;
     }
 
@@ -233,7 +233,7 @@ tr:nth-child(even) {
 @media screen and (max-width: 375px) and (max-height: 812px) and (orientation: portrait) {
     .table {
         width: 90%;
-        justify-content: flex-start;
+        /* justify-content: flex-start; */
         overflow-x: auto;
         
     }
