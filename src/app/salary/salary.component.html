@@ -9,6 +9,10 @@
     </mat-form-field>
 </div>
 
+<div class="image" *ngIf="!teamPicked">
+    <img src="../../../assets/images/team_cha_logo.jpg">
+</div>
+
 <div class="container" *ngIf="teamPicked && !isMobile">
 
     <div class="spinner" *ngIf="isLoading">

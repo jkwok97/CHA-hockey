@@ -25,3 +25,11 @@
     justify-items: center;
     align-items: flex-start;
 }
+
+.image {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin: 150px 0;
+}
