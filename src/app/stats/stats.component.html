@@ -63,8 +63,8 @@
                                     <td mat-cell *matCellDef="let team"> {{((team.wins / team.games_played) * 100).toFixed(1)}}%</td>
                                 </ng-container>
                     
-                                <tr mat-header-row *matHeaderRowDef="teamsColumnsToDisplay"></tr>
-                                <tr mat-row *matRowDef="let team; columns: teamsColumnsToDisplay;" (click)="openTeam(team.team_name)"></tr>
+                                <tr mat-header-row *matHeaderRowDef="isMobile ? mobileTeamsColumnsToDisplay: teamsColumnsToDisplay"></tr>
+                                <tr mat-row *matRowDef="let team; columns: isMobile ? mobileTeamsColumnsToDisplay: teamsColumnsToDisplay;" (click)="openTeam(team.team_name)"></tr>
                     
                             </table>
                     
@@ -101,8 +101,8 @@
                                     <td mat-cell *matCellDef="let team"> {{team.pim_game}} </td>
                                 </ng-container>
                     
-                                <tr mat-header-row *matHeaderRowDef="teamsPIMColumnsToDisplay"></tr>
-                                <tr mat-row *matRowDef="let team; columns: teamsPIMColumnsToDisplay;" (click)="openTeam(team.team_name)"></tr>
+                                <tr mat-header-row *matHeaderRowDef="isMobile ? mobileTeamsPIMColumnsToDisplay : teamsPIMColumnsToDisplay"></tr>
+                                <tr mat-row *matRowDef="let team; columns: isMobile ? mobileTeamsPIMColumnsToDisplay : teamsPIMColumnsToDisplay;" (click)="openTeam(team.team_name)"></tr>
                     
                             </table>
                     
@@ -144,8 +144,8 @@
                                     <td mat-cell *matCellDef="let team"> {{team.goal_diff}} </td>
                                 </ng-container>
                     
-                                <tr mat-header-row *matHeaderRowDef="teamsGoalDiffColumnsToDisplay"></tr>
-                                <tr mat-row *matRowDef="let team; columns: teamsGoalDiffColumnsToDisplay;" (click)="openTeam(team.team_name)"></tr>
+                                <tr mat-header-row *matHeaderRowDef="isMobile ? mobileTeamsGoalDiffColumnsToDisplay : teamsGoalDiffColumnsToDisplay"></tr>
+                                <tr mat-row *matRowDef="let team; columns: isMobile ? mobileTeamsGoalDiffColumnsToDisplay : teamsGoalDiffColumnsToDisplay;" (click)="openTeam(team.team_name)"></tr>
                     
                             </table>
                     
@@ -187,8 +187,8 @@
                                     <td mat-cell *matCellDef="let team"> {{team.shot_diff}}</td>
                                 </ng-container>
                     
-                                <tr mat-header-row *matHeaderRowDef="teamsShotDiffColumnsToDisplay"></tr>
-                                <tr mat-row *matRowDef="let team; columns: teamsShotDiffColumnsToDisplay;" (click)="openTeam(team.team_name)"></tr>
+                                <tr mat-header-row *matHeaderRowDef="isMobile ? mobileTeamsShotDiffColumnsToDisplay: teamsShotDiffColumnsToDisplay"></tr>
+                                <tr mat-row *matRowDef="let team; columns: isMobile ? mobileTeamsShotDiffColumnsToDisplay: teamsShotDiffColumnsToDisplay;" (click)="openTeam(team.team_name)"></tr>
                     
                             </table>
                     
@@ -230,8 +230,8 @@
                                     <td mat-cell *matCellDef="let team"> {{team.pp_pct}}%</td>
                                 </ng-container>
                     
-                                <tr mat-header-row *matHeaderRowDef="teamsPPColumnsToDisplay"></tr>
-                                <tr mat-row *matRowDef="let team; columns: teamsPPColumnsToDisplay;" (click)="openTeam(team.team_name)"></tr>
+                                <tr mat-header-row *matHeaderRowDef="isMobile ? mobileTeamsPPColumnsToDisplay : teamsPPColumnsToDisplay"></tr>
+                                <tr mat-row *matRowDef="let team; columns: isMobile ? mobileTeamsPPColumnsToDisplay : teamsPPColumnsToDisplay;" (click)="openTeam(team.team_name)"></tr>
                     
                             </table>
                     
@@ -273,8 +273,8 @@
                                     <td mat-cell *matCellDef="let team"> {{team.pk_pct}}%</td>
                                 </ng-container>
                     
-                                <tr mat-header-row *matHeaderRowDef="teamsPKColumnsToDisplay"></tr>
-                                <tr mat-row *matRowDef="let team; columns: teamsPKColumnsToDisplay;" (click)="openTeam(team.team_name)"></tr>
+                                <tr mat-header-row *matHeaderRowDef="isMobile ? mobileTeamsPKColumnsToDisplay : teamsPKColumnsToDisplay"></tr>
+                                <tr mat-row *matRowDef="let team; columns: isMobile ? mobileTeamsPKColumnsToDisplay : teamsPKColumnsToDisplay;" (click)="openTeam(team.team_name)"></tr>
                     
                             </table>
                     

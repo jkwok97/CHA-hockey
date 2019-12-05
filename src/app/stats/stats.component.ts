@@ -16,6 +16,7 @@ export class StatsComponent implements OnInit, OnDestroy {
   isLeadersLoading: boolean = false;
   isGoaliesLoading: boolean = false;
   isLeagueLoading: boolean = false;
+  isMobile: boolean;
 
   stats: any;
   goalieStats: any;
@@ -51,16 +52,27 @@ export class StatsComponent implements OnInit, OnDestroy {
   currentSeasonType: string;
 
   teamsLeaders: MatTableDataSource<any[]>;
+  mobileTeamsColumnsToDisplay = ['team_logo', 'games_played', 'wins', 'points']
   teamsColumnsToDisplay = [ 'team_logo','team_name', 'games_played', 'wins', 'loss', 'ties', 'points', 'win_pct' ];
+
   teamsGoalDiffLeaders: MatTableDataSource<any[]>;
+  mobileTeamsGoalDiffColumnsToDisplay = ['team_logo', 'goals_for', 'goals_against', 'goals_diff' ]
   teamsGoalDiffColumnsToDisplay = [ 'team_logo','team_name', 'goals_for', 'goals_against', 'goals_diff' ];
+
   teamsShotDiffLeaders: MatTableDataSource<any[]>;
+  mobileTeamsShotDiffColumnsToDisplay = ['team_logo', 'shots_for', 'shots_against', 'shots_diff']
   teamsShotDiffColumnsToDisplay = [ 'team_logo','team_name', 'shots_for', 'shots_against', 'shots_diff' ];
+
   teamsPPLeaders: MatTableDataSource<any[]>;
+  mobileTeamsPPColumnsToDisplay = [ 'team_logo', 'pp_attempts', 'pp_goals', 'pp_pct']
   teamsPPColumnsToDisplay = [ 'team_logo','team_name', 'pp_attempts', 'pp_goals', 'pp_pct' ];
+
   teamsPKLeaders: MatTableDataSource<any[]>;
+  mobileTeamsPKColumnsToDisplay = [ 'team_logo', 'pk_attempts', 'pk_goals', 'pk_pct']
   teamsPKColumnsToDisplay = [ 'team_logo','team_name', 'pk_attempts', 'pk_goals', 'pk_pct' ];
+
   teamsPIMLeaders: MatTableDataSource<any[]>;
+  mobileTeamsPIMColumnsToDisplay = ['team_logo', 'penalty_minutes', 'pim_game']
   teamsPIMColumnsToDisplay = [ 'team_logo','team_name', 'penalty_minutes', 'pim_game' ];
 
   players: MatTableDataSource<any[]>;
@@ -115,6 +127,7 @@ export class StatsComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.checkMobile();
     this.isLeadersLoading = true;
     this.isGoaliesLoading = true;
     this.isLeagueLoading = true;
@@ -159,6 +172,18 @@ export class StatsComponent implements OnInit, OnDestroy {
       this.getPimLeagueLeaders(resp);
       this.isLeagueLoading = false;
     });
+  }
+
+  checkMobile() {
+    if ( navigator.userAgent.match(/Android/i)
+        || navigator.userAgent.match(/webOS/i)
+        || navigator.userAgent.match(/iPhone/i)
+        || navigator.userAgent.match(/BlackBerry/i)
+        || navigator.userAgent.match(/Windows Phone/i) ) {
+          this.isMobile = true;
+        } else {
+          this.isMobile = false;
+        }
   }
 
   getShutOutsLeaders(resp) {
