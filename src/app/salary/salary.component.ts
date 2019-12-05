@@ -34,12 +34,12 @@ export class SalaryComponent implements OnInit, OnDestroy {
   }
 
   toSalaryPage(event) {
-    this.teamPicked = true;
     this.teamSelect.value = event.value;
     this.team = this.teams.find(team => team.name === this.teamSelect.value);
     if (this.isMobile) {
       window.open(this.team.link)
     } else {
+      this.teamPicked = true;
       this.isLoading = true;
       this.teamPage = this.sanitizer.bypassSecurityTrustResourceUrl(this.team.link);
       this.isLoading = false;
