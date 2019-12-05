@@ -82,7 +82,7 @@ export class StatsComponent implements OnInit, OnDestroy {
   rookies: MatTableDataSource<any[]>;
   rookieColumnsToDisplay = ['team_logo','player_name', 'games_played', 'goals', 'assists', 'points'];
   goalies: MatTableDataSource<any[]>;
-  goaliesColumnsToDisplay = ['team_logo','player_name', 'games_played', 'wins','loss', 'ties','save_pct'];
+  goaliesColumnsToDisplay = ['team_logo','player_name', 'games_played', 'wins'];
   goaliesGAA: MatTableDataSource<any[]>;
   goaliesGAAColumnsToDisplay = ['team_logo','player_name', 'goals_against_avg'];
   goaliesSvPct: MatTableDataSource<any[]>;
