@@ -21,6 +21,7 @@ import { LoginComponent } from './main/login/login.component';
 import { AuthGuard } from './main/auth.guard';
 import { PlayerInfoComponent } from './stats/player-info/player-info.component';
 import { TeamSeasonComponent } from './history/team-archives/team-season/team-season.component';
+import { SalaryComponent } from './salary/salary.component';
 
 const routes: Routes = [
   { path: 'main', component: MainComponent, canActivate: [AuthGuard] },
@@ -45,6 +46,7 @@ const routes: Routes = [
   { path: 'rules/rosters', component: RulesComponent, canActivate: [AuthGuard] },
   { path: 'rules/waivers', component: RulesComponent, canActivate: [AuthGuard] },
   { path: 'rules/winnings', component: RulesComponent, canActivate: [AuthGuard] },
+  { path: 'salary', component: SalaryComponent, canActivate: [AuthGuard] },
   { path: 'schedule', component: ScheduleComponent, canActivate: [AuthGuard] },
   { path: 'trades-picks', component: TradesComponent, canActivate: [AuthGuard] },
   { path: 'waiver-priority', component: WaiverPriorityComponent, canActivate: [AuthGuard] },

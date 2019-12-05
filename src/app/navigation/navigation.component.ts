@@ -22,6 +22,7 @@ export class NavigationComponent implements OnInit {
   routes = [
     {name: 'Statistics', url: 'stats', current: false},
     {name: 'Teams', url: 'teams', current: false},
+    {name: 'Salaries', url: 'salary', current: false},
     {name: 'History', url: 'history', current: false},
     {name: 'Rules & Prizes', url: 'rules', current: false},
     {name: 'Schedule', url: 'schedule', current: false},

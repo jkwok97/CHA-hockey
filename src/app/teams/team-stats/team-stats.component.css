@@ -58,7 +58,7 @@ mat-paginator {
     text-align: center;
     font-size: x-large;
     font-weight: 100;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 .teamInfoSection p {

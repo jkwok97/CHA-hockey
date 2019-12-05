@@ -40,6 +40,7 @@ import { HistoricalTeamStatsComponent } from './teams/historical-team-stats/hist
 import { TeamArchivesComponent } from './history/team-archives/team-archives.component';
 import { TeamSeasonComponent } from './history/team-archives/team-season/team-season.component';
 import { AwardsComponent } from './history/awards/awards.component';
+import { SalaryComponent } from './salary/salary.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { AwardsComponent } from './history/awards/awards.component';
     HistoricalTeamStatsComponent,
     TeamArchivesComponent,
     TeamSeasonComponent,
-    AwardsComponent
+    AwardsComponent,
+    SalaryComponent
   ],
   imports: [
     BrowserModule,

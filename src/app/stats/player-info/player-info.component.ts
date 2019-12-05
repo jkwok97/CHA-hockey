@@ -109,12 +109,12 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
   ) {
     this._teamsService.getPlayerInfo().pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.allPlayersInfo = resp as [];
-      console.log(this.allPlayersInfo);
+      // console.log(this.allPlayersInfo);
     });
     this.position = this._teamsService.playerPosition;
     this.hits = this._teamsService.playerHits;
-    console.log(this.position);
-    console.log(this.hits);
+    // console.log(this.position);
+    // console.log(this.hits);
     setTimeout(() => {
       if ((!this.position && !this.hits) || this.position === "G") {
         this.isPlayerGoalie = true;
@@ -125,7 +125,7 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
           if (this.allPlayersInfo) {
             this.playerInfo.picture = this.allPlayersInfo.find( player => (player.playerName.toLowerCase().includes(this.player[0].toLowerCase())) && (player.playerName.toLowerCase().includes(this.player[1].toLowerCase())));
           }
-          console.log(this.playerInfo)
+          // console.log(this.playerInfo)
           this.playerInfo.team = this.findLogo(this.playerInfo[0].team_name);
           this.getGoalieTotals(this.playerStatsFetched)
           this.playerStats = new MatTableDataSource<any[]>(this.playerStatsFetched);
@@ -141,7 +141,7 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
           if (this.allPlayersInfo) {
             this.playerInfo.picture = this.allPlayersInfo.find( player => (player.playerName.toLowerCase().includes(this.player[0].toLowerCase())) && (player.playerName.toLowerCase().includes(this.player[1].toLowerCase())));
           }
-          console.log(this.playerInfo)
+          // console.log(this.playerInfo)
           this.playerInfo.team = this.findLogo(this.playerInfo[0].team_name);
           this.getPlayerTotals(this.playerStatsFetched);
           this.playerStats = new MatTableDataSource<any[]>(this.playerStatsFetched);

@@ -12,7 +12,8 @@
                     <img src="{{team.image}}">
                 </div>
                 <div class="teamNameHeader">
-                    <h1 matTooltip="To Salary Page" matTooltipPosition="above" (click)="toSalaryPage()" *ngIf="currentTeam">{{team.name}}</h1>
+                    <!-- matTooltip="To Salary Page" matTooltipPosition="above" (click)="toSalaryPage()" -->
+                    <h1 *ngIf="currentTeam">{{team.name}}</h1>
                     <h1 *ngIf="!currentTeam">{{team.name}}</h1>
                     <p>owner: {{team.owner}}</p>
                 </div>
