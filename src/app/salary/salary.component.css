@@ -33,3 +33,7 @@
     align-content: center;
     margin: 150px 0;
 }
+
+.mat-option {
+    background: rgba(254, 61, 61, 0.9);
+}
