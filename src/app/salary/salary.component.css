@@ -4,6 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    /* border: 1px solid purple; */
 }
 
 .drop-down-container {
@@ -19,11 +20,14 @@
 
 .frame {
     height: 100%;
-    width: 95%;
+    width: 87%;
     overflow: auto;
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    /* border: 1px solid red; */
 }
 
 .image {
@@ -34,9 +38,12 @@
     margin: 150px 0;
 }
 
-iframe {
+.iframe {
     border: none;
-    overflow-x: hidden;
+    overflow: hidden;
+    /* border: 1px solid blue; */
+    height: 100%;
+    width: 100%;
 }
 
 .mat-option {
