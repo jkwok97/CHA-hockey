@@ -17,6 +17,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
   private _alive:boolean = true;
   isLoading: boolean = false;
+  isMobile: boolean;
 
   currentUser: User;
 
@@ -128,6 +129,7 @@ export class MainComponent implements OnInit, OnDestroy {
    }
 
   ngOnInit() {
+    this.checkMobile();
     this.currentSeason = this._teamsService.currentSeason;
     this.currentSeasonType = this._teamsService.currentSeasonType;
     this._teamsService.getLeagueTeamsStats(this.currentSeason).pipe(takeWhile(() => this._alive)).subscribe(resp => {
@@ -163,6 +165,20 @@ export class MainComponent implements OnInit, OnDestroy {
       this.goalies = new MatTableDataSource<any[]>(this.goalieStats);
       this.goalies.sort = this.goalieSort;
     });
+  }
+
+  checkMobile() {
+    if ( navigator.userAgent.match(/Android/i)
+        || navigator.userAgent.match(/webOS/i)
+        || navigator.userAgent.match(/iPhone/i)
+        || navigator.userAgent.match(/BlackBerry/i)
+        || navigator.userAgent.match(/Windows Phone/i) ) {
+          this.isMobile = true;
+          this._teamsService.setMobile(true);
+        } else {
+          this.isMobile = false;
+          this._teamsService.setMobile(false);
+        }
   }
 
   openTeam(shortName, season, type) {

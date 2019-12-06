@@ -37,7 +37,7 @@ export class SalaryComponent implements OnInit, OnDestroy {
     this.teamSelect.value = event.value;
     this.team = this.teams.find(team => team.name === this.teamSelect.value);
     if (this.isMobile) {
-      window.open(this.team.link)
+      window.open(this.team.mobileLink)
     } else {
       this.teamPicked = true;
       this.isLoading = true;
@@ -53,8 +53,10 @@ export class SalaryComponent implements OnInit, OnDestroy {
         || navigator.userAgent.match(/BlackBerry/i)
         || navigator.userAgent.match(/Windows Phone/i) ) {
           this.isMobile = true;
+          this._teamsService.setMobile(true);
         } else {
           this.isMobile = false;
+          this._teamsService.setMobile(false);
         }
   }
 
