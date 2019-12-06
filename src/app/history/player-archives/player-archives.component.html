@@ -32,7 +32,7 @@
 
         <div class="table" *ngIf="!isLoading">
 
-            <table mat-table [dataSource]="players" matSort class="mat-elevation-z8 full-width" matSortActive="points" matSortDirection="desc">
+            <table mat-table [dataSource]="playersArchived" matSort class="mat-elevation-z8 full-width" matSortActive="points" matSortDirection="desc">
 
                 <ng-container matColumnDef="playing_year">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true"> Year </th>

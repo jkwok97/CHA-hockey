@@ -21,7 +21,7 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
   pageSize: number = 20;
   length: number = 0;
 
-  players: MatTableDataSource<any[]>;
+  playersArchived: MatTableDataSource<any[]>;
   playersColumnsToDisplay = [ 'team_logo', 'player_name',
     'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'sh_goals',
     'gw_goals', 'gt_goals', 'shots', 'shooting_pct', 'minutes_per_game', 'fo_pct', 'pass_pct', 'corner_pct', 'hits', 'blocked_shots',
@@ -102,7 +102,7 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
       this._teamsService.getPlayerStatsByType(type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
         console.log(resp);
         let stats = resp as [];
-        this.players = new MatTableDataSource<any[]>(stats);
+        this.playersArchived = new MatTableDataSource<any[]>(stats);
         this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'sh_goals',
                                           'gw_goals', 'gt_goals', 'shots', 'shooting_pct', 'minutes_per_game', 'fo_pct', 'pass_pct', 'corner_pct', 'hits', 'blocked_shots',
                                           'playing_year', 'season_type', 'player_status'];
@@ -110,23 +110,23 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
         this.length = stats.length;
         this.isLoading = false;
         setTimeout(() => {
-          this.players.paginator = this.paginator;
-          this.players.sort = this.sort;
+          this.playersArchived.paginator = this.paginator;
+          this.playersArchived.sort = this.sort;
         }, 350);
       });
     } else {
       this._teamsService.getPlayerStatsByType(type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
         console.log(resp);
         let stats = resp['rows'] as [];
-        this.players = new MatTableDataSource<any[]>(stats);
+        this.playersArchived = new MatTableDataSource<any[]>(stats);
         this.playersColumnsToDisplay = [ 'player_name', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals',
                                           'gw_goals', 'gt_goals', 'shots', 'hits', 'blocked_shots' ];
         this.pageSize = 25;
         this.length = stats.length;
         this.isLoading = false;
         setTimeout(() => {
-          this.players.paginator = this.paginator;
-          this.players.sort = this.sort;
+          this.playersArchived.paginator = this.paginator;
+          this.playersArchived.sort = this.sort;
         }, 350);
       });
     }
@@ -151,7 +151,7 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
     this._teamsService.getAlltimeTeamPlayerStatsByType(team, type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       // console.log(resp);
       let stats = resp as [];
-      this.players = new MatTableDataSource<any[]>(stats);
+      this.playersArchived = new MatTableDataSource<any[]>(stats);
       this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'sh_goals',
                                         'gw_goals', 'gt_goals', 'shots', 'shooting_pct', 'minutes_per_game', 'fo_pct', 'pass_pct', 'corner_pct', 'hits', 'blocked_shots',
                                         'playing_year', 'season_type', 'player_status'
@@ -164,8 +164,8 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
       this.length = stats.length;
       this.isLoading = false;
       setTimeout(() => {
-        this.players.paginator = this.paginator;
-        this.players.sort = this.sort;
+        this.playersArchived.paginator = this.paginator;
+        this.playersArchived.sort = this.sort;
       }, 350);
     });
   }
@@ -174,7 +174,7 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
     this._teamsService.getAlltimeTeamPlayerStatsByType(team, type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       // console.log(resp);
       let stats = resp['rows'] as [];
-      this.players = new MatTableDataSource<any[]>(stats);
+      this.playersArchived = new MatTableDataSource<any[]>(stats);
       this.playersColumnsToDisplay = [ 'player_name', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals',
                                         'gw_goals', 'gt_goals', 'shots', 'hits', 'blocked_shots' ];
       this.playersTeamColumnsToDisplay = [ 'player_name', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'pp_goals','sh_goals',
@@ -183,8 +183,8 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
       this.length = stats.length;
       this.isLoading = false;
       setTimeout(() => {
-        this.players.paginator = this.paginator;
-        this.players.sort = this.sort;
+        this.playersArchived.paginator = this.paginator;
+        this.playersArchived.sort = this.sort;
       }, 350);
     });
   }
@@ -198,7 +198,7 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
         oldTeamStats.forEach(element => {
           stats.push(element);
         })
-        this.players = new MatTableDataSource<any[]>(stats);
+        this.playersArchived = new MatTableDataSource<any[]>(stats);
         this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'sh_goals',
                                         'gw_goals', 'gt_goals', 'shots', 'shooting_pct', 'minutes_per_game', 'fo_pct', 'pass_pct', 'corner_pct', 'hits', 'blocked_shots',
                                         'playing_year', 'season_type', 'player_status'
@@ -207,8 +207,8 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
         this.length = stats.length;
         this.isLoading = false;
         setTimeout(() => {
-          this.players.paginator = this.paginator;
-          this.players.sort = this.sort;
+          this.playersArchived.paginator = this.paginator;
+          this.playersArchived.sort = this.sort;
         }, 350);
       });
     });
@@ -222,15 +222,15 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
         oldTeamStats.forEach(element => {
           stats.push(element);
         })
-        this.players = new MatTableDataSource<any[]>(stats);
+        this.playersArchived = new MatTableDataSource<any[]>(stats);
         this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals',
                                           'gw_goals', 'gt_goals', 'shots', 'calc_shooting_pct', 'calc_minutes_per_game', 'hits', 'blocked_shots' ];
         this.pageSize = 25;
         this.length = stats.length;
         this.isLoading = false;
         setTimeout(() => {
-          this.players.paginator = this.paginator;
-          this.players.sort = this.sort;
+          this.playersArchived.paginator = this.paginator;
+          this.playersArchived.sort = this.sort;
         }, 350);
       });
     });
@@ -244,7 +244,7 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
         oldTeamStats.forEach(element => {
           stats.push(element);
         })
-        this.players = new MatTableDataSource<any[]>(stats);
+        this.playersArchived = new MatTableDataSource<any[]>(stats);
         this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'sh_goals',
                                         'gw_goals', 'gt_goals', 'shots', 'shooting_pct', 'minutes_per_game', 'fo_pct', 'pass_pct', 'corner_pct', 'hits', 'blocked_shots',
                                         'playing_year', 'season_type', 'player_status'
@@ -253,8 +253,8 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
         this.length = stats.length;
         this.isLoading = false;
         setTimeout(() => {
-          this.players.paginator = this.paginator;
-          this.players.sort = this.sort;
+          this.playersArchived.paginator = this.paginator;
+          this.playersArchived.sort = this.sort;
         }, 350);
       });
     });
@@ -268,15 +268,15 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
       oldTeamStats.forEach(element => {
         stats.push(element);
       })
-      this.players = new MatTableDataSource<any[]>(stats);
+      this.playersArchived = new MatTableDataSource<any[]>(stats);
       this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals',
                                           'gw_goals', 'gt_goals', 'shots', 'calc_shooting_pct', 'calc_minutes_per_game', 'hits', 'blocked_shots' ];
       this.pageSize = 25;
       this.length = stats.length;
       this.isLoading = false;
       setTimeout(() => {
-        this.players.paginator = this.paginator;
-        this.players.sort = this.sort;
+        this.playersArchived.paginator = this.paginator;
+        this.playersArchived.sort = this.sort;
       }, 350);
     });
   });
@@ -295,7 +295,7 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
           oldTeamStats.forEach(element => {
             teamStats.push(element);
           })
-          this.players = new MatTableDataSource<any[]>(teamStats);
+          this.playersArchived = new MatTableDataSource<any[]>(teamStats);
           this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'sh_goals',
                                         'gw_goals', 'gt_goals', 'shots', 'shooting_pct', 'minutes_per_game', 'fo_pct', 'pass_pct', 'corner_pct', 'hits', 'blocked_shots',
                                         'playing_year', 'season_type', 'player_status'
@@ -304,8 +304,8 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
           this.length = teamStats.length;
           this.isLoading = false;
           setTimeout(() => {
-            this.players.paginator = this.paginator;
-            this.players.sort = this.sort;
+            this.playersArchived.paginator = this.paginator;
+            this.playersArchived.sort = this.sort;
           }, 350);
         });
       });          
@@ -325,15 +325,15 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
           oldTeamStats.forEach(element => {
             teamStats.push(element);
           })
-          this.players = new MatTableDataSource<any[]>(teamStats);
+          this.playersArchived = new MatTableDataSource<any[]>(teamStats);
           this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals',
                                           'gw_goals', 'gt_goals', 'shots', 'calc_shooting_pct', 'calc_minutes_per_game', 'hits', 'blocked_shots' ];
           this.pageSize = 25;
           this.length = teamStats.length;
           this.isLoading = false;
           setTimeout(() => {
-            this.players.paginator = this.paginator;
-            this.players.sort = this.sort;
+            this.playersArchived.paginator = this.paginator;
+            this.playersArchived.sort = this.sort;
           }, 350);
         });
       });          
@@ -348,7 +348,7 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
         oldTeamStats.forEach(element => {
           stats.push(element);
         })
-        this.players = new MatTableDataSource<any[]>(stats);
+        this.playersArchived = new MatTableDataSource<any[]>(stats);
         this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'sh_goals',
                                         'gw_goals', 'gt_goals', 'shots', 'shooting_pct', 'minutes_per_game', 'fo_pct', 'pass_pct', 'corner_pct', 'hits', 'blocked_shots',
                                         'playing_year', 'season_type', 'player_status'
@@ -357,8 +357,8 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
         this.length = stats.length;
         this.isLoading = false;
         setTimeout(() => {
-          this.players.paginator = this.paginator;
-          this.players.sort = this.sort;
+          this.playersArchived.paginator = this.paginator;
+          this.playersArchived.sort = this.sort;
         }, 350);
       });
     });
@@ -372,15 +372,15 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
         oldTeamStats.forEach(element => {
           stats.push(element);
         })
-        this.players = new MatTableDataSource<any[]>(stats);
+        this.playersArchived = new MatTableDataSource<any[]>(stats);
         this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals',
                                           'gw_goals', 'gt_goals', 'shots', 'calc_shooting_pct', 'calc_minutes_per_game', 'hits', 'blocked_shots' ];
         this.pageSize = 25;
         this.length = stats.length;
         this.isLoading = false;
         setTimeout(() => {
-          this.players.paginator = this.paginator;
-          this.players.sort = this.sort;
+          this.playersArchived.paginator = this.paginator;
+          this.playersArchived.sort = this.sort;
         }, 350);
       });
     });
@@ -394,7 +394,7 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
         oldTeamStats.forEach(element => {
           stats.push(element);
         })
-        this.players = new MatTableDataSource<any[]>(stats);
+        this.playersArchived = new MatTableDataSource<any[]>(stats);
         this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'sh_goals',
                                         'gw_goals', 'gt_goals', 'shots', 'shooting_pct', 'minutes_per_game', 'fo_pct', 'pass_pct', 'corner_pct', 'hits', 'blocked_shots',
                                         'playing_year', 'season_type', 'player_status'
@@ -403,8 +403,8 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
         this.length = stats.length;
         this.isLoading = false;
         setTimeout(() => {
-          this.players.paginator = this.paginator;
-          this.players.sort = this.sort;
+          this.playersArchived.paginator = this.paginator;
+          this.playersArchived.sort = this.sort;
         }, 350);
       });
     });
@@ -418,15 +418,15 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
         oldTeamStats.forEach(element => {
           stats.push(element);
         })
-        this.players = new MatTableDataSource<any[]>(stats);
+        this.playersArchived = new MatTableDataSource<any[]>(stats);
         this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals',
                                           'gw_goals', 'gt_goals', 'shots', 'calc_shooting_pct', 'calc_minutes_per_game', 'hits', 'blocked_shots' ];
         this.pageSize = 25;
         this.length = stats.length;
         this.isLoading = false;
         setTimeout(() => {
-          this.players.paginator = this.paginator;
-          this.players.sort = this.sort;
+          this.playersArchived.paginator = this.paginator;
+          this.playersArchived.sort = this.sort;
         }, 350);
       });
     });
@@ -510,9 +510,9 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
   }
 
   applyFilter(filterValue: string) {
-    this.players.filter = filterValue.trim().toLowerCase();
-    if (this.players.paginator) {
-      this.players.paginator.firstPage();
+    this.playersArchived.filter = filterValue.trim().toLowerCase();
+    if (this.playersArchived.paginator) {
+      this.playersArchived.paginator.firstPage();
     }
   }
 

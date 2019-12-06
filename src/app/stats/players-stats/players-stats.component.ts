@@ -76,10 +76,8 @@ export class PlayersStatsComponent implements OnInit, OnDestroy {
           // console.log(resp);
           let stats = resp as any;
           stats.forEach(player => {
-            if (player.minutes_played > 0) {
-              player.points_per_sixty = ((player.points/player.minutes_played) * 60).toFixed(2);
-              this.stats.push(player);
-            }
+            player.points_per_sixty = ((player.points/player.minutes_played) * 60).toFixed(2);
+            this.stats.push(player);
           });
           this.players = new MatTableDataSource<any[]>(this.stats);
           this.length = this.stats.length;
