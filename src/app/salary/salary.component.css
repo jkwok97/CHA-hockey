@@ -22,7 +22,7 @@
     width: 95%;
     overflow: auto;
     display: flex;
-    justify-items: center;
+    justify-content: center;
     align-items: flex-start;
 }
 
@@ -32,6 +32,11 @@
     justify-content: center;
     align-content: center;
     margin: 150px 0;
+}
+
+iframe {
+    border: none;
+    overflow-x: hidden;
 }
 
 .mat-option {
