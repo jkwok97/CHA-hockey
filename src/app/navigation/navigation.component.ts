@@ -22,12 +22,13 @@ export class NavigationComponent implements OnInit {
   routes = [
     {name: 'Statistics', url: 'stats', current: false},
     {name: 'Teams', url: 'teams', current: false},
+    {name: 'Schedule', url: 'schedule', current: false},
     {name: 'Salaries', url: 'salary', current: false},
+    {name: 'Picks', url: 'picks', current: false},
+    {name: 'Trades', url: 'trades', current: false},
+    {name: 'Waiver Priority', url: 'waiver-priority', current: false},
     {name: 'History', url: 'history', current: false},
     {name: 'Rules & Prizes', url: 'rules', current: false},
-    {name: 'Schedule', url: 'schedule', current: false},
-    {name: 'Trades & Picks', url: 'trades-picks', current: false},
-    {name: 'Waiver Priority', url: 'waiver-priority', current: false},
   ];
 
   constructor(
