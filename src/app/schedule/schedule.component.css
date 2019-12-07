@@ -9,6 +9,15 @@
 
 .frame {
     height: 95%;
+    width: 810px;
+    overflow: auto;
+    display: flex;
+    justify-items: center;
+    align-items: flex-start;
+}
+
+.mobile-frame {
+    height: 95%;
     width: 90%;
     overflow: auto;
     display: flex;

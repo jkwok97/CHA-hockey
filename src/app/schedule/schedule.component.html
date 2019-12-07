@@ -1,6 +1,6 @@
 <div class="container">
-    <div class="frame">
-        <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS0JKYVSkNRwOZavK_pCosNcgCFxf45mLJlRQJMmppO12SPHINN4DQpdOtu-0Wn0ZbxIQmuSpiCymcF/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" width="100%" height="99%"></iframe>
+    <div class="frame" [ngClass]="{'frame': !isMobile, 'mobile-frame': isMobile}">
+        <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS0JKYVSkNRwOZavK_pCosNcgCFxf45mLJlRQJMmppO12SPHINN4DQpdOtu-0Wn0ZbxIQmuSpiCymcF/pubhtml?gid=0&amp;single=true&amp;widget=false&amp;headers=false&chrome=false" width="100%" height="99%"></iframe>
     </div>
 </div>
 
