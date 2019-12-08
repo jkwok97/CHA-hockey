@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="buttonContainer">
+    <div class="buttonContainer" *ngIf="isMobile">
 
         <nav mat-tab-nav-bar color="accent">
             <a mat-tab-link
@@ -11,6 +11,56 @@
                 {{route.name}}
             </a>
         </nav>
+
+    </div>
+
+    <div class="rules-container" *ngIf="!isMobile">
+
+        <mat-tab-group color="accent">
+
+            <mat-tab label="Player Equalization">
+                <div class="app-container">
+                    <app-equalization></app-equalization>  
+                </div>
+            </mat-tab>
+
+            <mat-tab label="Draft Lottery">
+                <div class="app-container">
+                    <app-lottery></app-lottery>
+                </div>
+            </mat-tab>
+
+            <mat-tab label="Emergency Goaltender Rule">
+                <div class="app-container">
+                    <app-egr></app-egr>
+                </div>
+            </mat-tab>
+
+            <mat-tab label="Player Protection Rule">
+                <div class="app-container">
+                    <app-protection></app-protection>
+                </div>
+            </mat-tab>
+
+            <mat-tab label="Roster Max & Min">
+                <div class="app-container">
+                    <app-rosters></app-rosters>
+                </div>
+            </mat-tab>
+
+            <mat-tab label="Waiver Wire">
+                <div class="app-container">
+                    <app-waivers></app-waivers>
+                </div>
+            </mat-tab>
+
+            <mat-tab label="Winnings">
+                <div class="app-container">
+                    <app-winnings></app-winnings>
+                </div>
+            </mat-tab>
+
+        </mat-tab-group>
 
     </div>
 </div>

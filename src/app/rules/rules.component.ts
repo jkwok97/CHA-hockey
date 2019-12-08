@@ -18,6 +18,7 @@ import { WinningsComponent } from './winnings/winnings.component';
 export class RulesComponent implements OnInit, OnDestroy {
 
   private _alive:boolean = true;
+  isMobile: boolean;
 
   route: any;
 
@@ -43,7 +44,19 @@ export class RulesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.checkMobile();
+  }
 
+  checkMobile() {
+    if ( navigator.userAgent.match(/Android/i)
+        || navigator.userAgent.match(/webOS/i)
+        || navigator.userAgent.match(/iPhone/i)
+        || navigator.userAgent.match(/BlackBerry/i)
+        || navigator.userAgent.match(/Windows Phone/i) ) {
+          this.isMobile = true;
+        } else {
+          this.isMobile = false;
+        }
   }
 
   openBottomSheet(route) {
