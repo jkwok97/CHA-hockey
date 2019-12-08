@@ -17,6 +17,7 @@ export class TeamsService {
   currentSeasonType: string = "Regular"
   playerPosition: string;
   playerHits: string;
+  allSalaryPagesArray = [];
 
   isMobile: boolean;
 
@@ -67,6 +68,20 @@ export class TeamsService {
       }]
     }]
   }
+
+  allSalaryPages = [{ 
+      name: 'All Forwards', 
+      link: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTpSpdaAz_Joer_bPx1jtFG3v59VsDaIaQ0FARGIWF7R4M83t73foELctvvEt2RK6kDXDw2c4Fiz_F6/pubhtml?gid=0&single=true&widget=false&headers=false&chrome=false', 
+      mobileLink: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTpSpdaAz_Joer_bPx1jtFG3v59VsDaIaQ0FARGIWF7R4M83t73foELctvvEt2RK6kDXDw2c4Fiz_F6/pubhtml?gid=0&single=false&widget=true&headers=false"
+    },{
+      name: 'All Defense', 
+      link: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTpSpdaAz_Joer_bPx1jtFG3v59VsDaIaQ0FARGIWF7R4M83t73foELctvvEt2RK6kDXDw2c4Fiz_F6/pubhtml?gid=1&single=true&widget=false&headers=false&chrome=false", 
+      mobileLink: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTpSpdaAz_Joer_bPx1jtFG3v59VsDaIaQ0FARGIWF7R4M83t73foELctvvEt2RK6kDXDw2c4Fiz_F6/pubhtml?gid=1&single=false&widget=true&headers=false"
+    },{
+      name: 'All Goaltenders', 
+      link: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTpSpdaAz_Joer_bPx1jtFG3v59VsDaIaQ0FARGIWF7R4M83t73foELctvvEt2RK6kDXDw2c4Fiz_F6/pubhtml?gid=2&single=true&widget=false&headers=false&chrome=false", 
+      mobileLink: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTpSpdaAz_Joer_bPx1jtFG3v59VsDaIaQ0FARGIWF7R4M83t73foELctvvEt2RK6kDXDw2c4Fiz_F6/pubhtml?gid=2&single=false&widget=true&headers=false"
+    }]
 
   currentLeague = {
     teams: [
@@ -190,7 +205,10 @@ export class TeamsService {
 
   constructor(
     private _http: HttpClient
-  ) { }
+  ) { 
+    this.allSalaryPagesArray = this.currentLeague.teams.concat(this.allSalaryPages as []);
+    console.log(this.allSalaryPagesArray);
+  }
 
   setMobile(bool) {
     this.isMobile = bool;
