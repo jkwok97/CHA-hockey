@@ -58,6 +58,9 @@
     .header-container {
         height: 20%;
     }
+    .home-button {
+        left: 20px;
+    }
 }
 
 @media screen and (max-width: 807px) {
@@ -71,6 +74,9 @@
     .sub-title {
         display: none;
     }
+    .home-button {
+        left: 20px;
+    }
 }
 
 @media screen and (max-width: 756px) {
@@ -83,6 +89,9 @@
 @media screen and (max-width: 736px) and (max-height: 414px) and (orientation: landscape) {
     .header-container {
         height: 20%;
+    }
+    .home-button {
+        left: 10px;
     }
 }
 
@@ -110,6 +119,9 @@
 @media screen and (max-width: 375px) and (max-height: 812px) and (orientation: portrait) {
     .header-container {
         height: 10%;
+    }
+    .home-button {
+        left: 20px;
     }
 }
 
