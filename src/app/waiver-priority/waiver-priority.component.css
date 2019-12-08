@@ -1,6 +1,6 @@
 .frame {
-    height: 540px;
-    width: 827px;
+    height: 800px;
+    width: 401px;
     /* overflow-x: hidden; */
     display: flex;
     justify-items: center;
@@ -8,8 +8,8 @@
 }
 
 .mobile-frame {
-    height: 550px;
-    width: 90%;
+    height: 800px;
+    width: 401px;
     overflow: auto;
     display: flex;
     justify-items: center;
