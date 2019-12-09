@@ -161,6 +161,7 @@
     white-space: nowrap;
     padding-left: 5px;
     padding-right: 5px;
+    text-align: center;
 }
 
 .table img {
@@ -186,6 +187,11 @@ table {
     background-color: red;
 }
 
+th, td {
+    color: white;
+    text-align: center;
+    font-weight: 100;
+}
 
 /* *************************** MEDIA QUERIES **************************** */
 

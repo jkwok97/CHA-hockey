@@ -60,3 +60,9 @@ table {
 .mat-paginator {
     width: 95%;
 }
+
+th, td {
+    color: white;
+    text-align: center;
+    font-weight: 100;
+}

@@ -30,7 +30,7 @@
                 </ng-container>
 
                 <ng-container matColumnDef="team_logo">
-                    <th mat-header-cell *matHeaderCellDef> </th>
+                    <th mat-header-cell *matHeaderCellDef><span *ngIf="isMobile">Team</span></th>
                     <td mat-cell *matCellDef="let champ"> 
                         <img src="{{ findLogo(champ.team_short).image }}"> 
                     </td>
@@ -47,8 +47,8 @@
                 </ng-container>
                 
                 
-                <tr mat-header-row *matHeaderRowDef="champsColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: champsColumns;"></tr>
+                <tr mat-header-row *matHeaderRowDef="isMobile ? mobileChampsColumns : champsColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: isMobile ? mobileChampsColumns : champsColumns;"></tr>
     
             </table>
         </div>
