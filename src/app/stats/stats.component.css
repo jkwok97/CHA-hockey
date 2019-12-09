@@ -25,7 +25,6 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: flex-start;
-    
 }
 
 .header {
@@ -138,6 +137,18 @@ tr:nth-child(even) {
     cursor: pointer;
 }
 
+.mat-accordion,
+.mat-expansion-panel,
+.mat-expansion-panel-header,
+.mat-expanded {
+    background-color: red;
+}
+
+.mat-accordion {
+    width: 48%;
+    margin-top:30px;
+}
+
 
 /* *************************** MEDIA QUERIES **************************** */
 
@@ -145,6 +156,13 @@ tr:nth-child(even) {
 
     .card {
         width: 90%;
+    }
+    .mat-accordion {
+        width: 95%;
+        margin-top:30px;
+    }
+    .mat-accordion:last-child {
+        margin-top:0;
     }
 }
 
@@ -202,6 +220,13 @@ tr:nth-child(even) {
     .card {
         width: 90%;
     }
+    .mat-accordion {
+        width: 95%;
+        margin-top:30px;
+    }
+    .mat-accordion:last-child {
+        margin-top:0;
+    }
     .full-width {
         width: 100%;
     }
@@ -227,6 +252,13 @@ tr:nth-child(even) {
         width: 90%;
         overflow-y: hidden;
     }
+    .mat-accordion {
+        width: 95%;
+        margin-top:30px;
+    }
+    .mat-accordion:last-child {
+        margin-top:0;
+    }
 }
 
 /* ***** IPHONE X ***** */
@@ -248,5 +280,12 @@ tr:nth-child(even) {
     }
     .card {
         width: 90%;
+    }
+    .mat-accordion {
+        width: 95%;
+        margin-top:30px;
+    }
+    .mat-accordion:last-child {
+        margin-top:0;
     }
 }

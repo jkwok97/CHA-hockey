@@ -17,6 +17,7 @@ export class StatsComponent implements OnInit, OnDestroy {
   isGoaliesLoading: boolean = false;
   isLeagueLoading: boolean = false;
   isMobile: boolean;
+  expand: boolean = false;
 
   stats: any;
   goalieStats: any;
@@ -182,8 +183,10 @@ export class StatsComponent implements OnInit, OnDestroy {
         || navigator.userAgent.match(/BlackBerry/i)
         || navigator.userAgent.match(/Windows Phone/i) ) {
           this.isMobile = true;
+          this.expand = false;
         } else {
           this.isMobile = false;
+          this.expand = true;
         }
   }
 
