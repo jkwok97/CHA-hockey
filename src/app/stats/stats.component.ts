@@ -78,10 +78,14 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   players: MatTableDataSource<any[]>;
   playersColumnsToDisplay = ['team_logo','player_name', 'games_played', 'goals', 'assists', 'points'];
+  mobilePlayersColumnsToDisplay = ['team_logo','player_name', 'games_played', 'points']
   dmen: MatTableDataSource<any[]>;
   dmenColumnsToDisplay = ['team_logo','player_name', 'games_played', 'goals', 'assists', 'points'];
+  mobileDmenColumnsToDisplay = ['team_logo','player_name', 'games_played', 'points']
   rookies: MatTableDataSource<any[]>;
   rookieColumnsToDisplay = ['team_logo','player_name', 'games_played', 'goals', 'assists', 'points'];
+  mobileRookiesColumnsToDisplay = ['team_logo','player_name', 'games_played', 'points']
+  
   goalies: MatTableDataSource<any[]>;
   goaliesColumnsToDisplay = ['team_logo','player_name', 'games_played', 'wins'];
   goaliesGAA: MatTableDataSource<any[]>;
