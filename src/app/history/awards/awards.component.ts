@@ -12,6 +12,8 @@ export class AwardsComponent implements OnInit, OnDestroy {
 
   private _alive:boolean = true;
   isLoading: boolean = false;
+  isMobile: boolean = false;
+  expand: boolean = false;
 
   awards = [];
 
@@ -21,6 +23,7 @@ export class AwardsComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.checkMobile();
     this.isLoading = true;
     this._teamsService.getChampions("scorer").pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.awards.push({title: "Wayne Gretzky Trophy", picture: "../../../assets/images/scorer.jpg", description: "Leading Scorer", winners: resp});
@@ -32,8 +35,10 @@ export class AwardsComponent implements OnInit, OnDestroy {
             this.awards.push({title: "Martin Brodeur Trophy", picture: "../../../assets/images/goalie.jpg", description: "Best Goalie", winners: resp});
             this._teamsService.getChampions("gm").pipe(takeWhile(() => this._alive)).subscribe(resp => {
               this.awards.push({title: "Muggleston Trophy", picture: "../../../assets/images/gm.jpg", description: "Best GM", winners: resp});
-              // console.log(this.awards);
-              this.isLoading = false;
+              this._teamsService.getChampions("season").pipe(takeWhile(() => this._alive)).subscribe(resp => {
+                this.awards.push({title: "President's Trophy", picture: "../../../assets/images/president.jpg", description: "Season Winner", winners: resp});
+                this.isLoading = false;
+              });
             });
           });
         });
@@ -48,6 +53,21 @@ export class AwardsComponent implements OnInit, OnDestroy {
     } else {
       return { image: "../../assets/team_logos/Free_Agent_logo_square.jpg", name: "Free Agent"}
     }
+  }
+
+  checkMobile() {
+    if ( navigator.userAgent.match(/Android/i)
+        || navigator.userAgent.match(/webOS/i)
+        || navigator.userAgent.match(/iPhone/i)
+        || navigator.userAgent.match(/BlackBerry/i)
+        || navigator.userAgent.match(/Windows Phone/i) ) {
+          this.isMobile = true;
+          this.expand = false;
+        } else {
+          this.isMobile = false;
+          this.expand = true;
+        }
+        console.log(this.expand);
   }
 
   openPlayer(name, team, position, hits) {

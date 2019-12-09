@@ -6,7 +6,7 @@
 
     <div class="awards-container" *ngIf="awards.length > 0 && !isLoading">
         <mat-accordion multi="true" >
-            <mat-expansion-panel *ngFor="let award of awards" expanded="true">
+            <mat-expansion-panel *ngFor="let award of awards" expanded="{{expand}}">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                         {{ award.title }}
