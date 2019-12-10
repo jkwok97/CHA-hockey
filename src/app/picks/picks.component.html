@@ -1,6 +1,12 @@
 <div class="container">
-    <div [ngClass]="{'frame': !isMobile, 'mobile-frame': isMobile}">
-        <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQhNH4rS2kl3afY5kfy6IpXo4x3u-XJnuBh01R4bleYWovIvt-pk2JhtzxW-10kMamkd2LgpzmvuiMP/pubhtml?gid=370157936&single=true&widget=false&headers=false&chrome=false" class="iframe">
+
+    <div class="spinner" *ngIf="isLoading">
+        <mat-spinner color="accent"></mat-spinner>
+    </div>
+
+    <div [ngClass]="{'frame': !isMobile, 'mobile-frame': isMobile}" *ngIf="!isLoading">
+        <iframe [src]="picksPage" class="iframe">
         </iframe>
     </div>
+
 </div>
