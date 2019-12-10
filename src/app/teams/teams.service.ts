@@ -207,7 +207,7 @@ export class TeamsService {
     private _http: HttpClient
   ) { 
     this.allSalaryPagesArray = this.currentLeague.teams.concat(this.allSalaryPages as []);
-    console.log(this.allSalaryPagesArray);
+    // console.log(this.allSalaryPagesArray);
   }
 
   setMobile(bool) {
