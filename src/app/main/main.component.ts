@@ -7,6 +7,7 @@ import { takeWhile } from 'rxjs/operators';
 import { Chart } from 'chart.js';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { MainService } from './main.service';
 
 
 @Component({
@@ -113,8 +114,7 @@ export class MainComponent implements OnInit, OnDestroy {
     private _router: Router,
     private _teamsService: TeamsService,
     private _route: ActivatedRoute,
-    private renderer2: Renderer2,
-    private el: ElementRef
+    private _mainService: MainService
   ) {
     this._authService.currentUser.subscribe(x => this.currentUser = x);
     if (!this.currentUser) {
@@ -141,14 +141,6 @@ export class MainComponent implements OnInit, OnDestroy {
       allTeams.forEach(team => {
         if (team['playing_year'] === this.currentSeason && team['season_type'] === this.currentSeasonType) { this.stats.push(team); }
       });
-      this.pointsChart(this.team.shortName);
-      this.goalDiffChart(this.team.shortName);
-      this.shotDiffChart(this.team.shortName);
-      this.winPctChart(this.team.shortName);
-      this.ppPctChart(this.team.shortName);
-      this.pkPctChart(this.team.shortName);
-      this.goalsForChart(this.team.shortName);
-      this.goalsAgainstChart(this.team.shortName);
       this.isLoading = false;
     });
     this._teamsService.getTeamPlayerStatsByYearByType(this.team.shortName, this.currentSeason, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
@@ -169,11 +161,6 @@ export class MainComponent implements OnInit, OnDestroy {
       this.goalies.sort = this.goalieSort;
     });
   }
-
-  // ngAfterViewInit() {
-  //   // @ts-ignore
-  //   twttr.widgets.load();
-  // }
 
   checkMobile() {
     if ( navigator.userAgent.match(/Android/i)
@@ -260,10 +247,19 @@ export class MainComponent implements OnInit, OnDestroy {
       this.playerPlusMinusChart();
     } else if (event.tab.textLabel === "Team History") {
       this.checkString(this.team);
-    } else if (event.tab.textLabel === "Division") {
+    } else if (event.tab.textLabel === "Team Charts") {
+      this.isLoading = true;
+      this.pointsChart(this.team.shortName);
+      this.goalDiffChart(this.team.shortName);
+      this.shotDiffChart(this.team.shortName);
+      this.winPctChart(this.team.shortName);
+      this.ppPctChart(this.team.shortName);
+      this.pkPctChart(this.team.shortName);
+      this.goalsForChart(this.team.shortName);
+      this.goalsAgainstChart(this.team.shortName);
+      this.isLoading = false;
+    } else if (event.tab.textLabel === 'NHL Info') {
       
-    } else if (event.tab.textLabel === 'NHL info') {
-  
     }
   }
 

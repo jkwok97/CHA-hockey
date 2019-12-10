@@ -1,13 +1,15 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-twitter',
   templateUrl: './twitter.component.html',
   styleUrls: ['./twitter.component.css']
 })
-export class TwitterComponent implements OnInit, AfterViewInit {
+export class TwitterComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  constructor() { }
+  private _alive:boolean = true;
+
+  constructor( ) { }
 
   ngOnInit() {
   }
@@ -15,6 +17,10 @@ export class TwitterComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     // @ts-ignore
     twttr.widgets.load();
+  }
+
+  ngOnDestroy() {
+    this._alive = false;
   }
 
 }

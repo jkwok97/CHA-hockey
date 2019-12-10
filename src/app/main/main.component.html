@@ -24,7 +24,16 @@
 
         <mat-tab-group color="accent" (selectedTabChange)="onTabChange($event)">
 
+            <mat-tab label="NHL Info">
+                <ng-template matTabContent>
+                    <div class="twitter-container">
+                        <app-twitter></app-twitter>
+                    </div>
+                </ng-template>
+            </mat-tab>
+
             <mat-tab label="Team Charts">
+                
                 <div class="card-container">
                     <div class="stat-card">
                         <div class="chart-container">
@@ -611,14 +620,6 @@
             <mat-tab label="Goalies History">
                 <ng-template matTabContent>
                     <app-goalie-archives></app-goalie-archives>
-                </ng-template>
-            </mat-tab>
-
-            <mat-tab label="NHL Info">
-                <ng-template matTabContent>
-                    <div class="twitter-container">
-                        <app-twitter></app-twitter>
-                    </div>
                 </ng-template>
             </mat-tab>
 
