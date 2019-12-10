@@ -9,7 +9,7 @@
 
 .frame {
     height: 95%;
-    width: 810px;
+    width: 801px;
     overflow: auto;
     display: flex;
     justify-items: center;
@@ -23,6 +23,15 @@
     display: flex;
     justify-items: center;
     align-items: flex-start;
+}
+
+.iframe {
+    border: none;
+    overflow-x:hidden;
+    overflow-y:hidden;
+    /* border: 1px solid blue; */
+    height: 100%;
+    width: 100%;
 }
 
 .click {
