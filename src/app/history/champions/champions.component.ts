@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TeamsService } from 'src/app/teams/teams.service';
 import { takeWhile } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-champions',
@@ -31,7 +32,8 @@ export class ChampionsComponent implements OnInit, OnDestroy {
   ];
 
   constructor(
-    private _teamsService: TeamsService
+    private _teamsService: TeamsService,
+    private _router: Router
   ) { }
 
   ngOnInit() {
@@ -103,6 +105,16 @@ export class ChampionsComponent implements OnInit, OnDestroy {
     } else {
       return { image: "../../assets/team_logos/Free_Agent_logo_square.jpg", name: "Free Agent"}
     }
+  }
+
+  toPlayoffPlayers(champ) {
+    this._router.navigate([`/teams/${champ.team_short}/${champ.year_won}/Playoffs`]);
+    window.scrollTo(0,0);
+  }
+
+  toSeasonPlayers(champ) {
+    this._router.navigate([`/teams/${champ.team_short}/${champ.year_won}/Regular`]);
+    window.scrollTo(0,0);
   }
 
   ngOnDestroy() {

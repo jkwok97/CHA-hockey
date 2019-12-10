@@ -166,6 +166,10 @@
                         <mat-spinner color="accent"></mat-spinner>
                     </div>
 
+                    <div class="champ-button">
+                        <button mat-raised-button (click)="toSeasonPlayers(champ)" color="accent">Season Roster</button>
+                    </div>
+
                 </div>
 
                 <div class="team-stats">
@@ -310,6 +314,10 @@
 
                     <div class="spinner" *ngIf="isStatsPlayoffsLoading">
                         <mat-spinner color="accent"></mat-spinner>
+                    </div>
+
+                    <div class="champ-button">
+                        <button mat-raised-button (click)="toPlayoffPlayers(champ)" color="accent">Playoff Roster</button>
                     </div>
 
                 </div>

@@ -12,6 +12,7 @@ import { Observable, Observer } from 'rxjs';
 export class TeamsComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private _alive:boolean = true;
+  historicTeam: boolean = false;
 
   short_team_name: string = '';
 
@@ -22,20 +23,17 @@ export class TeamsComponent implements OnInit, OnDestroy, AfterViewInit {
     private _teamsService: TeamsService,
     private _route: ActivatedRoute
   ) {
-    console.log(this._route.snapshot)
     this.short_team_name = this._route.snapshot.url[1].path;
     this._teamsService.getTeamStats(this.short_team_name).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      console.log(resp);
       this.stats = resp as [];
       if (this._route.snapshot.url[2]) {
-        console.log(this._route.snapshot.url[2].path);
+        this.historicTeam = true;
         let year = this._route.snapshot.url[2].path;
         let type = this._route.snapshot.url[3].path;
         this.team = this.stats.find(season => season.playing_year === year && season.season_type === type)
       } else {
         this.team = this.stats[0];
       }
-      console.log(this.team);
     }, error => {
       console.log(error);
     });
@@ -43,6 +41,15 @@ export class TeamsComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit() {
    
+  }
+
+  findLogo(shortName) {
+    if (shortName) {
+      let team = this._teamsService.getTeamInfo(shortName);
+      return { image: team.image, name: team.name }
+    } else {
+      return { image: "../../assets/team_logos/Free_Agent_logo_square.jpg", name: "Free Agent"}
+    }
   }
 
   ngAfterViewInit() {

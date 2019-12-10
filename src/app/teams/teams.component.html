@@ -1,4 +1,8 @@
 <div class="container">
+    <div class="header" *ngIf="historicTeam">
+        <img src="{{findLogo(team.team_name).image}}">
+        <p>{{team.team_city}} {{team.team_nickname}} - {{team.playing_year}}</p>
+    </div>
     <div class="card">
         <div class="cardHeader">
             <p>Overall Record</p>

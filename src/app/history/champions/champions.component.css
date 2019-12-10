@@ -116,6 +116,13 @@ table {
     justify-content: center;
 }
 
+.champ-button {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
 /* *************************** MEDIA QUERIES **************************** */
 
 
