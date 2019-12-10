@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit, Renderer2, ElementRef } from '@angular/core';
 import { AuthService } from './auth.service';
 import { User } from '../_models/user';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -8,12 +8,13 @@ import { Chart } from 'chart.js';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 
+
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
-export class MainComponent implements OnInit, OnDestroy {
+export class MainComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private _alive:boolean = true;
   isLoading: boolean = false;
@@ -112,6 +113,8 @@ export class MainComponent implements OnInit, OnDestroy {
     private _router: Router,
     private _teamsService: TeamsService,
     private _route: ActivatedRoute,
+    private renderer2: Renderer2,
+    private el: ElementRef
   ) {
     this._authService.currentUser.subscribe(x => this.currentUser = x);
     if (!this.currentUser) {
@@ -166,6 +169,11 @@ export class MainComponent implements OnInit, OnDestroy {
       this.goalies.sort = this.goalieSort;
     });
   }
+
+  // ngAfterViewInit() {
+  //   // @ts-ignore
+  //   twttr.widgets.load();
+  // }
 
   checkMobile() {
     if ( navigator.userAgent.match(/Android/i)
@@ -254,6 +262,8 @@ export class MainComponent implements OnInit, OnDestroy {
       this.checkString(this.team);
     } else if (event.tab.textLabel === "Division") {
       
+    } else if (event.tab.textLabel === 'NHL info') {
+  
     }
   }
 

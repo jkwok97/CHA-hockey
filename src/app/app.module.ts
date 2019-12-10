@@ -42,6 +42,7 @@ import { TeamSeasonComponent } from './history/team-archives/team-season/team-se
 import { AwardsComponent } from './history/awards/awards.component';
 import { SalaryComponent } from './salary/salary.component';
 import { PicksComponent } from './picks/picks.component';
+import { TwitterComponent } from './main/twitter/twitter.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { PicksComponent } from './picks/picks.component';
     TeamSeasonComponent,
     AwardsComponent,
     SalaryComponent,
-    PicksComponent
+    PicksComponent,
+    TwitterComponent
   ],
   imports: [
     BrowserModule,
