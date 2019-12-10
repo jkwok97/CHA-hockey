@@ -22,12 +22,22 @@ export class TeamsComponent implements OnInit, OnDestroy, AfterViewInit {
     private _teamsService: TeamsService,
     private _route: ActivatedRoute
   ) {
-    this.short_team_name = this._route.snapshot.paramMap.get("params");
+    console.log(this._route.snapshot)
+    this.short_team_name = this._route.snapshot.url[1].path;
     this._teamsService.getTeamStats(this.short_team_name).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      // console.log(resp);
+      console.log(resp);
       this.stats = resp as [];
-      this.team = this.stats[0];
-      // console.log(this.team);
+      if (this._route.snapshot.url[2]) {
+        console.log(this._route.snapshot.url[2].path);
+        let year = this._route.snapshot.url[2].path;
+        let type = this._route.snapshot.url[3].path;
+        this.team = this.stats.find(season => season.playing_year === year && season.season_type === type)
+      } else {
+        this.team = this.stats[0];
+      }
+      console.log(this.team);
+    }, error => {
+      console.log(error);
     });
    }
 

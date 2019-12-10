@@ -122,8 +122,8 @@ export class ArchivesComponent implements OnInit, OnDestroy {
     }
   }
 
-  openTeam(shortName) {
-    this._router.navigate([`teams/${shortName}`])
+  openTeam(shortName, season, type) {
+    this._router.navigate([`/teams/${shortName}/${season}/${type}`]);
     window.scrollTo(0,0);
   }
 
