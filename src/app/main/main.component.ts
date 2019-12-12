@@ -9,7 +9,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MainService } from './main.service';
 
-
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -20,6 +19,8 @@ export class MainComponent implements OnInit, OnDestroy {
   private _alive:boolean = true;
   isLoading: boolean = false;
   isMobile: boolean;
+  showPlayersStats: boolean = false;
+  showGoalieStats: boolean = false;
 
   currentUser: User;
 
@@ -113,8 +114,8 @@ export class MainComponent implements OnInit, OnDestroy {
     private _authService: AuthService,
     private _router: Router,
     private _teamsService: TeamsService,
+    private _mainService: MainService,
     private _route: ActivatedRoute,
-    private _mainService: MainService
   ) {
     this._authService.currentUser.subscribe(x => this.currentUser = x);
     if (!this.currentUser) {
@@ -135,6 +136,14 @@ export class MainComponent implements OnInit, OnDestroy {
     this.checkMobile();
     this.currentSeason = this._teamsService.currentSeason;
     this.currentSeasonType = this._teamsService.currentSeasonType;
+    this._mainService.listenerFullPageStats().pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      console.log(resp);
+      if (resp === "players") {
+        this.showPlayersStats = true;
+      } else if (resp === "goalies") {
+        this.showGoalieStats = true;
+      }
+    });
     this._teamsService.getLeagueTeamsStats(this.currentSeason).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       // console.log(resp);
       let allTeams = resp as [];
@@ -160,6 +169,11 @@ export class MainComponent implements OnInit, OnDestroy {
       this.goalies = new MatTableDataSource<any[]>(this.goalieStats);
       this.goalies.sort = this.goalieSort;
     });
+  }
+
+  showLeaders() {
+    this.showPlayersStats = false;
+    this.showGoalieStats = false;
   }
 
   checkMobile() {

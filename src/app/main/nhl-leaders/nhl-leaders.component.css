@@ -1,0 +1,44 @@
+.container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+}
+
+.table {
+    width: 100%;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.mat-accordion {
+    width: 100%;
+}
+
+.details {
+    color: white;
+    font-size: medium;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10px;
+}
+
+.link {
+    cursor: pointer;
+}
+
+.mat-accordion,
+.mat-expansion-panel,
+.mat-expansion-panel-header,
+.mat-expanded {
+    background-color: rgba(61, 90, 254, 0.25);;
+}
+
+.table img {
+    height: 30px;
+    width: 30px;
+}
