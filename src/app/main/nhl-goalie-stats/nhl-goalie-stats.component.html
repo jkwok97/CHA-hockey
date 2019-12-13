@@ -98,7 +98,11 @@
             </ng-container>
             
             <tr mat-header-row *matHeaderRowDef="goaliesColumnsToDisplay; sticky: true"></tr>
-            <tr mat-row *matRowDef="let goalie; columns: goaliesColumnsToDisplay;"></tr>
+            <tr 
+                mat-row 
+                *matRowDef="let goalie; columns: goaliesColumnsToDisplay;"
+                (click)="openPlayer(goalie)"
+            ></tr>
 
         </table>
 

@@ -94,7 +94,11 @@
             </ng-container>
             
             <tr mat-header-row *matHeaderRowDef="playersColumnsToDisplay; sticky: true"></tr>
-            <tr mat-row *matRowDef="let player; columns: playersColumnsToDisplay"></tr>
+            <tr 
+                mat-row 
+                *matRowDef="let player; columns: playersColumnsToDisplay"
+                (click)="openPlayer(player)"
+            ></tr>
 
         </table>
 

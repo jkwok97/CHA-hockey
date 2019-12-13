@@ -18,6 +18,11 @@
     width: 100%;
 }
 
+.mat-row:hover {
+    background-color: rgb(61, 90, 254);
+    cursor: pointer;
+}
+
 .details {
     color: white;
     font-size: medium;

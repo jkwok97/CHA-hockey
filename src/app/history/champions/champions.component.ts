@@ -3,6 +3,7 @@ import { TeamsService } from 'src/app/teams/teams.service';
 import { takeWhile } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { TeamArchivesComponent } from '../team-archives/team-archives.component';
 
 @Component({
   selector: 'app-champions',
@@ -15,6 +16,8 @@ export class ChampionsComponent implements OnInit, OnDestroy {
   isMobile: boolean;
   isStatsLoading: boolean = false;
   isStatsPlayoffsLoading: boolean = false;
+  champFound: boolean = false;
+  playoffChampFound: boolean = false;
 
   currentChamp: any;
   champions = [];
@@ -43,15 +46,6 @@ export class ChampionsComponent implements OnInit, OnDestroy {
       // console.log(resp);
       this.champions = resp as [];
       this.champs = new MatTableDataSource<any[]>(this.champions);
-      // this.champions.forEach(team => {
-      //   this._teamsService.getAlltimeTeamStatsByType(team.team_short, "Regular").pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      //     // console.log(resp);
-      //     let teamStats = resp as any;
-      //     let champYear = teamStats.find(year => year.playing_year === team.year_won);
-      //     // console.log(champYear);
-      //     team.team_stats = champYear;
-      //   });
-      // });
     });
   }
 
@@ -67,33 +61,62 @@ export class ChampionsComponent implements OnInit, OnDestroy {
         }
   }
 
+  onClosePanel(champ) {
+    this.champFound = false;
+    this.playoffChampFound = false;
+  }
+
   onOpenPanel(year, team) {
     this.isStatsLoading = true;
     this.isStatsPlayoffsLoading = true;
     this._teamsService.getAlltimeTeamStatsByType(team, "Regular").pipe(takeWhile(() => this._alive)).subscribe(resp => {
       let teamStats = resp as any;
-      if (teamStats[0].wins) {
+      if (teamStats[0].playing_year) {
         let champYear = teamStats.find(season => season.playing_year === year);
         let champChosen = this.champions.find(champ => champ.team_short === team && champ.year_won === year);
         champChosen.team_stats = champYear;
-        this.teams = new MatTableDataSource<any[]>([champYear]);
+        if (!champChosen.team_stats) {
+          this.champFound = false;
+          this.isStatsLoading = false;
+        } else {
+          setTimeout(() => {
+            this.champFound = true;
+            this.teams = new MatTableDataSource<any[]>([champYear]);
+            this.isStatsLoading = false;
+          }, 250);
+        }
+      } else {
+        this.champFound = false;
         this.isStatsLoading = false;
       }
     }, error => {
       console.log(error);
+      this.champFound = false;
       this.isStatsLoading = false;
     });
     this._teamsService.getAlltimeTeamStatsByType(team, "Playoffs").pipe(takeWhile(() => this._alive)).subscribe(resp => {
       let teamStats = resp as any;
-      if (teamStats[0].wins) {
+      if (teamStats[0].playing_year) {
         let champYear = teamStats.find(season => season.playing_year === year);
         let champChosen = this.champions.find(champ => champ.team_short === team && champ.year_won === year);
         champChosen.team_stats_playoffs = champYear;
-        this.teamsPlayoff = new MatTableDataSource<any[]>([champChosen.team_stats_playoffs]);
+        if (!champChosen.team_stats_playoffs) {
+          this.playoffChampFound = false;
+          this.isStatsPlayoffsLoading = false;
+        } else {
+          setTimeout(() => {
+            this.playoffChampFound = true;
+            this.teamsPlayoff = new MatTableDataSource<any[]>([champChosen.team_stats_playoffs]);
+            this.isStatsPlayoffsLoading = false;
+          }, 250);
+        }
+      } else {
+        this.playoffChampFound = false;
         this.isStatsPlayoffsLoading = false;
       }
     }, error => {
       console.log(error);
+      this.playoffChampFound = false;
       this.isStatsPlayoffsLoading = false;
     });
   }

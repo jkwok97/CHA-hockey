@@ -5,6 +5,7 @@ import { TeamsService } from 'src/app/teams/teams.service';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nhl-goalie-stats',
@@ -33,7 +34,8 @@ export class NhlGoalieStatsComponent implements OnInit, OnDestroy {
 
   constructor(
     private _mainService: MainService,
-    private _teamsService: TeamsService
+    private _teamsService: TeamsService,
+    private _router: Router
   ) { }
 
   ngOnInit() {
@@ -53,6 +55,13 @@ export class NhlGoalieStatsComponent implements OnInit, OnDestroy {
         this.goalies.sort = this.sort;
       }, 350);
     });
+  }
+
+  openPlayer(player) {
+    this._router.navigate([`/stats/players/${player.playerLastName}, ${player.playerFirstName}`]);
+    this._teamsService.setPlayerPosition(player.playerPositionCode);
+    this._teamsService.setPlayerHits(player.shots);
+    window.scrollTo(0,0);
   }
 
   findChaTeam(name, player, type) {

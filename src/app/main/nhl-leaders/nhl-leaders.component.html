@@ -38,7 +38,11 @@
                     </ng-container>
 
                     <tr mat-header-row *matHeaderRowDef="pointsColumnsToDisplay"></tr>
-                    <tr mat-row *matRowDef="let team; columns: pointsColumnsToDisplay;"></tr>
+                    <tr 
+                        mat-row 
+                        *matRowDef="let player; columns: pointsColumnsToDisplay;" 
+                        (click)="openPlayer(player)"
+                    ></tr>
 
                 </table>
 
@@ -74,7 +78,11 @@
                     </ng-container>
 
                     <tr mat-header-row *matHeaderRowDef="goalsColumnsToDisplay"></tr>
-                    <tr mat-row *matRowDef="let team; columns: goalsColumnsToDisplay;"></tr>
+                    <tr 
+                        mat-row 
+                        *matRowDef="let player; columns: goalsColumnsToDisplay;"
+                        (click)="openPlayer(player)"
+                    ></tr>
 
                 </table>
 
@@ -110,7 +118,11 @@
                     </ng-container>
 
                     <tr mat-header-row *matHeaderRowDef="assistsColumnsToDisplay"></tr>
-                    <tr mat-row *matRowDef="let team; columns: assistsColumnsToDisplay;"></tr>
+                    <tr 
+                        mat-row 
+                        *matRowDef="let player; columns: assistsColumnsToDisplay;"
+                        (click)="openPlayer(player)"
+                    ></tr>
 
                 </table>
 
@@ -146,7 +158,11 @@
                     </ng-container>
 
                     <tr mat-header-row *matHeaderRowDef="shPointsColumnsToDisplay"></tr>
-                    <tr mat-row *matRowDef="let team; columns: shPointsColumnsToDisplay;"></tr>
+                    <tr 
+                        mat-row 
+                        *matRowDef="let player; columns: shPointsColumnsToDisplay;"
+                        (click)="openPlayer(player)"
+                    ></tr>
 
                 </table>
 
@@ -190,7 +206,11 @@
                     </ng-container>
 
                     <tr mat-header-row *matHeaderRowDef="winsColumnsToDisplay"></tr>
-                    <tr mat-row *matRowDef="let team; columns: winsColumnsToDisplay;"></tr>
+                    <tr 
+                        mat-row 
+                        *matRowDef="let goalie; columns: winsColumnsToDisplay;"
+                        (click)="openPlayer(goalie)"
+                    ></tr>
 
                 </table>
 
@@ -226,7 +246,11 @@
                     </ng-container>
 
                     <tr mat-header-row *matHeaderRowDef="gaaColumnsToDisplay"></tr>
-                    <tr mat-row *matRowDef="let team; columns: gaaColumnsToDisplay;"></tr>
+                    <tr 
+                        mat-row 
+                        *matRowDef="let goalie; columns: gaaColumnsToDisplay;"
+                        (click)="openPlayer(goalie)"
+                    ></tr>
 
                 </table>
 
@@ -262,7 +286,11 @@
                     </ng-container>
 
                     <tr mat-header-row *matHeaderRowDef="savePctgColumnsToDisplay"></tr>
-                    <tr mat-row *matRowDef="let team; columns: savePctgColumnsToDisplay;"></tr>
+                    <tr 
+                        mat-row 
+                        *matRowDef="let goalie; columns: savePctgColumnsToDisplay;"
+                        (click)="openPlayer(goalie)"
+                    ></tr>
 
                 </table>
 
@@ -298,7 +326,11 @@
                     </ng-container>
 
                     <tr mat-header-row *matHeaderRowDef="shutoutsColumnsToDisplay"></tr>
-                    <tr mat-row *matRowDef="let team; columns: shutoutsColumnsToDisplay;"></tr>
+                    <tr 
+                        mat-row 
+                        *matRowDef="let goalie; columns: shutoutsColumnsToDisplay;"
+                        (click)="openPlayer(goalie)"
+                    ></tr>
 
                 </table>
 
