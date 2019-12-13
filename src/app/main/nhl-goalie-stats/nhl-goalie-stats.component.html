@@ -8,6 +8,10 @@
         <p>NHL Goalie Stats</p>
     </div>
 
+    <mat-form-field color="accent">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+    </mat-form-field>
+
     <div class="table">
         <table mat-table [dataSource]="goalies" matSort class="mat-elevation-z8 full-width" matSortActive="wins" matSortDirection="desc">
 

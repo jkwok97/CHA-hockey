@@ -25,7 +25,6 @@
 
 .mat-row:hover {
     background-color: rgba(61, 90, 254, 0.4);
-    cursor: pointer;
 }
 
 .spinner {
@@ -65,4 +64,10 @@ th, td {
     color: white;
     text-align: center;
     font-weight: 100;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 75%;
+    color: red;
 }

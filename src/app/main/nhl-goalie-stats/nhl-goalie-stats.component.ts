@@ -39,7 +39,7 @@ export class NhlGoalieStatsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.isLoading = true;
     this._mainService.getNhlLeaders("20192020", "goalie", "wins", "reverse", "all").pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       let stats = resp as [];
       stats.forEach( element => { this.playersList.push(element); });
       this.playersList.forEach(player => {
@@ -63,6 +63,13 @@ export class NhlGoalieStatsComponent implements OnInit, OnDestroy {
       player.chaTeam = null;
       return player;
     });
+  }
+
+  applyFilter(filterValue: string) {
+    this.goalies.filter = filterValue.trim().toLowerCase();
+    if (this.goalies.paginator) {
+      this.goalies.paginator.firstPage();
+    }
   }
 
   findLogo(shortName) {

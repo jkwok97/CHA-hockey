@@ -25,7 +25,6 @@
 
 .mat-row:hover {
     background-color: rgba(61, 90, 254, 0.4);
-    cursor: pointer;
 }
 
 .spinner {

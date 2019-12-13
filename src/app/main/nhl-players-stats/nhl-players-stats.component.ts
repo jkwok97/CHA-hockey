@@ -39,7 +39,7 @@ export class NhlPlayersStatsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.isLoading = true;
     this._mainService.getNhlLeaders("20192020", "skater", "points", "reverse", "all").pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       let stats = resp as [];
       stats.forEach( element => { this.playersList.push(element); });
       this.playersList.forEach(player => {
