@@ -2,7 +2,7 @@
     <mat-spinner color="accent"></mat-spinner>
 </div>
 
-<div class="container" *ngIf="!isLoading">
+<div class="container" *ngIf="!isLoading && !errored">
 
     <div class="details">
         <p class="link" (click)="sendToFullPlayers()">See Skater Details ></p>
@@ -341,3 +341,6 @@
     </mat-accordion>
 </div>
 
+<div class="container" *ngIf="!isLoading && errored">
+    <p class="error-text">Problem connecting to NHL network</p>
+</div>

@@ -51,3 +51,35 @@
 .mat-option {
     background: rgba(254, 61, 61, 0.9);
 }
+
+.salary-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.table {
+    width: 95%;
+    overflow-x: auto;
+}
+
+.table img {
+    height: 30px;
+    width: 30px;
+}
+
+.mat-paginator {
+    width: 95%;
+}
+
+.filtering {
+    font-size: 14px;
+    width: 75%;
+    color: red;
+}

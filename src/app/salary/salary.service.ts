@@ -1,0 +1,24 @@
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class SalaryService {
+
+  constructor(
+    private _http: HttpClient
+  ) { }
+
+  getSalaries(position, type, year) {
+    let options = {params: new HttpParams()
+      .set('position', position)
+      .set('type', type)
+      .set('year', year)
+    }
+    return this._http.get(`${environment.back_end_url}/salaries/`, options);
+  }
+
+}

@@ -23,8 +23,81 @@
         <mat-spinner color="accent"></mat-spinner>
     </div>
 
-    <div class="frame" *ngIf="teamPicked && !isLoading">
+    <div class="frame" *ngIf="teamPicked && !isLoading && !salaryPicked">
         <iframe [src]="teamPage" class="iframe"></iframe>
+    </div>
+
+    <div class="salary-container" *ngIf="!isLoading && salaryPicked">
+
+        <div class="tableHeader">
+            <p>{{type}} Salaries</p>
+        </div>
+    
+        <mat-form-field color="accent" class="filtering">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+        </mat-form-field>
+
+        <div class="table">
+            
+            <table mat-table [dataSource]="allSalaries" matSort class="mat-elevation-z8 full-width" matSortActive="current_season_salary" matSortDirection="desc">
+
+                <ng-container matColumnDef="team_logo">
+                    <th mat-header-cell *matHeaderCellDef><span *ngIf="isMobile">Team</span></th>
+                    <td mat-cell *matCellDef="let player"> 
+                        <img src="{{ findLogo(player.team_name).image }}"> 
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="team_name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Team </th>
+                    <td mat-cell *matCellDef="let player"> {{findLogo(player.team_name).name}} </td>
+                </ng-container>
+    
+                <ng-container matColumnDef="player_name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                    <td mat-cell *matCellDef="let player"> {{player.player_name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="current_season_salary">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> 2019 Salary </th>
+                    <td mat-cell *matCellDef="let player">{{ player.current_season_salary }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="year_two">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> 2020 Salary </th>
+                    <td mat-cell *matCellDef="let player">{{ player.year_two }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="year_three">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> 2021 Salary </th>
+                    <td mat-cell *matCellDef="let player"> {{ player.year_three }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="year_four">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> 2022 Salary </th>
+                    <td mat-cell *matCellDef="let player"> {{ player.year_four }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="year_five">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> 2023 Salary </th>
+                    <td mat-cell *matCellDef="let player"> {{ player.year_five }} </td>
+                </ng-container>
+    
+                <tr mat-header-row *matHeaderRowDef="isMobile ? mobileAllSalariesColumnsToDisplay: allSalariesColumnsToDisplay"></tr>
+                <tr mat-row *matRowDef="let player; columns: isMobile ? mobileAllSalariesColumnsToDisplay: allSalariesColumnsToDisplay;"></tr>
+    
+            </table>
+    
+        </div>
+
+        <mat-paginator
+            [pageSizeOptions]="[10]"
+            [pageSize]="pageSize"
+            [length]="length"
+            color="accent"
+            showFirstLastButtons
+         ></mat-paginator>
+
     </div>
 
 </div>

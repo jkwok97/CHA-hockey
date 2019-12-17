@@ -15,6 +15,7 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
   private _alive:boolean = true;
   isLoading: boolean = false;
   isMobile: boolean;
+  errored: boolean = false;
 
   currentSeason: string = "20192020";
 
@@ -120,6 +121,10 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
       });
       this.points = new MatTableDataSource<any[]>(pointLeaders);
       this.isLoading = false;
+    }, error => {
+      console.log(error);
+      this.errored = true;
+      this.isLoading = false;
     });
   }
 
@@ -133,6 +138,10 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
         player = this.findChaTeam(`${player['playerLastName']}, ${player['playerFirstName']}`, player, "player");
       });
       this.goals = new MatTableDataSource<any[]>(goalLeaders);
+      this.isLoading = false;
+    }, error => {
+      console.log(error);
+      this.errored = true;
       this.isLoading = false;
     });
   }
@@ -148,6 +157,10 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
       });
       this.assists = new MatTableDataSource<any[]>(assistsLeaders);
       this.isLoading = false;
+    }, error => {
+      console.log(error);
+      this.errored = true;
+      this.isLoading = false;
     });
   }
 
@@ -161,6 +174,10 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
         player = this.findChaTeam(`${player['playerLastName']}, ${player['playerFirstName']}`, player, "player");
       });
       this.shPoints = new MatTableDataSource<any[]>(shPointsLeaders);
+      this.isLoading = false;
+    }, error => {
+      console.log(error);
+      this.errored = true;
       this.isLoading = false;
     });
   }
@@ -176,6 +193,10 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
       });
       this.wins = new MatTableDataSource<any[]>(winsLeaders);
       this.isLoading = false;
+    }, error => {
+      console.log(error);
+      this.errored = true;
+      this.isLoading = false;
     });
   }
 
@@ -189,6 +210,10 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
         player = this.findChaTeam(`${player['playerLastName']}, ${player['playerFirstName']}`, player, "goalie");
       });
       this.gaa = new MatTableDataSource<any[]>(gaaLeaders);
+      this.isLoading = false;
+    }, error => {
+      console.log(error);
+      this.errored = true;
       this.isLoading = false;
     });
   }
@@ -204,6 +229,10 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
       });
       this.savePctg = new MatTableDataSource<any[]>(savePctgLeaders);
       this.isLoading = false;
+    }, error => {
+      console.log(error);
+      this.errored = true;
+      this.isLoading = false;
     });
   }
 
@@ -217,6 +246,10 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
         player = this.findChaTeam(`${player['playerLastName']}, ${player['playerFirstName']}`, player, "goalie");
       });
       this.shutouts = new MatTableDataSource<any[]>(shutoutsLeaders);
+      this.isLoading = false;
+    }, error => {
+      console.log(error);
+      this.errored = true;
       this.isLoading = false;
     });
   }
