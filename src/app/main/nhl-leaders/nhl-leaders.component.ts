@@ -54,14 +54,14 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.isLoading = true;
     this.checkMobile();
-    this.getNHLPointLeaders();
-    this.getNHLGoalLeaders();
-    this.getNHLAssistsLeaders();
-    this.getNHLShPointsLeaders();
-    this.getNHLWinsLeaders();
-    this.getNHLGaaLeaders();
-    this.getNHLSavePctLeaders();
-    this.getNHLShutoutsLeaders();
+    // this.getNHLPointLeaders();
+    // this.getNHLGoalLeaders();
+    // this.getNHLAssistsLeaders();
+    // this.getNHLShPointsLeaders();
+    // this.getNHLWinsLeaders();
+    // this.getNHLGaaLeaders();
+    // this.getNHLSavePctLeaders();
+    // this.getNHLShutoutsLeaders();
   }
 
   sendToFullPlayers() {

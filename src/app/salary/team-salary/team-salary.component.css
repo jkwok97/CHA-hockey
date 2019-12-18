@@ -1,0 +1,166 @@
+.spinner {
+    width: 100%;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+    /* height: 100%; */
+    /* border: 1px solid red; */
+}
+
+.team-header {
+    width: 100%;
+    height: 120px;
+    background-color: #424242;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: white;
+    font-weight: 200;
+    font-size: xx-large;
+    padding: 0 10px;
+}
+
+.team-header img {
+    width: 100px;
+    height: 100px;
+    margin-right: 30px;
+    margin-left: 50px;
+}
+
+.salary-container {
+    width: 100%;
+    /* border: 1px solid green; */
+    display: flex;
+    justify-content: space-evenly;
+    align-content: flex-start;
+    margin-bottom: 30px;
+}
+
+.salary-section {
+    margin: 20px 0;
+    width: 30%;
+    /* border: 1px solid purple; */
+}
+
+.salary-header {
+    font-size: medium;
+    font-weight: 100;
+    color: white;
+    text-align: center;
+}
+
+.salary-header p {
+    margin: 0;
+}
+
+.salary-table-container {
+    /* border: 1px solid red; */
+    margin-top: 10px;
+}
+
+.table {
+    /* border: 1px solid blue; */
+}
+
+.full-width {
+    width: 100%;
+}
+
+.center {
+    text-align: center;
+}
+
+.black {
+    background-color: black;
+}
+
+.salary-header-summary {
+    font-size: medium;
+    font-weight: 100;
+    color: white;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.team-summary {
+    /* border: 1px solid blue; */
+    /* background-color: #424242; */
+    background-color: black;
+    width: 100%;
+    /* padding: 10px; */
+    /* height: 100%; */
+}
+
+.team-summary-players {
+    width: 100%;
+    font-weight: 100;
+    color: white;
+    text-align: center;
+    font-size: small;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.team-summary-cap-container {
+    /* border: 1px solid red; */
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 100;
+    color: white;
+    text-align: center;
+    font-size: small;
+}
+
+.team-summary-cap {
+    /* border: 1px solid pink; */
+    width: 48%;
+    text-align: left;
+    padding: 0 5px;
+}
+
+.med-text-height {
+    font-size: medium;
+    text-align: center;
+}
+
+.red-text {
+    color: red;
+    font-weight: 300;
+}
+
+.green-text {
+    color: green;
+    font-weight: 300;
+}
+
+/* *************************** MEDIA QUERIES **************************** */
+
+@media screen and (max-width: 800px) {
+    .salary-container {
+        flex-wrap: wrap;
+    }
+    .salary-section {
+        width: 95%;
+    }
+    .team-header img {
+        margin-right: 15px;
+        margin-left: 25px;
+    }
+    .mat-cell, .mat-header-cell {
+        white-space: nowrap;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+}

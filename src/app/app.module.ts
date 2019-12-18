@@ -46,6 +46,7 @@ import { TwitterComponent } from './main/twitter/twitter.component';
 import { NhlLeadersComponent } from './main/nhl-leaders/nhl-leaders.component';
 import { NhlPlayersStatsComponent } from './main/nhl-players-stats/nhl-players-stats.component';
 import { NhlGoalieStatsComponent } from './main/nhl-goalie-stats/nhl-goalie-stats.component';
+import { TeamSalaryComponent } from './salary/team-salary/team-salary.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,8 @@ import { NhlGoalieStatsComponent } from './main/nhl-goalie-stats/nhl-goalie-stat
     TwitterComponent,
     NhlLeadersComponent,
     NhlPlayersStatsComponent,
-    NhlGoalieStatsComponent
+    NhlGoalieStatsComponent,
+    TeamSalaryComponent
   ],
   imports: [
     BrowserModule,

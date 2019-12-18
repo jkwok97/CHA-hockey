@@ -6,6 +6,7 @@ import { takeWhile } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-salary',
@@ -34,7 +35,7 @@ export class SalaryComponent implements OnInit, OnDestroy {
   length: number = 0;
 
   allSalaries: MatTableDataSource<any[]>;
-  mobileallSalariesColumnsToDisplay = [ 'team_logo','player_name', 'current_season_salary', 'year_two']
+  mobileAllSalariesColumnsToDisplay = [ 'team_logo','player_name', 'current_season_salary', 'year_two']
   allSalariesColumnsToDisplay = [ 'team_logo', 'team_name', 'player_name', 'current_season_salary', 'year_two', 'year_three', 'year_four', 'year_five' ];
 
   @ViewChild('teamSelect', {static: false}) teamSelect;
@@ -44,7 +45,8 @@ export class SalaryComponent implements OnInit, OnDestroy {
   constructor(
     private _teamsService: TeamsService,
     private sanitizer: DomSanitizer,
-    private _salaryService: SalaryService
+    private _salaryService: SalaryService,
+    private _router: Router
   ) { 
     this.currentSeason = this._teamsService.currentSeason;
     this.seasonType = this._teamsService.currentSeasonType;
@@ -61,25 +63,29 @@ export class SalaryComponent implements OnInit, OnDestroy {
     this.teamSelect.value = event.value;
     this.team = this.teams.find(team => team.name === this.teamSelect.value);
     if (event.value == "All Forwards") {
+      this._router.navigate(['/salary/forwards']);
       this.getSalaries("forward");
-      this.type = "Forward"
+      this.type = "Forward";
     } else if (event.value == "All Defense") {
+      this._router.navigate(['/salary/defense']);
       this.getSalaries("defense");
-      this.type = "Defense"
+      this.type = "Defense";
     } else if (event.value == "All Goaltenders") {
+      this._router.navigate(['/salary/goalies']);
       this.getSalaries("goalie");
-      this.type = "Goalie"
+      this.type = "Goalie";
     } else {
-      if (this.isMobile) {
-        window.open(this.team.mobileLink)
-      } else {
-        this.salaryPicked = false;
-        this.teamPicked = true;
-        this.isLoading = true;
-        this.teamPage = this.sanitizer.bypassSecurityTrustResourceUrl(this.team.link);
-        this.isLoading = false;
-      }
+      this.salaryPicked = false;
+      this.teamPicked = true;
+      this._salaryService.setTeamTrigger(this.team.shortName);
+      this.openTeamSalary(this.team);
     }
+  }
+
+  openTeamSalary(team) {
+    // console.log(team);
+    this._router.navigate([`/salary/${team.shortName}`]);
+    window.scrollTo(0,0);
   }
 
   applyFilter(filterValue: string) {
@@ -103,28 +109,6 @@ export class SalaryComponent implements OnInit, OnDestroy {
         this.allSalaries.sort = this.sort;
       }, 350);
     });
-  }
-
-  getTeam(type, array) {
-    if (type === "goalie") {
-      array.forEach(player => {
-        this._teamsService.getAllIndividualGoalieStats(player.player_name).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-          player.team = resp[0].team_name;
-        }, error => {
-          console.log(error);
-          player.team = null;
-        });
-      });
-    } else {
-      array.forEach(player => {
-        this._teamsService.getAllIndividualPlayerStats(player.player_name).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-          player.team = resp[0].team_name;
-        }, error => {
-          console.log(error);
-          player.team = null;
-        });
-      });
-    }
   }
 
   findLogo(shortName) {
