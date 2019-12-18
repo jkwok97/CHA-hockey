@@ -14,7 +14,7 @@ export class TeamsService {
   teamPlayerStats: any;
 
   currentSeason: string = "2019-20";
-  currentSeasonType: string = "Regular"
+  currentSeasonType: string = "Regular";
   playerPosition: string;
   playerHits: string;
   allSalaryPagesArray = [];

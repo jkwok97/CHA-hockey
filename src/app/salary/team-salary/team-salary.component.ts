@@ -64,7 +64,7 @@ export class TeamSalaryComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.setTeam();
     this._salaryService.setTeamListener().pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       this.teamRoster = [];
       this.setTeam();
     });
@@ -88,7 +88,7 @@ export class TeamSalaryComponent implements OnInit, OnDestroy {
       // console.log(this._route.children[0].url['_value'][0].path)
       this.short_team_name = this._route.children[0].url['_value'][0].path;
       this.team = this._teamsService.getTeamInfo(this.short_team_name);
-      console.log(this.team);
+      // console.log(this.team);
       this.currentSeason = this._teamsService.currentSeason;
       this.currentSeasonType = this._teamsService.currentSeasonType;
       this.getSalaries(this.team.shortName);
@@ -135,7 +135,7 @@ export class TeamSalaryComponent implements OnInit, OnDestroy {
           forwards.forEach(player => {
             this.teamRoster.push(player);
           });
-          console.log(this.teamRoster)
+          // console.log(this.teamRoster)
           this.getTotalsForRoster();
           this.isLoading = false;
         });
