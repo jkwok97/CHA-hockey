@@ -35,6 +35,18 @@ export class MainService {
     return this._http.get(`${environment.back_end_url}/nhl-leaders/`, options);
   }
 
+  getNHLsummary(season, player, statsType, sort, start, pageSize) {
+    let options = {params: new HttpParams()
+      .set('season', season)
+      .set('playerType', player)
+      .set('statsType', statsType)
+      .set('sort', sort)
+      .set('start', start)
+      .set('pageSize', pageSize)
+    }
+    return this._http.get(`${environment.back_end_url}/nhl-leaders/summary`, options);
+  }
+
   getChaTeam(player, type) {
     let options = {params: new HttpParams()
       .set('player', player)
