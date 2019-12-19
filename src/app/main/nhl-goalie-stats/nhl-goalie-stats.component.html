@@ -41,7 +41,7 @@
             </ng-container>
             
             <ng-container matColumnDef="goalsAgainstAverage">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true" start='desc'> GAA </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true" start='asc'> GAA </th>
                 <td mat-cell *matCellDef="let player"> {{player.goalsAgainstAverage.toFixed(2)}} </td>
             </ng-container>
             
@@ -51,7 +51,7 @@
             </ng-container>
             
             <ng-container matColumnDef="losses">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true" start='desc'> L </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true" start='asc'> L </th>
                 <td mat-cell *matCellDef="let player"> {{player.losses}} </td>
             </ng-container>
 
