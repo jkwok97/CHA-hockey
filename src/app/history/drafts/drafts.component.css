@@ -50,3 +50,8 @@
 .mat-paginator {
     width: 90%;
 }
+
+.table img {
+    height: 30px;
+    width: 30px;
+}

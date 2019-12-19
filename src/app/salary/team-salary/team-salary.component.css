@@ -92,17 +92,13 @@
 }
 
 .team-summary {
-    /* border: 1px solid blue; */
-    /* background-color: #424242; */
     background-color: black;
     width: 100%;
-    /* padding: 10px; */
-    /* height: 100%; */
 }
 
 .team-summary-players {
     width: 100%;
-    font-weight: 100;
+    font-weight: 300;
     color: white;
     text-align: center;
     font-size: small;
@@ -117,7 +113,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-weight: 100;
+    font-weight: 300;
     color: white;
     text-align: center;
     font-size: small;
@@ -137,12 +133,14 @@
 
 .red-text {
     color: red;
-    font-weight: 300;
+    font-weight: 500;
+    font-style: italic;
 }
 
 .green-text {
     color: green;
-    font-weight: 300;
+    font-weight: 500;
+    font-style: italic;
 }
 
 /* *************************** MEDIA QUERIES **************************** */

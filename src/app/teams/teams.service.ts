@@ -220,6 +220,7 @@ export class TeamsService {
       { name: "Tallahasse Crimsontide", shortName: "TAL", image: "../../assets/team_logos/crimsontide.png", owner: "Darren Ward" },
       { name: "Portland Beavers", shortName: "POR", image: "../../assets/team_logos/beavers.png", owner: "Jeff Muggleston" },
       { name: "Houston Comets", shortName: "HOU", image: "../../assets/team_logos/comets.png", owner: "Al Godfrey" },
+      { name: "Salem Grave Diggers", shortName: "SGD", image: "../../assets/team_logos/gravediggers.png", owner: "Tim Ross" },
     ]
   }
 

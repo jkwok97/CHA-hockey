@@ -40,14 +40,21 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Position </th>
                 <td mat-cell *matCellDef="let player"> {{player.player_pos}} </td>
             </ng-container>
+
+            <ng-container matColumnDef="team_logo">
+                <th mat-header-cell *matHeaderCellDef><span *ngIf="isMobile">Team</span></th>
+                <td mat-cell *matCellDef="let player"> 
+                    <img src="{{ findLogo(player.teamshort).image }}"> 
+                </td>
+            </ng-container>
             
             <ng-container matColumnDef="team">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Team </th>
                 <td mat-cell *matCellDef="let player"> {{player.team}} </td>
             </ng-container>
             
-            <tr mat-header-row *matHeaderRowDef="playersColumnsToDisplay"></tr>
-            <tr mat-row *matRowDef="let row; columns: playersColumnsToDisplay;"></tr>
+            <tr mat-header-row *matHeaderRowDef="isMobile ? playersMobileColumnsToDisplay : playersColumnsToDisplay"></tr>
+            <tr mat-row *matRowDef="let row; columns: isMobile ? playersMobileColumnsToDisplay : playersColumnsToDisplay;"></tr>
 
         </table>
 
