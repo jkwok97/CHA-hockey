@@ -11,7 +11,7 @@
 
     <div class="team-header" [style.background-color]='team.color'>
         <img src="{{team.image}}">
-        <p>{{team.name}}</p>
+        <p [style.color]='team.fontColor'>{{team.name}}</p>
     </div>
 
     <div class="stat-container">

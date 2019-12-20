@@ -50,32 +50,34 @@ mat-paginator {
 }
 
 .teamInfoSection {
+    margin-top: 5px;
     width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.teamInfoSection img {
+    height: 150px;
+    width: 150px;
+    margin: 5px 0 5px 10px;
 }
 
 .teamInfoSection h1 {
-    color: white;
-    text-align: center;
-    font-size: x-large;
+    text-align: left;
+    font-size: xx-large;
     font-weight: 100;
-    /* cursor: pointer; */
 }
 
 .teamInfoSection p {
-    color: white;
-    text-align: center;
+    text-align: left;
     font-size: medium;
+    font-weight: 200;
 }
 
 .teamCard {
     width: 100%;
     height: 100%;
-}
-
-.teamName {
-    display: flex;
-    justify-content: center;
-    align-content: center;
 }
 
 .teamNameHeader {
@@ -90,16 +92,6 @@ mat-paginator {
     font-size: larger;
 }
 
-.teamImage {
-    display: flex;
-    align-items: center;
-}
-
-.teamImage img {
-    height: 75px;
-    width: 75px;
-}
-
 .table {
     border: 1px solid red;
     width: 100%;
@@ -107,4 +99,13 @@ mat-paginator {
 
 .stats {
     overflow-y: auto;
+}
+
+/* ***** IPHONE 6/7/8 ***** */
+@media screen and (max-width: 414px) {
+    .teamInfoSection img {
+        height: 100px;
+        width: 100px;
+        margin: 5px 0 5px 10px;
+    }
 }

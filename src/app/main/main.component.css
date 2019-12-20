@@ -41,7 +41,6 @@
 
 .team-header {
     margin-top: 5px;
-    /* height: 15%; */
     width: 100%;
     display: flex;
     justify-content: flex-start;
@@ -55,7 +54,6 @@
 }
 
 .team-header p {
-    color: white;
     font-size: xx-large;
     font-weight: 200;
     margin-left: 20px;
