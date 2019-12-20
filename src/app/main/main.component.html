@@ -9,15 +9,9 @@
         </mat-form-field>
     </div>
 
-    <div class="team-header">
-        <div class="image">
-            <img src="{{team.image}}">
-            <div class="team-name">
-                <p>{{team.name}}</p>
-                <!-- <button mat-raised-button color="accent" (click)="toSalaryPage(team.link)">Salary Page</button> -->
-            </div>
-            <img src="{{team.image}}">
-        </div>
+    <div class="team-header" [style.background-color]='team.color'>
+        <img src="{{team.image}}">
+        <p>{{team.name}}</p>
     </div>
 
     <div class="stat-container">
