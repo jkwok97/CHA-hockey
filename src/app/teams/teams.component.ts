@@ -30,7 +30,7 @@ export class TeamsComponent implements OnInit, OnDestroy, AfterViewInit {
         this.historicTeam = true;
         let year = this._route.snapshot.url[2].path;
         let type = this._route.snapshot.url[3].path;
-        this.team = this.stats.find(season => season.playing_year === year && season.season_type === type)
+        this.team = this.stats.find(season => season.playing_year === year && season.season_type === type);
       } else {
         this.team = this.stats[0];
       }
