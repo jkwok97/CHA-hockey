@@ -84,7 +84,7 @@ export class NhlGoalieStatsComponent implements OnInit, OnDestroy {
   }
 
   onSort(event) {
-    console.log(event);
+    // console.log(event);
     this.start = 0;
     this.sortOrder = (event.direction).toUpperCase();
     this.sortType = event.active;
@@ -92,7 +92,8 @@ export class NhlGoalieStatsComponent implements OnInit, OnDestroy {
   }
 
   openPlayer(player) {
-    this._router.navigate([`/stats/players/${player.playerLastName}, ${player.playerFirstName}`]);
+    // console.log(player);
+    this._router.navigate([`/stats/players/${player.lastName}, ${player.firstName}`]);
     this._teamsService.setPlayerPosition(player.playerPositionCode);
     this._teamsService.setPlayerHits(player.shots);
     window.scrollTo(0,0);

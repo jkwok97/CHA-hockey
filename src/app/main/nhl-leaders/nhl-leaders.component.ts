@@ -72,9 +72,10 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
   }
 
   openPlayer(player) {
-    this._router.navigate([`/stats/players/${player.playerLastName}, ${player.playerFirstName}`]);
-    this._teamsService.setPlayerPosition(player.playerPositionCode);
-    this._teamsService.setPlayerHits(player.shots);
+    // console.log(player);
+    this._router.navigate([`/stats/players/${player.player.lastName}, ${player.player.firstName}`]);
+    this._teamsService.setPlayerPosition(player.player.playerPositionCode);
+    this._teamsService.setPlayerHits("1");
     window.scrollTo(0,0);
   }
 
