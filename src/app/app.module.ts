@@ -47,6 +47,7 @@ import { NhlLeadersComponent } from './main/nhl-leaders/nhl-leaders.component';
 import { NhlPlayersStatsComponent } from './main/nhl-players-stats/nhl-players-stats.component';
 import { NhlGoalieStatsComponent } from './main/nhl-goalie-stats/nhl-goalie-stats.component';
 import { TeamSalaryComponent } from './salary/team-salary/team-salary.component';
+import { PlayoffTreeComponent } from './schedule/playoff-tree/playoff-tree.component';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import { TeamSalaryComponent } from './salary/team-salary/team-salary.component'
     NhlLeadersComponent,
     NhlPlayersStatsComponent,
     NhlGoalieStatsComponent,
-    TeamSalaryComponent
+    TeamSalaryComponent,
+    PlayoffTreeComponent
   ],
   imports: [
     BrowserModule,
