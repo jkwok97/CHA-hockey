@@ -35,6 +35,16 @@ export class MainService {
     return this._http.get(`${environment.back_end_url}/nhl-leaders/`, options);
   }
 
+  getNhlRookieLeaders(season, player, stat) {
+    // console.log(season, player, stat);
+    let options = {params: new HttpParams()
+      .set('season', season)
+      .set('playerType', player)
+      .set('statType', stat)
+    }
+    return this._http.get(`${environment.back_end_url}/nhl-rookie-leaders/`, options);
+  }
+
   getNHLsummary(season, player, statsType, sort, start, pageSize) {
     let options = {params: new HttpParams()
       .set('season', season)
@@ -45,6 +55,18 @@ export class MainService {
       .set('pageSize', pageSize)
     }
     return this._http.get(`${environment.back_end_url}/nhl-leaders/summary`, options);
+  }
+
+  getNHLRookiesummary(season, player, statsType, sort, start, pageSize) {
+    let options = {params: new HttpParams()
+      .set('season', season)
+      .set('playerType', player)
+      .set('statsType', statsType)
+      .set('sort', sort)
+      .set('start', start)
+      .set('pageSize', pageSize)
+    }
+    return this._http.get(`${environment.back_end_url}/nhl-rookie-leaders/summary`, options);
   }
 
   getChaTeam(player, type) {

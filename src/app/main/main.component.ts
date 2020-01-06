@@ -21,6 +21,7 @@ export class MainComponent implements OnInit, OnDestroy {
   isMobile: boolean;
   showPlayersStats: boolean = false;
   showGoalieStats: boolean = false;
+  showRookieStats: boolean = false;
 
   currentUser: User;
 
@@ -137,11 +138,19 @@ export class MainComponent implements OnInit, OnDestroy {
     this.currentSeason = this._teamsService.currentSeason;
     this.currentSeasonType = this._teamsService.currentSeasonType;
     this._mainService.listenerFullPageStats().pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      // console.log(resp);
+      console.log(resp);
       if (resp === "players") {
         this.showPlayersStats = true;
+        this.showGoalieStats = false;
+        this.showRookieStats = false;
       } else if (resp === "goalies") {
         this.showGoalieStats = true;
+        this.showRookieStats = false;
+        this.showPlayersStats = false;
+      } else if (resp === "rookies") {
+        this.showRookieStats = true;
+        this.showPlayersStats = false;
+        this.showGoalieStats = false;
       }
     });
     this._teamsService.getLeagueTeamsStats(this.currentSeason).pipe(takeWhile(() => this._alive)).subscribe(resp => {
@@ -174,6 +183,7 @@ export class MainComponent implements OnInit, OnDestroy {
   showLeaders() {
     this.showPlayersStats = false;
     this.showGoalieStats = false;
+    this.showRookieStats = false;
   }
 
   checkMobile() {

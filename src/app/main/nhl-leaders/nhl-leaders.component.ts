@@ -24,11 +24,20 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
   points: MatTableDataSource<any[]>;
   pointsColumnsToDisplay = ['team_logo','playerName', 'points'];
 
+  rookiePoints: MatTableDataSource<any[]>;
+  rookiePointsColumnsToDisplay = ['team_logo','playerName', 'points'];
+
   goals: MatTableDataSource<any[]>;
   goalsColumnsToDisplay = ['team_logo', 'playerName', 'goals'];
 
+  rookieGoals: MatTableDataSource<any[]>;
+  rookieGoalsColumnsToDisplay = ['team_logo', 'playerName', 'goals'];
+
   assists: MatTableDataSource<any[]>;
   assistsColumnsToDisplay = ['team_logo', 'playerName', 'assists'];
+
+  rookieAssists: MatTableDataSource<any[]>;
+  rookieAssistsColumnsToDisplay = ['team_logo', 'playerName', 'assists'];
 
   shPoints: MatTableDataSource<any[]>;
   shPointsColumnsToDisplay = ['team_logo', 'playerName', 'shPoints'];
@@ -61,6 +70,9 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
     this.getNHLGaaLeaders();
     this.getNHLSavePctLeaders();
     this.getNHLShutoutsLeaders();
+    this.getNHLRookieLeaders("points");
+    this.getNHLRookieLeaders("goals");
+    this.getNHLRookieLeaders("assists");
   }
 
   sendToFullPlayers() {
@@ -69,6 +81,10 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
 
   sendToFullGoalies() {
     this._mainService.triggerFullPageStats("goalies");
+  }
+
+  sendToFullRookies() {
+    this._mainService.triggerFullPageStats("rookies");
   }
 
   openPlayer(player) {
@@ -108,6 +124,50 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
     } else {
       return { image: "../../assets/team_logos/Free_Agent_logo_square.jpg", name: "Free Agent"}
     }
+  }
+
+  findNHLLogo(player) {
+    let logo = player.team.logos.sort((a,b) => b['endSeason'] - a['endSeason']);
+    return logo[0].url;
+  }
+
+  getNHLRookieLeaders(type) {
+    this._mainService.getNhlRookieLeaders(this.currentSeason, "skater", type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      // console.log(resp);
+      let tempLeaders = resp as [];
+      if (type === "points") {
+        this.getRookiePointLeaders(tempLeaders);
+      } else if (type === "goals") {
+        this.getRookieGoalsLeaders(tempLeaders);
+      } else if (type === "assists") {
+        this.getRookieAssistsLeaders(tempLeaders);
+      }
+    }, error => {
+      console.log(error);
+      this.errored = true;
+      this.isLoading = false;
+    });
+  }
+  
+  getRookieAssistsLeaders(leaders) {
+    let rookieAssistsLeaders = [];
+    leaders.forEach(element => { rookieAssistsLeaders.push(element); });
+    this.rookieAssists = new MatTableDataSource<any[]>(rookieAssistsLeaders);
+    this.isLoading = false;
+  }
+
+  getRookieGoalsLeaders(leaders) {
+    let rookieGoalsLeaders = [];
+    leaders.forEach(element => { rookieGoalsLeaders.push(element); });
+    this.rookieGoals = new MatTableDataSource<any[]>(rookieGoalsLeaders);
+    this.isLoading = false;
+  }
+
+  getRookiePointLeaders(leaders) {
+    let rookiePointLeaders = [];
+    leaders.forEach(element => { rookiePointLeaders.push(element); });
+    this.rookiePoints = new MatTableDataSource<any[]>(rookiePointLeaders);
+    this.isLoading = false;
   }
 
   getNHLPointLeaders() {

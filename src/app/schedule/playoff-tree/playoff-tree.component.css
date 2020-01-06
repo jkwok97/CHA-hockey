@@ -106,7 +106,8 @@
 }
 
 .team-card {
-    width: 65%;
+    width: 80%;
+    height: 150px;
     margin: 5px;
     display: flex;
     justify-content: space-evenly;
@@ -161,9 +162,9 @@
 .versus {
     font-size: x-large;
     font-weight: 100;
-    width:100%;
+    width: 100%;
     text-align: center;
-    margin: 0;
+    margin: 5px 0;
 }
 
 .champion-versus {
@@ -179,4 +180,8 @@
     text-align: center;
     width: 100;
     color: whitesmoke;
+}
+
+.mat-card-image {
+    max-height: 75px;
 }

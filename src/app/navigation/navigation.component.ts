@@ -74,7 +74,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.currentSeasonType = this._teamsService.currentSeasonType;
     if (this.currentSeasonType === "Playoffs") {
       let found = this.routes.find(route => route.name === "Schedule");
-      console.log(found);
+      // console.log(found);
       found.name = "Playoff Tree";
       found.url = "playoffTree";
       found.current = false;

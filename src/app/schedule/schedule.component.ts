@@ -13,7 +13,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   isLoading: boolean = false;
 
   schedulePage: any;
-  range: string = 'a362:f821'
+  range: string = 'a402:f821'
 
   constructor(
     private sanitizer: DomSanitizer

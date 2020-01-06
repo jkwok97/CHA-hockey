@@ -12,17 +12,17 @@
                     <div class="matchup-card">
                         <div class="team-card">
                             <mat-card class="team">
-                                <img mat-card-image src="../../../assets/team_logos/Vipers.png">
+                                <img mat-card-image src="{{ findLogo(westernStats[0].team_name).image }}">
                                 <mat-card-content>
                                     <p class="seed">Seed 1</p>
                                 </mat-card-content>
                             </mat-card>
-                            <p class="west-wins">4</p>
+                            <p class="west-wins">0</p>
                         </div>
                         <p class="versus">Vs.</p>
                         <div class="team-card">
                             <mat-card class="team">
-                                <img mat-card-image src="../../../assets/team_logos/OilBarons.png">
+                                <img mat-card-image src="{{ findLogo(westernStats[7].team_name).image }}">
                                 <mat-card-content>
                                     <p class="seed">Seed 8</p>
                                 </mat-card-content>
@@ -36,22 +36,22 @@
                     <div class="matchup-card">
                         <div class="team-card">
                             <mat-card class="team">
-                                <img mat-card-image src="../../../assets/team_logos/Storm.png">
+                                <img mat-card-image src="{{ findLogo(westernStats[3].team_name).image }}">
                                 <mat-card-content>
                                     <p class="seed">Seed 4</p>
                                 </mat-card-content>
                             </mat-card>
-                            <p class="west-wins">4</p>
+                            <p class="west-wins">0</p>
                         </div>
                         <p class="versus">Vs.</p>
                         <div class="team-card">
                             <mat-card class="team">
-                                <img mat-card-image src="../../../assets/team_logos/Cocks.png">
+                                <img mat-card-image src="{{ findLogo(westernStats[4].team_name).image }}">
                                 <mat-card-content>
                                     <p class="seed">Seed 5</p>
                                 </mat-card-content>
                             </mat-card>
-                            <p class="west-wins">1</p>
+                            <p class="west-wins">0</p>
                         </div>
                     </div>
                 </div>
@@ -60,23 +60,23 @@
                     <div class="matchup-card">
                         <div class="team-card">
                             <mat-card class="team">
-                                <img mat-card-image src="../../../assets/team_logos/Desperado.png">
+                                <img mat-card-image src="{{ findLogo(westernStats[2].team_name).image }}">
                                 <mat-card-content>
                                     <p class="seed">Seed 3</p>
                                 </mat-card-content>
                             </mat-card>
-                            <p class="west-wins">4</p>
+                            <p class="west-wins">0</p>
                         </div>
     
                         <p class="versus">Vs.</p>
                         <div class="team-card">
                             <mat-card class="team">
-                                <img mat-card-image src="../../../assets/team_logos/Mountaineers.png">
+                                <img mat-card-image src="{{ findLogo(westernStats[5].team_name).image }}">
                                 <mat-card-content>
                                     <p class="seed">Seed 6</p>
                                 </mat-card-content>
                             </mat-card>
-                            <p class="west-wins">1</p>
+                            <p class="west-wins">0</p>
                         </div>
                     </div>
                 </div>
@@ -85,22 +85,22 @@
                     <div class="matchup-card">
                         <div class="team-card">
                             <mat-card class="team">
-                                <img mat-card-image src="../../../assets/team_logos/Assassins.png">
+                                <img mat-card-image src="{{ findLogo(westernStats[1].team_name).image }}">
                                 <mat-card-content>
                                     <p class="seed">Seed 2</p>
                                 </mat-card-content>
                             </mat-card>
-                            <p class="west-wins">2</p>
+                            <p class="west-wins">0</p>
                         </div>
                         <p class="versus">Vs.</p>
                         <div class="team-card">
                             <mat-card class="team">
-                                <img mat-card-image src="../../../assets/team_logos/Wolfpack.png">
+                                <img mat-card-image src="{{ findLogo(westernStats[6].team_name).image }}">
                                 <mat-card-content>
                                     <p class="seed">Seed 7</p>
                                 </mat-card-content>
                             </mat-card>
-                            <p class="west-wins">4</p>
+                            <p class="west-wins">0</p>
                         </div>
                     </div>
                 </div>
@@ -116,7 +116,7 @@
 
             <div class="matchup-container">
 
-                <div class="matchup">
+                <!-- <div class="matchup">
                     <div class="matchup-card">
                         <div class="team-card">
                             <mat-card class="team">
@@ -138,9 +138,9 @@
                             <p class="west-wins">4</p>
                         </div>
                     </div>
-                </div>
+                </div> -->
     
-                <div class="matchup">
+                <!-- <div class="matchup">
                     <div class="matchup-card">
                         <div class="team-card">
                             <mat-card class="team">
@@ -162,7 +162,7 @@
                             <p class="west-wins">4</p>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
             </div>
 
@@ -175,7 +175,7 @@
             </div>
 
             <div class="matchup-container">
-                <div class="matchup">
+                <!-- <div class="matchup">
                     <div class="matchup-card">
                         <div class="team-card">
                             <mat-card class="team">
@@ -197,7 +197,7 @@
                             <p class="west-wins">4</p>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 
         </div>
@@ -205,14 +205,14 @@
 
     <div class="champion-container">
 
-        <p class="champion-header">2019 CHA Playoffs</p>
+        <p class="champion-header">2020 CHA Playoffs</p>
 
-        <div class="champion">
+        <!-- <div class="champion">
             <img mat-card-image src="../../../assets/team_logos/KillerBees.png">
             <p class="champion-name">Staten Island Killer Bees</p>
-        </div>
+        </div> -->
 
-        <div class="champion-matchup">
+        <!-- <div class="champion-matchup">
 
             <div class="champion-matchup-card">
                 <p class="championship-header">Championship</p>
@@ -237,7 +237,7 @@
                 </div>
             </div>
 
-        </div>
+        </div> -->
 
     </div>
 
@@ -248,7 +248,7 @@
             </div>
             <div class="matchup-container">
 
-                <div class="matchup">
+                <!-- <div class="matchup">
                     <div class="matchup-card">
                         <div class="team-card">
                             <p class="east-wins">2</p>
@@ -270,7 +270,7 @@
                             </mat-card>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
             </div>
         </div>
@@ -280,7 +280,7 @@
             </div>
             <div class="matchup-container">
 
-                <div class="matchup">
+                <!-- <div class="matchup">
                     <div class="matchup-card">
                         <div class="team-card">
                             <p class="east-wins">3</p>
@@ -302,9 +302,9 @@
                             </mat-card>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
-                <div class="matchup">
+                <!-- <div class="matchup">
                     <div class="matchup-card">
                         <div class="team-card">
                             <p class="east-wins">1</p>
@@ -326,7 +326,7 @@
                             </mat-card>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
             </div>
         </div>
@@ -339,9 +339,9 @@
                 <div class="matchup">
                     <div class="matchup-card">
                         <div class="team-card">
-                            <p class="east-wins">4</p>
+                            <p class="east-wins">0</p>
                             <mat-card class="team">
-                                <img mat-card-image src="../../../assets/team_logos/Dragons.png">
+                                <img mat-card-image src="{{ findLogo(easternStats[0].team_name).image }}">
                                 <mat-card-content>
                                     <p class="seed">Seed 1</p>
                                 </mat-card-content>
@@ -349,9 +349,9 @@
                         </div>
                         <p class="versus">Vs.</p>
                         <div class="team-card">
-                            <p class="east-wins">1</p>
+                            <p class="east-wins">0</p>
                             <mat-card class="team">
-                                <img mat-card-image src="../../../assets/team_logos/Glory.png">
+                                <img mat-card-image src="{{ findLogo(easternStats[7].team_name).image }}">
                                 <mat-card-content>
                                     <p class="seed">Seed 8</p>
                                 </mat-card-content>
@@ -363,9 +363,9 @@
                 <div class="matchup">
                     <div class="matchup-card">
                         <div class="team-card">
-                            <p class="east-wins">4</p>
+                            <p class="east-wins">0</p>
                             <mat-card class="team">
-                                <img mat-card-image src="../../../assets/team_logos/KillerBees.png">
+                                <img mat-card-image src="{{ findLogo(easternStats[3].team_name).image }}">
                                 <mat-card-content>
                                     <p class="seed">Seed 4</p>
                                 </mat-card-content>
@@ -373,9 +373,9 @@
                         </div>
                         <p class="versus">Vs.</p>
                         <div class="team-card">
-                            <p class="east-wins">2</p>
+                            <p class="east-wins">0</p>
                             <mat-card class="team">
-                                <img mat-card-image src="../../../assets/team_logos/voodoo.png">
+                                <img mat-card-image src="{{ findLogo(easternStats[4].team_name).image }}">
                                 <mat-card-content>
                                     <p class="seed">Seed 5</p>
                                 </mat-card-content>
@@ -387,9 +387,9 @@
                 <div class="matchup">
                     <div class="matchup-card">
                         <div class="team-card">
-                            <p class="east-wins">4</p>
+                            <p class="east-wins">0</p>
                             <mat-card class="team">
-                                <img mat-card-image src="../../../assets/team_logos/Cyclones.png">
+                                <img mat-card-image src="{{ findLogo(easternStats[2].team_name).image }}">
                                 <mat-card-content>
                                     <p class="seed">Seed 3</p>
                                 </mat-card-content>
@@ -397,9 +397,9 @@
                         </div>
                         <p class="versus">Vs.</p>
                         <div class="team-card">
-                            <p class="east-wins">1</p>
+                            <p class="east-wins">0</p>
                             <mat-card class="team">
-                                <img mat-card-image src="../../../assets/team_logos/Prowlers.png">
+                                <img mat-card-image src="{{ findLogo(easternStats[5].team_name).image }}">
                                 <mat-card-content>
                                     <p class="seed">Seed 6</p>
                                 </mat-card-content>
@@ -411,9 +411,9 @@
                 <div class="matchup">
                     <div class="matchup-card">
                         <div class="team-card">
-                            <p class="east-wins">4</p>
+                            <p class="east-wins">0</p>
                             <mat-card class="team">
-                                <img mat-card-image src="../../../assets/team_logos/Goats.png">
+                                <img mat-card-image src="{{ findLogo(easternStats[1].team_name).image }}">
                                 <mat-card-content>
                                     <p class="seed">Seed 2</p>
                                 </mat-card-content>
@@ -423,7 +423,7 @@
                         <div class="team-card">
                             <p class="east-wins">0</p>
                             <mat-card class="team">
-                                <img mat-card-image src="../../../assets/team_logos/GreenJackets.png">
+                                <img mat-card-image src="{{ findLogo(easternStats[6].team_name).image }}">
                                 <mat-card-content>
                                     <p class="seed">Seed 7</p>
                                 </mat-card-content>
