@@ -427,4 +427,8 @@ export class TeamsService {
     return this._http.get(`${environment.back_end_url}/goalie-ratings/${name}`);
   }
 
+  getDraftTable() {
+    return this._http.get(`${environment.back_end_url}/draft-table/`);
+  }
+
 }
