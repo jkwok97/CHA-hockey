@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TeamsService } from 'src/app/teams/teams.service';
 import { takeWhile } from 'rxjs/operators';
 import { SalaryService } from '../salary.service';
@@ -56,7 +56,8 @@ export class TeamSalaryComponent implements OnInit, OnDestroy {
   constructor(
     private _route: ActivatedRoute,
     private _teamsService: TeamsService,
-    private _salaryService: SalaryService
+    private _salaryService: SalaryService,
+    private _router: Router
   ) { }
 
   ngOnInit() {
@@ -187,6 +188,13 @@ export class TeamSalaryComponent implements OnInit, OnDestroy {
       })
       return total;
     }
+  }
+
+  openPlayer(name, team, position, hits) {
+    this._router.navigate([`/stats/players/${name}`]);
+    this._teamsService.setPlayerPosition(position);
+    this._teamsService.setPlayerHits(hits);
+    window.scrollTo(0,0);
   }
 
   ngOnDestroy() {

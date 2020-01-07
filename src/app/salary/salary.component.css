@@ -18,6 +18,11 @@
     width: 300px;
 }
 
+.mat-row:hover {
+    background-color: rgb(61, 90, 254);
+    cursor: pointer;
+}
+
 /* .frame {
     height: 724px;
     width: 1474px;

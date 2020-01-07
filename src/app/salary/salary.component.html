@@ -85,7 +85,11 @@
                 </ng-container>
     
                 <tr mat-header-row *matHeaderRowDef="isMobile ? mobileAllSalariesColumnsToDisplay: allSalariesColumnsToDisplay"></tr>
-                <tr mat-row *matRowDef="let player; columns: isMobile ? mobileAllSalariesColumnsToDisplay: allSalariesColumnsToDisplay;"></tr>
+                <tr 
+                    mat-row 
+                    *matRowDef="let player; columns: isMobile ? mobileAllSalariesColumnsToDisplay: allSalariesColumnsToDisplay;"
+                    (click)="openPlayer(player.player_name, player.team_name, player.position, player.hits)"
+                ></tr>
     
             </table>
     

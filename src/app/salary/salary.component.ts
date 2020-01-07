@@ -134,6 +134,13 @@ export class SalaryComponent implements OnInit, OnDestroy {
         }
   }
 
+  openPlayer(name, team, position, hits) {
+    this._router.navigate([`/stats/players/${name}`]);
+    this._teamsService.setPlayerPosition(position);
+    this._teamsService.setPlayerHits(hits);
+    window.scrollTo(0,0);
+  }
+
   ngOnDestroy() {
     this._alive = false;
     this.teams = [];

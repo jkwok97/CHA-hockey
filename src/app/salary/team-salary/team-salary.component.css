@@ -143,6 +143,11 @@
     font-style: italic;
 }
 
+.mat-row:hover {
+    background-color: rgb(61, 90, 254);
+    cursor: pointer;
+}
+
 /* *************************** MEDIA QUERIES **************************** */
 
 @media screen and (max-width: 800px) {
