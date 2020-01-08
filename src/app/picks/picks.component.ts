@@ -23,7 +23,7 @@ export class PicksComponent implements OnInit, OnDestroy {
 
   draft: MatTableDataSource<any[]>;
   draftColumnsToDisplay = ['pick', 'team_logo', 'team_name', 'round_one', 'round_two', 'round_three', 'round_four', 'round_five'];
-  draftMobileColumnsToDisplay = ['team_logo', 'round_one', 'round_two', 'round_three', 'round_four', 'round_five'];
+  draftMobileColumnsToDisplay = ['pick', 'round_one', 'round_two', 'round_three', 'round_four', 'round_five'];
 
   constructor(
     private sanitizer: DomSanitizer,
