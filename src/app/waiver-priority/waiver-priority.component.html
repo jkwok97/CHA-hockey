@@ -4,7 +4,40 @@
         <mat-spinner color="accent"></mat-spinner>
     </div>
 
-    <div [ngClass]="{'frame': !isMobile, 'mobile-frame': isMobile}" *ngIf="!isLoading">
-        <iframe [src]="waiverPage" class="iframe"></iframe>
+    <div class="tableHeader">
+        <p>Waiver Wire Priority</p>
     </div>
+    
+    <div [ngClass]="{'playerStatsTable': !isMobile, 'playerStatsTableMobile' : isMobile}" *ngIf="!isLoading">
+    
+        <div class="table">
+    
+            <table mat-table [dataSource]="waiver" matSort class="mat-elevation-z8 full-width" matSortActive="priority_number" matSortDirection="asc">
+    
+                <ng-container matColumnDef="pick">
+                    <th mat-header-cell *matHeaderCellDef> Priority No. </th>
+                    <td mat-cell *matCellDef="let team; let i = index"> {{i+1}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="team_logo" sticky>
+                    <th mat-header-cell *matHeaderCellDef> Logo </th>
+                    <td mat-cell *matCellDef="let team"> 
+                        <img src="{{ findLogo(team.team_name).image }}"> 
+                    </td>
+                </ng-container>
+    
+                <ng-container matColumnDef="team_name">
+                    <th mat-header-cell *matHeaderCellDef> Team </th>
+                    <td mat-cell *matCellDef="let team"> {{ findLogo(team.team_name).name}} </td>
+                </ng-container>
+                
+                <tr mat-header-row *matHeaderRowDef="isMobile ? waiverMobileColumnsToDisplay : waiverColumnsToDisplay;"></tr>
+                <tr mat-row *matRowDef="let team; columns: isMobile ? waiverMobileColumnsToDisplay : waiverColumnsToDisplay;"></tr>
+    
+            </table>
+    
+        </div>
+    
+    </div> 
+
 </div>

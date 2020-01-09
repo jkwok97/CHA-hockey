@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { TeamsService } from '../teams/teams.service';
+import { takeWhile } from 'rxjs/operators';
+import { MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-waiver-priority',
@@ -14,18 +16,36 @@ export class WaiverPriorityComponent implements OnInit, OnDestroy {
 
   waiverPage: any;
 
+  teams = [];
+
+  waiver: MatTableDataSource<any[]>;
+  waiverColumnsToDisplay = ['pick', 'team_logo', 'team_name',];
+  waiverMobileColumnsToDisplay = ['pick', 'team_logo'];
+
   constructor(
-    private sanitizer: DomSanitizer
+    private _teamsService: TeamsService
   ) {
     this.checkMobile();
    }
 
   ngOnInit() {
     this.isLoading = true;
-    setTimeout(() => {
-      this.waiverPage = this.sanitizer.bypassSecurityTrustResourceUrl("https://docs.google.com/spreadsheets/d/e/2PACX-1vT2ElnsHkbexgaMCN5AVxLhcF3_8vCi56L4QW_umZ-cuPOn3_EC3fHEuJgf7C1Hz61-uVhhSoaQqx-F/pubhtml?widget=false&headers=false&chrome=false");
+    this._teamsService.getWaiverTeams().pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      // console.log(resp);
+      this.teams = resp as [];
+      this.teams.sort((a,b) => a.priority_number - b.priority_number);
+      this.waiver = new MatTableDataSource<any[]>(this.teams);
       this.isLoading = false;
-    }, 500);
+    });
+  }
+
+  findLogo(shortName) {
+    if (shortName) {
+      let team = this._teamsService.getTeamInfo(shortName);
+      return { image: team.image, name: team.name }
+    } else {
+      return { image: "../../assets/team_logos/Free_Agent_logo_square.jpg", name: "Free Agent"}
+    }
   }
 
   checkMobile() {

@@ -431,4 +431,8 @@ export class TeamsService {
     return this._http.get(`${environment.back_end_url}/draft-table/`);
   }
 
+  getWaiverTeams() {
+    return this._http.get(`${environment.back_end_url}/waivers/`);
+  }
+
 }
