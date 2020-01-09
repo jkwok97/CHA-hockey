@@ -435,4 +435,14 @@ export class TeamsService {
     return this._http.get(`${environment.back_end_url}/waivers/`);
   }
 
+  getAllSchedule() {
+    return this._http.get(`${environment.back_end_url}/schedule/`);
+  }
+
+  getDaySchedule(day) {
+    let options = {params: new HttpParams()
+      .set('day', day)}
+    return this._http.get(`${environment.back_end_url}/schedule/`, options);
+  }
+
 }
