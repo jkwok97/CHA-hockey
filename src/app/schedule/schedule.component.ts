@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+// import { DomSanitizer } from '@angular/platform-browser';
 import { TeamsService } from '../teams/teams.service';
 import { takeWhile } from 'rxjs/operators';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
@@ -36,7 +36,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   constructor(
-    private sanitizer: DomSanitizer,
+    // private sanitizer: DomSanitizer,
     private _teamsService: TeamsService
   ) { 
     this.currentSeason = this._teamsService.currentSeason;
@@ -70,7 +70,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   }
 
   changeSchedule(value) {
-    console.log(value);
+    // console.log(value);
     if (value === "all") {
       this.showAll = true;
       this.isLoading = true;
@@ -108,12 +108,14 @@ export class ScheduleComponent implements OnInit, OnDestroy {
       }, 350);
     })
     // console.log(this.days);
-    this.isLoading = false;
+    setTimeout(() => {
+      this.isLoading = false;
+    },1500);
   }
 
   getAllSchedule() {
     this._teamsService.getAllSchedule().pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       this.days = resp as [];
       this.allSchedule = new MatTableDataSource<any[]>(this.days);
       this.length = this.days.length;
