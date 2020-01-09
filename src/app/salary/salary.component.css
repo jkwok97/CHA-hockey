@@ -23,18 +23,6 @@
     cursor: pointer;
 }
 
-/* .frame {
-    height: 724px;
-    width: 1474px;
-    overflow: auto;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    background-color: black;
-} */
-
 .frame {
     width: 95%;
     /* border: 1px solid red; */
