@@ -201,7 +201,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     this.populateMatchUpRecord(this.days);
     setTimeout(() => {
       this.isLoading = false;
-    },1500);
+    },2000);
   }
 
   populateMatchUpRecord(days) {
@@ -214,7 +214,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
           game.vis_team_loss = versusFound.matchupWins;
           game.vis_team_ties = versusFound.matchupTie;
         })
-      }, 350);
+      }, 1000);
     })
   }
 
