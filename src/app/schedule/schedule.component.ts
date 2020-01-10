@@ -25,8 +25,8 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   days = [];
 
   allSchedule: MatTableDataSource<any[]>;
-  mobileAllScheduleColumnsToDisplay = [ 'game_day', 'vis_team', 'versus', 'home_team' ];
-  allScheduleColumnsToDisplay = [ 'game_day', 'vis_team', 'vis_team_name', 'versus', 'home_team', 'home_team_name' ];
+  mobileAllScheduleColumnsToDisplay = [ 'game_day', 'vis_team', 'versus', 'home_team', 'result' ];
+  allScheduleColumnsToDisplay = [ 'game_day', 'vis_team', 'vis_team_name', 'vis_team_score', 'versus', 'home_team', 'home_team_name', 'home_team_score' ];
 
   page: number = 1;
   pageSize: number = 25;
