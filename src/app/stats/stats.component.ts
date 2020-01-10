@@ -133,7 +133,7 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.checkMobile();
-    console.log(this.isMobile);
+    // console.log(this.isMobile);
     this.isLeadersLoading = true;
     this.isGoaliesLoading = true;
     this.isLeagueLoading = true;

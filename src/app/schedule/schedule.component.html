@@ -32,7 +32,7 @@
                         Record: {{game.vis_team_stats.wins}}-{{game.vis_team_stats.loss}}-{{game.vis_team_stats.ties}}
                     </p>
                     <p class="stat">
-                        Vs. {{game.home_team_name}}: {{game.vis_team_wins}}-{{game.vis_team_loss}}-{{game.vis_team_ties}}
+                        Vs. {{ game.home_team_name | titlecase }}: {{game.vis_team_wins}}-{{game.vis_team_loss}}-{{game.vis_team_ties}}
                     </p>
                 </div>
 
@@ -51,7 +51,7 @@
                         Record: {{game.home_team_stats.wins}}-{{game.home_team_stats.loss}}-{{game.home_team_stats.ties}}
                     </p>
                     <p class="stat">
-                        Vs. {{game.vis_team_name}}: {{game.vis_team_loss}}-{{game.vis_team_wins}}-{{game.vis_team_ties}}
+                        Vs. {{ game.vis_team_name | titlecase }}: {{game.vis_team_loss}}-{{game.vis_team_wins}}-{{game.vis_team_ties}}
                     </p>
                 </div>
                 

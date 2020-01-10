@@ -66,3 +66,9 @@ th, td {
     text-align: center;
     font-weight: 100;
 }
+
+.mat-form-field {
+    font-size: 14px;
+    width: 75%;
+    color: red;
+}
