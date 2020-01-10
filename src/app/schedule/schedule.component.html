@@ -31,15 +31,27 @@
                     <p class="stat" *ngIf="game.vis_team_stats">
                         Record: {{game.vis_team_stats.wins}}-{{game.vis_team_stats.loss}}-{{game.vis_team_stats.ties}}
                     </p>
+                    <p class="stat">
+                        Vs. {{game.home_team_name}}: {{game.vis_team_wins}}-{{game.vis_team_loss}}-{{game.vis_team_ties}}
+                    </p>
+                </div>
+
+                <div class="versus">
+                    <!-- <p class="stat">{{game.vis_team_name}}: {{game.vis_team_wins}}</p> -->
+                    <p>@</p>
+                    <!-- <p class="stat">Matchup</p> -->
+                    <!-- <p class="stat">{{game.home_team_name}}: {{game.vis_team_loss}}</p> -->
+                    <!-- <p class="stat">Ties: {{game.vis_team_ties}}</p> -->
                 </div>
                 
-                <p>@</p>
-
                 <div [ngClass]="{'team': !isMobile, 'team-mobile': isMobile}">
                     <img src="{{ findLogo(game.home_team_name).image }}">
                     <p class="team-name">{{ findLogo(game.home_team_name).name }}</p>
                     <p class="stat" *ngIf="game.home_team_stats">
                         Record: {{game.home_team_stats.wins}}-{{game.home_team_stats.loss}}-{{game.home_team_stats.ties}}
+                    </p>
+                    <p class="stat">
+                        Vs. {{game.vis_team_name}}: {{game.vis_team_loss}}-{{game.vis_team_wins}}-{{game.vis_team_ties}}
                     </p>
                 </div>
                 
