@@ -20,7 +20,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   currentSeason: string;
   range: string = 'a402:f821';
   currentDay: number = 121;
-  scheduleType: string = "next";
+  scheduleType: string = "day";
 
   days = [];
   matchups: any[] = [];
@@ -80,11 +80,19 @@ export class ScheduleComponent implements OnInit, OnDestroy {
       this.showAll = true;
       this.isLoading = true;
       this.getAllSchedule();
-    } else if (value === "next") {
+    } else if (value === "day") {
       this.showAll = false;
       this.isLoading = true;
       this.getNextDaysSchedule(this.currentDay);
-    }
+    } else if (value === "prev") {
+      this.showAll = false;
+      this.isLoading = true;
+      this.getNextDaysSchedule(this.currentDay - 5);
+    } else if (value === "next") {
+      this.showAll = false;
+      this.isLoading = true;
+      this.getNextDaysSchedule(this.currentDay + 5);
+    } 
   }
 
   getMatchupTotals() {

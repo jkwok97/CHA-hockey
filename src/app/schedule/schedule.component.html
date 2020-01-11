@@ -6,11 +6,17 @@
 
     <div class="button-container">
         <mat-button-toggle-group #bySeason="matButtonToggleGroup" [value]="scheduleType" (change)="changeSchedule(bySeason.value)">
+            <mat-button-toggle value="prev" color="accent">
+                << Prev
+            </mat-button-toggle>
+            <mat-button-toggle value="day" color="accent">
+                Day
+            </mat-button-toggle>
             <mat-button-toggle value="next" color="accent">
-                Next Days
+                Next >>
             </mat-button-toggle>
             <mat-button-toggle value="all" color="accent">
-                All Days
+                All
             </mat-button-toggle>
         </mat-button-toggle-group>
     </div>
@@ -39,9 +45,9 @@
                 <div class="versus">
                     <!-- <p class="stat">{{game.vis_team_name}}: {{game.vis_team_wins}}</p> -->
                     <p>@</p>
-                    <!-- <p class="stat">Matchup</p> -->
-                    <!-- <p class="stat">{{game.home_team_name}}: {{game.vis_team_loss}}</p> -->
-                    <!-- <p class="stat">Ties: {{game.vis_team_ties}}</p> -->
+                    <p class="stat" *ngIf="game.vis_team_score && game.home_team_score">
+                        Result: {{game.vis_team_score}} - {{game.home_team_score}}
+                    </p>
                 </div>
                 
                 <div [ngClass]="{'team': !isMobile, 'team-mobile': isMobile}">
