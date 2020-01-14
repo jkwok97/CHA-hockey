@@ -33,7 +33,7 @@
             <div *ngFor="let game of day.games[0]" [ngClass]="{'matchup-container': !isMobile, 'matchup-mobile': isMobile}">
                 <div [ngClass]="{'team': !isMobile, 'team-mobile': isMobile}">
                     <img src="{{ findLogo(game.vis_team_name).image }}">
-                    <p class="team-name">{{ findLogo(game.vis_team_name).name }}</p>
+                    <p class="team-name" *ngIf="!isMobile">{{ findLogo(game.vis_team_name).name }}</p>
                     <p class="stat" *ngIf="game.vis_team_stats">
                         Record: {{game.vis_team_stats.wins}}-{{game.vis_team_stats.loss}}-{{game.vis_team_stats.ties}}
                     </p>
@@ -61,7 +61,7 @@
                 
                 <div [ngClass]="{'team': !isMobile, 'team-mobile': isMobile}">
                     <img src="{{ findLogo(game.home_team_name).image }}">
-                    <p class="team-name">{{ findLogo(game.home_team_name).name }}</p>
+                    <p class="team-name" *ngIf="!isMobile">{{ findLogo(game.home_team_name).name }}</p>
                     <p class="stat" *ngIf="game.home_team_stats">
                         Record: {{game.home_team_stats.wins}}-{{game.home_team_stats.loss}}-{{game.home_team_stats.ties}}
                     </p>
