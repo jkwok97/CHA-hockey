@@ -215,6 +215,27 @@
     margin: 5px 0;
 }
 
+.win {
+    color: green;
+    font-size: 10px;
+    width: 12px;
+    height: 12px;
+}
+
+.loss {
+    color: red;
+    font-size: 10px;
+    width: 12px;
+    height: 12px;
+}
+
+.tie {
+    color: black;
+    font-size: 10px;
+    width: 12px;
+    height: 12px;
+}
+
 /* *************************** MEDIA QUERIES **************************** */
 
 @media screen and (max-width: 900px) {

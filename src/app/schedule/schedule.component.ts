@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 // import { DomSanitizer } from '@angular/platform-browser';
 import { TeamsService } from '../teams/teams.service';
 import { takeWhile } from 'rxjs/operators';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort, getMatIconNameNotFoundError } from '@angular/material';
 
 @Component({
   selector: 'app-schedule',
@@ -19,11 +19,13 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   schedulePage: any;
   currentSeason: string;
   range: string = 'a402:f821';
-  currentDay: number = 121;
+  currentDay: number = 126;
   scheduleType: string = "day";
 
   days = [];
   matchups: any[] = [];
+  teamRecord: any[] = [];
+  gamesWithRecord: any[];
   teams = [];
   versus: any;
 
@@ -95,6 +97,35 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     } 
   }
 
+  getLastFiveRecord(games) {
+    // console.log(games);
+    this.teams.forEach(team => {
+      this.teamRecord.push({
+        team: team.shortName,
+        record: []
+      })
+    });
+    games.forEach(game => {
+      let homeTeam = this.teamRecord.find(element => element.team === game.home_team_name);
+      let roadTeam = this.teamRecord.find(element => element.team === game.vis_team_name);
+      if (game.home_team_score > game.vis_team_score) {
+        homeTeam.record.push({day: game.game_day, result: "home win"});
+        roadTeam.record.push({day: game.game_day, result: "road loss"});
+      } else if (game.home_team_score < game.vis_team_score) {
+        homeTeam.record.push({day: game.game_day, result: "home loss"});
+        roadTeam.record.push({day: game.game_day, result: "road win"});
+      } else if (game.home_team_score && (game.home_team_score == game.vis_team_score)) {
+        homeTeam.record.push({day: game.game_day, result: "home tie"})
+        roadTeam.record.push({day: game.game_day, result: "road tie"})
+      }
+      game.home_team_record = homeTeam.record.slice(homeTeam.record.length - 5, homeTeam.record.length);
+      game.vis_team_record = roadTeam.record.slice(roadTeam.record.length - 5, roadTeam.record.length);
+      game.home_team_record.sort((a,b) => a['day'] - b['day']);
+      game.vis_team_record.sort((a,b) => a['day'] - b['day']);
+    })
+    return games;
+  }
+
   getMatchupTotals() {
     // console.log(this.teams);
     this.separateTeams();
@@ -103,10 +134,12 @@ export class ScheduleComponent implements OnInit, OnDestroy {
       let games = resp as any[];
       this.populateMatchups(games);
       this.getMatchupRecord();
+      this.gamesWithRecord = this.getLastFiveRecord(games);
     });
   }
 
   getMatchupRecord() {
+    // console.log(this.matchups);
     this.matchups.forEach(matchup => {
       matchup.versus.forEach(team => {
         let matchupWins = 0;
@@ -148,12 +181,26 @@ export class ScheduleComponent implements OnInit, OnDestroy {
           if (index !== null) {
             team.versus[index].games.push(game);
           }
+          if (game.home_team_score > game.vis_team_score) {
+            team.lastFiveRecord.push({day: game.game_day, result: "win"});
+          } else if (game.home_team_score < game.vis_team_score) {
+            team.lastFiveRecord.push({day: game.game_day, result: "loss"});
+          } else if (game.home_team_score && (game.home_team_score == game.vis_team_score)) {
+            team.lastFiveRecord.push({day: game.game_day, result: "tie"});
+          }
         } 
         if (game.vis_team_name === team.team) {
           let versus = game.home_team_name;
           let index = team.versus.findIndex(name => name.team === versus);
           if (index !== null) {
             team.versus[index].games.push(game);
+          }
+          if (game.home_team_score > game.vis_team_score) {
+            team.lastFiveRecord.push({day: game.game_day, result: "loss"});
+          } else if (game.home_team_score < game.vis_team_score) {
+            team.lastFiveRecord.push({day: game.game_day, result: "win"});
+          } else if (game.home_team_score && (game.home_team_score == game.vis_team_score)) {
+            team.lastFiveRecord.push({day: game.game_day, result: "tie"});
           }
         }
       })
@@ -164,11 +211,11 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     this.teams.forEach(team => {
       this.matchups.push({
         team: team.shortName,
+        lastFiveRecord: [],
         versus: this.getVersus(team.shortName)
       })
       // console.log(this.matchups);
     });
-    
   }
 
   getVersus(name) {
@@ -199,12 +246,18 @@ export class ScheduleComponent implements OnInit, OnDestroy {
         day.games[0].forEach(element => {
         this._teamsService.getTeamStats(element.vis_team_name).pipe(takeWhile(() => this._alive)).subscribe(resp => {
           element.vis_team_stats = resp[0];
+          let found = this.matchups.find(matchup => matchup.team === element.vis_team_name).lastFiveRecord;
+          let lastFive = found.slice(found.length - 5, found.length);
+          element.vis_team_last_five = lastFive.sort((a,b) => a['day'] - b['day']);
         });
         this._teamsService.getTeamStats(element.home_team_name).pipe(takeWhile(() => this._alive)).subscribe(resp => {
           element.home_team_stats = resp[0];
+          let found = this.matchups.find(matchup => matchup.team === element.home_team_name).lastFiveRecord;
+          let lastFive = found.slice(found.length - 5, found.length);
+          element.home_team_last_five = lastFive.sort((a,b) => a['day'] - b['day']);
         });
       });
-      }, 750);
+      }, 1000);
     })
     this.populateMatchUpRecord(this.days);
     setTimeout(() => {

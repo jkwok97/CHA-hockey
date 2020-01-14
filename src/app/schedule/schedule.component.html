@@ -40,6 +40,15 @@
                     <p class="stat">
                         Vs. {{ game.home_team_name | titlecase }}: {{game.vis_team_wins}}-{{game.vis_team_loss}}-{{game.vis_team_ties}}
                     </p>
+                    <p class="stat">
+                        Last 5:
+                        <mat-icon 
+                            *ngFor="let record of game.vis_team_last_five" 
+                            [ngClass]="{'win': record.result == 'win', 'loss': record.result == 'loss', 'tie': record.result == 'tie'}"
+                        >
+                            lens
+                        </mat-icon>
+                    </p>
                 </div>
 
                 <div class="versus">
@@ -58,6 +67,15 @@
                     </p>
                     <p class="stat">
                         Vs. {{ game.vis_team_name | titlecase }}: {{game.vis_team_loss}}-{{game.vis_team_wins}}-{{game.vis_team_ties}}
+                    </p>
+                    <p class="stat">
+                        Last 5:
+                        <mat-icon 
+                            *ngFor="let record of game.home_team_last_five" 
+                            [ngClass]="{'win': record.result == 'win', 'loss': record.result == 'loss', 'tie': record.result == 'tie'}"
+                        >
+                            lens
+                        </mat-icon>
                     </p>
                 </div>
                 
