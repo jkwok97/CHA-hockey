@@ -39,8 +39,9 @@ export class DraftsComponent implements OnInit {
     this.checkMobile();
     this.isLoading = true;
     this._teamsService.getDrafts().pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       this.drafts = resp as [];
+      this.drafts.sort((a, b) => a['number_num'] - b['number_num']);
       this.players = new MatTableDataSource<any[]>(this.drafts);
       this.length = this.drafts.length;
       this.isLoading = false;
@@ -76,7 +77,6 @@ export class DraftsComponent implements OnInit {
 
   applyFilter(filterValue: string) {
     this.players.filter = filterValue.trim().toLowerCase();
-
     if (this.players.paginator) {
       this.players.paginator.firstPage();
     }

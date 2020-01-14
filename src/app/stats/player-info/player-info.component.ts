@@ -257,13 +257,11 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
   onTabChange(event) {
     // console.log(event);
     if (event.tab.textLabel === "NHL") {
-      console.log(this.position);
-      console.log(this.hits);
       this.resetValues();
       if ((!this.position && !this.hits) || this.position === "G") {
         this.isPlayerGoalie = true;
         this._teamsService.getAllIndividualGoalieStatsByTypeReal(this._route.snapshot.params.params, this.seasonType, "NHL").pipe(takeWhile(() => this._alive)).subscribe(resp => {
-          console.log(resp);
+          // console.log(resp);
           this.isLoading = true;
           if (resp[0]['player_nhl_id']) {
             let playerId = resp[0]['player_nhl_id'];
@@ -275,7 +273,7 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
         });
       } else {
         this._teamsService.getAllIndividualPlayerStatsByTypeReal(this._route.snapshot.params.params, this.seasonType, "NHL").pipe(takeWhile(() => this._alive)).subscribe(resp => {
-          console.log(resp[0]['player_nhl_id']);
+          // console.log(resp[0]['player_nhl_id']);
           this.isLoading = true;
           if (resp[0]['player_nhl_id']) {
             let playerId = resp[0]['player_nhl_id'];
@@ -287,8 +285,6 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
         });
       }
     } else if (event.tab.textLabel === "Ratings") {
-      console.log(this.position);
-      console.log(this.hits);
       this.resetValues();
       if ((!this.position && !this.hits) || this.position === "G") {
         this.isPlayerGoalie = true;
@@ -356,7 +352,7 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
     this._teamsService.getIndividualOnPaceNHLRealStats(id, pace).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.isCurrentPlayer = true;
       this.realPlayerStatsOnPaceFetched = resp['stats'][0]['splits'][0]['stat'] as [];
-      console.log([this.realPlayerStatsOnPaceFetched]);
+      // console.log([this.realPlayerStatsOnPaceFetched]);
       this.isLoading = false;
       this.realPlayerStatsOnPace = new MatTableDataSource<any[]>([this.realPlayerStatsOnPaceFetched]);
       setTimeout(() => {
