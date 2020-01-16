@@ -19,7 +19,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   schedulePage: any;
   currentSeason: string;
   range: string = 'a402:f821';
-  currentDay: number = 126;
+  currentDay: number = 131;
   scheduleType: string = "day";
 
   days = [];
