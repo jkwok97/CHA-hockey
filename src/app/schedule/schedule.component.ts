@@ -244,13 +244,15 @@ export class ScheduleComponent implements OnInit, OnDestroy {
       });
       setTimeout(() => {
         day.games[0].forEach(element => {
-        this._teamsService.getTeamStats(element.vis_team_name).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        this._teamsService.getTeamStatsByYear(element.vis_team_name, this.currentSeason).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+          // console.log(resp);
           element.vis_team_stats = resp[0];
           let found = this.matchups.find(matchup => matchup.team === element.vis_team_name).lastFiveRecord;
           let lastFive = found.slice(found.length - 5, found.length);
           element.vis_team_last_five = lastFive.sort((a,b) => b['day'] - a['day']);
         });
-        this._teamsService.getTeamStats(element.home_team_name).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        this._teamsService.getTeamStatsByYear(element.home_team_name, this.currentSeason).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+          // console.log(resp);
           element.home_team_stats = resp[0];
           let found = this.matchups.find(matchup => matchup.team === element.home_team_name).lastFiveRecord;
           let lastFive = found.slice(found.length - 5, found.length);

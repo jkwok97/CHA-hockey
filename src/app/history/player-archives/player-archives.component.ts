@@ -100,7 +100,7 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
   getStats(type, group) {
     if (group === "Season") {
       this._teamsService.getPlayerStatsByType(type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-        console.log(resp);
+        // console.log(resp);
         let stats = resp as [];
         this.playersArchived = new MatTableDataSource<any[]>(stats);
         this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'sh_goals',
@@ -116,7 +116,7 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
       });
     } else {
       this._teamsService.getPlayerStatsByType(type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-        console.log(resp);
+        // console.log(resp);
         let stats = resp['rows'] as [];
         this.playersArchived = new MatTableDataSource<any[]>(stats);
         this.playersColumnsToDisplay = [ 'player_name', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals',
