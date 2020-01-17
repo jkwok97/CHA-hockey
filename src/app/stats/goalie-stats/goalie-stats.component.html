@@ -114,7 +114,11 @@
             </ng-container>
             
             <tr mat-header-row *matHeaderRowDef="inAllPlayersStats ? goaliesColumnsToDisplay : teamGoaliesColumnsToDisplay; sticky: true"></tr>
-            <tr mat-row *matRowDef="let goalie; columns: inAllPlayersStats ? goaliesColumnsToDisplay : teamGoaliesColumnsToDisplay;" (click)="openGoaliePlayer(goalie.player_name, goalie.team_name, goalie.position)"></tr>
+            <tr 
+                mat-row 
+                *matRowDef="let goalie; columns: inAllPlayersStats ? goaliesColumnsToDisplay : teamGoaliesColumnsToDisplay;" 
+                (click)="openPlayer(goalie, 'goalie')"
+            ></tr>
 
         </table>
 
