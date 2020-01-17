@@ -177,7 +177,7 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
       let pointLeaders = [];
       tempLeaders.forEach(element => { pointLeaders.push(element); });
       pointLeaders.forEach(player => {
-        player = this.findChaTeam(`${player.player.lastName}, ${player.player.firstName}`, player, "player");
+        player = this.findChaTeam(player.player.id, player, "player");
       });
       this.points = new MatTableDataSource<any[]>(pointLeaders);
       this.isLoading = false;
@@ -195,7 +195,7 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
       let goalLeaders = [];
       tempLeaders.forEach(element => { goalLeaders.push(element); });
       goalLeaders.forEach(player => {
-        player = this.findChaTeam(`${player.player.lastName}, ${player.player.firstName}`, player, "player");
+        player = this.findChaTeam(player.player.id, player, "player");
       });
       this.goals = new MatTableDataSource<any[]>(goalLeaders);
       this.isLoading = false;
@@ -213,7 +213,7 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
       let assistsLeaders = [];
       tempLeaders.forEach(element => { assistsLeaders.push(element); });
       assistsLeaders.forEach(player => {
-        player = this.findChaTeam(`${player.player.lastName}, ${player.player.firstName}`, player, "player");
+        player = this.findChaTeam(player.player.id, player, "player");
       });
       this.assists = new MatTableDataSource<any[]>(assistsLeaders);
       this.isLoading = false;
@@ -224,23 +224,23 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
     });
   }
 
-  getNHLWinsLeaders() {
-    this._mainService.getNhlLeaders(this.currentSeason, "goalie", "wins", "reverse", "trim").pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      // console.log(resp);
-      let tempLeaders = resp as [];
-      let winsLeaders = [];
-      tempLeaders.forEach(element => { winsLeaders.push(element); });
-      winsLeaders.forEach(player => {
-        player = this.findChaTeam(`${player['playerLastName']}, ${player['playerFirstName']}`, player, "goalie");
-      });
-      this.wins = new MatTableDataSource<any[]>(winsLeaders);
-      this.isLoading = false;
-    }, error => {
-      console.log(error);
-      this.errored = true;
-      this.isLoading = false;
-    });
-  }
+  // getNHLWinsLeaders() {
+  //   this._mainService.getNhlLeaders(this.currentSeason, "goalie", "wins", "reverse", "trim").pipe(takeWhile(() => this._alive)).subscribe(resp => {
+  //     // console.log(resp);
+  //     let tempLeaders = resp as [];
+  //     let winsLeaders = [];
+  //     tempLeaders.forEach(element => { winsLeaders.push(element); });
+  //     winsLeaders.forEach(player => {
+  //       player = this.findChaTeam(`${player['playerLastName']}, ${player['playerFirstName']}`, player, "goalie");
+  //     });
+  //     this.wins = new MatTableDataSource<any[]>(winsLeaders);
+  //     this.isLoading = false;
+  //   }, error => {
+  //     console.log(error);
+  //     this.errored = true;
+  //     this.isLoading = false;
+  //   });
+  // }
 
   getNHLGaaLeaders() {
     this._mainService.getNhlLeaders(this.currentSeason, "goalie", "gaa", "no", "trim").pipe(takeWhile(() => this._alive)).subscribe(resp => {
@@ -249,7 +249,7 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
       let gaaLeaders = [];
       tempLeaders.forEach(element => { gaaLeaders.push(element); });
       gaaLeaders.forEach(player => {
-        player = this.findChaTeam(`${player.player.lastName}, ${player.player.firstName}`, player, "goalie");
+        player = this.findChaTeam(player.player.id, player, "goalie");
       });
       this.gaa = new MatTableDataSource<any[]>(gaaLeaders);
       this.isLoading = false;
@@ -267,7 +267,7 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
       let savePctgLeaders = [];
       tempLeaders.forEach(element => { savePctgLeaders.push(element); });
       savePctgLeaders.forEach(player => {
-        player = this.findChaTeam(`${player.player.lastName}, ${player.player.firstName}`, player, "goalie");
+        player = this.findChaTeam(player.player.id, player, "goalie");
       });
       this.savePctg = new MatTableDataSource<any[]>(savePctgLeaders);
       this.isLoading = false;
@@ -285,7 +285,7 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
       let shutoutsLeaders = [];
       tempLeaders.forEach(element => { shutoutsLeaders.push(element); });
       shutoutsLeaders.forEach(player => {
-        player = this.findChaTeam(`${player.player.lastName}, ${player.player.firstName}`, player, "goalie");
+        player = this.findChaTeam(player.player.id, player, "goalie");
       });
       this.shutouts = new MatTableDataSource<any[]>(shutoutsLeaders);
       this.isLoading = false;

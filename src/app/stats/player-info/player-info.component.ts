@@ -257,25 +257,27 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
       this.resetValues();
       if (this._route.snapshot.params.type === 'goalies') {
         this.isPlayerGoalie = true;
+        this.isLoading = true;
         this._teamsService.getAllIndividualGoalieStatsByTypeReal(this._route.snapshot.params.id, this.seasonType, "NHL").pipe(takeWhile(() => this._alive)).subscribe(resp => {
           // console.log(resp);
-          this.isLoading = true;
           if (resp[0]['player_nhl_id']) {
             let playerId = resp[0]['player_nhl_id'];
             this.getRealNHLStats(playerId);
             this.getOnPaceNHLStats(playerId, "Pace");
+            this.isLoading = false;
           } else {
             this.isLoading = false;
           }
         });
       } else if (this._route.snapshot.params.type === 'players') {
+        this.isLoading = true;
         this._teamsService.getAllIndividualPlayerStatsByTypeReal(this._route.snapshot.params.id, this.seasonType, "NHL").pipe(takeWhile(() => this._alive)).subscribe(resp => {
           // console.log(resp[0]['player_nhl_id']);
-          this.isLoading = true;
           if (resp[0]['player_nhl_id']) {
             let playerId = resp[0]['player_nhl_id'];
             this.getRealNHLStats(playerId);
             this.getOnPaceNHLStats(playerId, "Pace");
+            this.isLoading = false;
           } else {
             this.isLoading = false;
           }

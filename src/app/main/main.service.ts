@@ -69,9 +69,10 @@ export class MainService {
     return this._http.get(`${environment.back_end_url}/nhl-rookie-leaders/summary`, options);
   }
 
-  getChaTeam(player, type) {
+  getChaTeam(id, type) {
+    // console.log(id)
     let options = {params: new HttpParams()
-      .set('player', player)
+      .set('id', id)
       .set('playerType', type)
     }
     return this._http.get(`${environment.back_end_url}/nhl-leaders/`, options);

@@ -138,7 +138,7 @@ export class MainComponent implements OnInit, OnDestroy {
     this.currentSeason = this._teamsService.currentSeason;
     this.currentSeasonType = this._teamsService.currentSeasonType;
     this._mainService.listenerFullPageStats().pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       if (resp === "players") {
         this.showPlayersStats = true;
         this.showGoalieStats = false;

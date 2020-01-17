@@ -58,7 +58,7 @@ export class NhlGoalieStatsComponent implements OnInit, OnDestroy {
       stats.forEach( element => { this.playersList.push(element); });
       this.playersList.forEach(player => {
         player.firstName = this.splitName(player['goalieFullName'])[0];
-        player = this.findChaTeam(`${player.lastName}, ${player.firstName}`, player, "goalie");
+        player = this.findChaTeam(player.playerId, player, "goalie");
       });
       this.goalies = new MatTableDataSource<any[]>(stats);
       this.isLoading = false;
@@ -96,9 +96,10 @@ export class NhlGoalieStatsComponent implements OnInit, OnDestroy {
     window.scrollTo(0,0);
   }
 
-  findChaTeam(name, player, type) {
-    this._mainService.getChaTeam(name, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      player.chaTeam = resp;
+  findChaTeam(id, player, type) {
+    this._mainService.getChaTeam(id, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      player.chaTeam = resp['team_name'];
+      player.cha_player_id = resp['player_id'];
       return player;
     }, error => {
       player.chaTeam = null;

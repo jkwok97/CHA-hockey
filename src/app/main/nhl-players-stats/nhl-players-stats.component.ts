@@ -50,12 +50,12 @@ export class NhlPlayersStatsComponent implements OnInit, OnDestroy {
 
   getSummary(start, pageSize, type, statType, sortOrder) {
     this._mainService.getNHLsummary("20192020", "skater", statType, sortOrder, start, pageSize).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       let stats = resp['data'] as [];
       stats.forEach( element => { this.playersList.push(element); });
       this.playersList.forEach(player => {
         player.firstName = this.splitName(player['skaterFullName'])[0];
-        player = this.findChaTeam(`${player.lastName}, ${player.firstName}`, player, "player");
+        player = this.findChaTeam(player.playerId, player, "player");
       });
       this.players = new MatTableDataSource<any[]>(stats);
       this.isLoading = false;
@@ -87,9 +87,10 @@ export class NhlPlayersStatsComponent implements OnInit, OnDestroy {
     }
   }
 
-  findChaTeam(name, player, type) {
-    this._mainService.getChaTeam(name, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      player.chaTeam = resp;
+  findChaTeam(id, player, type) {
+    this._mainService.getChaTeam(id, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      player.chaTeam = resp['team_name'];
+      player.cha_player_id = resp['player_id'];
       return player;
     }, error => {
       player.chaTeam = null;
@@ -116,7 +117,7 @@ export class NhlPlayersStatsComponent implements OnInit, OnDestroy {
   }
 
   onSort(event) {
-    console.log(event);
+    // console.log(event);
     this.start = 0;
     this.sortOrder = (event.direction).toUpperCase();
     this.sortType = event.active;
