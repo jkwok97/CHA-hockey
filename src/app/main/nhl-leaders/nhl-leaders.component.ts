@@ -88,8 +88,6 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
   }
 
   openPlayer(player, type) {
-    // console.log(player);
-    // console.log(type);
     this._router.navigate([`/info/${type}s/${player.cha_player_id}/${player.player.lastName}, ${player.player.firstName}`]);
     window.scrollTo(0,0);
   }

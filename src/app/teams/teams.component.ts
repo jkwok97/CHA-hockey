@@ -15,6 +15,7 @@ export class TeamsComponent implements OnInit, OnDestroy, AfterViewInit {
   historicTeam: boolean = false;
 
   short_team_name: string = '';
+  currentSeason: string;
 
   team: any;
   stats: any[];
@@ -23,8 +24,10 @@ export class TeamsComponent implements OnInit, OnDestroy, AfterViewInit {
     private _teamsService: TeamsService,
     private _route: ActivatedRoute
   ) {
+    this.currentSeason = this._teamsService.currentSeason;
     this.short_team_name = this._route.snapshot.url[1].path;
-    this._teamsService.getTeamStats(this.short_team_name).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+    this._teamsService.getTeamStatsByYear(this.short_team_name, this.currentSeason).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      // console.log(resp);
       this.stats = resp as [];
       if (this._route.snapshot.url[2]) {
         this.historicTeam = true;
