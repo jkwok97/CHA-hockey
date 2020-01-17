@@ -70,10 +70,10 @@ export class AwardsComponent implements OnInit, OnDestroy {
         console.log(this.expand);
   }
 
-  openPlayer(name, team, position, hits) {
-    this._router.navigate([`/stats/players/${name}`]);
-    this._teamsService.setPlayerPosition(position);
-    this._teamsService.setPlayerHits(hits);
+  openPlayer(player, type) {
+    console.log(player);
+    console.log(type);
+    this._router.navigate([`/info/${type}s/${player.player_id}/${player.player_name}`]);
     window.scrollTo(0,0);
   }
 

@@ -167,7 +167,11 @@
                 </ng-container>
                 
                 <tr mat-header-row *matHeaderRowDef="inMainPage ? playersTeamColumnsToDisplay : playersColumnsToDisplay;"></tr>
-                <tr mat-row *matRowDef="let player; columns: inMainPage ? playersTeamColumnsToDisplay : playersColumnsToDisplay;" (click)="openPlayer(player.player_name, player.team_name, player.position, player.hits)"></tr>
+                <tr 
+                    mat-row 
+                    *matRowDef="let player; columns: inMainPage ? playersTeamColumnsToDisplay : playersColumnsToDisplay;" 
+                    (click)="openPlayer(player, 'player')"
+                ></tr>
     
             </table>
     

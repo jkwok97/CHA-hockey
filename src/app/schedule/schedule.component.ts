@@ -1,8 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-// import { DomSanitizer } from '@angular/platform-browser';
 import { TeamsService } from '../teams/teams.service';
 import { takeWhile } from 'rxjs/operators';
-import { MatTableDataSource, MatPaginator, MatSort, getMatIconNameNotFoundError } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 @Component({
   selector: 'app-schedule',
@@ -41,7 +40,6 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   constructor(
-    // private sanitizer: DomSanitizer,
     private _teamsService: TeamsService
   ) { 
     this.currentSeason = this._teamsService.currentSeason;
@@ -53,8 +51,6 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     this.checkMobile();
     this.getMatchupTotals();
     this.getNextDaysSchedule(this.currentDay);
-    // this.schedulePage = this.sanitizer.bypassSecurityTrustResourceUrl(`https://docs.google.com/spreadsheets/d/e/2PACX-1vS0JKYVSkNRwOZavK_pCosNcgCFxf45mLJlRQJMmppO12SPHINN4DQpdOtu-0Wn0ZbxIQmuSpiCymcF/pubhtml?gid=0&single=true&widget=false&headers=false&chrome=false&gridlines=false&range=${this.range}`)
-    // this.isLoading = false;
   }
 
   checkMobile() {

@@ -104,7 +104,7 @@
             <tr 
                 mat-row 
                 *matRowDef="let goalie; columns: goaliesColumnsToDisplay;"
-                (click)="openPlayer(goalie)"
+                (click)="openPlayer(goalie, 'goalie')"
             ></tr>
 
         </table>

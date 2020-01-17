@@ -32,14 +32,14 @@
                                     <td 
                                         *ngIf="winner.player_name && (winner.award_type !== 'goalie')" 
                                         class="point" 
-                                        (click)="openPlayer(winner.player_name, winner.team_name, 'C', 1)"
+                                        (click)="openPlayer(winner, 'goalie')"
                                     >
                                         {{winner.player_name}}
                                     </td>
                                     <td 
                                         *ngIf="winner.player_name && (winner.award_type === 'goalie')" 
                                         class="point" 
-                                        (click)="openPlayer(winner.player_name, winner.team_name, 'G', winner.hits)"
+                                        (click)="openPlayer(winner, 'player')"
                                     >
                                         {{winner.player_name}}
                                     </td>

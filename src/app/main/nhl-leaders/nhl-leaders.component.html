@@ -41,7 +41,7 @@
                     <tr 
                         mat-row 
                         *matRowDef="let player; columns: pointsColumnsToDisplay;" 
-                        (click)="openPlayer(player)"
+                        (click)="openPlayer(player, 'player')"
                     ></tr>
 
                 </table>
@@ -81,7 +81,7 @@
                     <tr 
                         mat-row 
                         *matRowDef="let player; columns: goalsColumnsToDisplay;"
-                        (click)="openPlayer(player)"
+                        (click)="openPlayer(player, 'player')"
                     ></tr>
 
                 </table>
@@ -121,7 +121,7 @@
                     <tr 
                         mat-row 
                         *matRowDef="let player; columns: assistsColumnsToDisplay;"
-                        (click)="openPlayer(player)"
+                        (click)="openPlayer(player, 'player')"
                     ></tr>
 
                 </table>
@@ -209,7 +209,7 @@
                     <tr 
                         mat-row 
                         *matRowDef="let goalie; columns: gaaColumnsToDisplay;"
-                        (click)="openPlayer(goalie)"
+                        (click)="openPlayer(goalie, 'goalie')"
                     ></tr>
 
                 </table>
@@ -249,7 +249,7 @@
                     <tr 
                         mat-row 
                         *matRowDef="let goalie; columns: savePctgColumnsToDisplay;"
-                        (click)="openPlayer(goalie)"
+                        (click)="openPlayer(goalie, 'goalie')"
                     ></tr>
 
                 </table>
@@ -289,7 +289,7 @@
                     <tr 
                         mat-row 
                         *matRowDef="let goalie; columns: shutoutsColumnsToDisplay;"
-                        (click)="openPlayer(goalie)"
+                        (click)="openPlayer(goalie, 'goalie')"
                     ></tr>
 
                 </table>

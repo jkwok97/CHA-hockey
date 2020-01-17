@@ -141,7 +141,7 @@ export class StatsComponent implements OnInit, OnDestroy {
     this.currentSeasonType = this._teamsService.currentSeasonType;
     this._teamsService.getPlayerStatsByYearByType(this.currentSeason, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.stats = resp;
-      // console.log(resp);
+      console.log(resp);
       this.getPointLeaders(resp);
       this.getDmanPointLeaders(resp);
       this.getRookiePointLeaders(resp);
@@ -161,6 +161,7 @@ export class StatsComponent implements OnInit, OnDestroy {
       this.isLeadersLoading = false;
     });
     this._teamsService.getGoalieStatsByYearByType(this.currentSeason, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      console.log(resp);
       this.goalieStats = resp;
       this.getGoalieLeaders(resp);
       this.getGAALeaders(resp);
@@ -478,17 +479,10 @@ export class StatsComponent implements OnInit, OnDestroy {
     window.scrollTo(0,0);
   }
 
-  openPlayer(name, team, position, hits) {
-    this._route.navigate([`/stats/players/${name}`]);
-    this._teamsService.setPlayerPosition(position);
-    this._teamsService.setPlayerHits(hits);
-    window.scrollTo(0,0);
-  }
-
-  openGoaliePlayer(name, team, position, hits) {
-    this._route.navigate([`/stats/players/${name}`]);
-    this._teamsService.setPlayerPosition(position);
-    this._teamsService.setPlayerHits(hits);
+  openPlayer(player, type) {
+    console.log(player);
+    console.log(type);
+    this._route.navigate([`/info/${type}s/${player.player_id}/${player.player_name}`]);
     window.scrollTo(0,0);
   }
 

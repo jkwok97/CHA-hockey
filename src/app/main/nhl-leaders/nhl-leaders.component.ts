@@ -87,11 +87,10 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
     this._mainService.triggerFullPageStats("rookies");
   }
 
-  openPlayer(player) {
+  openPlayer(player, type) {
     // console.log(player);
-    this._router.navigate([`/stats/players/${player.player.lastName}, ${player.player.firstName}`]);
-    this._teamsService.setPlayerPosition(player.player.playerPositionCode);
-    this._teamsService.setPlayerHits("1");
+    // console.log(type);
+    this._router.navigate([`/info/${type}s/${player.cha_player_id}/${player.player.lastName}, ${player.player.firstName}`]);
     window.scrollTo(0,0);
   }
 
@@ -109,10 +108,13 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
 
   findChaTeam(name, player, type) {
     this._mainService.getChaTeam(name, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      player.chaTeam = resp;
+      // console.log(resp);
+      player.chaTeam = resp['team_name'];
+      player.cha_player_id = resp['player_id'];
       return player;
     }, error => {
       player.chaTeam = null;
+      player.cha_player_id = null;
       return player;
     });
   }

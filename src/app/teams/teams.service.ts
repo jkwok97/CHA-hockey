@@ -15,8 +15,6 @@ export class TeamsService {
 
   currentSeason: string = "2019-20";
   currentSeasonType: string = "Regular";
-  playerPosition: string;
-  playerHits: string;
   allSalaryPagesArray = [];
 
   isMobile: boolean;
@@ -277,16 +275,6 @@ export class TeamsService {
     this._subjectPlayerStats.next(stats);
   }
 
-  setPlayerPosition(position) {
-    // console.log(stats);
-    this.playerPosition = position;
-    // this._subjectPlayerStats.next(stats);
-  }
-
-  setPlayerHits(hits) {
-    this.playerHits = hits;
-  }
-
   sendPlayerStatsListener(): Observable<any> {
     return this._subjectPlayerStats.asObservable();
   }
@@ -419,12 +407,12 @@ export class TeamsService {
     return this._http.get(`${environment.back_end_url}/real-stats/`, options);
   }
 
-  getPlayerRatings(name) {
-    return this._http.get(`${environment.back_end_url}/player-ratings/${name}`);
+  getPlayerRatings(id) {
+    return this._http.get(`${environment.back_end_url}/player-ratings/${id}`);
   }
 
-  getGoalieRatings(name) {
-    return this._http.get(`${environment.back_end_url}/goalie-ratings/${name}`);
+  getGoalieRatings(id) {
+    return this._http.get(`${environment.back_end_url}/goalie-ratings/${id}`);
   }
 
   getDraftTable() {

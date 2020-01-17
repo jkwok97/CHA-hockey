@@ -73,11 +73,10 @@ export class NhlPlayersStatsComponent implements OnInit, OnDestroy {
     return name.split(" ");
   }
 
-  openPlayer(player) {
-    // console.log(player);
-    this._router.navigate([`/stats/players/${player.lastName}, ${player.firstName}`]);
-    this._teamsService.setPlayerPosition(player.playerPositionCode);
-    this._teamsService.setPlayerHits(player.shots);
+  openPlayer(player, type) {
+    console.log(player);
+    console.log(type);
+    this._router.navigate([`/info/${type}s/${player.player_id}/${player.player_name}`]);
     window.scrollTo(0,0);
   }
 

@@ -369,7 +369,11 @@
                                     </ng-container>
                         
                                     <tr mat-header-row *matHeaderRowDef="isMobile ? mobilePlayersColumnsToDisplay : playersColumnsToDisplay"></tr>
-                                    <tr mat-row *matRowDef="let player; columns: isMobile ? mobilePlayersColumnsToDisplay : playersColumnsToDisplay;" (click)="openPlayer(player.player_name, player.team_name, player.position, player.hits)"></tr>
+                                    <tr 
+                                        mat-row 
+                                        *matRowDef="let player; columns: isMobile ? mobilePlayersColumnsToDisplay : playersColumnsToDisplay;" 
+                                        (click)="openPlayer(player, 'player')"
+                                    ></tr>
                         
                                 </table>
                         
@@ -419,7 +423,11 @@
                                     </ng-container>
                         
                                     <tr mat-header-row *matHeaderRowDef="isMobile ? mobileRookiesColumnsToDisplay : rookieColumnsToDisplay"></tr>
-                                    <tr mat-row *matRowDef="let player; columns: isMobile ? mobileRookiesColumnsToDisplay : rookieColumnsToDisplay;" (click)="openPlayer(player.player_name, player.team_name, player.position, player.hits)"></tr>
+                                    <tr 
+                                        mat-row 
+                                        *matRowDef="let player; columns: isMobile ? mobileRookiesColumnsToDisplay : rookieColumnsToDisplay;" 
+                                        (click)="openPlayer(player, 'player')"
+                                    ></tr>
                         
                                 </table>
                         
@@ -454,7 +462,11 @@
                                     </ng-container>
                         
                                     <tr mat-header-row *matHeaderRowDef="playersGoalsColumnsToDisplay"></tr>
-                                    <tr mat-row *matRowDef="let player; columns: playersGoalsColumnsToDisplay;" (click)="openPlayer(player.player_name, player.team_name, player.position, player.hits)"></tr>
+                                    <tr 
+                                        mat-row 
+                                        *matRowDef="let player; columns: playersGoalsColumnsToDisplay;" 
+                                        (click)="openPlayer(player, 'player')"
+                                    ></tr>
                         
                                 </table>
                         
@@ -489,7 +501,11 @@
                                     </ng-container>
                         
                                     <tr mat-header-row *matHeaderRowDef="playersPpGoalsColumnsToDisplay"></tr>
-                                    <tr mat-row *matRowDef="let player; columns: playersPpGoalsColumnsToDisplay;" (click)="openPlayer(player.player_name, player.team_name, player.position, player.hits)"></tr>
+                                    <tr 
+                                        mat-row 
+                                        *matRowDef="let player; columns: playersPpGoalsColumnsToDisplay;" 
+                                        (click)="openPlayer(player, 'player')"
+                                    ></tr>
                         
                                 </table>
                         
@@ -523,7 +539,11 @@
                                     </ng-container>
                         
                                     <tr mat-header-row *matHeaderRowDef="playersPlusMinusColumnsToDisplay"></tr>
-                                    <tr mat-row *matRowDef="let player; columns: playersPlusMinusColumnsToDisplay;" (click)="openPlayer(player.player_name, player.team_name, player.position, player.hits)"></tr>
+                                    <tr 
+                                        mat-row 
+                                        *matRowDef="let player; columns: playersPlusMinusColumnsToDisplay;" 
+                                        (click)="openPlayer(player, 'player')"
+                                    ></tr>
                         
                                 </table>
                         
@@ -557,7 +577,11 @@
                                     </ng-container>
                         
                                     <tr mat-header-row *matHeaderRowDef="playersPenaltiesColumnsToDisplay"></tr>
-                                    <tr mat-row *matRowDef="let player; columns: playersPenaltiesColumnsToDisplay;" (click)="openPlayer(player.player_name, player.team_name, player.position, player.hits)"></tr>
+                                    <tr 
+                                        mat-row 
+                                        *matRowDef="let player; columns: playersPenaltiesColumnsToDisplay;" 
+                                        (click)="openPlayer(player, 'player')"
+                                    ></tr>
                         
                                 </table>
                         
@@ -591,7 +615,11 @@
                                     </ng-container>
                         
                                     <tr mat-header-row *matHeaderRowDef="playersShotsColumnsToDisplay"></tr>
-                                    <tr mat-row *matRowDef="let player; columns: playersShotsColumnsToDisplay;" (click)="openPlayer(player.player_name, player.team_name, player.position, player.hits)"></tr>
+                                    <tr 
+                                        mat-row 
+                                        *matRowDef="let player; columns: playersShotsColumnsToDisplay;" 
+                                        (click)="openPlayer(player, 'player')"
+                                    ></tr>
                         
                                 </table>
                         
@@ -630,7 +658,11 @@
                                     </ng-container>
                         
                                     <tr mat-header-row *matHeaderRowDef="currPointLeadersColumnsToDisplay"></tr>
-                                    <tr mat-row *matRowDef="let player; columns: currPointLeadersColumnsToDisplay;" (click)="openPlayer(player.player_name, player.team_name, player.position, player.hits)"></tr>
+                                    <tr 
+                                        mat-row 
+                                        *matRowDef="let player; columns: currPointLeadersColumnsToDisplay;" 
+                                        (click)="openPlayer(player, 'player')"
+                                    ></tr>
                         
                                 </table>
                         
@@ -684,7 +716,11 @@
                                     </ng-container>
                         
                                     <tr mat-header-row *matHeaderRowDef="isMobile ? mobileDmenColumnsToDisplay : dmenColumnsToDisplay"></tr>
-                                    <tr mat-row *matRowDef="let player; columns: isMobile ? mobileDmenColumnsToDisplay : dmenColumnsToDisplay;" (click)="openPlayer(player.player_name, player.team_name, player.position, player.hits)"></tr>
+                                    <tr 
+                                        mat-row 
+                                        *matRowDef="let player; columns: isMobile ? mobileDmenColumnsToDisplay : dmenColumnsToDisplay;" 
+                                        (click)="openPlayer(player, 'player')"
+                                    ></tr>
                         
                                 </table>
                         
@@ -724,7 +760,11 @@
                                     </ng-container>
                         
                                     <tr mat-header-row *matHeaderRowDef="playersPointsSixtyColumnsToDisplay"></tr>
-                                    <tr mat-row *matRowDef="let player; columns: playersPointsSixtyColumnsToDisplay;" (click)="openPlayer(player.player_name, player.team_name, player.position, player.hits)"></tr>
+                                    <tr 
+                                        mat-row 
+                                        *matRowDef="let player; columns: playersPointsSixtyColumnsToDisplay;" 
+                                        (click)="openPlayer(player, 'player')"
+                                    ></tr>
                         
                                 </table>
                         
@@ -759,7 +799,11 @@
                                     </ng-container>
                         
                                     <tr mat-header-row *matHeaderRowDef="playersAssistsColumnsToDisplay"></tr>
-                                    <tr mat-row *matRowDef="let player; columns: playersAssistsColumnsToDisplay;" (click)="openPlayer(player.player_name, player.team_name, player.position, player.hits)"></tr>
+                                    <tr 
+                                        mat-row 
+                                        *matRowDef="let player; columns: playersAssistsColumnsToDisplay;" 
+                                        (click)="openPlayer(player, 'player')"
+                                    ></tr>
                         
                                 </table>
                         
@@ -793,7 +837,11 @@
                                     </ng-container>
                         
                                     <tr mat-header-row *matHeaderRowDef="playersShGoalsColumnsToDisplay"></tr>
-                                    <tr mat-row *matRowDef="let player; columns: playersShGoalsColumnsToDisplay;" (click)="openPlayer(player.player_name, player.team_name, player.position, player.hits)"></tr>
+                                    <tr 
+                                        mat-row 
+                                        *matRowDef="let player; columns: playersShGoalsColumnsToDisplay;" 
+                                        (click)="openPlayer(player, 'player')"
+                                    ></tr>
                         
                                 </table>
                         
@@ -827,7 +875,11 @@
                                     </ng-container>
                         
                                     <tr mat-header-row *matHeaderRowDef="playersPlusMinusColumnsToDisplay"></tr>
-                                    <tr mat-row *matRowDef="let player; columns: playersPlusMinusColumnsToDisplay;" (click)="openPlayer(player.player_name, player.team_name, player.position, player.hits)"></tr>
+                                    <tr 
+                                        mat-row 
+                                        *matRowDef="let player; columns: playersPlusMinusColumnsToDisplay;" 
+                                        (click)="openPlayer(player, 'player')"
+                                    ></tr>
                         
                                 </table>
                         
@@ -861,7 +913,11 @@
                                     </ng-container>
                         
                                     <tr mat-header-row *matHeaderRowDef="playersHitsColumnsToDisplay"></tr>
-                                    <tr mat-row *matRowDef="let player; columns: playersHitsColumnsToDisplay;" (click)="openPlayer(player.player_name, player.team_name, player.position, player.hits)"></tr>
+                                    <tr 
+                                        mat-row 
+                                        *matRowDef="let player; columns: playersHitsColumnsToDisplay;" 
+                                        (click)="openPlayer(player, 'player')"
+                                    ></tr>
                         
                                 </table>
                         
@@ -895,7 +951,11 @@
                                     </ng-container>
                         
                                     <tr mat-header-row *matHeaderRowDef="playersBlockedColumnsToDisplay"></tr>
-                                    <tr mat-row *matRowDef="let player; columns: playersBlockedColumnsToDisplay;" (click)="openPlayer(player.player_name, player.team_name, player.position, player.hits)"></tr>
+                                    <tr 
+                                        mat-row 
+                                        *matRowDef="let player; columns: playersBlockedColumnsToDisplay;" 
+                                        (click)="openPlayer(player, 'player')"
+                                    ></tr>
                         
                                 </table>
                         
@@ -934,7 +994,11 @@
                                     </ng-container>
                         
                                     <tr mat-header-row *matHeaderRowDef="longPointLeadersColumnsToDisplay"></tr>
-                                    <tr mat-row *matRowDef="let player; columns: longPointLeadersColumnsToDisplay;" (click)="openPlayer(player.player_name, player.team_name, player.position, player.hits)"></tr>
+                                    <tr 
+                                        mat-row 
+                                        *matRowDef="let player; columns: longPointLeadersColumnsToDisplay;"
+                                        (click)="openPlayer(player, 'player')" 
+                                    ></tr>
                         
                                 </table>
                         
@@ -1009,7 +1073,11 @@
                                     </ng-container>
                                     
                                     <tr mat-header-row *matHeaderRowDef="goaliesColumnsToDisplay"></tr>
-                                    <tr mat-row *matRowDef="let goalie; columns: goaliesColumnsToDisplay;" (click)="openGoaliePlayer(goalie.player_name, goalie.team_name, goalie.position)"></tr>
+                                    <tr 
+                                        mat-row 
+                                        *matRowDef="let goalie; columns: goaliesColumnsToDisplay;" 
+                                        (click)="openPlayer(goalie, 'goalie')"
+                                    ></tr>
                         
                                 </table>
                         
@@ -1043,7 +1111,11 @@
                                     </ng-container>
                                     
                                     <tr mat-header-row *matHeaderRowDef="goaliesSvPctColumnsToDisplay"></tr>
-                                    <tr mat-row *matRowDef="let goalie; columns: goaliesSvPctColumnsToDisplay;" (click)="openGoaliePlayer(goalie.player_name, goalie.team_name, goalie.position)"></tr>
+                                    <tr 
+                                        mat-row 
+                                        *matRowDef="let goalie; columns: goaliesSvPctColumnsToDisplay;" 
+                                        (click)="openPlayer(goalie, 'goalie')"
+                                    ></tr>
                         
                                 </table>
                         
@@ -1077,7 +1149,11 @@
                                     </ng-container>
                                     
                                     <tr mat-header-row *matHeaderRowDef="goaliesShutOutsColumnsToDisplay"></tr>
-                                    <tr mat-row *matRowDef="let goalie; columns: goaliesShutOutsColumnsToDisplay;" (click)="openGoaliePlayer(goalie.player_name, goalie.team_name, goalie.position)"></tr>
+                                    <tr 
+                                        mat-row 
+                                        *matRowDef="let goalie; columns: goaliesShutOutsColumnsToDisplay;" 
+                                        (click)="openPlayer(goalie, 'goalie')"
+                                    ></tr>
                         
                                 </table>
                         
@@ -1116,7 +1192,11 @@
                                     </ng-container>
                                     
                                     <tr mat-header-row *matHeaderRowDef="goaliesGAAColumnsToDisplay"></tr>
-                                    <tr mat-row *matRowDef="let goalie; columns: goaliesGAAColumnsToDisplay;" (click)="openGoaliePlayer(goalie.player_name, goalie.team_name, goalie.position)"></tr>
+                                    <tr 
+                                        mat-row 
+                                        *matRowDef="let goalie; columns: goaliesGAAColumnsToDisplay;" 
+                                        (click)="openPlayer(goalie, 'goalie')"
+                                    ></tr>
                         
                                 </table>
                         
@@ -1149,7 +1229,11 @@
                                     </ng-container>
                                     
                                     <tr mat-header-row *matHeaderRowDef="goaliesShotsFacedColumnsToDisplay"></tr>
-                                    <tr mat-row *matRowDef="let goalie; columns: goaliesShotsFacedColumnsToDisplay;" (click)="openGoaliePlayer(goalie.player_name, goalie.team_name, goalie.position)"></tr>
+                                    <tr 
+                                        mat-row 
+                                        *matRowDef="let goalie; columns: goaliesShotsFacedColumnsToDisplay;" 
+                                        (click)="openPlayer(goalie, 'goalie')"
+                                    ></tr>
                         
                                 </table>
                         

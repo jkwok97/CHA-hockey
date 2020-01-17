@@ -91,11 +91,10 @@ export class NhlGoalieStatsComponent implements OnInit, OnDestroy {
     this.getSummary(this.start, this.pageSize, "next", this.sortType, this.sortOrder);
   }
 
-  openPlayer(player) {
-    // console.log(player);
-    this._router.navigate([`/stats/players/${player.lastName}, ${player.firstName}`]);
-    this._teamsService.setPlayerPosition(player.playerPositionCode);
-    this._teamsService.setPlayerHits(player.shots);
+  openPlayer(player, type) {
+    console.log(player);
+    console.log(type);
+    this._router.navigate([`/info/${type}s/${player.player_id}/${player.player_name}`]);
     window.scrollTo(0,0);
   }
 

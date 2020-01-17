@@ -52,8 +52,6 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
   GAA: string;
   savePCT: string;
   player: string;
-  position: string;
-  hits: string;
   seasonType: string = 'Regular';
 
   playerStats: MatTableDataSource<any[]>;
@@ -111,14 +109,13 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
       this.allPlayersInfo = resp as [];
       // console.log(this.allPlayersInfo);
     });
-    this.position = this._teamsService.playerPosition;
-    this.hits = this._teamsService.playerHits;
-    // console.log(this.position);
-    // console.log(this.hits);
+    // console.log(this._route.snapshot.params.type);
+    // console.log(this._route.snapshot.params.id);
+    // console.log(this._route.snapshot.params.name);
     setTimeout(() => {
-      if ((!this.position && !this.hits) || this.position === "G") {
+      if (this._route.snapshot.params.type === 'goalies') {
         this.isPlayerGoalie = true;
-        this._teamsService.getAllIndividualGoalieStatsByType(this._route.snapshot.params.params, this.seasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        this._teamsService.getAllIndividualGoalieStatsByType(this._route.snapshot.params.id, this.seasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
           // console.log(resp);
           this.playerStatsFetched = resp as [];
           this.playerInfo = resp as [];
@@ -133,8 +130,8 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
             this.playerStats.sort = this.sort;
           })
         });
-      } else {
-        this._teamsService.getAllIndividualPlayerStatsByType(this._route.snapshot.params.params, this.seasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      } else if (this._route.snapshot.params.type === 'players') {
+        this._teamsService.getAllIndividualPlayerStatsByType(this._route.snapshot.params.id, this.seasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
           // console.log(resp);
           this.playerInfo = resp as [];
           this.playerStatsFetched = resp as [];
@@ -154,7 +151,7 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.player = this.splitName(this._route.snapshot.params.params);
+    this.player = this.splitName(this._route.snapshot.params.name);
   }
 
   getGoalieTotals(allStats) {
@@ -258,9 +255,9 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
     // console.log(event);
     if (event.tab.textLabel === "NHL") {
       this.resetValues();
-      if ((!this.position && !this.hits) || this.position === "G") {
+      if (this._route.snapshot.params.type === 'goalies') {
         this.isPlayerGoalie = true;
-        this._teamsService.getAllIndividualGoalieStatsByTypeReal(this._route.snapshot.params.params, this.seasonType, "NHL").pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        this._teamsService.getAllIndividualGoalieStatsByTypeReal(this._route.snapshot.params.id, this.seasonType, "NHL").pipe(takeWhile(() => this._alive)).subscribe(resp => {
           // console.log(resp);
           this.isLoading = true;
           if (resp[0]['player_nhl_id']) {
@@ -271,8 +268,8 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
             this.isLoading = false;
           }
         });
-      } else {
-        this._teamsService.getAllIndividualPlayerStatsByTypeReal(this._route.snapshot.params.params, this.seasonType, "NHL").pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      } else if (this._route.snapshot.params.type === 'players') {
+        this._teamsService.getAllIndividualPlayerStatsByTypeReal(this._route.snapshot.params.id, this.seasonType, "NHL").pipe(takeWhile(() => this._alive)).subscribe(resp => {
           // console.log(resp[0]['player_nhl_id']);
           this.isLoading = true;
           if (resp[0]['player_nhl_id']) {
@@ -286,10 +283,10 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
       }
     } else if (event.tab.textLabel === "Ratings") {
       this.resetValues();
-      if ((!this.position && !this.hits) || this.position === "G") {
+      if (this._route.snapshot.params.type === 'goalies') {
         this.isPlayerGoalie = true;
         this.isLoading = true;
-        this._teamsService.getGoalieRatings(this._route.snapshot.params.params).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        this._teamsService.getGoalieRatings(this._route.snapshot.params.id).pipe(takeWhile(() => this._alive)).subscribe(resp => {
           this.playerRatingsFetched = resp[0] as [];
           this.hasRatings = true;
           this.populateRatings(this.playerRatingsFetched);
@@ -297,8 +294,8 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
           this.playerRatingsStats = new MatTableDataSource<any[]>([this.playerRatingsFetched]);
           this.isLoading = false;
         });
-      } else {
-        this._teamsService.getPlayerRatings(this._route.snapshot.params.params).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      } else if (this._route.snapshot.params.type === 'players'){
+        this._teamsService.getPlayerRatings(this._route.snapshot.params.id).pipe(takeWhile(() => this._alive)).subscribe(resp => {
           this.playerRatingsFetched = resp[0] as [];
           this.hasRatings = true;
           this.populateRatings(this.playerRatingsFetched);
