@@ -136,7 +136,7 @@ export class TeamSalaryComponent implements OnInit, OnDestroy {
           forwards.forEach(player => {
             this.teamRoster.push(player);
           });
-          // console.log(this.teamRoster)
+          console.log(this.teamRoster)
           this.getTotalsForRoster();
           this.isLoading = false;
         });

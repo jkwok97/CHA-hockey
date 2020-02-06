@@ -44,7 +44,6 @@ export class SalaryComponent implements OnInit, OnDestroy {
   
   constructor(
     private _teamsService: TeamsService,
-    private sanitizer: DomSanitizer,
     private _salaryService: SalaryService,
     private _router: Router
   ) { 
