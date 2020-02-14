@@ -124,7 +124,10 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
           if (this.allPlayersInfo) {
             this.playerInfo.picture = this.allPlayersInfo.find( player => (player.playerName.toLowerCase().includes(this.player[0].toLowerCase())) && (player.playerName.toLowerCase().includes(this.player[1].toLowerCase())));
           }
-          // console.log(this.playerInfo)
+          this._salaryService.getGoalieSalary('goalie', this.playerInfo[0].player_id).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+            this.playerInfo.salary = resp;
+          });
+          console.log(this.playerInfo)
           this.playerInfo.team = this.findLogo(this.playerInfo[0].team_name);
           this.getGoalieTotals(this.playerStatsFetched)
           this.playerStats = new MatTableDataSource<any[]>(this.playerStatsFetched);
@@ -142,6 +145,10 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
           }
           if ((this.playerInfo[0].position === 'LW') || (this.playerInfo[0].position === 'RW') || (this.playerInfo[0].position === 'C')) {
             this._salaryService.getForwardSalary('forward', this.playerInfo[0].player_id).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+              this.playerInfo.salary = resp;
+            });
+          } else if ((this.playerInfo[0].position === 'LD') || (this.playerInfo[0].position === 'RD')) {
+            this._salaryService.getDefenseSalary('defense', this.playerInfo[0].player_id).pipe(takeWhile(() => this._alive)).subscribe(resp => {
               this.playerInfo.salary = resp;
             });
           }
