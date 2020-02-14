@@ -13,6 +13,8 @@
             <p class="player-desc" *ngIf="playerInfo.picture">Position: {{playerInfo.picture.position}}</p>
             <p class="player-desc" *ngIf="!playerInfo.picture && playerInfo[0].position">Position: {{playerInfo[0].position}}</p>
             <p class="player-desc" *ngIf="!playerInfo.picture && !playerInfo[0].position">Position: G</p>
+            <p class="player-desc" *ngIf="playerInfo.salary">Current Salary: ${{playerInfo.salary[0].current_season_salary}}</p>
+            <p class="player-desc" *ngIf="playerInfo.salary">Next Year Salary: ${{playerInfo.salary[0].year_two}}</p>
         </div>
         
     </div>

@@ -34,6 +34,27 @@ export class SalaryService {
     return this._http.get(`${environment.back_end_url}/salaries/`, options);
   }
 
+  getForwardSalary(position, id) {
+    let options = {params: new HttpParams()
+      .set('position', position)
+    }
+    return this._http.get(`${environment.back_end_url}/salaries/${id}`, options)
+  }
+
+  getDefenseSalary(position, id) {
+    let options = {params: new HttpParams()
+      .set('position', position)
+    }
+    return this._http.get(`${environment.back_end_url}/salaries/${id}`, options)
+  }
+
+  getGoalieSalary(position, id) {
+    let options = {params: new HttpParams()
+      .set('position', position)
+    }
+    return this._http.get(`${environment.back_end_url}/salaries/${id}`, options)
+  }
+
   setTeamListener(): Observable<any> {
     return this._subjectTeam.asObservable();
   }
