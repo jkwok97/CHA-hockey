@@ -127,7 +127,7 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
           this._salaryService.getGoalieSalary('goalie', this.playerInfo[0].player_id).pipe(takeWhile(() => this._alive)).subscribe(resp => {
             this.playerInfo.salary = resp;
           });
-          console.log(this.playerInfo)
+          // console.log(this.playerInfo)
           this.playerInfo.team = this.findLogo(this.playerInfo[0].team_name);
           this.getGoalieTotals(this.playerStatsFetched)
           this.playerStats = new MatTableDataSource<any[]>(this.playerStatsFetched);
@@ -152,7 +152,7 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
               this.playerInfo.salary = resp;
             });
           }
-          console.log(this.playerInfo);
+          // console.log(this.playerInfo);
           this.playerInfo.team = this.findLogo(this.playerInfo[0].team_name);
           this.getPlayerTotals(this.playerStatsFetched);
           this.playerStats = new MatTableDataSource<any[]>(this.playerStatsFetched);
