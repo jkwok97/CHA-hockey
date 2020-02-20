@@ -44,6 +44,7 @@ export class StatsComponent implements OnInit, OnDestroy {
   leagueLeaders = [];
   goalDiffLeagueLeaders = [];
   shotDiffLeagueLeaders = [];
+  winStreakLeaders = [];
   ppLeagueLeaders = [];
   pkLeagueLeaders = [];
   pimLeagueLeaders = [];
@@ -75,6 +76,10 @@ export class StatsComponent implements OnInit, OnDestroy {
   teamsPIMLeaders: MatTableDataSource<any[]>;
   mobileTeamsPIMColumnsToDisplay = ['team_logo', 'penalty_minutes', 'pim_game']
   teamsPIMColumnsToDisplay = [ 'team_logo','team_name', 'penalty_minutes', 'pim_game' ];
+
+  teamsLongWinStreak: MatTableDataSource<any[]>;
+  mobileTeamsLongWinStreakColumnsToDisplay = ['team_logo', 'win_streak']
+  teamsLongWinStreakColumnsToDisplay = [ 'team_logo','team_name', 'win_streak' ];
 
   players: MatTableDataSource<any[]>;
   playersColumnsToDisplay = ['team_logo','player_name', 'games_played', 'goals', 'assists', 'points'];
@@ -173,7 +178,8 @@ export class StatsComponent implements OnInit, OnDestroy {
     this._teamsService.getLeagueTeamsStats(this.currentSeason).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.getLeagueLeaders(resp);
       this.getGoalDiffLeagueLeaders(resp);
-      this.getShotDiffLeagueLeaders(resp);
+      // this.getShotDiffLeagueLeaders(resp);
+      this.getWinStreakLeaders(resp);
       this.getPPLeagueLeaders(resp);
       this.getPKLeagueLeaders(resp);
       this.getPimLeagueLeaders(resp);
@@ -402,16 +408,27 @@ export class StatsComponent implements OnInit, OnDestroy {
     this.teamsGoalDiffLeaders = new MatTableDataSource<any[]>(this.goalDiffLeagueLeaders);
   }
 
-  getShotDiffLeagueLeaders(resp) {
+  // getShotDiffLeagueLeaders(resp) {
+  //   let tempLeaders = resp;
+  //   tempLeaders.forEach(element => {
+  //     if (element.playing_year === this.currentSeason && element.season_type === this.currentSeasonType) {
+  //       element.shot_diff = element.shots_for - element.shots_against
+  //       this.shotDiffLeagueLeaders.push(element);
+  //     }
+  //   })
+  //   this.shotDiffLeagueLeaders.sort((a,b) => b.shot_diff - a.shot_diff);
+  //   this.teamsShotDiffLeaders = new MatTableDataSource<any[]>(this.shotDiffLeagueLeaders);
+  // }
+
+  getWinStreakLeaders(resp) {
     let tempLeaders = resp;
     tempLeaders.forEach(element => {
       if (element.playing_year === this.currentSeason && element.season_type === this.currentSeasonType) {
-        element.shot_diff = element.shots_for - element.shots_against
-        this.shotDiffLeagueLeaders.push(element);
+        this.winStreakLeaders.push(element);
       }
     })
-    this.shotDiffLeagueLeaders.sort((a,b) => b.shot_diff - a.shot_diff);
-    this.teamsShotDiffLeaders = new MatTableDataSource<any[]>(this.shotDiffLeagueLeaders);
+    this.winStreakLeaders.sort((a,b) => b.long_win_streak - a.long_win_streak);
+    this.teamsLongWinStreak = new MatTableDataSource<any[]>(this.winStreakLeaders);
   }
 
   getPPLeagueLeaders(resp) {

@@ -218,6 +218,42 @@
                         <mat-expansion-panel expanded="{{expand}}">
 
                             <mat-expansion-panel-header>
+                                <mat-panel-title>Longest Winning Streak</mat-panel-title>
+                            </mat-expansion-panel-header>
+
+                            <div class="table">
+        
+                                <table mat-table [dataSource]="teamsLongWinStreak" class="mat-elevation-z8 full-width">
+                
+                                    <ng-container matColumnDef="team_logo">
+                                        <th mat-header-cell *matHeaderCellDef><span *ngIf="isMobile">Team</span></th>
+                                        <td mat-cell *matCellDef="let team"> 
+                                            <img src="{{ findLogo(team.team_name).image }}"> 
+                                        </td>
+                                    </ng-container>
+                        
+                                    <ng-container matColumnDef="team_name">
+                                        <th mat-header-cell *matHeaderCellDef> Team </th>
+                                        <td mat-cell *matCellDef="let team"> {{findLogo(team.team_name).name}} </td>
+                                    </ng-container>
+                                    
+                                    <ng-container matColumnDef="win_streak">
+                                        <th mat-header-cell *matHeaderCellDef> Games </th>
+                                        <td mat-cell *matCellDef="let team"> {{team.long_win_streak}} </td>
+                                    </ng-container>
+                        
+                                    <tr mat-header-row *matHeaderRowDef="isMobile ? mobileTeamsLongWinStreakColumnsToDisplay: teamsLongWinStreakColumnsToDisplay"></tr>
+                                    <tr mat-row *matRowDef="let team; columns: isMobile ? mobileTeamsLongWinStreakColumnsToDisplay: teamsLongWinStreakColumnsToDisplay;" (click)="openTeam(team.team_name)"></tr>
+                        
+                                </table>
+                        
+                            </div>
+
+                        </mat-expansion-panel>
+
+                        <!-- <mat-expansion-panel expanded="{{expand}}">
+
+                            <mat-expansion-panel-header>
                                 <mat-panel-title>League Shot Differentials</mat-panel-title>
                             </mat-expansion-panel-header>
 
@@ -259,7 +295,7 @@
                         
                             </div>
 
-                        </mat-expansion-panel>
+                        </mat-expansion-panel> -->
 
                         <mat-expansion-panel expanded="{{expand}}">
 

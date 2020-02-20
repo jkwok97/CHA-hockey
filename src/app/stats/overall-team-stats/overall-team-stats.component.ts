@@ -43,7 +43,7 @@ export class OverallTeamStatsComponent implements OnInit, OnDestroy, AfterViewIn
   southEasternTeams: MatTableDataSource<any[]>;
   teamsColumnsToDisplay = [
     'team_logo','team_name', 'games_played', 'wins', 'loss', 'ties', 'points', 'goals_for', 'goals_for_game', 'goals_against', 'goals_against_game', 
-    'goals_diff', 'win_pct', 'pp_pct', 'pk_pct', 'sh_goals', 'penalty_minutes_game', 'shot_diff', 'div_record',
+    'goals_diff', 'win_pct', 'pp_pct', 'pk_pct', 'penalty_minutes_game', 'div_record',
     'home_record', 'away_record', 'trail_record'
   ];
 
@@ -87,7 +87,7 @@ export class OverallTeamStatsComponent implements OnInit, OnDestroy, AfterViewIn
             element.pp_pct = ((element.pp_goals / element.pp_attempts) * 100).toFixed(1);
             element.pk_pct = (((element.pk_attempts - element.pk_goals) / element.pk_attempts) * 100).toFixed(1);
             element.penalty_minutes_game = (element.penalty_minutes / element.games_played).toFixed(1);
-            element.shot_diff = (element.shots_for - element.shots_against);
+            // element.shot_diff = (element.shots_for - element.shots_against);
             this.stats.push(element);
           }
         })
