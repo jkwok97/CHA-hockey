@@ -111,9 +111,6 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
       this.allPlayersInfo = resp as [];
       // console.log(this.allPlayersInfo);
     });
-    // console.log(this._route.snapshot.params.type);
-    // console.log(this._route.snapshot.params.id);
-    // console.log(this._route.snapshot.params.name);
     setTimeout(() => {
       if (this._route.snapshot.params.type === 'goalies') {
         this.isPlayerGoalie = true;
@@ -235,7 +232,7 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
   }
 
   getGoalieStats(type) {
-    this._teamsService.getAllIndividualGoalieStatsByType(this._route.snapshot.params.params, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+    this._teamsService.getAllIndividualGoalieStatsByType(this._route.snapshot.params.id, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       // console.log(resp);
       this.playerStatsFetched = resp as [];
       this.getGoalieTotals(this.playerStatsFetched);
@@ -244,7 +241,7 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
   }
 
   getPlayerStats(type) {
-    this._teamsService.getAllIndividualPlayerStatsByType(this._route.snapshot.params.params, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+    this._teamsService.getAllIndividualPlayerStatsByType(this._route.snapshot.params.id, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       // console.log(resp);
       this.playerStatsFetched = resp as [];
       this.getPlayerTotals(this.playerStatsFetched);
@@ -273,7 +270,7 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
         this.isPlayerGoalie = true;
         this.isLoading = true;
         this._teamsService.getAllIndividualGoalieStatsByTypeReal(this._route.snapshot.params.id, this.seasonType, "NHL").pipe(takeWhile(() => this._alive)).subscribe(resp => {
-          // console.log(resp);
+          console.log(resp);
           if (resp[0]['player_nhl_id']) {
             let playerId = resp[0]['player_nhl_id'];
             this.getRealNHLStats(playerId);
@@ -286,7 +283,8 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
       } else if (this._route.snapshot.params.type === 'players') {
         this.isLoading = true;
         this._teamsService.getAllIndividualPlayerStatsByTypeReal(this._route.snapshot.params.id, this.seasonType, "NHL").pipe(takeWhile(() => this._alive)).subscribe(resp => {
-          // console.log(resp[0]['player_nhl_id']);
+          console.log(resp[0]['player_nhl_id']);
+          console.log(resp[0])
           if (resp[0]['player_nhl_id']) {
             let playerId = resp[0]['player_nhl_id'];
             this.getRealNHLStats(playerId);

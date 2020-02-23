@@ -348,14 +348,14 @@ export class TeamsService {
     return this._http.get(`${environment.back_end_url}/goalies-stats/${team}`, options);
   }
 
-  getAllIndividualPlayerStats(name) {
-    return this._http.get(`${environment.back_end_url}/players/${name}`);
+  getAllIndividualPlayerStats(id) {
+    return this._http.get(`${environment.back_end_url}/players/${id}`);
   }
 
-  getAllIndividualPlayerStatsByType(name, type) {
+  getAllIndividualPlayerStatsByType(id, type) {
     let options = {params: new HttpParams()
       .set('type', type)}
-    return this._http.get(`${environment.back_end_url}/players/${name}`, options);
+    return this._http.get(`${environment.back_end_url}/players/${id}`, options);
   }
 
   getAllIndividualGoalieStats(name) {
