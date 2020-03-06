@@ -54,6 +54,11 @@
     text-align: center;
 }
 
+.team img {
+    height: 100%;
+    width: auto;
+}
+
 .image {
     width: 100%;
 }
@@ -126,7 +131,9 @@
 
 .team {
     background-color: transparent;
-    /* border: 1px solid red; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .west-wins {
