@@ -25,6 +25,7 @@ import { SalaryComponent } from './salary/salary.component';
 import { PicksComponent } from './picks/picks.component';
 import { TeamSalaryComponent } from './salary/team-salary/team-salary.component';
 import { PlayoffTreeComponent } from './schedule/playoff-tree/playoff-tree.component';
+import { NewPlayoffTreeComponent } from './schedule/playoff-tree/new-playoff-tree/new-playoff-tree.component';
 
 const routes: Routes = [
   { path: 'main', component: MainComponent, canActivate: [AuthGuard] },
@@ -56,7 +57,7 @@ const routes: Routes = [
     ]}, 
   // { path: 'salary/:params', component: SalaryComponent, canActivate: [AuthGuard] },
   { path: 'schedule', component: ScheduleComponent, canActivate: [AuthGuard] },
-  { path: 'playoffTree', component: PlayoffTreeComponent, canActivate: [AuthGuard] },
+  { path: 'playoffTree', component: NewPlayoffTreeComponent, canActivate: [AuthGuard] },
   { path: 'trades', component: TradesComponent, canActivate: [AuthGuard] },
   { path: 'picks', component: PicksComponent, canActivate: [AuthGuard] },
   { path: 'waiver-priority', component: WaiverPriorityComponent, canActivate: [AuthGuard] },

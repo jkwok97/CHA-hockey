@@ -1,0 +1,18 @@
+<mat-card *ngIf="matchup" class="matchup-container">
+
+    <div class="team-container">
+        <app-team-card [team]="homeTeam"></app-team-card>
+    </div>
+
+    <p *ngIf="homeTeam">Vs</p>
+
+    <div class="team-container">
+        <app-team-card [team]="visitingTeam"></app-team-card>
+    </div>
+    
+    <mat-card-content class="record-container" *ngIf="homeTeam">
+        <!-- <p>Regular Season Matchup Record</p> -->
+        <p class="series-text">Series: <span class="red-text">{{series}}</span></p>
+    </mat-card-content>
+
+</mat-card>

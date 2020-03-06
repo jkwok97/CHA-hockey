@@ -1,0 +1,19 @@
+.team-logo {
+    height: 100px;
+    width: auto;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.content-container {
+    width: 100%;
+}
+
+.team-card-container {
+    background-color: rgba(138, 136, 136, 0.4);
+}
+

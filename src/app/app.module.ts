@@ -49,6 +49,10 @@ import { NhlGoalieStatsComponent } from './main/nhl-goalie-stats/nhl-goalie-stat
 import { TeamSalaryComponent } from './salary/team-salary/team-salary.component';
 import { PlayoffTreeComponent } from './schedule/playoff-tree/playoff-tree.component';
 import { NhlRookieStatsComponent } from './main/nhl-rookie-stats/nhl-rookie-stats.component';
+import { MatchupComponent } from './schedule/playoff-tree/matchup/matchup.component';
+import { ChampionComponent } from './schedule/playoff-tree/champion/champion.component';
+import { NewPlayoffTreeComponent } from './schedule/playoff-tree/new-playoff-tree/new-playoff-tree.component';
+import { TeamCardComponent } from './schedule/playoff-tree/matchup/team-card/team-card.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +97,11 @@ import { NhlRookieStatsComponent } from './main/nhl-rookie-stats/nhl-rookie-stat
     NhlGoalieStatsComponent,
     TeamSalaryComponent,
     PlayoffTreeComponent,
-    NhlRookieStatsComponent
+    NhlRookieStatsComponent,
+    MatchupComponent,
+    ChampionComponent,
+    NewPlayoffTreeComponent,
+    TeamCardComponent
   ],
   imports: [
     BrowserModule,

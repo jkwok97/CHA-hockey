@@ -1,0 +1,95 @@
+<div class="tree-container">
+
+    <div class="conference-container">
+
+        <h1 class="header-text">Western Conference</h1>
+
+        <div class="rounds-container">
+
+            <div class="round-container">
+
+                <h4 class="header-text">Quarter-Finals</h4>
+    
+                <app-matchup 
+                    *ngFor="let matchup of westernQuarterMatchups" 
+                    [matchup]="matchup"
+                ></app-matchup>
+    
+            </div>
+    
+            <div class="round-container">
+    
+                <h4 class="header-text">Semi-Finals</h4>
+    
+                <app-matchup 
+                    *ngFor="let matchup of westernSemiMatchups" 
+                    [matchup]="matchup"
+                ></app-matchup>
+    
+            </div>
+    
+            <div class="round-container">
+    
+                <h4 class="header-text">Conference-Finals</h4>
+    
+                <app-matchup 
+                    *ngFor="let matchup of westernConferenceMatchups" 
+                    [matchup]="matchup"
+                ></app-matchup>
+    
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="conference-container east">
+
+        <h1 class="header-text">Eastern Conference</h1>
+
+        <div class="rounds-container">
+
+            <div class="round-container">
+
+                <h4 class="header-text">Quarter-Finals</h4>
+    
+                <app-matchup 
+                    *ngFor="let matchup of easternQuarterMatchups"
+                    [matchup]="matchup"
+                ></app-matchup>
+    
+            </div>
+    
+            <div class="round-container">
+    
+                <h4 class="header-text">Semi-Finals</h4>
+    
+                <app-matchup 
+                    *ngFor="let matchup of easternSemiMatchups"
+                    [matchup]="matchup"
+                ></app-matchup>
+    
+            </div>
+    
+            <div class="round-container">
+    
+                <h4 class="header-text">Conference-Finals</h4>
+    
+                <app-matchup 
+                    *ngFor="let matchup of easternConferenceMatchups"
+                    [matchup]="matchup"
+                ></app-matchup>
+    
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- <div class="champion-container">
+        <app-champion></app-champion>
+    </div> -->
+
+</div>
+
+
