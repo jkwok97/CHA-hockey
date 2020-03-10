@@ -29,6 +29,12 @@ export class NewPlayoffTreeComponent implements OnInit, OnDestroy {
   isMobile: boolean = false;
   isLoading: boolean = false;
 
+  tiles = [
+    {text: 'One', cols: 4, rows: 1, color: 'lightblue'},
+    {text: 'Two', cols: 1, rows: 2, color: 'lightgreen'},
+    {text: 'Three', cols: 4, rows: 1, color: 'lightpink'},
+  ];
+
   constructor(
     private _teamsService:TeamsService,
   ) { 
