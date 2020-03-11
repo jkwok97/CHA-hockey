@@ -53,6 +53,7 @@ import { MatchupComponent } from './schedule/playoff-tree/matchup/matchup.compon
 import { ChampionComponent } from './schedule/playoff-tree/champion/champion.component';
 import { NewPlayoffTreeComponent } from './schedule/playoff-tree/new-playoff-tree/new-playoff-tree.component';
 import { TeamCardComponent } from './schedule/playoff-tree/matchup/team-card/team-card.component';
+import { ConferenceComponent } from './schedule/playoff-tree/conference/conference.component';
 
 @NgModule({
   declarations: [
@@ -101,7 +102,8 @@ import { TeamCardComponent } from './schedule/playoff-tree/matchup/team-card/tea
     MatchupComponent,
     ChampionComponent,
     NewPlayoffTreeComponent,
-    TeamCardComponent
+    TeamCardComponent,
+    ConferenceComponent
   ],
   imports: [
     BrowserModule,

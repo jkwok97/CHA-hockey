@@ -1,45 +1,45 @@
 <div class="tree-container">
 
-    <mat-grid-list cols="5" rowHeight="825px" class="grid-width">
+    <mat-grid-list cols="5" rowHeight="825px" gutterSize="25px" class="grid-width">
     
         <mat-grid-tile colspan="4" rowspan="1" class="grid-tile">
-    
-            <div class="conference-container">
-    
-                <h1 class="header-text">Western Conference</h1>
-        
-                <div class="rounds-container">
-        
-                    <div class="round-container">
-        
-                        <h4 class="header-text">Quarter-Finals</h4>
 
+            <div class="conference">
+
+                <h1 class="header-text">Western Conference</h1>
+    
+                <div class="rounds-container">
+                
+                    <div class="round-container">
+                
+                        <h4 class="round-text">Quarter-Finals</h4>
+                
                         <div class="matchups">
                             <app-matchup 
                                 *ngFor="let matchup of westernQuarterMatchups" 
                                 [matchup]="matchup"
                             ></app-matchup>
                         </div>
-            
+                
                     </div>
-            
+                
                     <div class="round-container">
-            
-                        <h4 class="header-text">Semi-Finals</h4>
-
+                
+                        <h4 class="round-text">Semi-Finals</h4>
+                
                         <div class="matchups">
                             <app-matchup 
                                 *ngFor="let matchup of westernSemiMatchups" 
                                 [matchup]="matchup"
                             ></app-matchup>
                         </div>
-            
+                
                     </div>
-            
+                
                     <div class="round-container">
-            
-                        <h4 class="header-text">Conference-Finals</h4>
-            
+                
+                        <h4 class="round-text">Conference-Finals</h4>
+                
                         <div class="matchups">
                             <app-matchup 
                                 *ngFor="let matchup of westernConferenceMatchups" 
@@ -48,9 +48,9 @@
                         </div>
                         
                     </div>
-        
+                
                 </div>
-        
+
             </div>
     
         </mat-grid-tile>
@@ -59,9 +59,9 @@
             <app-champion></app-champion>
         </mat-grid-tile>
     
-        <mat-grid-tile colspan="4" rowspan="1">
+        <mat-grid-tile colspan="4" rowspan="1" class="grid-tile">
     
-            <div class="conference-container east">
+            <div class="conference east">
     
                 <h1 class="header-text">Eastern Conference</h1>
         
@@ -69,7 +69,7 @@
         
                     <div class="round-container">
         
-                        <h4 class="header-text">Quarter-Finals</h4>
+                        <h4 class="round-text">Quarter-Finals</h4>
             
                         <div class="matchups">
                             <app-matchup 
@@ -82,7 +82,7 @@
             
                     <div class="round-container">
             
-                        <h4 class="header-text">Semi-Finals</h4>
+                        <h4 class="round-text">Semi-Finals</h4>
             
                         <div class="matchups">
                             <app-matchup 
@@ -95,7 +95,7 @@
             
                     <div class="round-container">
             
-                        <h4 class="header-text">Conference-Finals</h4>
+                        <h4 class="round-text">Conference-Finals</h4>
             
                         <div class="matchups">
                             <app-matchup 
