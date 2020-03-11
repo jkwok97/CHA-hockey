@@ -1,6 +1,6 @@
 <div class="tree-container">
 
-    <mat-grid-list cols="5" rowHeight="85vh" class="grid-width">
+    <mat-grid-list cols="5" rowHeight="825px" class="grid-width">
     
         <mat-grid-tile colspan="4" rowspan="1" class="grid-tile">
     
@@ -13,22 +13,26 @@
                     <div class="round-container">
         
                         <h4 class="header-text">Quarter-Finals</h4>
-            
-                        <app-matchup 
-                            *ngFor="let matchup of westernQuarterMatchups" 
-                            [matchup]="matchup"
-                        ></app-matchup>
+
+                        <div class="matchups">
+                            <app-matchup 
+                                *ngFor="let matchup of westernQuarterMatchups" 
+                                [matchup]="matchup"
+                            ></app-matchup>
+                        </div>
             
                     </div>
             
                     <div class="round-container">
             
                         <h4 class="header-text">Semi-Finals</h4>
-            
-                        <app-matchup 
-                            *ngFor="let matchup of westernSemiMatchups" 
-                            [matchup]="matchup"
-                        ></app-matchup>
+
+                        <div class="matchups">
+                            <app-matchup 
+                                *ngFor="let matchup of westernSemiMatchups" 
+                                [matchup]="matchup"
+                            ></app-matchup>
+                        </div>
             
                     </div>
             
@@ -36,11 +40,13 @@
             
                         <h4 class="header-text">Conference-Finals</h4>
             
-                        <app-matchup 
-                            *ngFor="let matchup of westernConferenceMatchups" 
-                            [matchup]="matchup"
-                        ></app-matchup>
-            
+                        <div class="matchups">
+                            <app-matchup 
+                                *ngFor="let matchup of westernConferenceMatchups" 
+                                [matchup]="matchup"
+                            ></app-matchup>
+                        </div>
+                        
                     </div>
         
                 </div>
@@ -65,10 +71,12 @@
         
                         <h4 class="header-text">Quarter-Finals</h4>
             
-                        <app-matchup 
-                            *ngFor="let matchup of easternQuarterMatchups"
-                            [matchup]="matchup"
-                        ></app-matchup>
+                        <div class="matchups">
+                            <app-matchup 
+                                *ngFor="let matchup of easternQuarterMatchups"
+                                [matchup]="matchup"
+                            ></app-matchup>
+                        </div>
             
                     </div>
             
@@ -76,10 +84,12 @@
             
                         <h4 class="header-text">Semi-Finals</h4>
             
-                        <app-matchup 
-                            *ngFor="let matchup of easternSemiMatchups"
-                            [matchup]="matchup"
-                        ></app-matchup>
+                        <div class="matchups">
+                            <app-matchup 
+                                *ngFor="let matchup of easternSemiMatchups"
+                                [matchup]="matchup"
+                            ></app-matchup>
+                        </div>
             
                     </div>
             
@@ -87,11 +97,13 @@
             
                         <h4 class="header-text">Conference-Finals</h4>
             
-                        <app-matchup 
-                            *ngFor="let matchup of easternConferenceMatchups"
-                            [matchup]="matchup"
-                        ></app-matchup>
-            
+                        <div class="matchups">
+                            <app-matchup 
+                                *ngFor="let matchup of easternConferenceMatchups"
+                                [matchup]="matchup"
+                            ></app-matchup>
+                        </div>
+                        
                     </div>
         
                 </div>

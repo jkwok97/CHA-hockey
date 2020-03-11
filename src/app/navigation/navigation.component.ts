@@ -26,7 +26,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     {name: 'Statistics', url: 'stats', current: false},
     {name: 'Teams', url: 'teams', current: false},
     {name: 'Schedule', url: 'schedule', current: false},
-    {name: 'Playoff Tree', url: 'playoffTree', current: false},
+    // {name: 'Playoff Tree', url: 'playoffTree', current: false},
     {name: 'Salaries', url: 'salary', current: false},
     {name: 'Picks', url: 'picks', current: false},
     {name: 'Trades', url: 'trades', current: false},

@@ -2,17 +2,17 @@
     /* height: 160vh; */
     /* border: 1px solid blue; */
     margin: 20px 0;
-    width: 600px;
+    width: 500px;
 }
 
 .conference-container {
     /* width: 65%; */
-    margin: 20px 0;
+    margin: 0 0 20px 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
     align-content: flex-start;
-    height: 80vh;
+    height: 100%;
     width: 2100px;
 }
 
@@ -31,10 +31,12 @@
 }
 
 .round-container {
-    width: 700px;
+    width: 725px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    height: 100%;
+    border: 1px solid blue;
 }
 
 .rounds-container {
@@ -53,4 +55,10 @@
 
 .grid-tile {
     /* border: 1px solid blue; */
+}
+
+.matchups {
+    /* border: 1px solid green; */
+    
+    
 }
