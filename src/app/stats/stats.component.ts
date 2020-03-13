@@ -228,7 +228,7 @@ export class StatsComponent implements OnInit, OnDestroy {
   getSvPctLeaders(resp) {
     let tempLeaders = resp;
     tempLeaders.forEach(element => { 
-      if (element.games_played > 0) {
+      if (element.minutes_played > 500) {
         this.goaliesSvPctLeaders.push(element);
       }
     });
@@ -240,7 +240,7 @@ export class StatsComponent implements OnInit, OnDestroy {
   getGAALeaders(resp) {
     let tempLeaders = resp;
     tempLeaders.forEach(element => { 
-      if (element.games_played > 0) {
+      if (element.minutes_played > 500) {
         this.goaliesGAALeaders.push(element);
       }
     });
@@ -471,7 +471,7 @@ export class StatsComponent implements OnInit, OnDestroy {
     let tempLeaders = resp;
     tempLeaders.forEach(element => {
       if (element.playing_year === this.currentSeason && element.season_type === this.currentSeasonType) {
-        if (element.minutes_played > 0) {
+        if (element.minutes_played > 500) {
           element.points_per_sixty = ((element.points/element.minutes_played) * 60).toFixed(2);
           this.pointsPerSixtyLeaders.push(element);
         }
