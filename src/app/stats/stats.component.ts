@@ -4,6 +4,7 @@ import { takeWhile } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { MatSort } from '@angular/material/sort';
+import { transition } from '@angular/animations';
 
 @Component({
   selector: 'app-stats',
@@ -52,6 +53,7 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   currentSeason: string;
   currentSeasonType: string;
+  currentTab: string = 'Teams';
 
   teamsLeaders: MatTableDataSource<any[]>;
   mobileTeamsColumnsToDisplay = ['team_logo', 'games_played', 'wins', 'loss', 'ties', 'points']
@@ -139,52 +141,92 @@ export class StatsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.checkMobile();
     // console.log(this.isMobile);
-    this.isLeadersLoading = true;
-    this.isGoaliesLoading = true;
-    this.isLeagueLoading = true;
     this.currentSeason = this._teamsService.currentSeason;
     this.currentSeasonType = this._teamsService.currentSeasonType;
-    this._teamsService.getPlayerStatsByYearByType(this.currentSeason, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+
+    this.getTeamStats(this.currentSeason, this.currentSeasonType);
+
+  }
+
+  onTabChange(event) {
+    this.currentTab = event.tab.textLabel;
+    console.log(this.currentSeasonType);
+    if (event.tab.textLabel === 'Players') {
+      this.getPlayerStats(this.currentSeason, this.currentSeasonType);
+    } else if (event.tab.textLabel === 'Goalies') {
+      this.getGoalieStats(this.currentSeason, this.currentSeasonType);
+    } else if (event.tab.textLabel === 'Teams') {
+      this.getTeamStats(this.currentSeason, this.currentSeasonType);
+    }
+  }
+
+  getPlayerStats(season: string, type: string) {
+    this.isLeadersLoading = true;
+    this._teamsService.getPlayerStatsByYearByType(season, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.stats = resp;
-      // console.log(resp);
-      this.getPointLeaders(resp);
-      this.getDmanPointLeaders(resp);
-      this.getRookiePointLeaders(resp);
-      this.getPointStreakLeaders(resp);
-      this.getLongPointStreakLeaders(resp);
-      this.getGoalsLeaders(resp);
-      this.getAssistsLeaders(resp);
-      this.getPlusMinusLeaders(resp);
-      this.getPlusMinusLosers(resp);
-      this.getPenaltiesLeaders(resp);
-      this.getHitsLeaders(resp);
-      this.getBlockedLeaders(resp);
-      this.getShotsLeaders(resp);
-      this.getPointsPerSixtyLeaders(resp);
-      this.getShGoalsLeaders(resp);
-      this.getPpGoalsLeaders(resp);
-      this.isLeadersLoading = false;
+      setTimeout(() => {
+        this.getPointLeaders(resp);
+        this.getDmanPointLeaders(resp);
+        this.getRookiePointLeaders(resp);
+        this.getPointStreakLeaders(resp);
+        this.getLongPointStreakLeaders(resp);
+        this.getGoalsLeaders(resp);
+        this.getAssistsLeaders(resp);
+        this.getPlusMinusLeaders(resp);
+        this.getPlusMinusLosers(resp);
+        this.getPenaltiesLeaders(resp);
+        this.getHitsLeaders(resp);
+        this.getBlockedLeaders(resp);
+        this.getShotsLeaders(resp);
+        this.getPointsPerSixtyLeaders(resp);
+        this.getShGoalsLeaders(resp);
+        this.getPpGoalsLeaders(resp);
+        this.isLeadersLoading = false;
+      }, 1000);
     });
-    this._teamsService.getGoalieStatsByYearByType(this.currentSeason, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      // console.log(resp);
+  }
+
+  getGoalieStats(season: string, type: string) {
+    this.isGoaliesLoading = true;
+    this._teamsService.getGoalieStatsByYearByType(season, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.goalieStats = resp;
-      this.getGoalieLeaders(resp);
-      this.getGAALeaders(resp);
-      this.getSvPctLeaders(resp);
-      this.getShotsFacedLeaders(resp);
-      this.getShutOutsLeaders(resp);
-      this.isGoaliesLoading = false;
+      setTimeout(() => {
+        this.getGoalieLeaders(resp);
+        this.getGAALeaders(resp);
+        this.getSvPctLeaders(resp);
+        this.getShotsFacedLeaders(resp);
+        this.getShutOutsLeaders(resp);
+        this.isGoaliesLoading = false;
+      }, 1000);
     });
-    this._teamsService.getLeagueTeamsStats(this.currentSeason).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      this.getLeagueLeaders(resp);
-      this.getGoalDiffLeagueLeaders(resp);
-      // this.getShotDiffLeagueLeaders(resp);
-      this.getWinStreakLeaders(resp);
-      this.getPPLeagueLeaders(resp);
-      this.getPKLeagueLeaders(resp);
-      this.getPimLeagueLeaders(resp);
-      this.isLeagueLoading = false;
+  }
+
+  getTeamStats(season: string, type: string) {
+    this.isLeagueLoading = true;
+    this._teamsService.getLeagueTeamsStats(season, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      console.log(resp);
+      setTimeout(() => {
+        this.getLeagueLeaders(resp);
+        this.getGoalDiffLeagueLeaders(resp);
+        // this.getShotDiffLeagueLeaders(resp);
+        this.getWinStreakLeaders(resp);
+        this.getPPLeagueLeaders(resp);
+        this.getPKLeagueLeaders(resp);
+        this.getPimLeagueLeaders(resp);
+        this.isLeagueLoading = false;
+      }, 1000);
     });
+  }
+
+  changeSeason(value) {
+    this.currentSeasonType = value;
+    if (this.currentTab === 'Players') {
+      this.getPlayerStats(this.currentSeason, value);
+    } else if (this.currentTab === 'Goalies') {
+      this.getGoalieStats(this.currentSeason, value);
+    } else if (this.currentTab === 'Teams') {
+      this.getTeamStats(this.currentSeason, value);
+    }
   }
 
   checkMobile() {
@@ -203,6 +245,7 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   getShutOutsLeaders(resp) {
     let tempLeaders = resp;
+    this.goaliesShutOutsLeaders = [];
     tempLeaders.forEach(element => { 
       if (element.games_played > 0) {
         this.goaliesShutOutsLeaders.push(element);
@@ -215,6 +258,7 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   getShotsFacedLeaders(resp) {
     let tempLeaders = resp;
+    this.goaliesShotsFacedLeaders = [];
     tempLeaders.forEach(element => { 
       if (element.games_played > 0) {
         this.goaliesShotsFacedLeaders.push(element);
@@ -227,6 +271,7 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   getSvPctLeaders(resp) {
     let tempLeaders = resp;
+    this.goaliesSvPctLeaders = [];
     tempLeaders.forEach(element => { 
       if (element.minutes_played > 500) {
         this.goaliesSvPctLeaders.push(element);
@@ -239,6 +284,7 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   getGAALeaders(resp) {
     let tempLeaders = resp;
+    this.goaliesGAALeaders = [];
     tempLeaders.forEach(element => { 
       if (element.minutes_played > 500) {
         this.goaliesGAALeaders.push(element);
@@ -251,6 +297,7 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   getBlockedLeaders(resp) {
     let tempLeaders = resp;
+    this.blockedLeader = [];
     tempLeaders.forEach(element => { this.blockedLeader.push(element) });
     this.blockedLeader.sort((a,b) => b.blocked_shots - a.blocked_shots);
     let leaders = this.blockedLeader.splice(0, 10);
@@ -259,6 +306,7 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   getHitsLeaders(resp) {
     let tempLeaders = resp;
+    this.hitLeader = [];
     tempLeaders.forEach(element => { this.hitLeader.push(element) });
     this.hitLeader.sort((a,b) => b.hits - a.hits);
     let leaders = this.hitLeader.splice(0, 10);
@@ -267,6 +315,7 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   getPenaltiesLeaders(resp) {
     let tempLeaders = resp;
+    this.penaltyLeader = [];
     tempLeaders.forEach(element => { this.penaltyLeader.push(element) });
     this.penaltyLeader.sort((a,b) => b.penalty_minutes - a.penalty_minutes);
     let leaders = this.penaltyLeader.splice(0, 10);
@@ -275,6 +324,7 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   getPlusMinusLeaders(resp) {
     let tempLeaders = resp;
+    this.plusMinusLeader = [];
     tempLeaders.forEach(element => { this.plusMinusLeader.push(element) });
     this.plusMinusLeader.sort((a,b) => b.plus_minus - a.plus_minus);
     let leaders = this.plusMinusLeader.splice(0, 10);
@@ -283,6 +333,7 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   getPlusMinusLosers(resp) {
     let tempLeaders = resp;
+    this.plusMinusLoser = [];
     tempLeaders.forEach(element => { this.plusMinusLoser.push(element) });
     this.plusMinusLoser.sort((a,b) => a.plus_minus - b.plus_minus);
     let leaders = this.plusMinusLoser.splice(0, 10);
@@ -291,6 +342,7 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   getAssistsLeaders(resp) {
     let tempLeaders = resp;
+    this.assistLeaders = [];
     tempLeaders.forEach(element => { this.assistLeaders.push(element) });
     this.assistLeaders.sort((a,b) => b.assists - a.assists);
     let leaders = this.assistLeaders.splice(0, 10);
@@ -299,6 +351,7 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   getRookiePointLeaders(resp) {
     let tempLeaders = resp;
+    this.rookieLeaders = [];
     tempLeaders.forEach(element => { 
       if (element.player_status === "Rookie") {
         this.rookieLeaders.push(element) 
@@ -311,6 +364,7 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   getDmanPointLeaders(resp) {
     let tempLeaders = resp;
+    this.dmenLeaders = [];
     tempLeaders.forEach(element => { 
       if (element.position === "RD" || element.position === "LD") {
         this.dmenLeaders.push(element) 
@@ -323,6 +377,7 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   getShotsLeaders(resp) {
     let tempLeaders = resp;
+    this.shotLeaders = [];
     tempLeaders.forEach(element => { this.shotLeaders.push(element) });
     this.shotLeaders.sort((a,b) => b.shots - a.shots);
     let leaders = this.shotLeaders.splice(0, 10);
@@ -331,6 +386,7 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   getGoalsLeaders(resp) {
     let tempLeaders = resp;
+    this.goalLeaders = [];
     tempLeaders.forEach(element => { this.goalLeaders.push(element) });
     this.goalLeaders.sort((a,b) => b.goals - a.goals);
     let leaders = this.goalLeaders.splice(0, 10);
@@ -339,6 +395,7 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   getShGoalsLeaders(resp) {
     let tempLeaders = resp;
+    this.shGoalLeaders = [];
     tempLeaders.forEach(element => { this.shGoalLeaders.push(element) });
     this.shGoalLeaders.sort((a,b) => b.sh_goals - a.sh_goals);
     let leaders = this.shGoalLeaders.splice(0, 10);
@@ -347,6 +404,7 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   getPpGoalsLeaders(resp) {
     let tempLeaders = resp;
+    this.ppGoalLeaders = [];
     tempLeaders.forEach(element => { this.ppGoalLeaders.push(element) });
     this.ppGoalLeaders.sort((a,b) => b.pp_goals - a.pp_goals);
     let leaders = this.ppGoalLeaders.splice(0, 10);
@@ -355,6 +413,7 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   getPointLeaders(resp) {
     let tempLeaders = resp;
+    this.pointLeaders = [];
     tempLeaders.forEach(element => { this.pointLeaders.push(element) });
     this.pointLeaders.sort((a,b) => b.points - a.points);
     let leaders = this.pointLeaders.splice(0, 10);
@@ -363,6 +422,7 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   getPointStreakLeaders(resp) {
     let tempLeaders = resp;
+    this.currPointStreakLeaders = [];
     tempLeaders.forEach(element => { this.currPointStreakLeaders.push(element); });
     this.currPointStreakLeaders.sort((a,b) => b.current_points_streak - a.current_points_streak);
     let leaders = this.currPointStreakLeaders.splice(0, 10);
@@ -371,6 +431,7 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   getLongPointStreakLeaders(resp) {
     let tempLeaders = resp;
+    this.longPointStreakLeaders = [];
     tempLeaders.forEach(element => { this.longPointStreakLeaders.push(element); });
     this.longPointStreakLeaders.sort((a,b) => b.longest_points_streak - a.longest_points_streak);
     let leaders = this.longPointStreakLeaders.splice(0, 10);
@@ -379,6 +440,7 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   getGoalieLeaders(resp) {
     let tempLeaders = resp;
+    this.goalieLeaders = [];
     tempLeaders.forEach(element => { this.goalieLeaders.push(element); });
     this.goalieLeaders.sort((a,b) => b.wins - a.wins);
     let leaders = this.goalieLeaders.splice(0, 10);
@@ -387,6 +449,7 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   getLeagueLeaders(resp) {
     let tempLeaders = resp;
+    this.leagueLeaders = [];
     tempLeaders.forEach(element => {
       if (element.playing_year === this.currentSeason && element.season_type === this.currentSeasonType) {
         this.leagueLeaders.push(element);
@@ -398,6 +461,7 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   getGoalDiffLeagueLeaders(resp) {
     let tempLeaders = resp;
+    this.goalDiffLeagueLeaders = [];
     tempLeaders.forEach(element => {
       if (element.playing_year === this.currentSeason && element.season_type === this.currentSeasonType) {
         element.goal_diff = element.goals_for - element.goals_against;
@@ -422,6 +486,7 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   getWinStreakLeaders(resp) {
     let tempLeaders = resp;
+    this.winStreakLeaders = [];
     tempLeaders.forEach(element => {
       if (element.playing_year === this.currentSeason && element.season_type === this.currentSeasonType) {
         this.winStreakLeaders.push(element);
@@ -433,6 +498,7 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   getPPLeagueLeaders(resp) {
     let tempLeaders = resp;
+    this.ppLeagueLeaders = [];
     tempLeaders.forEach(element => {
       if (element.playing_year === this.currentSeason && element.season_type === this.currentSeasonType) {
         element.pp_pct = ((element.pp_goals / element.pp_attempts) * 100).toFixed(1)
@@ -445,6 +511,7 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   getPKLeagueLeaders(resp) {
     let tempLeaders = resp;
+    this.pkLeagueLeaders = [];
     tempLeaders.forEach(element => {
       if (element.playing_year === this.currentSeason && element.season_type === this.currentSeasonType) {
         element.pk_pct = (((element.pk_attempts - element.pk_goals) / element.pk_attempts) * 100).toFixed(1) 
@@ -457,6 +524,7 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   getPimLeagueLeaders(resp) {
     let tempLeaders = resp;
+    this.pimLeagueLeaders = [];
     tempLeaders.forEach(element => {
       if (element.playing_year === this.currentSeason && element.season_type === this.currentSeasonType) {
         element.pim_game = (element.penalty_minutes / element.games_played).toFixed(1)
@@ -469,6 +537,7 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   getPointsPerSixtyLeaders(resp) {
     let tempLeaders = resp;
+    this.pointsPerSixtyLeaders = [];
     tempLeaders.forEach(element => {
       if (element.playing_year === this.currentSeason && element.season_type === this.currentSeasonType) {
         if (element.minutes_played > 500) {

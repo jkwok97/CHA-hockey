@@ -51,7 +51,7 @@ export class PlayoffTreeComponent implements OnInit, OnDestroy {
   }
 
   checkStandings() {
-    this._teamsService.getLeagueTeamsStats(this.currentSeason).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+    this._teamsService.getLeagueTeamsStats(this.currentSeason, 'Regular').pipe(takeWhile(() => this._alive)).subscribe(resp => {
       // console.log(resp);
       let tempLeaders = resp as any;
       tempLeaders.forEach(element => {

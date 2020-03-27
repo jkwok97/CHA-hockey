@@ -41,7 +41,7 @@ export class PicksComponent implements OnInit, OnDestroy {
     // }, 500);
     this._teamsService.getDraftTable().pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.drafts = resp;
-      this._teamsService.getLeagueTeamsStats(this.currentSeason).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      this._teamsService.getLeagueTeamsStats(this.currentSeason, 'Regular').pipe(takeWhile(() => this._alive)).subscribe(resp => {
         this.getLeagueLeaders(resp, this.drafts);
       });
     });

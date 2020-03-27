@@ -153,7 +153,7 @@ export class MainComponent implements OnInit, OnDestroy {
         this.showGoalieStats = false;
       }
     });
-    this._teamsService.getLeagueTeamsStats(this.currentSeason).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+    this._teamsService.getLeagueTeamsStats(this.currentSeason, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       // console.log(resp);
       let allTeams = resp as [];
       allTeams.forEach(team => {

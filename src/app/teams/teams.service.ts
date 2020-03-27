@@ -207,9 +207,10 @@ export class TeamsService {
     return this._http.get(`${environment.back_end_url}/team-stats/${team}`, options);
   }
 
-  getLeagueTeamsStats(year) {
+  getLeagueTeamsStats(year, type) {
     let options = {params: new HttpParams()
-      .set('year', year)}
+      .set('year', year)
+      .set('type', type)}
     return this._http.get(`${environment.back_end_url}/team-stats/`, options);
   }
 

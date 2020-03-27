@@ -63,7 +63,7 @@ export class NewPlayoffTreeComponent implements OnInit, OnDestroy {
   }
 
   checkStandings() {
-    this._teamsService.getLeagueTeamsStats(this.currentSeason).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+    this._teamsService.getLeagueTeamsStats(this.currentSeason, 'Regular').pipe(takeWhile(() => this._alive)).subscribe(resp => {
       let tempLeaders = resp as any;
       tempLeaders.forEach(element => {
         this.regularSeasonstats.push(element);

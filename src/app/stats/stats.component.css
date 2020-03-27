@@ -146,6 +146,19 @@ th, td {
     margin-top:30px;
 }
 
+.button-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.mat-button-toggle-checked {
+    background-color: red;
+}
+
 
 /* *************************** MEDIA QUERIES **************************** */
 
