@@ -58,9 +58,10 @@ export class PlayersStatsComponent implements OnInit, OnDestroy {
         stats.forEach(player => {
           if (player.minutes_played > 0) {
             player.points_per_sixty = ((player.points/player.minutes_played) * 60).toFixed(2);
-            this.stats.push(player);
-          }
+          } 
+          this.stats.push(player);
         });
+        // console.log(this.stats);
         this.players = new MatTableDataSource<any[]>(this.stats);
         this.pageSize = 25;
         this.length = this.stats.length;
@@ -68,7 +69,7 @@ export class PlayersStatsComponent implements OnInit, OnDestroy {
         setTimeout(() => {
           this.players.paginator = this.paginator;
           this.players.sort = this.sort;
-        }, 350);
+        }, 1000);
       });
     } else if (this._route.snapshot.routeConfig.path === "teams/:params") {
         this.short_team_name = this._route.snapshot.paramMap.get("params");
@@ -86,7 +87,7 @@ export class PlayersStatsComponent implements OnInit, OnDestroy {
           setTimeout(() => {
             this.players.paginator = this.paginator;
             this.players.sort = this.sort;
-          }, 350);
+          }, 1000);
         }); 
     } 
   }

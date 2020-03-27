@@ -150,7 +150,6 @@ export class StatsComponent implements OnInit, OnDestroy {
 
   onTabChange(event) {
     this.currentTab = event.tab.textLabel;
-    console.log(this.currentSeasonType);
     if (event.tab.textLabel === 'Players') {
       this.getPlayerStats(this.currentSeason, this.currentSeasonType);
     } else if (event.tab.textLabel === 'Goalies') {
@@ -204,7 +203,7 @@ export class StatsComponent implements OnInit, OnDestroy {
   getTeamStats(season: string, type: string) {
     this.isLeagueLoading = true;
     this._teamsService.getLeagueTeamsStats(season, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       setTimeout(() => {
         this.getLeagueLeaders(resp);
         this.getGoalDiffLeagueLeaders(resp);
