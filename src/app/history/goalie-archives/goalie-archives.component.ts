@@ -399,11 +399,27 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
   getAssassinsStats(team, type, group) {
     this._teamsService.getAlltimeTeamGoalieStatsByType(team, type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       let stats = resp as [];
-      this._teamsService.getAlltimeTeamGoalieStatsByType("OAO", type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-        let oldTeamStats = resp as [];
-        oldTeamStats.forEach(element => {
-          stats.push(element);
-        })
+      if (type === "Regular") {
+        this._teamsService.getAlltimeTeamGoalieStatsByType("OAO", type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+          let oldTeamStats = resp as [];
+          oldTeamStats.forEach(element => {
+            stats.push(element);
+          })
+          this.goaliesArchive = new MatTableDataSource<any[]>(stats);
+          this.goaliesColumnsToDisplay = [ 
+            'team_logo', 'player_name', 'games_played','wins','loss', 'ties', 'goals_against_avg', 'goals_against', 'en_goals',
+            'shutouts', 'saves', 'shots_for', 'save_pct', 'minutes_played', 'goals', 'assists', 'points', 'penalty_minutes', 'pass_pct',
+            'playing_year', 'season_type', 'player_status'
+          ];
+          this.pageSize = 25;
+          this.length = stats.length;
+          this.isLoading = false;
+          setTimeout(() => {
+            this.goaliesArchive.paginator = this.paginator;
+            this.goaliesArchive.sort = this.sort;
+          }, 350);
+        });
+      } else {
         this.goaliesArchive = new MatTableDataSource<any[]>(stats);
         this.goaliesColumnsToDisplay = [ 
           'team_logo', 'player_name', 'games_played','wins','loss', 'ties', 'goals_against_avg', 'goals_against', 'en_goals',
@@ -417,30 +433,32 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
           this.goaliesArchive.paginator = this.paginator;
           this.goaliesArchive.sort = this.sort;
         }, 350);
-      });
+      }
     });
   }
 
   getAssassinsRawStats(team, type, group) {
     this._teamsService.getAlltimeTeamGoalieStatsByType(team, type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       let stats = resp['rows'] as [];
-      this._teamsService.getAlltimeTeamGoalieStatsByType("OAO", type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-        let oldTeamStats = resp['rows'] as [];
-        oldTeamStats.forEach(element => {
-          stats.push(element);
-        })
-        this.goaliesArchive = new MatTableDataSource<any[]>(stats);
-        this.goaliesColumnsToDisplay = [ 'team_logo', 'player_name', 'games_played','wins','loss', 'ties', 'calc_goals_against_avg', 'goals_against', 'en_goals',
-                                          'shutouts', 'saves', 'shots_for', 'calc_save_pct', 'minutes_played', 'goals', 'assists', 'points', 'penalty_minutes','season_type',
-                                        ];
-        this.pageSize = 25;
-        this.length = stats.length;
-        this.isLoading = false;
-        setTimeout(() => {
-          this.goaliesArchive.paginator = this.paginator;
-          this.goaliesArchive.sort = this.sort;
-        }, 350);
-      });
+      if (type === "Regular") {
+        this._teamsService.getAlltimeTeamGoalieStatsByType("OAO", type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+          let oldTeamStats = resp['rows'] as [];
+          oldTeamStats.forEach(element => {
+            stats.push(element);
+          })
+          this.goaliesArchive = new MatTableDataSource<any[]>(stats);
+          this.goaliesColumnsToDisplay = [ 'team_logo', 'player_name', 'games_played','wins','loss', 'ties', 'calc_goals_against_avg', 'goals_against', 'en_goals',
+                                            'shutouts', 'saves', 'shots_for', 'calc_save_pct', 'minutes_played', 'goals', 'assists', 'points', 'penalty_minutes','season_type',
+                                          ];
+          this.pageSize = 25;
+          this.length = stats.length;
+          this.isLoading = false;
+          setTimeout(() => {
+            this.goaliesArchive.paginator = this.paginator;
+            this.goaliesArchive.sort = this.sort;
+          }, 350);
+        });
+      }
     });
   }
 

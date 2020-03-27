@@ -113,6 +113,8 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
           this.playersArchived.paginator = this.paginator;
           this.playersArchived.sort = this.sort;
         }, 350);
+      }, error => {
+        console.log("in here");
       });
     } else {
       this._teamsService.getPlayerStatsByType(type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
@@ -128,6 +130,8 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
           this.playersArchived.paginator = this.paginator;
           this.playersArchived.sort = this.sort;
         }, 350);
+      }, error => {
+        console.log("in here");
       });
     }
   }
@@ -387,46 +391,78 @@ export class PlayerArchivesComponent implements OnInit, OnDestroy {
   getAssassinsStats(team, type, group) {
     this._teamsService.getAlltimeTeamPlayerStatsByType(team, type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       let stats = resp as [];
-      this._teamsService.getAlltimeTeamPlayerStatsByType("OAO", type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-        let oldTeamStats = resp as [];
-        oldTeamStats.forEach(element => {
-          stats.push(element);
-        })
+      if (type === 'Regular') {
+        this._teamsService.getAlltimeTeamPlayerStatsByType("OAO", type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+          let oldTeamStats = resp as [];
+          oldTeamStats.forEach(element => {
+            stats.push(element);
+          })
+          this.playersArchived = new MatTableDataSource<any[]>(stats);
+          this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'sh_goals',
+                                          'gw_goals', 'gt_goals', 'shots', 'shooting_pct', 'minutes_per_game', 'fo_pct', 'pass_pct', 'corner_pct', 'hits', 'blocked_shots',
+                                          'playing_year', 'season_type', 'player_status'
+                                        ];
+          this.pageSize = 25;
+          this.length = stats.length;
+          this.isLoading = false;
+          setTimeout(() => {
+            this.playersArchived.paginator = this.paginator;
+            this.playersArchived.sort = this.sort;
+          }, 350);
+        }, error => {
+          console.log("ERRRRRRRRRRRRRR");
+        });
+      } else {
         this.playersArchived = new MatTableDataSource<any[]>(stats);
-        this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'sh_goals',
-                                        'gw_goals', 'gt_goals', 'shots', 'shooting_pct', 'minutes_per_game', 'fo_pct', 'pass_pct', 'corner_pct', 'hits', 'blocked_shots',
-                                        'playing_year', 'season_type', 'player_status'
-                                      ];
-        this.pageSize = 25;
-        this.length = stats.length;
-        this.isLoading = false;
-        setTimeout(() => {
-          this.playersArchived.paginator = this.paginator;
-          this.playersArchived.sort = this.sort;
-        }, 350);
-      });
+          this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'sh_goals',
+                                          'gw_goals', 'gt_goals', 'shots', 'shooting_pct', 'minutes_per_game', 'fo_pct', 'pass_pct', 'corner_pct', 'hits', 'blocked_shots',
+                                          'playing_year', 'season_type', 'player_status'
+                                        ];
+          this.pageSize = 25;
+          this.length = stats.length;
+          this.isLoading = false;
+          setTimeout(() => {
+            this.playersArchived.paginator = this.paginator;
+            this.playersArchived.sort = this.sort;
+          }, 350);
+      }
     });
   }
 
   getAssassinsRawStats(team, type, group) {
     this._teamsService.getAlltimeTeamPlayerStatsByType(team, type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       let stats = resp['rows'] as [];
-      this._teamsService.getAlltimeTeamPlayerStatsByType("OAO", type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-        let oldTeamStats = resp['rows'] as [];
-        oldTeamStats.forEach(element => {
-          stats.push(element);
-        })
+      if (type === "Regular") {
+        this._teamsService.getAlltimeTeamPlayerStatsByType("OAO", type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+          let oldTeamStats = resp['rows'] as [];
+          oldTeamStats.forEach(element => {
+            stats.push(element);
+          })
+          this.playersArchived = new MatTableDataSource<any[]>(stats);
+          this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals',
+                                            'gw_goals', 'gt_goals', 'shots', 'calc_shooting_pct', 'calc_minutes_per_game', 'hits', 'blocked_shots' ];
+          this.pageSize = 25;
+          this.length = stats.length;
+          this.isLoading = false;
+          setTimeout(() => {
+            this.playersArchived.paginator = this.paginator;
+            this.playersArchived.sort = this.sort;
+          }, 350);
+        });
+      } else {
         this.playersArchived = new MatTableDataSource<any[]>(stats);
-        this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals',
-                                          'gw_goals', 'gt_goals', 'shots', 'calc_shooting_pct', 'calc_minutes_per_game', 'hits', 'blocked_shots' ];
-        this.pageSize = 25;
-        this.length = stats.length;
-        this.isLoading = false;
-        setTimeout(() => {
-          this.playersArchived.paginator = this.paginator;
-          this.playersArchived.sort = this.sort;
-        }, 350);
-      });
+          this.playersColumnsToDisplay = [ 'team_logo', 'player_name', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals',
+                                            'gw_goals', 'gt_goals', 'shots', 'calc_shooting_pct', 'calc_minutes_per_game', 'hits', 'blocked_shots' ];
+          this.pageSize = 25;
+          this.length = stats.length;
+          this.isLoading = false;
+          setTimeout(() => {
+            this.playersArchived.paginator = this.paginator;
+            this.playersArchived.sort = this.sort;
+          }, 350);
+      }
+    }, error => {
+      console.log("booooooooo");
     });
   }
 

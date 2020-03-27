@@ -16,6 +16,7 @@ export class TeamsComponent implements OnInit, OnDestroy, AfterViewInit {
 
   short_team_name: string = '';
   currentSeason: string;
+  currentSeasonType: string;
 
   team: any;
   stats: any[];
@@ -25,9 +26,9 @@ export class TeamsComponent implements OnInit, OnDestroy, AfterViewInit {
     private _route: ActivatedRoute
   ) {
     this.currentSeason = this._teamsService.currentSeason;
+    this.currentSeasonType = this._teamsService.currentSeasonType;
     this.short_team_name = this._route.snapshot.url[1].path;
     this._teamsService.getTeamStatsByYear(this.short_team_name, this.currentSeason).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      // console.log(resp);
       this.stats = resp as [];
       if (this._route.snapshot.url[2]) {
         this.historicTeam = true;
@@ -35,7 +36,7 @@ export class TeamsComponent implements OnInit, OnDestroy, AfterViewInit {
         let type = this._route.snapshot.url[3].path;
         this.team = this.stats.find(season => season.playing_year === year && season.season_type === type);
       } else {
-        this.team = this.stats[0];
+        this.team = this.stats.find(year => year.season_type === this.currentSeasonType);
       }
     }, error => {
       console.log(error);

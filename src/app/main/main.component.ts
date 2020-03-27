@@ -425,6 +425,8 @@ export class MainComponent implements OnInit, OnDestroy {
         this.teams = new MatTableDataSource<any[]>(teamStats);
         this.teams.sort = this.overallSort;
       });          
+    }, error => {
+      console.log("baaaaaaaaaaaaaaa");
     });
   }
 

@@ -59,7 +59,8 @@ export class TeamArchivesComponent implements OnInit, OnDestroy {
     private _router: Router
   ) { 
     this.short_team_name = this._route.snapshot.paramMap.get("params");
-    this.team = this._teamsService.getTeamInfo(this.short_team_name); 
+    this.team = this._teamsService.getTeamInfo(this.short_team_name);
+    this.seasonType = this._teamsService.currentSeasonType; 
   }
 
   ngOnInit() {
@@ -239,18 +240,28 @@ export class TeamArchivesComponent implements OnInit, OnDestroy {
   getAssassinsStats(team, type) {
     this._teamsService.getAlltimeTeamStatsByType(team.shortName, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       let teamStats = resp as [];
-      this._teamsService.getAlltimeTeamStatsByType("OAO", type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-        let oldTeamStats = resp as [];
-        oldTeamStats.forEach(element => {
-          teamStats.push(element);
-        })
-        // console.log(teamStats);
+      if (type === "Regular") {
+        this._teamsService.getAlltimeTeamStatsByType("OAO", type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+          let oldTeamStats = resp as [];
+          oldTeamStats.forEach(element => {
+            teamStats.push(element);
+          })
+          // console.log(teamStats);
+          this.isLoading = false;
+          teamStats.sort((a,b) => b['playing_year'] - a['playing_year']);
+          this.getTeamTotals(teamStats);
+          this.teams = new MatTableDataSource<any[]>(teamStats);
+          this.teams.sort = this.overallSort;
+        }); 
+      } else {
         this.isLoading = false;
         teamStats.sort((a,b) => b['playing_year'] - a['playing_year']);
         this.getTeamTotals(teamStats);
         this.teams = new MatTableDataSource<any[]>(teamStats);
         this.teams.sort = this.overallSort;
-      });          
+      }      
+    }, error => {
+      console.log("brrrrrrrr");
     });
   }
 
