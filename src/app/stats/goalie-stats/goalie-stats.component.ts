@@ -66,6 +66,7 @@ export class GoalieStatsComponent implements OnInit, OnDestroy {
     } else if (this._route.snapshot.routeConfig.path === "teams/:params") {
         this.short_team_name = this._route.snapshot.paramMap.get("params");
         this._teamsService.getTeamGoalieStatsByYearByType(this.short_team_name, this.currentSeason, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+        // console.log(resp);
         this.stats = resp as [];
         this.goalies = new MatTableDataSource<any[]>(this.stats);
         this.length = this.stats.length;
