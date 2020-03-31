@@ -272,9 +272,16 @@ export class StatsComponent implements OnInit, OnDestroy {
     let tempLeaders = resp;
     this.goaliesSvPctLeaders = [];
     tempLeaders.forEach(element => { 
-      if (element.minutes_played > 500) {
-        this.goaliesSvPctLeaders.push(element);
+      if (this.currentSeasonType === 'Regular') {
+        if (element.minutes_played > 500) {
+          this.goaliesSvPctLeaders.push(element);
+        }
+      } else {
+        if (element.minutes_played > 0) {
+          this.goaliesSvPctLeaders.push(element);
+        }
       }
+      
     });
     this.goaliesSvPctLeaders.sort((a,b) => b.save_pct - a.save_pct);
     let leaders = this.goaliesSvPctLeaders.splice(0, 10);
@@ -285,9 +292,16 @@ export class StatsComponent implements OnInit, OnDestroy {
     let tempLeaders = resp;
     this.goaliesGAALeaders = [];
     tempLeaders.forEach(element => { 
-      if (element.minutes_played > 500) {
-        this.goaliesGAALeaders.push(element);
+      if (this.currentSeason === 'Regular') {
+        if (element.minutes_played > 500) {
+          this.goaliesGAALeaders.push(element);
+        }
+      } else {
+        if (element.minutes_played > 0) {
+          this.goaliesGAALeaders.push(element);
+        }
       }
+      
     });
     this.goaliesGAALeaders.sort((a,b) => a.goals_against_avg - b.goals_against_avg);
     let leaders = this.goaliesGAALeaders.splice(0, 10);
@@ -462,9 +476,11 @@ export class StatsComponent implements OnInit, OnDestroy {
     let tempLeaders = resp;
     this.goalDiffLeagueLeaders = [];
     tempLeaders.forEach(element => {
-      if (element.playing_year === this.currentSeason && element.season_type === this.currentSeasonType) {
-        element.goal_diff = element.goals_for - element.goals_against;
-        this.goalDiffLeagueLeaders.push(element);
+      if (element.games_played > 0) {
+        if (element.playing_year === this.currentSeason && element.season_type === this.currentSeasonType) {
+          element.goal_diff = element.goals_for - element.goals_against;
+          this.goalDiffLeagueLeaders.push(element);
+        }
       }
     })
     this.goalDiffLeagueLeaders.sort((a,b) => b.goal_diff - a.goal_diff);
@@ -487,8 +503,10 @@ export class StatsComponent implements OnInit, OnDestroy {
     let tempLeaders = resp;
     this.winStreakLeaders = [];
     tempLeaders.forEach(element => {
-      if (element.playing_year === this.currentSeason && element.season_type === this.currentSeasonType) {
-        this.winStreakLeaders.push(element);
+      if (element.games_played > 0) {
+        if (element.playing_year === this.currentSeason && element.season_type === this.currentSeasonType) {
+          this.winStreakLeaders.push(element);
+        }
       }
     })
     this.winStreakLeaders.sort((a,b) => b.long_win_streak - a.long_win_streak);
@@ -499,9 +517,13 @@ export class StatsComponent implements OnInit, OnDestroy {
     let tempLeaders = resp;
     this.ppLeagueLeaders = [];
     tempLeaders.forEach(element => {
-      if (element.playing_year === this.currentSeason && element.season_type === this.currentSeasonType) {
-        element.pp_pct = ((element.pp_goals / element.pp_attempts) * 100).toFixed(1)
-        this.ppLeagueLeaders.push(element);
+      if (element.games_played > 0) {
+        if (element.playing_year === this.currentSeason && element.season_type === this.currentSeasonType) {
+          if (element.pp_attempts > 0) {
+            element.pp_pct = ((element.pp_goals / element.pp_attempts) * 100).toFixed(1)
+          }
+          this.ppLeagueLeaders.push(element);
+        }
       }
     })
     this.ppLeagueLeaders.sort((a,b) => b.pp_pct - a.pp_pct);
@@ -512,9 +534,11 @@ export class StatsComponent implements OnInit, OnDestroy {
     let tempLeaders = resp;
     this.pkLeagueLeaders = [];
     tempLeaders.forEach(element => {
-      if (element.playing_year === this.currentSeason && element.season_type === this.currentSeasonType) {
-        element.pk_pct = (((element.pk_attempts - element.pk_goals) / element.pk_attempts) * 100).toFixed(1) 
-        this.pkLeagueLeaders.push(element);
+      if (element.games_played > 0) {
+        if (element.playing_year === this.currentSeason && element.season_type === this.currentSeasonType) {
+          element.pk_pct = (((element.pk_attempts - element.pk_goals) / element.pk_attempts) * 100).toFixed(1) 
+          this.pkLeagueLeaders.push(element);
+        }
       }
     })
     this.pkLeagueLeaders.sort((a,b) => b.pk_pct - a.pk_pct);
@@ -525,9 +549,11 @@ export class StatsComponent implements OnInit, OnDestroy {
     let tempLeaders = resp;
     this.pimLeagueLeaders = [];
     tempLeaders.forEach(element => {
-      if (element.playing_year === this.currentSeason && element.season_type === this.currentSeasonType) {
-        element.pim_game = (element.penalty_minutes / element.games_played).toFixed(1)
-        this.pimLeagueLeaders.push(element);
+      if (element.games_played > 0) {
+        if (element.playing_year === this.currentSeason && element.season_type === this.currentSeasonType) {
+          element.pim_game = (element.penalty_minutes / element.games_played).toFixed(1)
+          this.pimLeagueLeaders.push(element);
+        }
       }
     })
     this.pimLeagueLeaders.sort((a,b) => b.pim_game - a.pim_game);
@@ -539,9 +565,16 @@ export class StatsComponent implements OnInit, OnDestroy {
     this.pointsPerSixtyLeaders = [];
     tempLeaders.forEach(element => {
       if (element.playing_year === this.currentSeason && element.season_type === this.currentSeasonType) {
-        if (element.minutes_played > 500) {
-          element.points_per_sixty = ((element.points/element.minutes_played) * 60).toFixed(2);
-          this.pointsPerSixtyLeaders.push(element);
+        if (this.currentSeasonType === 'Regular') {
+          if (element.minutes_played > 500) {
+            element.points_per_sixty = ((element.points/element.minutes_played) * 60).toFixed(2);
+            this.pointsPerSixtyLeaders.push(element);
+          }
+        } else {
+          if (element.minutes_played > 1) {
+            element.points_per_sixty = ((element.points/element.minutes_played) * 60).toFixed(2);
+            this.pointsPerSixtyLeaders.push(element);
+          }
         }
       }
     })
