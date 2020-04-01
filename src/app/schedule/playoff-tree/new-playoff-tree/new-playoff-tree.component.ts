@@ -112,7 +112,7 @@ export class NewPlayoffTreeComponent implements OnInit, OnDestroy {
       this.westernSemiMatchups.push({homeTeam:null, visitingTeam: null, series: null});
       this.westernSemiMatchups.push({homeTeam: teams.find(team => team.seed === 2), visitingTeam: null, series: "0-0"});
     } else if (type === 'east') {
-      this.easternSemiMatchups.push({{homeTeam: teams.find(team => team.seed === 1), visitingTeam: null, series: "0-0"});
+      this.easternSemiMatchups.push({homeTeam: teams.find(team => team.seed === 1), visitingTeam: null, series: "0-0"});
       this.easternSemiMatchups.push({homeTeam: null, visitingTeam: null, series: null});
     }
   }
