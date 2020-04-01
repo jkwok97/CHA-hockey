@@ -95,24 +95,24 @@ export class NewPlayoffTreeComponent implements OnInit, OnDestroy {
 
   setQuarterMatchups(teams: any[], type: string) {
     if (type === 'west') {
-      this.westernQuarterMatchups.push({homeTeam: teams.find(team => team.seed === 1), visitingTeam: teams.find(team => team.seed === 8), series: "2 - 0"});
-      this.westernQuarterMatchups.push({homeTeam: teams.find(team => team.seed === 4), visitingTeam: teams.find(team => team.seed === 5), series: "1 - 1"});
-      this.westernQuarterMatchups.push({homeTeam: teams.find(team => team.seed === 3), visitingTeam: teams.find(team => team.seed === 6), series: "0 - 2"});
-      this.westernQuarterMatchups.push({homeTeam: teams.find(team => team.seed === 2), visitingTeam: teams.find(team => team.seed === 7), series: "2 - 0"});
+      this.westernQuarterMatchups.push({homeTeam: teams.find(team => team.seed === 1), visitingTeam: teams.find(team => team.seed === 8), series: "3 - 1"});
+      this.westernQuarterMatchups.push({homeTeam: teams.find(team => team.seed === 4), visitingTeam: teams.find(team => team.seed === 5), series: "1 - 3"});
+      this.westernQuarterMatchups.push({homeTeam: teams.find(team => team.seed === 3), visitingTeam: teams.find(team => team.seed === 6), series: "2 - 2"});
+      this.westernQuarterMatchups.push({homeTeam: teams.find(team => team.seed === 2), visitingTeam: teams.find(team => team.seed === 7), series: "4 - 0"});
     } else if (type === 'east') {
-      this.easternQuarterMatchups.push({homeTeam: teams.find(team => team.seed === 1), visitingTeam: teams.find(team => team.seed === 8), series: "2 - 0"});
-      this.easternQuarterMatchups.push({homeTeam: teams.find(team => team.seed === 4), visitingTeam: teams.find(team => team.seed === 5), series: "2 - 0"});
-      this.easternQuarterMatchups.push({homeTeam: teams.find(team => team.seed === 3), visitingTeam: teams.find(team => team.seed === 6), series: "1 - 1"});
-      this.easternQuarterMatchups.push({homeTeam: teams.find(team => team.seed === 2), visitingTeam: teams.find(team => team.seed === 7), series: "1 - 1"});
+      this.easternQuarterMatchups.push({homeTeam: teams.find(team => team.seed === 1), visitingTeam: teams.find(team => team.seed === 8), series: "4 - 0"});
+      this.easternQuarterMatchups.push({homeTeam: teams.find(team => team.seed === 4), visitingTeam: teams.find(team => team.seed === 5), series: "3 - 1"});
+      this.easternQuarterMatchups.push({homeTeam: teams.find(team => team.seed === 3), visitingTeam: teams.find(team => team.seed === 6), series: "3 - 1"});
+      this.easternQuarterMatchups.push({homeTeam: teams.find(team => team.seed === 2), visitingTeam: teams.find(team => team.seed === 7), series: "2 - 2"});
     }
   }
 
   setSemiMatchups(teams: any[], type: string) {
     if (type === 'west') {
       this.westernSemiMatchups.push({homeTeam:null, visitingTeam: null, series: null});
-      this.westernSemiMatchups.push({homeTeam: null, visitingTeam: null, series: null});
+      this.westernSemiMatchups.push({homeTeam: teams.find(team => team.seed === 2), visitingTeam: null, series: "0-0"});
     } else if (type === 'east') {
-      this.easternSemiMatchups.push({homeTeam:null, visitingTeam: null, series: null});
+      this.easternSemiMatchups.push({{homeTeam: teams.find(team => team.seed === 1), visitingTeam: null, series: "0-0"});
       this.easternSemiMatchups.push({homeTeam: null, visitingTeam: null, series: null});
     }
   }
