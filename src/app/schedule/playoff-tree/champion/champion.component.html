@@ -7,4 +7,9 @@
 
     <img mat-card-image src="../../../../assets/images/libertycup.jpg">
 
+    <app-matchup 
+        *ngFor="let matchup of easternQuarterMatchups"
+        [matchup]="matchup"
+    ></app-matchup>
+
 </mat-card>

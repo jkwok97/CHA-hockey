@@ -2,7 +2,7 @@
 
     <mat-grid-list cols="5" rowHeight="825px" gutterSize="25px" class="grid-width">
     
-        <mat-grid-tile colspan="4" rowspan="1" class="grid-tile">
+        <mat-grid-tile colspan="3" rowspan="1" class="grid-tile">
 
             <div class="conference">
 
@@ -56,10 +56,29 @@
         </mat-grid-tile>
     
         <mat-grid-tile colspan="1" rowspan="2" class="grid-tile">
-            <app-champion></app-champion>
+
+            <div class="round-container">
+        
+                <h1 class="round-text">Championship</h1>
+    
+                <div class="matchups">
+                    <app-matchup 
+                        [matchup]="championship"
+                    ></app-matchup>
+                </div>
+    
+            </div>
+
+            <!-- <app-champion [matchup]="championship"></app-champion> -->
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1" rowspan="2" class="grid-tile">
+
+            <app-champion [champion]="champion"></app-champion>
+            
         </mat-grid-tile>
     
-        <mat-grid-tile colspan="4" rowspan="1" class="grid-tile">
+        <mat-grid-tile colspan="3" rowspan="1" class="grid-tile">
     
             <div class="conference east">
     

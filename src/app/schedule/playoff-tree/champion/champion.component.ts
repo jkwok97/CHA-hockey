@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-champion',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./champion.component.css']
 })
 export class ChampionComponent implements OnInit {
+
+  @Input() champion: any;
 
   constructor() { }
 

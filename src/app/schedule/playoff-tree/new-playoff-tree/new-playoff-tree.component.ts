@@ -15,6 +15,7 @@ export class NewPlayoffTreeComponent implements OnInit, OnDestroy {
   westernSemiMatchups: any[] = [];
   easternConferenceMatchups: any[] = [];
   westernConferenceMatchups: any[] = [];
+  championship: any[] = [];
   northwestTeams = [];
   southwestTeams = [];
   northeastTeams = [];
@@ -28,12 +29,6 @@ export class NewPlayoffTreeComponent implements OnInit, OnDestroy {
   private _alive:boolean = true;
   isMobile: boolean = false;
   isLoading: boolean = false;
-
-  tiles = [
-    {text: 'One', cols: 4, rows: 1, color: 'lightblue'},
-    {text: 'Two', cols: 1, rows: 2, color: 'lightgreen'},
-    {text: 'Three', cols: 4, rows: 1, color: 'lightpink'},
-  ];
 
   constructor(
     private _teamsService:TeamsService,
@@ -123,6 +118,10 @@ export class NewPlayoffTreeComponent implements OnInit, OnDestroy {
     } else if (type === 'east') {
       this.easternConferenceMatchups.push({homeTeam:null, visitingTeam: null, series: null});
     }
+  }
+
+  setChampionShip(teams: any[]) {
+    this.championship.push({homeTeam:null, visitingTeam: null, series: null});
   }
 
   ngOnDestroy() {
