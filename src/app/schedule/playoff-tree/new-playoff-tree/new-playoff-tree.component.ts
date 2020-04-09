@@ -104,19 +104,19 @@ export class NewPlayoffTreeComponent implements OnInit, OnDestroy {
 
   setSemiMatchups(teams: any[], type: string) {
     if (type === 'west') {
-      this.westernSemiMatchups.push({homeTeam: teams.find(team => team.seed === 1), visitingTeam: teams.find(team => team.seed === 6), series: "2-2"});
-      this.westernSemiMatchups.push({homeTeam: teams.find(team => team.seed === 2), visitingTeam: teams.find(team => team.seed === 4), series: "3-1"});
+      this.westernSemiMatchups.push({homeTeam: teams.find(team => team.seed === 1), visitingTeam: teams.find(team => team.seed === 6), series: "4-3"});
+      this.westernSemiMatchups.push({homeTeam: teams.find(team => team.seed === 2), visitingTeam: teams.find(team => team.seed === 4), series: "4-1"});
     } else if (type === 'east') {
-      this.easternSemiMatchups.push({homeTeam: teams.find(team => team.seed === 1), visitingTeam: teams.find(team => team.seed === 4), series: "2-2"});
-      this.easternSemiMatchups.push({homeTeam: teams.find(team => team.seed === 2), visitingTeam: teams.find(team => team.seed === 3), series: "1-3"});
+      this.easternSemiMatchups.push({homeTeam: teams.find(team => team.seed === 1), visitingTeam: teams.find(team => team.seed === 4), series: "4-2"});
+      this.easternSemiMatchups.push({homeTeam: teams.find(team => team.seed === 2), visitingTeam: teams.find(team => team.seed === 3), series: "3-4"});
     }
   }
 
   setConferenceMatchups(teams: any[], type: string) {
     if (type === 'west') {
-      this.westernConferenceMatchups.push({homeTeam:null, visitingTeam: null, series: null});
+      this.westernConferenceMatchups.push({homeTeam: teams.find(team => team.seed === 1), visitingTeam: teams.find(team => team.seed === 2), series: "0-0"});
     } else if (type === 'east') {
-      this.easternConferenceMatchups.push({homeTeam:null, visitingTeam: null, series: null});
+      this.easternConferenceMatchups.push({homeTeam: teams.find(team => team.seed === 1), visitingTeam: teams.find(team => team.seed === 3), series: "0-0"});
     }
   }
 
