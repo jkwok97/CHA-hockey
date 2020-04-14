@@ -114,9 +114,9 @@ export class NewPlayoffTreeComponent implements OnInit, OnDestroy {
 
   setConferenceMatchups(teams: any[], type: string) {
     if (type === 'west') {
-      this.westernConferenceMatchups.push({homeTeam: teams.find(team => team.seed === 1), visitingTeam: teams.find(team => team.seed === 2), series: "0-0"});
+      this.westernConferenceMatchups.push({homeTeam: teams.find(team => team.seed === 1), visitingTeam: teams.find(team => team.seed === 2), series: "2-0"});
     } else if (type === 'east') {
-      this.easternConferenceMatchups.push({homeTeam: teams.find(team => team.seed === 1), visitingTeam: teams.find(team => team.seed === 3), series: "0-0"});
+      this.easternConferenceMatchups.push({homeTeam: teams.find(team => team.seed === 1), visitingTeam: teams.find(team => team.seed === 3), series: "0-2"});
     }
   }
 
