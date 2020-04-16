@@ -24,6 +24,9 @@ export class NewPlayoffTreeComponent implements OnInit, OnDestroy {
   easternStats: any[];
   regularSeasonstats = [];
 
+  westChamp: any;
+  eastChamp: any;
+
   currentSeason: string;
 
   private _alive:boolean = true;
@@ -104,24 +107,30 @@ export class NewPlayoffTreeComponent implements OnInit, OnDestroy {
 
   setSemiMatchups(teams: any[], type: string) {
     if (type === 'west') {
-      this.westernSemiMatchups.push({homeTeam: teams.find(team => team.seed === 1), visitingTeam: teams.find(team => team.seed === 6), series: "4-3"});
-      this.westernSemiMatchups.push({homeTeam: teams.find(team => team.seed === 2), visitingTeam: teams.find(team => team.seed === 4), series: "4-1"});
+      this.westernSemiMatchups.push({homeTeam: teams.find(team => team.seed === 1), visitingTeam: teams.find(team => team.seed === 6), series: "4 - 3"});
+      this.westernSemiMatchups.push({homeTeam: teams.find(team => team.seed === 2), visitingTeam: teams.find(team => team.seed === 4), series: "4 - 1"});
     } else if (type === 'east') {
-      this.easternSemiMatchups.push({homeTeam: teams.find(team => team.seed === 1), visitingTeam: teams.find(team => team.seed === 4), series: "4-2"});
-      this.easternSemiMatchups.push({homeTeam: teams.find(team => team.seed === 2), visitingTeam: teams.find(team => team.seed === 3), series: "3-4"});
+      this.easternSemiMatchups.push({homeTeam: teams.find(team => team.seed === 1), visitingTeam: teams.find(team => team.seed === 4), series: "4 - 2"});
+      this.easternSemiMatchups.push({homeTeam: teams.find(team => team.seed === 2), visitingTeam: teams.find(team => team.seed === 3), series: "3 - 4"});
     }
   }
 
   setConferenceMatchups(teams: any[], type: string) {
     if (type === 'west') {
-      this.westernConferenceMatchups.push({homeTeam: teams.find(team => team.seed === 1), visitingTeam: teams.find(team => team.seed === 2), series: "2-2"});
+      this.westernConferenceMatchups.push({homeTeam: teams.find(team => team.seed === 1), visitingTeam: teams.find(team => team.seed === 2), series: "4 - 2"});
+      this.westChamp = teams.find(team => team.seed === 1);
     } else if (type === 'east') {
-      this.easternConferenceMatchups.push({homeTeam: teams.find(team => team.seed === 1), visitingTeam: teams.find(team => team.seed === 3), series: "1-3"});
+      this.easternConferenceMatchups.push({homeTeam: teams.find(team => team.seed === 1), visitingTeam: teams.find(team => team.seed === 3), series: "3 - 4"});
+      this.eastChamp = teams.find(team => team.seed === 3);
+    }
+    if (this.westChamp && this.eastChamp) {
+      this.setChampionShip(this.westChamp, this.eastChamp);
     }
   }
 
-  setChampionShip(teams: any[]) {
-    this.championship.push({homeTeam:null, visitingTeam: null, series: null});
+  setChampionShip(westChamp, eastChamp) {
+    this.championship.push({homeTeam: westChamp, visitingTeam: eastChamp, series: "0 - 0"});
+    console.log(this.championship);
   }
 
   ngOnDestroy() {

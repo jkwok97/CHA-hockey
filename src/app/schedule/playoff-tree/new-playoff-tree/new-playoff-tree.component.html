@@ -61,21 +61,20 @@
         
                 <h1 class="round-text">Championship</h1>
     
-                <div class="matchups">
+                <div class="matchups" *ngFor="let matchup of championship">
                     <app-matchup 
-                        [matchup]="championship"
+                        [matchup]="matchup"
                     ></app-matchup>
                 </div>
     
             </div>
 
-            <!-- <app-champion [matchup]="championship"></app-champion> -->
         </mat-grid-tile>
 
         <mat-grid-tile colspan="1" rowspan="2" class="grid-tile">
 
             <app-champion [champion]="champion"></app-champion>
-            
+
         </mat-grid-tile>
     
         <mat-grid-tile colspan="3" rowspan="1" class="grid-tile">
