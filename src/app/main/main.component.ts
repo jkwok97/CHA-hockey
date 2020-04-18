@@ -106,9 +106,9 @@ export class MainComponent implements OnInit, OnDestroy {
     'home_record', 'away_record', 'trail_record'
   ];
 
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  // @ViewChild(MatSort, {static: false}) sort: MatSort;
   @ViewChild("overallSort", {static: false}) overallSort: MatSort;
-  @ViewChild("playerSort", {static: false}) playerSort: MatSort;
+  // @ViewChild("playerSort", {static: false}) playerSort: MatSort;
   @ViewChild("goalieSort", {static: false}) goalieSort: MatSort;
 
   constructor(
@@ -170,7 +170,7 @@ export class MainComponent implements OnInit, OnDestroy {
         this.playerStats.push(player);
       });
       this.players = new MatTableDataSource<any[]>(this.playerStats);
-      this.players.sort = this.playerSort;
+      // this.players.sort = this.playerSort;
     });
     this._teamsService.getTeamGoalieStatsByYearByType(this.team.shortName, this.currentSeason, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.goalieStats = resp as [];

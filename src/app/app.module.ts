@@ -54,6 +54,9 @@ import { ChampionComponent } from './schedule/playoff-tree/champion/champion.com
 import { NewPlayoffTreeComponent } from './schedule/playoff-tree/new-playoff-tree/new-playoff-tree.component';
 import { TeamCardComponent } from './schedule/playoff-tree/matchup/team-card/team-card.component';
 import { ConferenceComponent } from './schedule/playoff-tree/conference/conference.component';
+import { GoalieStatsTableComponent } from './stats/goalie-stats-table/goalie-stats-table.component';
+import { TeamStatsTableComponent } from './stats/team-stats-table/team-stats-table.component';
+import { PlayerStatsTableComponent } from './stats/player-stats-table/player-stats-table.component';
 
 @NgModule({
   declarations: [
@@ -103,7 +106,10 @@ import { ConferenceComponent } from './schedule/playoff-tree/conference/conferen
     ChampionComponent,
     NewPlayoffTreeComponent,
     TeamCardComponent,
-    ConferenceComponent
+    ConferenceComponent,
+    PlayerStatsTableComponent,
+    GoalieStatsTableComponent,
+    TeamStatsTableComponent
   ],
   imports: [
     BrowserModule,

@@ -3,7 +3,6 @@ import { TeamsService } from 'src/app/teams/teams.service';
 import { takeWhile } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -38,7 +37,6 @@ export class PlayersStatsComponent implements OnInit, OnDestroy {
   length: number = 0;
 
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   constructor(
     private _teamsService: TeamsService,
@@ -68,7 +66,6 @@ export class PlayersStatsComponent implements OnInit, OnDestroy {
         this.isLoading = false;
         setTimeout(() => {
           this.players.paginator = this.paginator;
-          this.players.sort = this.sort;
         }, 1000);
       });
     } else if (this._route.snapshot.routeConfig.path === "teams/:params") {
@@ -86,7 +83,6 @@ export class PlayersStatsComponent implements OnInit, OnDestroy {
           this.isLoading = false;
           setTimeout(() => {
             this.players.paginator = this.paginator;
-            this.players.sort = this.sort;
           }, 1000);
         }); 
     } 
@@ -97,20 +93,6 @@ export class PlayersStatsComponent implements OnInit, OnDestroy {
     if (this.players.paginator) {
       this.players.paginator.firstPage();
     }
-  }
-
-  findLogo(shortName) {
-    if (shortName) {
-      let team = this._teamsService.getTeamInfo(shortName);
-      return { image: team.image, name: team.name }
-    } else {
-      return { image: "../../assets/team_logos/Free_Agent_logo_square.jpg", name: "Free Agent"}
-    }
-  }
-
-  openPlayer(player, type) {
-    this._router.navigate([`/info/${type}s/${player.player_id}/${player.player_name}`]);
-    window.scrollTo(0,0);
   }
 
   ngOnDestroy() {
