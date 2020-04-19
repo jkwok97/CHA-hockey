@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { TeamsService } from 'src/app/teams/teams.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { takeWhile } from 'rxjs/operators';
 
@@ -38,12 +37,10 @@ export class GoalieStatsComponent implements OnInit, OnDestroy {
   length: number = 0;
 
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   constructor(
     private _teamsService: TeamsService,
     private _route: ActivatedRoute,
-    private _router: Router
   ) { }
 
   ngOnInit() {
@@ -60,7 +57,6 @@ export class GoalieStatsComponent implements OnInit, OnDestroy {
         this.isLoading = false;
         setTimeout(() => {
           this.goalies.paginator = this.paginator;
-          this.goalies.sort = this.sort;
         }, 350);
       });
     } else if (this._route.snapshot.routeConfig.path === "teams/:params") {
@@ -73,18 +69,8 @@ export class GoalieStatsComponent implements OnInit, OnDestroy {
         this.isLoading = false;  
         setTimeout(() => {
           this.goalies.paginator = this.paginator;
-          this.goalies.sort = this.sort;
         }, 350);
       });
-    }
-  }
-
-  findLogo(shortName) {
-    if (shortName) {
-      let team = this._teamsService.getTeamInfo(shortName);
-      return { image: team.image, name: team.name }
-    } else {
-      return { image: "../../assets/team_logos/Free_Agent_logo_square.jpg", name: "Free Agent"}
     }
   }
 
@@ -93,11 +79,6 @@ export class GoalieStatsComponent implements OnInit, OnDestroy {
     if (this.goalies.paginator) {
       this.goalies.paginator.firstPage();
     }
-  }
-
-  openPlayer(player, type) {
-    this._router.navigate([`/info/${type}s/${player.player_id}/${player.player_name}`]);
-    window.scrollTo(0,0);
   }
 
   ngOnDestroy() {

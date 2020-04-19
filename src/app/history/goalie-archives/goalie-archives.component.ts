@@ -18,7 +18,7 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
   inMainPage: boolean = false;
 
   page: number = 1;
-  pageSize: number = 20;
+  pageSize: number = 25;
   length: number = 0;
 
   seasonType: string = 'Regular';
@@ -27,15 +27,24 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
 
   teamString: any;
 
-  goaliesArchive: MatTableDataSource<any[]>;
+  goalies: MatTableDataSource<any[]>;
+  
   goaliesColumnsToDisplay = [ 
     'team_logo', 'player_name', 'games_played','wins','loss', 'ties', 'goals_against_avg', 'goals_against', 'en_goals',
     'shutouts', 'saves', 'shots_for', 'save_pct', 'minutes_played', 'goals', 'assists', 'points', 'penalty_minutes', 'pass_pct',
     'playing_year', 'season_type', 'player_status'
   ];
+  goaliesColumnsToDisplayForAllTime = [ 
+    'player_name', 'games_played','wins','loss', 'ties', 'calc_goals_against_avg', 'goals_against', 'en_goals',
+    'shutouts', 'saves', 'shots_for', 'calc_save_pct', 'minutes_played', 'goals', 'assists', 'points', 'penalty_minutes','season_type',
+  ];
   goaliesTeamColumnsToDisplay = [ 'playing_year', 'season_type',
     'player_name', 'games_played','minutes_played', 'goals_against_avg', 'wins','loss', 'ties', 'en_goals',
     'shutouts', 'goals_against', 'saves', 'shots_for', 'save_pct', 'goals', 'assists', 'points', 'penalty_minutes', 'pass_pct', 'player_status'
+  ];
+  goaliesTeamColumnsToDisplayForAllTime = [ 'season_type',
+    'player_name', 'games_played','minutes_played', 'calc_goals_against_avg', 'wins','loss', 'ties', 'en_goals',
+    'shutouts', 'goals_against', 'saves', 'shots_for', 'calc_save_pct', 'goals', 'assists', 'points', 'penalty_minutes'
   ];
 
   @ViewChild(MatSort, {static: false}) sort: MatSort;
@@ -44,7 +53,6 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
   constructor(
     private _teamsService: TeamsService, 
     private _route: ActivatedRoute,
-    private _router: Router
   ) { }
 
   ngOnInit() {
@@ -60,19 +68,6 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
       this.teamString = this._route.snapshot.params.params;
       this.checkString(this.teamString, this.seasonType, this.showType);
     }
-  }
-
-  calcGAA(goalsAgainst, minutes) {
-    return (goalsAgainst*60) / minutes;
-  }
-
-  calcSvPct(saves, shots) {
-    return (saves / shots);
-  }
-
-  openPlayer(player, type) {
-    this._router.navigate([`/info/${type}s/${player.player_id}/${player.player_name}`]);
-    window.scrollTo(0,0);
   }
 
   checkString(team, type, group) {
@@ -114,34 +109,22 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
       this._teamsService.getGoalieStatsByType(type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
         // console.log(resp);
         let stats = resp as [];
-        this.goaliesArchive = new MatTableDataSource<any[]>(stats);
-        this.goaliesColumnsToDisplay = [ 
-          'team_logo', 'player_name', 'games_played','wins','loss', 'ties', 'goals_against_avg', 'goals_against', 'en_goals',
-          'shutouts', 'saves', 'shots_for', 'save_pct', 'minutes_played', 'goals', 'assists', 'points', 'penalty_minutes', 'pass_pct',
-          'playing_year', 'season_type', 'player_status'
-        ];
-        this.pageSize = 25;
+        this.goalies = new MatTableDataSource<any[]>(stats);
         this.length = stats.length;
         this.isLoading = false;
         setTimeout(() => {
-          this.goaliesArchive.paginator = this.paginator;
-          this.goaliesArchive.sort = this.sort;
+          this.goalies.paginator = this.paginator;
         }, 350);
       });
     } else {
       this._teamsService.getGoalieStatsByType(type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
         // console.log(resp);
         let stats = resp['rows'] as [];
-        this.goaliesArchive = new MatTableDataSource<any[]>(stats);
-        this.goaliesColumnsToDisplay = [ 'player_name', 'games_played','wins','loss', 'ties', 'calc_goals_against_avg', 'goals_against', 'en_goals',
-                                          'shutouts', 'saves', 'shots_for', 'calc_save_pct', 'minutes_played', 'goals', 'assists', 'points', 'penalty_minutes','season_type',
-                                        ];
-        this.pageSize = 25;
+        this.goalies = new MatTableDataSource<any[]>(stats);
         this.length = stats.length;
         this.isLoading = false;
         setTimeout(() => {
-          this.goaliesArchive.paginator = this.paginator;
-          this.goaliesArchive.sort = this.sort;
+          this.goalies.paginator = this.paginator;
         }, 350);
       });
     }
@@ -152,23 +135,11 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
     this._teamsService.getAlltimeTeamGoalieStatsByType(team, type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       // console.log(resp);
       let stats = resp as [];
-      this.goaliesArchive = new MatTableDataSource<any[]>(stats);
-      this.goaliesColumnsToDisplay = [ 
-        'team_logo', 'player_name', 'games_played','wins','loss', 'ties', 'goals_against_avg', 'goals_against', 'en_goals',
-        'shutouts', 'saves', 'shots_for', 'save_pct', 'minutes_played', 'goals', 'assists', 'points', 'penalty_minutes', 'pass_pct',
-        'playing_year', 'season_type', 'player_status'
-      ];
-      this.goaliesTeamColumnsToDisplay = [ 
-        'player_name', 'games_played','wins','loss', 'ties', 'goals_against_avg', 'goals_against', 'en_goals',
-        'shutouts', 'saves', 'shots_for', 'save_pct', 'minutes_played', 'goals', 'assists', 'points', 'penalty_minutes', 'pass_pct',
-        'playing_year', 'season_type', 'player_status'
-      ];
-      this.pageSize = 25;
+      this.goalies = new MatTableDataSource<any[]>(stats);
       this.length = stats.length;
       this.isLoading = false;
       setTimeout(() => {
-        this.goaliesArchive.paginator = this.paginator;
-        this.goaliesArchive.sort = this.sort;
+        this.goalies.paginator = this.paginator;
       }, 350);
     });
   }
@@ -177,17 +148,11 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
     this._teamsService.getAlltimeTeamGoalieStatsByType(team, type, group).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       // console.log(resp);
       let stats = resp['rows'] as [];
-      this.goaliesArchive = new MatTableDataSource<any[]>(stats);
-      this.goaliesColumnsToDisplay = [ 'team_logo', 'player_name', 'games_played','wins','loss', 'ties', 'calc_goals_against_avg', 'goals_against', 'en_goals',
-                                        'shutouts', 'saves', 'shots_for', 'calc_save_pct', 'minutes_played', 'goals', 'assists', 'points', 'penalty_minutes','season_type'];
-      this.goaliesTeamColumnsToDisplay = [ 'player_name', 'games_played','wins','loss', 'ties', 'calc_goals_against_avg', 'goals_against', 'en_goals',
-                                        'shutouts', 'saves', 'shots_for', 'calc_save_pct', 'minutes_played', 'goals', 'assists', 'points', 'penalty_minutes','season_type'];
-      this.pageSize = 25;
+      this.goalies = new MatTableDataSource<any[]>(stats);
       this.length = stats.length;
       this.isLoading = false;
       setTimeout(() => {
-        this.goaliesArchive.paginator = this.paginator;
-        this.goaliesArchive.sort = this.sort;
+        this.goalies.paginator = this.paginator;
       }, 350);
     });
   }
@@ -200,18 +165,11 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
         oldTeamStats.forEach(element => {
           stats.push(element);
         })
-        this.goaliesArchive = new MatTableDataSource<any[]>(stats);
-        this.goaliesColumnsToDisplay = [ 
-          'team_logo', 'player_name', 'games_played','wins','loss', 'ties', 'goals_against_avg', 'goals_against', 'en_goals',
-          'shutouts', 'saves', 'shots_for', 'save_pct', 'minutes_played', 'goals', 'assists', 'points', 'penalty_minutes', 'pass_pct',
-          'playing_year', 'season_type', 'player_status'
-        ];
-        this.pageSize = 25;
+        this.goalies = new MatTableDataSource<any[]>(stats);
         this.length = stats.length;
         this.isLoading = false;
         setTimeout(() => {
-          this.goaliesArchive.paginator = this.paginator;
-          this.goaliesArchive.sort = this.sort;
+          this.goalies.paginator = this.paginator;
         }, 350);
       });
     });
@@ -225,16 +183,11 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
         oldTeamStats.forEach(element => {
           stats.push(element);
         })
-        this.goaliesArchive = new MatTableDataSource<any[]>(stats);
-        this.goaliesColumnsToDisplay = [ 'team_logo', 'player_name', 'games_played','wins','loss', 'ties', 'calc_goals_against_avg', 'goals_against', 'en_goals',
-                                          'shutouts', 'saves', 'shots_for', 'calc_save_pct', 'minutes_played', 'goals', 'assists', 'points', 'penalty_minutes','season_type',
-                                        ];
-        this.pageSize = 25;
+        this.goalies = new MatTableDataSource<any[]>(stats);
         this.length = stats.length;
         this.isLoading = false;
         setTimeout(() => {
-          this.goaliesArchive.paginator = this.paginator;
-          this.goaliesArchive.sort = this.sort;
+          this.goalies.paginator = this.paginator;
         }, 350);
       });
     });
@@ -248,18 +201,11 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
         oldTeamStats.forEach(element => {
           stats.push(element);
         })
-        this.goaliesArchive = new MatTableDataSource<any[]>(stats);
-        this.goaliesColumnsToDisplay = [ 
-          'team_logo', 'player_name', 'games_played','wins','loss', 'ties', 'goals_against_avg', 'goals_against', 'en_goals',
-          'shutouts', 'saves', 'shots_for', 'save_pct', 'minutes_played', 'goals', 'assists', 'points', 'penalty_minutes', 'pass_pct',
-          'playing_year', 'season_type', 'player_status'
-        ];
-        this.pageSize = 25;
+        this.goalies = new MatTableDataSource<any[]>(stats);
         this.length = stats.length;
         this.isLoading = false;
         setTimeout(() => {
-          this.goaliesArchive.paginator = this.paginator;
-          this.goaliesArchive.sort = this.sort;
+          this.goalies.paginator = this.paginator;
         }, 350);
       });
     });
@@ -273,16 +219,11 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
         oldTeamStats.forEach(element => {
           stats.push(element);
         })
-        this.goaliesArchive = new MatTableDataSource<any[]>(stats);
-        this.goaliesColumnsToDisplay = [ 'team_logo', 'player_name', 'games_played','wins','loss', 'ties', 'calc_goals_against_avg', 'goals_against', 'en_goals',
-                                          'shutouts', 'saves', 'shots_for', 'calc_save_pct', 'minutes_played', 'goals', 'assists', 'points', 'penalty_minutes','season_type',
-                                        ];
-        this.pageSize = 25;
+        this.goalies = new MatTableDataSource<any[]>(stats);
         this.length = stats.length;
         this.isLoading = false;
         setTimeout(() => {
-          this.goaliesArchive.paginator = this.paginator;
-          this.goaliesArchive.sort = this.sort;
+          this.goalies.paginator = this.paginator;
         }, 350);
       });
     });
@@ -301,18 +242,11 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
           oldTeamStats.forEach(element => {
             teamStats.push(element);
           })
-          this.goaliesArchive = new MatTableDataSource<any[]>(teamStats);
-          this.goaliesColumnsToDisplay = [ 
-            'team_logo', 'player_name', 'games_played','wins','loss', 'ties', 'goals_against_avg', 'goals_against', 'en_goals',
-            'shutouts', 'saves', 'shots_for', 'save_pct', 'minutes_played', 'goals', 'assists', 'points', 'penalty_minutes', 'pass_pct',
-            'playing_year', 'season_type', 'player_status'
-          ];
-          this.pageSize = 25;
+          this.goalies = new MatTableDataSource<any[]>(teamStats);
           this.length = teamStats.length;
           this.isLoading = false;
           setTimeout(() => {
-            this.goaliesArchive.paginator = this.paginator;
-            this.goaliesArchive.sort = this.sort;
+            this.goalies.paginator = this.paginator;
           }, 350);
         });
       });          
@@ -332,16 +266,11 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
           oldTeamStats.forEach(element => {
             teamStats.push(element);
           })
-          this.goaliesArchive = new MatTableDataSource<any[]>(teamStats);
-          this.goaliesColumnsToDisplay = [ 'team_logo', 'player_name', 'games_played','wins','loss', 'ties', 'calc_goals_against_avg', 'goals_against', 'en_goals',
-                                          'shutouts', 'saves', 'shots_for', 'calc_save_pct', 'minutes_played', 'goals', 'assists', 'points', 'penalty_minutes','season_type',
-                                        ];
-          this.pageSize = 25;
+          this.goalies = new MatTableDataSource<any[]>(teamStats);
           this.length = teamStats.length;
           this.isLoading = false;
           setTimeout(() => {
-            this.goaliesArchive.paginator = this.paginator;
-            this.goaliesArchive.sort = this.sort;
+            this.goalies.paginator = this.paginator;
           }, 350);
         });
       });          
@@ -356,18 +285,11 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
         oldTeamStats.forEach(element => {
           stats.push(element);
         })
-        this.goaliesArchive = new MatTableDataSource<any[]>(stats);
-        this.goaliesColumnsToDisplay = [ 
-          'team_logo', 'player_name', 'games_played','wins','loss', 'ties', 'goals_against_avg', 'goals_against', 'en_goals',
-          'shutouts', 'saves', 'shots_for', 'save_pct', 'minutes_played', 'goals', 'assists', 'points', 'penalty_minutes', 'pass_pct',
-          'playing_year', 'season_type', 'player_status'
-        ];
-        this.pageSize = 25;
+        this.goalies = new MatTableDataSource<any[]>(stats);
         this.length = stats.length;
         this.isLoading = false;
         setTimeout(() => {
-          this.goaliesArchive.paginator = this.paginator;
-          this.goaliesArchive.sort = this.sort;
+          this.goalies.paginator = this.paginator;
         }, 350);
       });
     });
@@ -381,16 +303,11 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
         oldTeamStats.forEach(element => {
           stats.push(element);
         })
-        this.goaliesArchive = new MatTableDataSource<any[]>(stats);
-        this.goaliesColumnsToDisplay = [ 'team_logo', 'player_name', 'games_played','wins','loss', 'ties', 'calc_goals_against_avg', 'goals_against', 'en_goals',
-                                          'shutouts', 'saves', 'shots_for', 'calc_save_pct', 'minutes_played', 'goals', 'assists', 'points', 'penalty_minutes','season_type',
-                                        ];
-        this.pageSize = 25;
+        this.goalies = new MatTableDataSource<any[]>(stats);
         this.length = stats.length;
         this.isLoading = false;
         setTimeout(() => {
-          this.goaliesArchive.paginator = this.paginator;
-          this.goaliesArchive.sort = this.sort;
+          this.goalies.paginator = this.paginator;
         }, 350);
       });
     });
@@ -405,33 +322,19 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
           oldTeamStats.forEach(element => {
             stats.push(element);
           })
-          this.goaliesArchive = new MatTableDataSource<any[]>(stats);
-          this.goaliesColumnsToDisplay = [ 
-            'team_logo', 'player_name', 'games_played','wins','loss', 'ties', 'goals_against_avg', 'goals_against', 'en_goals',
-            'shutouts', 'saves', 'shots_for', 'save_pct', 'minutes_played', 'goals', 'assists', 'points', 'penalty_minutes', 'pass_pct',
-            'playing_year', 'season_type', 'player_status'
-          ];
-          this.pageSize = 25;
+          this.goalies = new MatTableDataSource<any[]>(stats);
           this.length = stats.length;
           this.isLoading = false;
           setTimeout(() => {
-            this.goaliesArchive.paginator = this.paginator;
-            this.goaliesArchive.sort = this.sort;
+            this.goalies.paginator = this.paginator;
           }, 350);
         });
       } else {
-        this.goaliesArchive = new MatTableDataSource<any[]>(stats);
-        this.goaliesColumnsToDisplay = [ 
-          'team_logo', 'player_name', 'games_played','wins','loss', 'ties', 'goals_against_avg', 'goals_against', 'en_goals',
-          'shutouts', 'saves', 'shots_for', 'save_pct', 'minutes_played', 'goals', 'assists', 'points', 'penalty_minutes', 'pass_pct',
-          'playing_year', 'season_type', 'player_status'
-        ];
-        this.pageSize = 25;
+        this.goalies = new MatTableDataSource<any[]>(stats);
         this.length = stats.length;
         this.isLoading = false;
         setTimeout(() => {
-          this.goaliesArchive.paginator = this.paginator;
-          this.goaliesArchive.sort = this.sort;
+          this.goalies.paginator = this.paginator;
         }, 350);
       }
     });
@@ -446,18 +349,20 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
           oldTeamStats.forEach(element => {
             stats.push(element);
           })
-          this.goaliesArchive = new MatTableDataSource<any[]>(stats);
-          this.goaliesColumnsToDisplay = [ 'team_logo', 'player_name', 'games_played','wins','loss', 'ties', 'calc_goals_against_avg', 'goals_against', 'en_goals',
-                                            'shutouts', 'saves', 'shots_for', 'calc_save_pct', 'minutes_played', 'goals', 'assists', 'points', 'penalty_minutes','season_type',
-                                          ];
-          this.pageSize = 25;
+          this.goalies = new MatTableDataSource<any[]>(stats);
           this.length = stats.length;
           this.isLoading = false;
           setTimeout(() => {
-            this.goaliesArchive.paginator = this.paginator;
-            this.goaliesArchive.sort = this.sort;
+            this.goalies.paginator = this.paginator;
           }, 350);
         });
+      } else {
+        this.goalies = new MatTableDataSource<any[]>(stats);
+        this.length = stats.length;
+        this.isLoading = false;
+        setTimeout(() => {
+          this.goalies.paginator = this.paginator;
+        }, 350);
       }
     });
   }
@@ -530,19 +435,22 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
     }
   }
 
-  findLogo(shortName) {
-    if (shortName) {
-      let team = this._teamsService.getTeamInfo(shortName);
-      return { image: team.image, name: team.name }
-    } else {
-      return { image: "../../assets/team_logos/Free_Agent_logo_square.jpg", name: "Free Agent"}
+  columnsToDisplay() {
+    if (this.teamString && this.showType === 'Season') {
+      return this.goaliesTeamColumnsToDisplay
+    } else if (this.teamString && this.showType === 'Alltime') {
+      return this.goaliesTeamColumnsToDisplayForAllTime
+    } else if (!this.teamString && this.showType === 'Season') {
+      return this.goaliesColumnsToDisplay
+    } else if (!this.teamString && this.showType === 'Alltime') {
+      return this.goaliesColumnsToDisplayForAllTime
     }
   }
 
   applyFilter(filterValue: string) {
-    this.goaliesArchive.filter = filterValue.trim().toLowerCase();
-    if (this.goaliesArchive.paginator) {
-      this.goaliesArchive.paginator.firstPage();
+    this.goalies.filter = filterValue.trim().toLowerCase();
+    if (this.goalies.paginator) {
+      this.goalies.paginator.firstPage();
     }
   }
 

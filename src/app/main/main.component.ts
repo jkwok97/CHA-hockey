@@ -106,10 +106,7 @@ export class MainComponent implements OnInit, OnDestroy {
     'home_record', 'away_record', 'trail_record'
   ];
 
-  // @ViewChild(MatSort, {static: false}) sort: MatSort;
   @ViewChild("overallSort", {static: false}) overallSort: MatSort;
-  // @ViewChild("playerSort", {static: false}) playerSort: MatSort;
-  @ViewChild("goalieSort", {static: false}) goalieSort: MatSort;
 
   constructor(
     private _authService: AuthService,
@@ -176,7 +173,6 @@ export class MainComponent implements OnInit, OnDestroy {
       this.goalieStats = resp as [];
       // console.log(this.goalieStats);
       this.goalies = new MatTableDataSource<any[]>(this.goalieStats);
-      this.goalies.sort = this.goalieSort;
     });
   }
 
