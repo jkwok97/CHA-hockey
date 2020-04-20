@@ -38,7 +38,6 @@ import { PlayerArchivesComponent } from './history/player-archives/player-archiv
 import { GoalieArchivesComponent } from './history/goalie-archives/goalie-archives.component';
 import { HistoricalTeamStatsComponent } from './teams/historical-team-stats/historical-team-stats.component';
 import { TeamArchivesComponent } from './history/team-archives/team-archives.component';
-import { TeamSeasonComponent } from './history/team-archives/team-season/team-season.component';
 import { AwardsComponent } from './history/awards/awards.component';
 import { SalaryComponent } from './salary/salary.component';
 import { PicksComponent } from './picks/picks.component';
@@ -91,7 +90,7 @@ import { PlayerStatsTableComponent } from './stats/player-stats-table/player-sta
     GoalieArchivesComponent,
     HistoricalTeamStatsComponent,
     TeamArchivesComponent,
-    TeamSeasonComponent,
+    // TeamSeasonComponent,
     AwardsComponent,
     SalaryComponent,
     PicksComponent,
