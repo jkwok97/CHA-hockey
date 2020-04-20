@@ -238,7 +238,6 @@ export class MainComponent implements OnInit, OnDestroy {
         this.resetStats();
         this.getTeamTotals(teamStats);
         this.teams = new MatTableDataSource<any[]>(teamStats);
-        this.teams.sort = this.overallSort;
       });
     }
   }
@@ -341,7 +340,6 @@ export class MainComponent implements OnInit, OnDestroy {
         teamStats.sort((a,b) => b['playing_year'] - a['playing_year']);
         this.getTeamTotals(teamStats);
         this.teams = new MatTableDataSource<any[]>(teamStats);
-        this.teams.sort = this.overallSort;
       });          
     });
   }
@@ -359,7 +357,6 @@ export class MainComponent implements OnInit, OnDestroy {
         teamStats.sort((a,b) => b['playing_year'] - a['playing_year']);
         this.getTeamTotals(teamStats);
         this.teams = new MatTableDataSource<any[]>(teamStats);
-        this.teams.sort = this.overallSort;
       });          
     });
   }
@@ -382,7 +379,6 @@ export class MainComponent implements OnInit, OnDestroy {
           teamStats.sort((a,b) => b['playing_year'] - a['playing_year']);
           this.getTeamTotals(teamStats);
           this.teams = new MatTableDataSource<any[]>(teamStats);
-          this.teams.sort = this.overallSort;
         });
       });          
     });
@@ -401,7 +397,6 @@ export class MainComponent implements OnInit, OnDestroy {
         teamStats.sort((a,b) => b['playing_year'] - a['playing_year']);
         this.getTeamTotals(teamStats);
         this.teams = new MatTableDataSource<any[]>(teamStats);
-        this.teams.sort = this.overallSort;
       });          
     });
   }
@@ -419,7 +414,6 @@ export class MainComponent implements OnInit, OnDestroy {
         teamStats.sort((a,b) => b['playing_year'] - a['playing_year']);
         this.getTeamTotals(teamStats);
         this.teams = new MatTableDataSource<any[]>(teamStats);
-        this.teams.sort = this.overallSort;
       });          
     }, error => {
       console.log("baaaaaaaaaaaaaaa");
