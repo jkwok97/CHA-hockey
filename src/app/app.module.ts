@@ -56,6 +56,9 @@ import { ConferenceComponent } from './schedule/playoff-tree/conference/conferen
 import { GoalieStatsTableComponent } from './stats/goalie-stats-table/goalie-stats-table.component';
 import { TeamStatsTableComponent } from './stats/team-stats-table/team-stats-table.component';
 import { PlayerStatsTableComponent } from './stats/player-stats-table/player-stats-table.component';
+import { TeamChartComponent } from './stats/team-chart/team-chart.component';
+import { PlayerChartComponent } from './stats/player-chart/player-chart.component';
+import { TeamSeasonComponent } from './history/team-archives/team-season/team-season.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +93,7 @@ import { PlayerStatsTableComponent } from './stats/player-stats-table/player-sta
     GoalieArchivesComponent,
     HistoricalTeamStatsComponent,
     TeamArchivesComponent,
-    // TeamSeasonComponent,
+    TeamSeasonComponent,
     AwardsComponent,
     SalaryComponent,
     PicksComponent,
@@ -108,7 +111,9 @@ import { PlayerStatsTableComponent } from './stats/player-stats-table/player-sta
     ConferenceComponent,
     PlayerStatsTableComponent,
     GoalieStatsTableComponent,
-    TeamStatsTableComponent
+    TeamStatsTableComponent,
+    TeamChartComponent,
+    PlayerChartComponent
   ],
   imports: [
     BrowserModule,

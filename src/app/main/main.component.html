@@ -44,204 +44,47 @@
             </mat-tab>
 
             <mat-tab label="Player Roster">
-
                 <ng-template matTabContent>
                     <div class="playerStatsTable cha-dark" *ngIf="!isLoading">
-                
                         <div class="table">
-    
                             <app-player-stats-table
                                 [players]="players"
                                 [statsColumnsToDisplay]="playersColumnsToDisplay"
                             >
                             </app-player-stats-table>
-                    
                         </div>
-                    
                     </div>
                 </ng-template>
-                
-                
             </mat-tab>
 
             <mat-tab label="Goalie Roster">
-
                 <ng-template matTabContent>
                     <div class="playerStatsTable cha-dark" *ngIf="!isLoading">
-                
                         <div class="table">
-    
                             <app-goalie-stats-table 
                                 [goalies]="goalies"
                                 [statsColumnsToDisplay]="goaliesColumnsToDisplay"
                             ></app-goalie-stats-table>
-                    
                         </div>
-                    
                     </div>
                 </ng-template>
-
             </mat-tab>
 
             <mat-tab label="Team Charts">
-                
-                <div class="card-container">
-                    <div class="stat-card">
-                        <div class="chart-container">
-                            <canvas id="pointsChart"></canvas>
-                        </div>
-                        
-                        <div class="stat-card-rank">
-                            <p>Points: <span class="stats">{{team.points}}</span></p>
-                            <p>Overall Rank: <span class="stats">{{pointsRank}}</span> of 20</p>
-                        </div>
-                    </div>
-            
-                    <div class="stat-card">
-                        <div class="chart-container">
-                            <canvas id="winPctChart"></canvas>
-                        </div>
-                        
-                        <div class="stat-card-rank">
-                            <p>Win %: <span class="stats">{{team.win_pct}} %</span></p>
-                            <p>Overall Rank: <span class="stats">{{winPctRank}}</span> of 20</p>
-                        </div>
-                    </div>
-            
-                    <div class="stat-card">
-                        <div class="chart-container">
-                            <canvas id="goalsForChart"></canvas>
-                        </div>
-                        
-                        <div class="stat-card-rank">
-                            <p>Goals/Game: <span class="stats">{{team.goals_for_avg}}</span></p>
-                            <p>Overall Rank: <span class="stats">{{goalsForRank}}</span> of 20</p>
-                        </div>
-                    </div>
-            
-                    <div class="stat-card">
-                        <div class="chart-container">
-                            <canvas id="goalsAgainstChart"></canvas>
-                        </div>
-                        
-                        <div class="stat-card-rank">
-                            <p>Goals Against/Game: <span class="stats">{{team.goals_against_avg}}</span></p>
-                            <p>Overall Rank: <span class="stats">{{goalsAgainstRank}}</span> of 20</p>
-                        </div>
-                    </div>
-            
-                    <div class="stat-card">
-                        <div class="chart-container">
-                            <canvas id="goalDiffChart"></canvas>
-                        </div>
-                        
-                        <div class="stat-card-rank">
-                            <p>Goals Diff: <span class="stats">{{team.goal_diff}}</span></p>
-                            <p>Overall Rank: <span class="stats">{{goalDiffRank}}</span> of 20</p>
-                        </div>
-                    </div>
-            
-                    <div class="stat-card">
-                        <div class="chart-container">
-                            <canvas id="shotDiffChart"></canvas>
-                        </div>
-                        
-                        <div class="stat-card-rank">
-                            <p>Shots Diff: <span class="stats">{{team.shot_diff}}</span></p>
-                            <p>Overall Rank: <span class="stats">{{shotDiffRank}}</span> of 20</p>
-                        </div>
-                    </div>
-            
-                    <div class="stat-card">
-                        <div class="chart-container">
-                            <canvas id="ppChart"></canvas>
-                        </div>
-                        
-                        <div class="stat-card-rank">
-                            <p>PP %: <span class="stats">{{team.pp_pct}} %</span></p>
-                            <p>Overall Rank: <span class="stats">{{ppRank}}</span> of 20</p>
-                        </div>
-                    </div>
-            
-                    <div class="stat-card">
-                        <div class="chart-container">
-                            <canvas id="pkChart"></canvas>
-                        </div>
-                        
-                        <div class="stat-card-rank">
-                            <p>PK %: <span class="stats">{{team.pk_pct}} %</span></p>
-                            <p>Overall Rank: <span class="stats">{{pkRank}}</span> of 20</p>
-                        </div>
-                    </div>
-
-                </div>
-                
+                <ng-template matTabContent>
+                    <app-team-chart
+                        [stats]="stats"
+                        [team]="team"
+                    ></app-team-chart>
+                </ng-template>
             </mat-tab>
 
             <mat-tab label="Player Charts">
-                <div class="card-container">
-
-                    <div class="stat-card">
-                        <div class="stat-card-rank" *ngIf="goalLeader">
-                            <p>Player Name: <span class="stats">{{goalLeader.player_name}} </span></p>
-                            <p>Goals: <span class="stats">{{goalLeader.goals}}</span></p>
-                        </div> 
-                        <div class="chart-container">
-                            <canvas id="playerGoalChart"></canvas>
-                        </div> 
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-card-rank" *ngIf="goalPpLeader">
-                            <p>Player Name: <span class="stats">{{goalPpLeader.player_name}} </span></p>
-                            <p>PP Goals: <span class="stats">{{goalPpLeader.pp_goals}}</span></p>
-                        </div> 
-                        <div class="chart-container">
-                            <canvas id="playerPpGoalChart"></canvas>
-                        </div> 
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-card-rank" *ngIf="assistLeader">
-                            <p>Player Name: <span class="stats">{{assistLeader.player_name}} </span></p>
-                            <p>Assists: <span class="stats">{{assistLeader.assists}}</span></p>
-                        </div> 
-                        <div class="chart-container">
-                            <canvas id="playerAssistChart"></canvas>
-                        </div> 
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-card-rank" *ngIf="pointsLeader">
-                            <p>Player Name: <span class="stats">{{pointsLeader.player_name}} </span></p>
-                            <p>Points: <span class="stats">{{pointsLeader.points}}</span></p>
-                        </div> 
-                        <div class="chart-container">
-                            <canvas id="playerPointsChart"></canvas>
-                        </div> 
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-card-rank" *ngIf="shGoalsLeader">
-                            <p>Player Name: <span class="stats">{{shGoalsLeader.player_name}} </span></p>
-                            <p>SH Goals: <span class="stats">{{shGoalsLeader.sh_goals}}</span></p>
-                        </div> 
-                        <div class="chart-container">
-                            <canvas id="playerShGoalChart"></canvas>
-                        </div> 
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-card-rank" *ngIf="plusMinusLeader">
-                            <p>Player Name: <span class="stats">{{plusMinusLeader.player_name}} </span></p>
-                            <p>Plus/Minus: <span class="stats">{{plusMinusLeader.plus_minus}}</span></p>
-                        </div> 
-                        <div class="chart-container">
-                            <canvas id="playerPlusMinusChart"></canvas>
-                        </div> 
-                    </div>
-
-                </div>
+                <ng-template matTabContent>
+                    <app-player-chart
+                        [playerStats]="playerStats"
+                    ></app-player-chart>
+                </ng-template>
             </mat-tab>
 
             <mat-tab label="Team History">

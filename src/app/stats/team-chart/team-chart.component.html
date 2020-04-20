@@ -1,0 +1,90 @@
+<div class="card-container">
+    <div class="stat-card">
+        <div class="chart-container">
+            <canvas id="pointsChart"></canvas>
+        </div>
+        
+        <div class="stat-card-rank">
+            <p>Points: <span class="stats">{{team.points}}</span></p>
+            <p>Overall Rank: <span class="stats">{{pointsRank}}</span> of {{totalTeams}}</p>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="chart-container">
+            <canvas id="winPctChart"></canvas>
+        </div>
+        
+        <div class="stat-card-rank">
+            <p>Win %: <span class="stats">{{team.win_pct}} %</span></p>
+            <p>Overall Rank: <span class="stats">{{winPctRank}}</span> of {{totalTeams}}</p>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="chart-container">
+            <canvas id="goalsForChart"></canvas>
+        </div>
+        
+        <div class="stat-card-rank">
+            <p>Goals/Game: <span class="stats">{{team.goals_for_avg}}</span></p>
+            <p>Overall Rank: <span class="stats">{{goalsForRank}}</span> of {{totalTeams}}</p>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="chart-container">
+            <canvas id="goalsAgainstChart"></canvas>
+        </div>
+        
+        <div class="stat-card-rank">
+            <p>Goals Against/Game: <span class="stats">{{team.goals_against_avg}}</span></p>
+            <p>Overall Rank: <span class="stats">{{goalsAgainstRank}}</span> of {{totalTeams}}</p>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="chart-container">
+            <canvas id="goalDiffChart"></canvas>
+        </div>
+        
+        <div class="stat-card-rank">
+            <p>Goals Diff: <span class="stats">{{team.goal_diff}}</span></p>
+            <p>Overall Rank: <span class="stats">{{goalDiffRank}}</span> of {{totalTeams}}</p>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="chart-container">
+            <canvas id="shotDiffChart"></canvas>
+        </div>
+        
+        <div class="stat-card-rank">
+            <p>Shots Diff: <span class="stats">{{team.shot_diff}}</span></p>
+            <p>Overall Rank: <span class="stats">{{shotDiffRank}}</span> of {{totalTeams}}</p>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="chart-container">
+            <canvas id="ppChart"></canvas>
+        </div>
+        
+        <div class="stat-card-rank">
+            <p>PP %: <span class="stats">{{team.pp_pct}} %</span></p>
+            <p>Overall Rank: <span class="stats">{{ppRank}}</span> of {{totalTeams}}</p>
+        </div>
+    </div>
+
+    <div class="stat-card">
+        <div class="chart-container">
+            <canvas id="pkChart"></canvas>
+        </div>
+        
+        <div class="stat-card-rank">
+            <p>PK %: <span class="stats">{{team.pk_pct}} %</span></p>
+            <p>Overall Rank: <span class="stats">{{pkRank}}</span> of {{totalTeams}}</p>
+        </div>
+    </div>
+
+</div>

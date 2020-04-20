@@ -25,10 +25,15 @@ export class TeamsComponent implements OnInit, OnDestroy, AfterViewInit {
     private _teamsService: TeamsService,
     private _route: ActivatedRoute
   ) {
-    this.currentSeason = this._teamsService.currentSeason;
-    this.currentSeasonType = this._teamsService.currentSeasonType;
+    if (this._route.snapshot.url[2] && this._route.snapshot.url[3]) {
+      this.currentSeason = this._route.snapshot.url[2].path;
+      this.currentSeasonType = this._route.snapshot.url[3].path;
+    } else {
+      this.currentSeason = this._teamsService.currentSeason;
+      this.currentSeasonType = this._teamsService.currentSeasonType;
+    }
     this.short_team_name = this._route.snapshot.url[1].path;
-    this._teamsService.getTeamStatsByYear(this.short_team_name, this.currentSeason).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+    this._teamsService.getAlltimeTeamStatsByType(this.short_team_name, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.stats = resp as [];
       if (this._route.snapshot.url[2]) {
         this.historicTeam = true;

@@ -30,8 +30,11 @@ export class TeamArchivesComponent implements OnInit, OnDestroy {
     private _teamsService: TeamsService,
     private _route: ActivatedRoute,
   ) {
-    this.short_team_name = this._route.snapshot.queryParams['team'];
-    // this.short_team_name = this._route.snapshot.paramMap.get("params");
+    if (this._route.snapshot.queryParams['team']) {
+      this.short_team_name = this._route.snapshot.queryParams['team'];
+    } else {
+      this.short_team_name = this._route.snapshot.paramMap.get("params");
+    }
     this.team = this._teamsService.getTeamInfo(this.short_team_name);
     this.seasonType = this._teamsService.currentSeasonType; 
   }

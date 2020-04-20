@@ -25,6 +25,8 @@ import { PicksComponent } from './picks/picks.component';
 import { TeamSalaryComponent } from './salary/team-salary/team-salary.component';
 import { PlayoffTreeComponent } from './schedule/playoff-tree/playoff-tree.component';
 import { NewPlayoffTreeComponent } from './schedule/playoff-tree/new-playoff-tree/new-playoff-tree.component';
+import { TeamSeasonComponent } from './history/team-archives/team-season/team-season.component';
+
 
 const routes: Routes = [
   { path: 'main', component: MainComponent, canActivate: [AuthGuard] },
@@ -37,6 +39,7 @@ const routes: Routes = [
   { path: 'stats/league', component: OverallTeamStatsComponent, canActivate: [AuthGuard] },
   { path: 'teams', component: LeagueComponent, canActivate: [AuthGuard] },
   { path: 'teams/:params', component: TeamStatsComponent, canActivate: [AuthGuard] },
+  { path: 'teams/:params/:params/:params', component: TeamSeasonComponent, canActivate: [AuthGuard] },
   { path: 'history', component: HistoryComponent, canActivate: [AuthGuard] },
   { path: 'history/champions', component: ChampionsComponent, canActivate: [AuthGuard] },
   { path: 'history/drafts', component: DraftsComponent, canActivate: [AuthGuard] },
