@@ -129,7 +129,7 @@ export class NewPlayoffTreeComponent implements OnInit, OnDestroy {
   }
 
   setChampionShip(westChamp, eastChamp) {
-    this.championship.push({homeTeam: westChamp, visitingTeam: eastChamp, series: "0 - 0"});
+    this.championship.push({homeTeam: westChamp, visitingTeam: eastChamp, series: "2 - 0"});
     console.log(this.championship);
   }
 
