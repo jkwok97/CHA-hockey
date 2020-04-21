@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { LeagueComponent } from './league/league.component';
 import { AppRoutingModule } from './app-routing.module';
-import { TeamsComponent } from './teams/teams.component';
+import { TeamsComponent } from './teams/teams-header.component';
 import { RulesComponent } from './rules/rules.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { StatsComponent } from './stats/stats.component';

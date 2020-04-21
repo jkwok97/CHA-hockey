@@ -5,7 +5,7 @@
 <div class="playerStatsTable cha-dark" *ngIf="!isLoading">
 
     <div class="teamStats">
-        <app-teams></app-teams>
+        <app-teams-header></app-teams-header>
     </div>
 
     <div class="tableHeader">
@@ -14,128 +14,10 @@
 
     <div class="table">
 
-        <table mat-table [dataSource]="players" #playerSort="matSort" matSort class="mat-elevation-z8 full-width" matSortActive="points" matSortDirection="desc">
-
-            <ng-container matColumnDef="team_logo" sticky>
-                <th mat-header-cell *matHeaderCellDef> Team </th>
-                <td mat-cell *matCellDef="let player"> 
-                    <img src="{{ findLogo(player.team_name).image }}"> 
-                </td>
-            </ng-container>
-
-            <ng-container matColumnDef="player_name" sticky>
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-                <td mat-cell *matCellDef="let player"> {{player.player_name}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="position">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Position </th>
-                <td mat-cell *matCellDef="let player"> {{player.position}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="games_played">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> GP </th>
-                <td mat-cell *matCellDef="let player"> {{player.games_played}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="goals">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> G </th>
-                <td mat-cell *matCellDef="let player"> {{player.goals}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="assists">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> A </th>
-                <td mat-cell *matCellDef="let player"> {{player.assists}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="points">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Pts </th>
-                <td mat-cell *matCellDef="let player"> {{player.points}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="plus_minus">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> +/- </th>
-                <td mat-cell *matCellDef="let player"> {{player.plus_minus}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="penalty_minutes">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> PIM </th>
-                <td mat-cell *matCellDef="let player"> {{player.penalty_minutes}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="pp_goals">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> PPG </th>
-                <td mat-cell *matCellDef="let player"> {{player.pp_goals}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="sh_goals">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> SHG </th>
-                <td mat-cell *matCellDef="let player"> {{player.sh_goals}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="gw_goals">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> GWG </th>
-                <td mat-cell *matCellDef="let player"> {{player.gw_goals}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="gt_goals">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> GTG </th>
-                <td mat-cell *matCellDef="let player"> {{player.gt_goals}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="shots">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> SOG </th>
-                <td mat-cell *matCellDef="let player"> {{player.shots}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="shooting_pct">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Sh% </th>
-                <td mat-cell *matCellDef="let player"> {{player.shooting_pct}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="minutes_per_game">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Min/G </th>
-                <td mat-cell *matCellDef="let player"> {{player.minutes_per_game}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="fo_pct">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> FO% </th>
-                <td mat-cell *matCellDef="let player"> {{player.fo_pct}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="pass_pct">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Pas% </th>
-                <td mat-cell *matCellDef="let player"> {{player.pass_pct}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="corner_pct">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> CB% </th>
-                <td mat-cell *matCellDef="let player"> {{player.corner_pct}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="hits">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> H </th>
-                <td mat-cell *matCellDef="let player"> {{player.hits}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="blocked_shots">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> BS </th>
-                <td mat-cell *matCellDef="let player"> {{player.blocked_shots}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="player_status">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-                <td mat-cell *matCellDef="let player"> {{player.player_status}} </td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="playersColumnsToDisplay"></tr>
-            <tr 
-                mat-row 
-                *matRowDef="let player; columns: playersColumnsToDisplay" 
-                (click)="openPlayer(player, 'player')"
-            ></tr>
-
-        </table>
+        <app-player-stats-table 
+            [players]="players"
+            [statsColumnsToDisplay]="playersColumnsToDisplay"
+        ></app-player-stats-table>
 
     </div>
 
@@ -148,118 +30,11 @@
     </div>
 
     <div class="table">
-        <table mat-table [dataSource]="goalies" #goalieSort="matSort" matSort class="mat-elevation-z8 full-width" matSortActive="wins" matSortDirection="desc">
 
-            <ng-container matColumnDef="team_logo" sticky>
-                <th mat-header-cell *matHeaderCellDef> Team </th>
-                <td mat-cell *matCellDef="let goalie"> 
-                    <img src="{{ findLogo(goalie.team_name).image }}"> 
-                </td>
-            </ng-container>
-
-            <ng-container matColumnDef="player_name" sticky>
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-                <td mat-cell *matCellDef="let player"> {{player.player_name}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="games_played">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> GP </th>
-                <td mat-cell *matCellDef="let player"> {{player.games_played}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="minutes_played">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Mins </th>
-                <td mat-cell *matCellDef="let player"> {{player.minutes_played}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="goals_against_avg">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> GAA </th>
-                <td mat-cell *matCellDef="let player"> {{player.goals_against_avg}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="wins">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> W </th>
-                <td mat-cell *matCellDef="let player"> {{player.wins}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="loss">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> L </th>
-                <td mat-cell *matCellDef="let player"> {{player.loss}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="ties">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> T </th>
-                <td mat-cell *matCellDef="let player"> {{player.ties}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="en_goals">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> EN </th>
-                <td mat-cell *matCellDef="let player"> {{player.en_goals}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="shutouts">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> SO </th>
-                <td mat-cell *matCellDef="let player"> {{player.shutouts}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="goals_against">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> GA </th>
-                <td mat-cell *matCellDef="let player"> {{player.goals_against}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="saves">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Sv </th>
-                <td mat-cell *matCellDef="let player"> {{player.saves}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="shots_for">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> SF </th>
-                <td mat-cell *matCellDef="let player"> {{player.shots_for}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="save_pct">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Sv% </th>
-                <td mat-cell *matCellDef="let player"> {{player.save_pct}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="goals">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> G </th>
-                <td mat-cell *matCellDef="let player"> {{player.goals}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="assists">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> A </th>
-                <td mat-cell *matCellDef="let player"> {{player.assists}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="points">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Pts </th>
-                <td mat-cell *matCellDef="let player"> {{player.points}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="penalty_minutes">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> PIM </th>
-                <td mat-cell *matCellDef="let player"> {{player.penalty_minutes}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="pass_pct">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Pas% </th>
-                <td mat-cell *matCellDef="let player"> {{player.pass_pct}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="player_status">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-                <td mat-cell *matCellDef="let player"> {{player.player_status}} </td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="goaliesColumnsToDisplay"></tr>
-            <tr 
-                mat-row 
-                *matRowDef="let goalie; columns: goaliesColumnsToDisplay" 
-                (click)="openPlayer(goalie, 'goalie')"
-            ></tr>
-
-        </table>
+        <app-goalie-stats-table 
+            [goalies]="goalies"
+            [statsColumnsToDisplay]="goaliesColumnsToDisplay"
+        ></app-goalie-stats-table>
 
     </div>
 

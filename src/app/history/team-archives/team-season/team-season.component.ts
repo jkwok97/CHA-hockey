@@ -1,7 +1,6 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { TeamsService } from 'src/app/teams/teams.service';
-import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { takeWhile } from 'rxjs/operators';
 
@@ -21,9 +20,6 @@ export class TeamSeasonComponent implements OnInit, OnDestroy {
 
   stats: any[];
 
-  pageSize: number = 30;
-  length: number = 0;
-
   players: MatTableDataSource<any[]>;
   playersColumnsToDisplay = [
     'player_name', 'position', 'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals',
@@ -36,52 +32,33 @@ export class TeamSeasonComponent implements OnInit, OnDestroy {
     'shutouts', 'goals_against', 'saves', 'shots_for', 'save_pct', 'goals', 'assists', 'points', 'penalty_minutes', 'pass_pct', 'player_status'
   ];
 
-  @ViewChild("playerSort", {static: false}) playerSort: MatSort;
-  @ViewChild("goalieSort", {static: false}) goalieSort: MatSort;
-
   constructor(
     private _route: ActivatedRoute,
     private _teamsService: TeamsService,
-    private _router: Router
   ) { }
 
   ngOnInit() {
+    this.isLoading = true;
     this.short_team_name = this._route.snapshot.url[1].path;
     this.currentSeason = this._route.snapshot.url[2].path;
     this.seasonType = this._route.snapshot.url[3].path;
-    this._teamsService.getTeamPlayerStatsByYearByType(this.short_team_name, this.currentSeason, this.seasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      // console.log(resp);
+    this.getPlayerStats(this.short_team_name, this.currentSeason, this.seasonType);
+    this.getGoalieStats(this.short_team_name, this.currentSeason, this.seasonType);
+  }
+
+  getPlayerStats(teamName: string, season: string, seasonType: string) {
+    return this._teamsService.getTeamPlayerStatsByYearByType(teamName, season, seasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.stats = resp as [];
       this.players = new MatTableDataSource<any[]>(this.stats);
-      this.length = this.stats.length;
       this.isLoading = false;
-      setTimeout(() => {
-        this.players.sort = this.playerSort;
-      }, 350);
     });
-      this._teamsService.getTeamGoalieStatsByYearByType(this.short_team_name, this.currentSeason, this.seasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+  }
+
+  getGoalieStats(teamName: string, season: string, seasonType: string) {
+    return this._teamsService.getTeamGoalieStatsByYearByType(teamName, season, seasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       let goalieStats = resp as [];
       this.goalies = new MatTableDataSource<any[]>(goalieStats);
-      this.length = goalieStats.length;
-      this.isLoading = false;  
-      setTimeout(() => {
-        this.goalies.sort = this.goalieSort;
-      }, 350);
     });
-  }
-
-  findLogo(shortName) {
-    if (shortName) {
-      let team = this._teamsService.getTeamInfo(shortName);
-      return { image: team.image, name: team.name }
-    } else {
-      return { image: "../../assets/team_logos/Free_Agent_logo_square.jpg", name: "Free Agent"}
-    }
-  }
-
-  openPlayer(player, type) {
-    this._router.navigate([`/info/${type}s/${player.player_id}/${player.player_name}`]);
-    window.scrollTo(0,0);
   }
 
   ngOnDestroy() {

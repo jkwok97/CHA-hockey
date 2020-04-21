@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { LeagueComponent } from './league/league.component';
 import { StatsComponent } from './stats/stats.component';
-import { TeamsComponent } from './teams/teams.component';
+import { TeamsComponent } from './teams/teams-header.component';
 import { HistoryComponent } from './history/history.component';
 import { RulesComponent } from './rules/rules.component';
 import { ScheduleComponent } from './schedule/schedule.component';

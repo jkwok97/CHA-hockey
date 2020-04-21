@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TeamsComponent } from './teams.component';
+import { TeamsComponent } from './teams-header.component';
 
 describe('TeamsComponent', () => {
   let component: TeamsComponent;

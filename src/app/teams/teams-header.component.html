@@ -1,7 +1,9 @@
 <div class="container">
-    <div class="header" *ngIf="historicTeam">
+    <div class="header" *ngIf="historicTeam" [style.background-color]='teamInfo.color'>
         <img src="{{findLogo(team.team_name).image}}">
-        <p [style.color]='team.fontColor'>{{team.team_city}} {{team.team_nickname}} - {{team.playing_year}}({{team.season_type}})</p>
+        <p [style.color]='teamInfo.fontColor'>
+            {{team.team_city}} {{team.team_nickname}} - {{team.playing_year}}({{team.season_type}})
+        </p>
     </div>
     <div class="card">
         <div class="cardHeader">

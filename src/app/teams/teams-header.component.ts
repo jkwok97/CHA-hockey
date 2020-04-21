@@ -2,12 +2,11 @@ import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { TeamsService } from './teams.service';
 import { ActivatedRoute } from '@angular/router';
 import { takeWhile } from 'rxjs/operators';
-import { Observable, Observer } from 'rxjs';
 
 @Component({
-  selector: 'app-teams',
-  templateUrl: './teams.component.html',
-  styleUrls: ['./teams.component.css']
+  selector: 'app-teams-header',
+  templateUrl: './teams-header.component.html',
+  styleUrls: ['./teams-header.component.css']
 })
 export class TeamsComponent implements OnInit, OnDestroy, AfterViewInit {
 
@@ -19,6 +18,7 @@ export class TeamsComponent implements OnInit, OnDestroy, AfterViewInit {
   currentSeasonType: string;
 
   team: any;
+  teamInfo: any;
   stats: any[];
 
   constructor(
@@ -33,6 +33,7 @@ export class TeamsComponent implements OnInit, OnDestroy, AfterViewInit {
       this.currentSeasonType = this._teamsService.currentSeasonType;
     }
     this.short_team_name = this._route.snapshot.url[1].path;
+    this.teamInfo = this._teamsService.getTeamInfo(this.short_team_name);
     this._teamsService.getAlltimeTeamStatsByType(this.short_team_name, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.stats = resp as [];
       if (this._route.snapshot.url[2]) {
