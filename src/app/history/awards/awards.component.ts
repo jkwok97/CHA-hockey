@@ -36,7 +36,7 @@ export class AwardsComponent implements OnInit, OnDestroy {
             this._teamsService.getChampions("gm").pipe(takeWhile(() => this._alive)).subscribe(resp => {
               this.awards.push({title: "Muggleston Trophy", picture: "../../../assets/images/gm.jpg", description: "Best GM", winners: resp});
               this._teamsService.getChampions("season").pipe(takeWhile(() => this._alive)).subscribe(resp => {
-                this.awards.push({title: "President's Trophy", picture: "../../../assets/images/president.jpg", description: "Season Winner", winners: resp});
+                this.awards.push({title: "Prime Minister's Trophy", picture: "../../../assets/images/president.jpg", description: "Season Winner", winners: resp});
                 this.isLoading = false;
               });
             });
