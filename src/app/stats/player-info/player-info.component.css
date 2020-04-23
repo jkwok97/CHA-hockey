@@ -20,6 +20,7 @@
     box-shadow: 0 0 30px lightsteelblue;
     background-color: whitesmoke;
     margin-left: 50px;
+    border: 1px solid red;
 }
 
 .player-info {

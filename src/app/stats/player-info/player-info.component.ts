@@ -134,7 +134,7 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
         });
       } else if (this._route.snapshot.params.type === 'players') {
         this._teamsService.getAllIndividualPlayerStatsByType(this._route.snapshot.params.id, this.seasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-          // console.log(resp);
+          console.log(resp);
           this.playerInfo = resp as [];
           this.playerStatsFetched = resp as [];
           if (this.allPlayersInfo) {
@@ -283,12 +283,11 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
       } else if (this._route.snapshot.params.type === 'players') {
         this.isLoading = true;
         this._teamsService.getAllIndividualPlayerStatsByTypeReal(this._route.snapshot.params.id, this.seasonType, "NHL").pipe(takeWhile(() => this._alive)).subscribe(resp => {
-          console.log(resp[0]['player_nhl_id']);
-          console.log(resp[0])
           if (resp[0]['player_nhl_id']) {
             let playerId = resp[0]['player_nhl_id'];
             this.getRealNHLStats(playerId);
             this.getOnPaceNHLStats(playerId, "Pace");
+            this.getPlayerPicture(playerId);
             this.isLoading = false;
           } else {
             this.isLoading = false;
@@ -372,6 +371,10 @@ export class PlayerInfoComponent implements OnInit, OnDestroy {
     }, error => {
       
     })
+  }
+
+  getPlayerPicture(id: number) {
+    return `https://nhl.bamcontent.com/images/headshots/current/168x168/${id}.jpg`
   }
 
   resetValues() {

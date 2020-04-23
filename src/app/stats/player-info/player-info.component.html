@@ -2,6 +2,7 @@
 
     <div class="player-header" *ngIf="playerInfo">
         <img src="{{playerInfo.picture.image}}" class="headshot" *ngIf="playerInfo.picture">
+        <!-- <img src="{{ getPlayerPicture(playerInfo[0].player_nhl_id)}}" class="headshot"> -->
         <div class="player-info">
             <div class="playerName-container">
                 <img src="{{playerInfo.team.image}}" class="logo">

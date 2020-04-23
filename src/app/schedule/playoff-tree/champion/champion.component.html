@@ -1,15 +1,11 @@
 <mat-card class="champion-container">
 
     <mat-card-header>
-        <mat-card-title>2020 CHA Champion</mat-card-title>
-        <mat-card-subtitle>{{champion}}</mat-card-subtitle>
+        <div mat-card-avatar class="champion-image"></div>
+        <mat-card-title>{{champion.team_city}} {{champion.team_nickname}}</mat-card-title>
+        <mat-card-subtitle>2020 CHA Champion</mat-card-subtitle>
     </mat-card-header>
 
     <img mat-card-image src="../../../../assets/images/libertycup.jpg">
-
-    <app-matchup 
-        *ngFor="let matchup of easternQuarterMatchups"
-        [matchup]="matchup"
-    ></app-matchup>
 
 </mat-card>

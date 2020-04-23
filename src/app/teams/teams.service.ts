@@ -262,10 +262,6 @@ export class TeamsService {
     return this._http.get(`${environment.back_end_url}/drafts/`);
   }
 
-  // this.getPlayerInfo().subscribe(resp => {
-  //   this.allPlayerInfo = resp;
-  // });
-
   getPlayerInfo() {
     return this._http.get(`${environment.back_end_url}/player-info/`);
   }

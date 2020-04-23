@@ -34,6 +34,7 @@ export class PlayerStatsTableComponent implements OnInit, AfterViewInit, OnChang
   }
 
   openPlayer(player, type) {
+    console.log(player);
     this._router.navigate([`/info/${type}s/${player.player_id}/${player.player_name}`]);
     window.scrollTo(0,0);
   }

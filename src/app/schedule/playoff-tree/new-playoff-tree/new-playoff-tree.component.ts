@@ -27,6 +27,8 @@ export class NewPlayoffTreeComponent implements OnInit, OnDestroy {
   westChamp: any;
   eastChamp: any;
 
+  champion: any;
+
   currentSeason: string;
 
   private _alive:boolean = true;
@@ -36,7 +38,7 @@ export class NewPlayoffTreeComponent implements OnInit, OnDestroy {
   constructor(
     private _teamsService:TeamsService,
   ) { 
-    this.currentSeason = this._teamsService.currentSeason;
+    this.currentSeason = '2019-20';
     this.northwestTeams = this._teamsService.league.conference[0].division[0].teams;
     this.southwestTeams = this._teamsService.league.conference[0].division[1].teams;
     this.northeastTeams = this._teamsService.league.conference[1].division[0].teams;
@@ -129,8 +131,9 @@ export class NewPlayoffTreeComponent implements OnInit, OnDestroy {
   }
 
   setChampionShip(westChamp, eastChamp) {
-    this.championship.push({homeTeam: westChamp, visitingTeam: eastChamp, series: "3 - 2"});
-    console.log(this.championship);
+    this.championship.push({homeTeam: westChamp, visitingTeam: eastChamp, series: "4 - 3"});
+    this.champion = westChamp;
+    console.log(this.champion);
   }
 
   ngOnDestroy() {
