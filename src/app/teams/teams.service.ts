@@ -412,8 +412,10 @@ export class TeamsService {
     return this._http.get(`${environment.back_end_url}/goalie-ratings/${id}`);
   }
 
-  getDraftTable() {
-    return this._http.get(`${environment.back_end_url}/draft-table/`);
+  getDraftTable(season) {
+    let options = {params: new HttpParams()
+      .set('season', season)}
+    return this._http.get(`${environment.back_end_url}/draft-table/`, options);
   }
 
   getWaiverTeams() {
