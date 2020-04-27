@@ -20,7 +20,7 @@ export class PicksComponent implements OnInit, OnDestroy {
   drafts: any;
 
   currentSeason: string = "2019-20";
-  draftSeason: '2020';
+  draftSeason: string = '2020';
 
   draft: MatTableDataSource<any[]>;
   draftColumnsToDisplay = ['pick', 'team_logo', 'team_name', 'round_one', 'round_two', 'round_three', 'round_four', 'round_five'];
@@ -35,16 +35,26 @@ export class PicksComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.isLoading = true;
     // this.currentSeason = this._teamsService.currentSeason;
-    this._teamsService.getDraftTable(this.draftSeason).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+    this.getDraftTable(this.draftSeason);
+  }
+
+  showToolTip(name: string) {
+    console.log(name);
+  }
+
+  changeSeason(season) {
+    this.isLoading = true;
+    this.draftSeason = season;
+    this.getDraftTable(this.draftSeason);
+  }
+
+  getDraftTable(draftSeason) {
+    this._teamsService.getDraftTable(draftSeason).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.drafts = resp;
       this._teamsService.getLeagueTeamsStats(this.currentSeason, 'Regular').pipe(takeWhile(() => this._alive)).subscribe(resp => {
         this.getLeagueLeaders(resp, this.drafts);
       });
     });
-  }
-
-  showToolTip(name: string) {
-    console.log(name);
   }
 
   getLeagueLeaders(resp, drafts) {

@@ -12,7 +12,23 @@
     <div class="playerStatsTable cha-dark" *ngIf="!isLoading">
 
         <div class="tableHeader">
-            <p>{{currentSeason}} Draft Pick Tracker</p>
+            <p>{{draftSeason}} Draft Pick Tracker</p>
+        </div>
+
+        <div class="button-container">
+            <mat-button-toggle-group 
+                #bySeason="matButtonToggleGroup" 
+                [value]="draftSeason" 
+                (change)="changeSeason(bySeason.value)"
+            >
+                <mat-button-toggle value="2020" color="accent">
+                    2020
+                </mat-button-toggle>
+                <mat-button-toggle value="2021" color="accent">
+                    2021
+                </mat-button-toggle>
+            </mat-button-toggle-group>
+    
         </div>
     
         <div class="table">
