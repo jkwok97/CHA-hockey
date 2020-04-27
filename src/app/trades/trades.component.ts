@@ -14,6 +14,10 @@ export class TradesComponent implements OnInit, OnDestroy {
   isLoading: boolean = false;
 
   years = [{ 
+      label: '20/21 Season', query: '21', 
+      link: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQhNH4rS2kl3afY5kfy6IpXo4x3u-XJnuBh01R4bleYWovIvt-pk2JhtzxW-10kMamkd2LgpzmvuiMP/pubhtml?gid=1702239337&single=true&widget=false&headers=false&chrome=false'
+    },
+    { 
       label: '19/20 Season', query: '20', 
       link: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQhNH4rS2kl3afY5kfy6IpXo4x3u-XJnuBh01R4bleYWovIvt-pk2JhtzxW-10kMamkd2LgpzmvuiMP/pubhtml?gid=587747407&single=true&widget=false&headers=false&chrome=false'
     },{
@@ -65,7 +69,7 @@ export class TradesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.isLoading = true;
     setTimeout(() => {
-      this.yearSelect.value = '20';
+      this.yearSelect.value = '21';
       this.tradePage = this.sanitizer.bypassSecurityTrustResourceUrl(this.years[0].link);
       this.isLoading = false;
     }, 250);
