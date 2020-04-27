@@ -19,7 +19,7 @@ export class TeamSalaryComponent implements OnInit, OnDestroy {
 
   short_team_name: string;
   currentSeason: string;
-  nextSeason: string = "2020-21";
+  nextSeason: string = "2021-22";
   currentSeasonType: string;
   totalForwardsCurrentSalary: string;
   totalForwardsYearTwoSalary: string;
@@ -36,7 +36,7 @@ export class TeamSalaryComponent implements OnInit, OnDestroy {
   totalDefense: number;
   totalGoalie: number;
   totalPlayers: number;
-  currentSeasonCap: number = 100.3;
+  currentSeasonCap: number = 102.7;
   nextSeasonCap: number = 102.7;
   currentSeasonPayroll: number;
   currentSeasonSpace: number;
@@ -46,8 +46,8 @@ export class TeamSalaryComponent implements OnInit, OnDestroy {
   forwardSalaries: MatTableDataSource<any[]>;
   defenceSalaries: MatTableDataSource<any[]>;
   goalieSalaries: MatTableDataSource<any[]>;
-  salariesColumnsToDisplay = [ 'player_name', 'position', 'current_season_salary', 'year_two'];
-  mobileSalariesColumnsToDisplay = [ 'player_name', 'position', 'current_season_salary'];
+  salariesColumnsToDisplay = [ 'player_name', 'position', 'year_two', 'year_three'];
+  mobileSalariesColumnsToDisplay = [ 'player_name', 'position', 'year_two'];
 
   @ViewChild("forwardSort", {static: false}) forwardSort: MatSort;
   @ViewChild("defenceSort", {static: false}) defenceSort: MatSort;
@@ -101,8 +101,8 @@ export class TeamSalaryComponent implements OnInit, OnDestroy {
       // console.log(resp);
       let goalies = resp as [];
       this.totalGoalie = goalies.length;
-      this.totalGoalieCurrentSalary = this.getTotalSalary(goalies, "current");
-      this.totalGoalieYearTwoSalary = this.getTotalSalary(goalies, "yearTwo");
+      this.totalGoalieCurrentSalary = this.getTotalSalary(goalies, "yearTwo");
+      this.totalGoalieYearTwoSalary = this.getTotalSalary(goalies, "yearThree");
       this.goalieSalaries = new MatTableDataSource<any[]>(goalies);
       setTimeout(() => {
         this.goalieSalaries.sort = this.goalieSort;
@@ -114,12 +114,13 @@ export class TeamSalaryComponent implements OnInit, OnDestroy {
         // console.log(resp);
         let defense = resp as [];
         this.totalDefense = defense.length;
-        this.totalDefenseCurrentSalary = this.getTotalSalary(defense, "current");
-        this.totalDefenseYearTwoSalary = this.getTotalSalary(defense, "yearTwo");
+        this.totalDefenseCurrentSalary = this.getTotalSalary(defense, "yearTwo");
+        this.totalDefenseYearTwoSalary = this.getTotalSalary(defense, "yearThree");
         this.defenceSalaries = new MatTableDataSource<any[]>(defense);
+        console.log(defense);
         setTimeout(() => {
           this.defenceSalaries.sort = this.defenceSort;
-        }, 350);
+        }, 500);
         defense.forEach(player => {
           this.teamRoster.push(player);
         });
@@ -127,16 +128,16 @@ export class TeamSalaryComponent implements OnInit, OnDestroy {
           // console.log(resp);
           let forwards = resp as [];
           this.totalForwards = forwards.length;
-          this.totalForwardsCurrentSalary = this.getTotalSalary(forwards, "current");
-          this.totalForwardsYearTwoSalary = this.getTotalSalary(forwards, "yearTwo");
+          this.totalForwardsCurrentSalary = this.getTotalSalary(forwards, "yearTwo");
+          this.totalForwardsYearTwoSalary = this.getTotalSalary(forwards, "yearThree");
+          console.log(forwards);
           this.forwardSalaries = new MatTableDataSource<any[]>(forwards);
           setTimeout(() => {
             this.forwardSalaries.sort = this.forwardSort;
-          }, 350);
+          }, 500);
           forwards.forEach(player => {
             this.teamRoster.push(player);
           });
-          console.log(this.teamRoster)
           this.getTotalsForRoster();
           this.isLoading = false;
         });
@@ -175,15 +176,15 @@ export class TeamSalaryComponent implements OnInit, OnDestroy {
     let total = 0;
     if (string === "current") {
       this.teamRoster.forEach(player => {
-        if ((Number(player.current_season_salary) > 0)) {
-          total += Number(player.current_season_salary);
+        if ((Number(player.year_two) > 0)) {
+          total += Number(player.year_two);
         }
       })
       return total;
     } else {
       this.teamRoster.forEach(player => {
-        if ((Number(player.year_two) > 0)) {
-          total += Number(player.year_two);
+        if ((Number(player.year_three) > 0)) {
+          total += Number(player.year_three);
         }
       })
       return total;

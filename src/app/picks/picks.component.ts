@@ -19,14 +19,13 @@ export class PicksComponent implements OnInit, OnDestroy {
   teams = [];
   drafts: any;
 
-  currentSeason: string;
+  currentSeason: string = "2019-20";
 
   draft: MatTableDataSource<any[]>;
   draftColumnsToDisplay = ['pick', 'team_logo', 'team_name', 'round_one', 'round_two', 'round_three', 'round_four', 'round_five'];
   draftMobileColumnsToDisplay = ['pick', 'round_one', 'round_two', 'round_three', 'round_four', 'round_five'];
 
   constructor(
-    private sanitizer: DomSanitizer,
     private _teamsService: TeamsService
   ) { 
     this.checkMobile();
@@ -34,11 +33,7 @@ export class PicksComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isLoading = true;
-    this.currentSeason = this._teamsService.currentSeason;
-    // setTimeout(() => {
-    //   this.picksPage = this.sanitizer.bypassSecurityTrustResourceUrl("https://docs.google.com/spreadsheets/d/e/2PACX-1vQhNH4rS2kl3afY5kfy6IpXo4x3u-XJnuBh01R4bleYWovIvt-pk2JhtzxW-10kMamkd2LgpzmvuiMP/pubhtml?gid=370157936&single=true&widget=false&headers=false&chrome=false");
-    //   this.isLoading = false;
-    // }, 500);
+    // this.currentSeason = this._teamsService.currentSeason;
     this._teamsService.getDraftTable().pipe(takeWhile(() => this._alive)).subscribe(resp => {
       this.drafts = resp;
       this._teamsService.getLeagueTeamsStats(this.currentSeason, 'Regular').pipe(takeWhile(() => this._alive)).subscribe(resp => {

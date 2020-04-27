@@ -5,44 +5,26 @@
             {{team.team_city}} {{team.team_nickname}} - {{team.playing_year}}({{team.season_type}})
         </p>
     </div>
-    <div class="card">
-        <div class="cardHeader">
-            <p>Overall Record</p>
+    <div class="stats" *ngIf="team">
+        <div class="stat-individual">
+            Overall: {{team.wins}} - {{team.loss}} - {{team.ties}}
         </div>
-        <div class="record">
-            <p *ngIf="team">{{team.wins}}-{{team.loss}}-{{team.ties}}</p>
+        <mat-divider [vertical]="true" class="white"></mat-divider>
+        <div class="stat-individual">
+            Points: {{team.points}}
         </div>
-    </div>
-    <div class="card">
-        <div class="cardHeader">
-            <p>Points</p>
+        <mat-divider [vertical]="true" class="white"></mat-divider>
+        <div class="stat-individual">
+            Home: {{team.home_wins}} - {{team.home_loss}} - {{team.home_ties}}
         </div>
-        <div class="record">
-            <p *ngIf="team">{{team.points}}</p>
+        <mat-divider [vertical]="true" class="white"></mat-divider>
+        <div class="stat-individual">
+            Away: {{team.road_wins}} - {{team.road_loss}} - {{team.road_ties}}
         </div>
-    </div>
-    <div class="card">
-        <div class="cardHeader">
-            <p>Home Record</p>
-        </div>
-        <div class="record">
-            <p *ngIf="team">{{team.home_wins}}-{{team.home_loss}}-{{team.home_ties}}</p>
+        <mat-divider [vertical]="true" class="white"></mat-divider>
+        <div class="stat-individual">
+            Division: {{team.div_win}} - {{team.div_loss}} - {{team.div_tie}}
         </div>
     </div>
-    <div class="card">
-        <div class="cardHeader">
-            <p>Away Record</p>
-        </div>
-        <div class="record">
-            <p *ngIf="team">{{team.road_wins}}-{{team.road_loss}}-{{team.road_ties}}</p>
-        </div>
-    </div>
-    <div class="card">
-        <div class="cardHeader">
-            <p>In Division Record</p>
-        </div>
-        <div class="record">
-            <p *ngIf="team">{{team.div_win}}-{{team.div_loss}}-{{team.div_tie}}</p>
-        </div>
-    </div>
+    
 </div>

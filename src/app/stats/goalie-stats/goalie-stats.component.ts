@@ -19,8 +19,8 @@ export class GoalieStatsComponent implements OnInit, OnDestroy {
   stats: any[];
 
   short_team_name: string = '';
-  currentSeason: string;
-  currentSeasonType: string;
+  currentSeason: string = '2019-20';
+  currentSeasonType: string = 'Regular';
 
   goalies: MatTableDataSource<any[]>;
   goaliesColumnsToDisplay = [
@@ -45,20 +45,11 @@ export class GoalieStatsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isLoading = true;
-    this.currentSeason = this._teamsService.currentSeason;
-    this.currentSeasonType = this._teamsService.currentSeasonType;
+    // this.currentSeason = this._teamsService.currentSeason;
+    // this.currentSeasonType = this._teamsService.currentSeasonType;
     if (this._route.snapshot.routeConfig.path === "stats/goalies") {
-      this._teamsService.getGoalieStatsByYearByType(this.currentSeason, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-        this.inAllPlayersStats = true;
-        this.stats = resp as [];
-        this.goalies = new MatTableDataSource<any[]>(this.stats);
-        this.pageSize = 25;
-        this.length = this.stats.length;
-        this.isLoading = false;
-        setTimeout(() => {
-          this.goalies.paginator = this.paginator;
-        }, 350);
-      });
+      this.inAllPlayersStats = true;
+      this.getOverallPlayerStats(this.currentSeasonType);
     } else if (this._route.snapshot.routeConfig.path === "teams/:params") {
         this.short_team_name = this._route.snapshot.paramMap.get("params");
         this._teamsService.getTeamGoalieStatsByYearByType(this.short_team_name, this.currentSeason, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
@@ -72,6 +63,25 @@ export class GoalieStatsComponent implements OnInit, OnDestroy {
         }, 350);
       });
     }
+  }
+
+  getOverallPlayerStats(seasonType) {
+    this._teamsService.getGoalieStatsByYearByType(this.currentSeason, seasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      this.stats = resp as [];
+      this.goalies = new MatTableDataSource<any[]>(this.stats);
+      this.pageSize = 25;
+      this.length = this.stats.length;
+      this.isLoading = false;
+      setTimeout(() => {
+        this.goalies.paginator = this.paginator;
+      }, 350);
+    });
+  }
+
+  changeSeason(seasonType) {
+    this.isLoading = true;
+    this.currentSeasonType = seasonType;
+    this.getOverallPlayerStats(this.currentSeasonType);
   }
 
   applyFilter(filterValue: string) {

@@ -13,8 +13,8 @@ export class TeamsService {
   allPlayerInfo: any;
   teamPlayerStats: any;
 
-  currentSeason: string = "2019-20";
-  currentSeasonType: string = "Playoffs";
+  currentSeason: string = "2020-21";
+  currentSeasonType: string = "Regular";
   allSalaryPagesArray = [];
 
   isMobile: boolean;

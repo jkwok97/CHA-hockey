@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { TeamsService } from '../teams/teams.service';
-import { DomSanitizer } from '@angular/platform-browser';
 import { SalaryService } from './salary.service';
 import { takeWhile } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
@@ -35,8 +34,8 @@ export class SalaryComponent implements OnInit, OnDestroy {
   length: number = 0;
 
   allSalaries: MatTableDataSource<any[]>;
-  mobileAllSalariesColumnsToDisplay = [ 'team_logo','player_name', 'current_season_salary', 'year_two']
-  allSalariesColumnsToDisplay = [ 'team_logo', 'team_name', 'player_name', 'current_season_salary', 'year_two', 'year_three', 'year_four', 'year_five' ];
+  mobileAllSalariesColumnsToDisplay = [ 'team_logo','player_name', 'year_two', 'year_three']
+  allSalariesColumnsToDisplay = [ 'team_logo', 'team_name', 'player_name', 'year_two', 'year_three', 'year_four', 'year_five' ];
 
   @ViewChild('teamSelect', {static: false}) teamSelect;
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
@@ -106,7 +105,7 @@ export class SalaryComponent implements OnInit, OnDestroy {
       setTimeout(() => {
         this.allSalaries.paginator = this.paginator;
         this.allSalaries.sort = this.sort;
-      }, 350);
+      }, 500);
     });
   }
 

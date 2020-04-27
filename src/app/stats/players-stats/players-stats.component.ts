@@ -15,12 +15,13 @@ export class PlayersStatsComponent implements OnInit, OnDestroy {
   private _alive:boolean = true;
   isLoading: boolean = false;
   inAllPlayersStats: boolean = false;
+  statsLoading: boolean = false;
 
   stats = [];
 
   short_team_name: string = '';
-  currentSeason: string;
-  currentSeasonType: string;
+  currentSeason: string = '2019-20';
+  currentSeasonType: string = 'Regular';
 
   players: MatTableDataSource<any[]>;
   playersColumnsToDisplay = [
@@ -46,30 +47,14 @@ export class PlayersStatsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isLoading = true;
-    this.currentSeason = this._teamsService.currentSeason;
-    this.currentSeasonType = this._teamsService.currentSeasonType;
+    // this.currentSeason = this._teamsService.currentSeason;
+    // this.currentSeasonType = this._teamsService.currentSeasonType;
     if (this._route.snapshot.routeConfig.path === "stats/players") {
       this.inAllPlayersStats = true;
-      this._teamsService.getPlayerStatsByYearByType(this.currentSeason,this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-        // console.log(resp);
-        let stats = resp as any;
-        stats.forEach(player => {
-          if (player.minutes_played > 0) {
-            player.points_per_sixty = ((player.points/player.minutes_played) * 60).toFixed(2);
-          } 
-          this.stats.push(player);
-        });
-        // console.log(this.stats);
-        this.players = new MatTableDataSource<any[]>(this.stats);
-        this.pageSize = 25;
-        this.length = this.stats.length;
-        this.isLoading = false;
-        setTimeout(() => {
-          this.players.paginator = this.paginator;
-        }, 1000);
-      });
+      this.getOverallPlayerStats(this.currentSeasonType)
     } else if (this._route.snapshot.routeConfig.path === "teams/:params") {
         this.short_team_name = this._route.snapshot.paramMap.get("params");
+        this.currentSeason = this._teamsService.currentSeason;
         this._teamsService.getTeamPlayerStatsByYearByType(this.short_team_name, this.currentSeason, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
           // console.log(resp);
           let stats = resp as any;
@@ -86,6 +71,34 @@ export class PlayersStatsComponent implements OnInit, OnDestroy {
           }, 1000);
         }); 
     } 
+  }
+
+  getOverallPlayerStats(seasonType) {
+    this._teamsService.getPlayerStatsByYearByType(this.currentSeason, seasonType).pipe(
+      takeWhile(() => this._alive))
+      .subscribe(resp => {
+        this.stats = [];
+        let stats = resp as any;
+        stats.forEach(player => {
+          if (player.minutes_played > 0) {
+            player.points_per_sixty = ((player.points/player.minutes_played) * 60).toFixed(2);
+          } 
+          this.stats.push(player);
+        });
+        this.players = new MatTableDataSource<any[]>(this.stats);
+        this.pageSize = 25;
+        this.length = this.stats.length;
+        this.isLoading = false;
+        setTimeout(() => {
+          this.players.paginator = this.paginator;
+        }, 1000);
+      });
+  }
+
+  changeSeason(seasonType) {
+    this.isLoading = true;
+    this.currentSeasonType = seasonType;
+    this.getOverallPlayerStats(this.currentSeasonType);
   }
 
   applyFilter(filterValue: string) {

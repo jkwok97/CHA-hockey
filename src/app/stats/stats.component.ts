@@ -4,7 +4,6 @@ import { takeWhile } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { MatSort } from '@angular/material/sort';
-import { transition } from '@angular/animations';
 
 @Component({
   selector: 'app-stats',
@@ -51,7 +50,7 @@ export class StatsComponent implements OnInit, OnDestroy {
   pimLeagueLeaders = [];
   pointsPerSixtyLeaders = [];
 
-  currentSeason: string;
+  currentSeason: string = "2019-20";
   currentSeasonType: string;
   currentTab: string = 'Teams';
 
@@ -141,7 +140,7 @@ export class StatsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.checkMobile();
     // console.log(this.isMobile);
-    this.currentSeason = this._teamsService.currentSeason;
+    // this.currentSeason = this._teamsService.currentSeason;
     this.currentSeasonType = this._teamsService.currentSeasonType;
 
     this.getTeamStats(this.currentSeason, this.currentSeasonType);
