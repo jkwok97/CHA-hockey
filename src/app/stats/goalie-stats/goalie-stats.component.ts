@@ -51,6 +51,7 @@ export class GoalieStatsComponent implements OnInit, OnDestroy {
       this.inAllPlayersStats = true;
       this.getOverallPlayerStats(this.currentSeasonType);
     } else if (this._route.snapshot.routeConfig.path === "teams/:params") {
+        this.currentSeason = this._teamsService.currentSeason;
         this.short_team_name = this._route.snapshot.paramMap.get("params");
         this._teamsService.getTeamGoalieStatsByYearByType(this.short_team_name, this.currentSeason, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
         // console.log(resp);
