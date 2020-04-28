@@ -30,7 +30,7 @@ export class TeamsService {
           { name: "Seattle Storm", shortName: "SEA", image: "../../assets/team_logos/Storm.png", owner: "Matt Hamilton" },
           { name: "Oakland Assassins", shortName: "OAK", image: "../../assets/team_logos/Assassins.png", owner: "Joseph Sutherland" },
           { name: "Kelowna Mountaineers", shortName: "KEL", image: "../../assets/team_logos/Mountaineers.png", owner: "Randy Foster", },
-          { name: "Victoria Vipers", shortName: "VIC", image: "../../assets/team_logos/Vipers.png", owner: "Ryan Bender", },
+          { name: "Victoria Stellers Jays", shortName: "VSJ", image: "../../assets/team_logos/Vipers.png", owner: "Dave Maxwell", },
           { name: "San Francisco Fighting Cocks", shortName: "SFC", image: "../../assets/team_logos/Cocks.png", owner: "Darren Koyata", },
         ]
       },{
@@ -77,11 +77,10 @@ export class TeamsService {
       { name: "Oakland Assassins", shortName: "OAK", image: "../../assets/team_logos/Assassins.png", owner: "Joseph Sutherland", 
         color: '#e10000', fontColor: 'white'  
       },
+      { name: "Victoria Stellers Jays", shortName: "VSJ", image: "../../assets/team_logos/Vipers.png", owner: "Dave Maxwell", 
+        color: '#5ebe7d', fontColor: 'black' },
       { name: "Kelowna Mountaineers", shortName: "KEL", image: "../../assets/team_logos/Mountaineers.png", owner: "Randy Foster", 
         color: '#ec131e', fontColor: 'white'   
-      },
-      { name: "Victoria Vipers", shortName: "VIC", image: "../../assets/team_logos/Vipers.png", owner: "Dave Maxwell", 
-        color: '#5ebe7d', fontColor: 'black' 
       },
       { name: "San Francisco Fighting Cocks", shortName: "SFC", image: "../../assets/team_logos/Cocks.png", owner: "Darren Koyata", 
         color: '#2a4543', fontColor: 'white'  
@@ -136,6 +135,7 @@ export class TeamsService {
 
   archivedLeague = {
     teams: [
+      { name: "Victoria Vipers", shortName: "VIC", image: "../../assets/team_logos/Vipers.png", owner: "Ryan Bender", color: '#5ebe7d', fontColor: 'black' },
       { name: "Mississippi Mudbugs", shortName: "MIS", image: "../../assets/team_logos/mudbugs.png", owner: "Jeff Kwok", color: '#ed1a26', fontColor: 'white' },
       { name: "Charlotte Storm", shortName: "CHA", image: "../../assets/team_logos/chastorm.png", owner: "Patrick Ryan", color: '#000122', fontColor: 'white' },
       { name: "Seattle Surge", shortName: "STS", image: "../../assets/team_logos/surge.png", owner: "Corey Abbott", color: '#000122', fontColor: 'white' },
