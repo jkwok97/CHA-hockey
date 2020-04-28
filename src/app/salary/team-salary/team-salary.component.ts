@@ -117,7 +117,7 @@ export class TeamSalaryComponent implements OnInit, OnDestroy {
         this.totalDefenseCurrentSalary = this.getTotalSalary(defense, "yearTwo");
         this.totalDefenseYearTwoSalary = this.getTotalSalary(defense, "yearThree");
         this.defenceSalaries = new MatTableDataSource<any[]>(defense);
-        console.log(defense);
+        // console.log(defense);
         setTimeout(() => {
           this.defenceSalaries.sort = this.defenceSort;
         }, 500);
@@ -130,7 +130,7 @@ export class TeamSalaryComponent implements OnInit, OnDestroy {
           this.totalForwards = forwards.length;
           this.totalForwardsCurrentSalary = this.getTotalSalary(forwards, "yearTwo");
           this.totalForwardsYearTwoSalary = this.getTotalSalary(forwards, "yearThree");
-          console.log(forwards);
+          // console.log(forwards);
           this.forwardSalaries = new MatTableDataSource<any[]>(forwards);
           setTimeout(() => {
             this.forwardSalaries.sort = this.forwardSort;

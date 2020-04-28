@@ -60,11 +60,17 @@ export class PicksComponent implements OnInit, OnDestroy {
   getLeagueLeaders(resp, drafts) {
     let tempLeaders = resp;
     drafts.forEach(element => {
-      let tempTeam = tempLeaders.find(team => team.team_name === element.team_name);
-      element.team_stats = tempTeam;
-      // console.log(element);
+
+      // THIS IS TEMPORARY
+      if (element.team_name === 'VSJ') {
+       let tempTeam = tempLeaders.find(team => team.team_name === 'VIC');
+       element.points = tempTeam.points;
+      } else {
+        let tempTeam = tempLeaders.find(team => team.team_name === element.team_name);
+        element.points = tempTeam.points;
+      }
     });
-    drafts.sort((a,b) => a.team_stats.points - b.team_stats.points);
+    drafts.sort((a,b) => a.points - b.points);
     this.draft = new MatTableDataSource<any[]>(drafts);
     this.isLoading = false;
   }
