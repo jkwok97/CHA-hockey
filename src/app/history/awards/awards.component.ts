@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TeamsService } from 'src/app/teams/teams.service';
 import { takeWhile } from 'rxjs/operators';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-awards',
@@ -19,7 +18,6 @@ export class AwardsComponent implements OnInit, OnDestroy {
 
   constructor(
     private _teamsService: TeamsService,
-    private _router: Router
   ) { }
 
   ngOnInit() {
@@ -46,15 +44,6 @@ export class AwardsComponent implements OnInit, OnDestroy {
     });
   }
 
-  findLogo(shortName) {
-    if (shortName) {
-      let team = this._teamsService.getTeamInfo(shortName);
-      return { image: team.image, name: team.name }
-    } else {
-      return { image: "../../assets/team_logos/Free_Agent_logo_square.jpg", name: "Free Agent"}
-    }
-  }
-
   checkMobile() {
     if ( navigator.userAgent.match(/Android/i)
         || navigator.userAgent.match(/webOS/i)
@@ -67,11 +56,6 @@ export class AwardsComponent implements OnInit, OnDestroy {
           this.isMobile = false;
           this.expand = true;
         }
-  }
-
-  openPlayer(player, type) {
-    this._router.navigate([`/info/${type}s/${player.player_id}/${player.player_name}`]);
-    window.scrollTo(0,0);
   }
 
   ngOnDestroy() {

@@ -15,41 +15,22 @@
                         {{award.description}}
                     </mat-panel-description>
                 </mat-expansion-panel-header>
+                
                 <div class="award-container">
-                    <div class="image">
+
+                    <div [ngClass]="{'image': !isMobile, 'mobile-image': isMobile}">
                         <img src="{{award.picture}}">
                     </div>
+
                     <div class="winners">
                         <div class="award-row">
+
                             <table class="table">
-                                <tr>
-                                    <th>Year</th>
-                                    <th>Name</th>
-                                    <th>Team</th>
-                                </tr>
-                                <tr *ngFor="let winner of award.winners">
-                                    <td>{{winner.year_won}}</td>
-                                    <td 
-                                        *ngIf="winner.player_name && (winner.award_type !== 'goalie')" 
-                                        class="point" 
-                                        (click)="openPlayer(winner, 'goalie')"
-                                    >
-                                        {{winner.player_name}}
-                                    </td>
-                                    <td 
-                                        *ngIf="winner.player_name && (winner.award_type === 'goalie')" 
-                                        class="point" 
-                                        (click)="openPlayer(winner, 'player')"
-                                    >
-                                        {{winner.player_name}}
-                                    </td>
-                                    <td *ngIf="winner.owner_name">{{winner.owner_name}}</td>
-                                    <td>
-                                        <img src="{{ findLogo(winner.team_short).image }}" matTooltip="{{findLogo(winner.team_short).name}}" matTooltipPosition="left">
-                                    </td>
-                                    <!-- <td>{{winner.team_name}}</td> -->
-                                </tr>
+                                <app-award-table-view
+                                    [winnersStats]="award.winners"
+                                ></app-award-table-view>
                             </table>
+
                         </div>
                     </div>
                 </div>

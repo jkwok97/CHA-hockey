@@ -59,6 +59,7 @@ import { PlayerStatsTableComponent } from './stats/player-stats-table/player-sta
 import { TeamChartComponent } from './stats/team-chart/team-chart.component';
 import { PlayerChartComponent } from './stats/player-chart/player-chart.component';
 import { TeamSeasonComponent } from './history/team-archives/team-season/team-season.component';
+import { AwardTableViewComponent } from './history/awards/award-table-view/award-table-view.component';
 
 @NgModule({
   declarations: [
@@ -113,7 +114,8 @@ import { TeamSeasonComponent } from './history/team-archives/team-season/team-se
     GoalieStatsTableComponent,
     TeamStatsTableComponent,
     TeamChartComponent,
-    PlayerChartComponent
+    PlayerChartComponent,
+    AwardTableViewComponent
   ],
   imports: [
     BrowserModule,
