@@ -26,7 +26,7 @@
 }
 
 .image img {
-    width: 100%;
+    width: 75%;
     box-shadow: 5px -5px 20px lightsteelblue;
 }
 
@@ -39,7 +39,7 @@
 }
 
 .mobile-image img {
-    width: 100%;
+    width: 75%;
     box-shadow: 5px -5px 20px lightsteelblue;
 }
 
