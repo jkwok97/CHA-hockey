@@ -132,10 +132,13 @@ export class SalaryComponent implements OnInit, OnDestroy {
         }
   }
 
-  openPlayer(player, type) {
-    this._router.navigate([`/info/${type}s/${player.player_id}/${player.player_name}`]);
-    window.scrollTo(0,0);
-  }
+  // openPlayer(player) {
+  //   console.log(player)
+  //   let type;
+  //   player.position ? type = 'player' : type = 'goalie';
+  //   this._router.navigate([`/info/${type}s/${player.player_id}/${player.player_name}`]);
+  //   window.scrollTo(0,0);
+  // }
 
   ngOnDestroy() {
     this._alive = false;

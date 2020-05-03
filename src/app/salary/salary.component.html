@@ -88,8 +88,10 @@
                 <tr 
                     mat-row 
                     *matRowDef="let player; columns: isMobile ? mobileAllSalariesColumnsToDisplay: allSalariesColumnsToDisplay;"
-                    (click)="openPlayer(player, 'player')"
+                    
                 ></tr>
+
+                <!-- (click)="openPlayer(player)" -->
     
             </table>
     
