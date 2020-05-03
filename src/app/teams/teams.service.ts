@@ -30,7 +30,7 @@ export class TeamsService {
           { name: "Seattle Storm", shortName: "SEA", image: "../../assets/team_logos/Storm.png", owner: "Matt Hamilton" },
           { name: "Oakland Assassins", shortName: "OAK", image: "../../assets/team_logos/Assassins.png", owner: "Joseph Sutherland" },
           { name: "Kelowna Mountaineers", shortName: "KEL", image: "../../assets/team_logos/Mountaineers.png", owner: "Randy Foster", },
-          { name: "Victoria Stellers Jays", shortName: "VSJ", image: "../../assets/team_logos/Vipers.png", owner: "Dave Maxwell", },
+          { name: "Victoria Steller's Jays", shortName: "VSJ", image: "../../assets/team_logos/Vipers.png", owner: "Dave Maxwell", },
           { name: "San Francisco Fighting Cocks", shortName: "SFC", image: "../../assets/team_logos/Cocks.png", owner: "Darren Koyata", },
         ]
       },{
@@ -77,7 +77,7 @@ export class TeamsService {
       { name: "Oakland Assassins", shortName: "OAK", image: "../../assets/team_logos/Assassins.png", owner: "Joseph Sutherland", 
         color: '#e10000', fontColor: 'white'  
       },
-      { name: "Victoria Stellers Jays", shortName: "VSJ", image: "../../assets/team_logos/Vipers.png", owner: "Dave Maxwell", 
+      { name: "Victoria Steller's Jays", shortName: "VSJ", image: "../../assets/team_logos/Vipers.png", owner: "Dave Maxwell", 
         color: '#5ebe7d', fontColor: 'black' },
       { name: "Kelowna Mountaineers", shortName: "KEL", image: "../../assets/team_logos/Mountaineers.png", owner: "Randy Foster", 
         color: '#ec131e', fontColor: 'white'   
