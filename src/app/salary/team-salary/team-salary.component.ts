@@ -101,7 +101,7 @@ export class TeamSalaryComponent implements OnInit, OnDestroy {
       // console.log(resp);
       let goalies = resp as [];
       this.totalGoalie = goalies.length;
-      this.totalGoalieCurrentSalary = this.getTotalSalary(goalies, "yearTwo");
+      this.totalGoalieCurrentSalary = this.getTotalSalary(goalies, "current");
       this.totalGoalieYearTwoSalary = this.getTotalSalary(goalies, "yearThree");
       this.goalieSalaries = new MatTableDataSource<any[]>(goalies);
       setTimeout(() => {
@@ -114,7 +114,7 @@ export class TeamSalaryComponent implements OnInit, OnDestroy {
         // console.log(resp);
         let defense = resp as [];
         this.totalDefense = defense.length;
-        this.totalDefenseCurrentSalary = this.getTotalSalary(defense, "yearTwo");
+        this.totalDefenseCurrentSalary = this.getTotalSalary(defense, "current");
         this.totalDefenseYearTwoSalary = this.getTotalSalary(defense, "yearThree");
         this.defenceSalaries = new MatTableDataSource<any[]>(defense);
         // console.log(defense);
@@ -128,7 +128,7 @@ export class TeamSalaryComponent implements OnInit, OnDestroy {
           // console.log(resp);
           let forwards = resp as [];
           this.totalForwards = forwards.length;
-          this.totalForwardsCurrentSalary = this.getTotalSalary(forwards, "yearTwo");
+          this.totalForwardsCurrentSalary = this.getTotalSalary(forwards, "current");
           this.totalForwardsYearTwoSalary = this.getTotalSalary(forwards, "yearThree");
           // console.log(forwards);
           this.forwardSalaries = new MatTableDataSource<any[]>(forwards);
@@ -149,15 +149,15 @@ export class TeamSalaryComponent implements OnInit, OnDestroy {
     let total = 0;
     if (string === "current") {
       array.forEach(element => {
-        if ((Number(element.current_season_salary) > 0)) {
-          total += Number(element.current_season_salary);
+        if ((Number(element.year_two) > 0)) {
+          total += Number(element.year_two);
         }
       });
       return total.toFixed(3);
     } else {
       array.forEach(element => {
-        if ((Number(element.year_two) > 0)) {
-          total += Number(element.year_two);
+        if ((Number(element.year_three) > 0)) {
+          total += Number(element.year_three);
         }
       });
       return total.toFixed(3);
