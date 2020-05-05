@@ -54,7 +54,7 @@
 .salary-header {
     font-size: medium;
     font-weight: 200;
-    color: white;
+    /* color: white; */
     text-align: center;
 }
 
@@ -86,7 +86,7 @@
 .salary-header-summary {
     font-size: medium;
     font-weight: 200;
-    color: white;
+    /* color: white; */
     text-align: center;
     margin: 20px 0;
 }
