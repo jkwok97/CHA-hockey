@@ -96,7 +96,7 @@
     width: 100%;
 }
 
-.team-summary-players {
+.messages {
     width: 100%;
     font-weight: 300;
     color: white;
@@ -104,7 +104,30 @@
     font-size: small;
     margin-top: 20px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
+    /* border: 1px solid blue; */
+}
+
+.messages p {
+    margin: 5px 0;
+}
+
+.team-summary-players {
+    width: 100%;
+    font-weight: 300;
+    color: white;
+    text-align: center;
+    font-size: small;
+    /* margin-top: 20px; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* border: 1px solid blue; */
+}
+
+.team-summary-players p {
+    margin: 5px 0;
 }
 
 .team-summary-cap-container {

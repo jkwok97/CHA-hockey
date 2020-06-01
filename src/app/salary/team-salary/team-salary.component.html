@@ -164,6 +164,11 @@
             </div>
 
             <div class="team-summary">
+                <div class="messages">
+                    <p class="red-text" *ngIf="totalPlayers < 24">Under Player Limit</p>
+                    <p class="red-text" *ngIf="totalPlayers > 30">Over Player Limit</p>
+                    <p class="red-text" *ngIf="currentSeasonSpace > 0">Over Cap Limit</p>
+                </div>
                 <div class="team-summary-players">
                     <p>Total Players = 
                         <span class="red-text" *ngIf="(totalPlayers < 24) || (totalPlayers > 30)">{{totalPlayers}}</span>
