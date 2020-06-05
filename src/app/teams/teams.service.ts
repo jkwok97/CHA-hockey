@@ -395,14 +395,14 @@ export class TeamsService {
   getIndividualNHLRealStats(id) {
     let options = {params: new HttpParams()
       .set('id', id)}
-    return this._http.get(`${environment.back_end_url}/real-stats/`, options);
+    return this._http.get(`${environment.back_end_url}/nhl-stats/player`, options);
   }
 
   getIndividualOnPaceNHLRealStats(id, pace) {
     let options = {params: new HttpParams()
       .set('pace', pace)
       .set('id', id)}
-    return this._http.get(`${environment.back_end_url}/real-stats/`, options);
+    return this._http.get(`${environment.back_end_url}/nhl-stats/player`, options);
   }
 
   getPlayerRatings(id) {
