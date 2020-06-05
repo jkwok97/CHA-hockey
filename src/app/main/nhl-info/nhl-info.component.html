@@ -1,0 +1,29 @@
+<div 
+    [ngClass]="{'nhl-container': !isMobile, 'mobile-nhl-container': isMobile}" 
+    *ngIf="!showPlayersStats && !showGoalieStats && !showRookieStats"
+>
+
+    <div [ngClass]="{'twitter-container': !isMobile, 'mobile-twitter-container': isMobile }">
+        <app-twitter></app-twitter>
+    </div>
+
+    <div [ngClass]="{'twitter-container': !isMobile, 'mobile-twitter-container': isMobile }">
+        <app-nhl-leaders></app-nhl-leaders>
+    </div>
+
+</div>
+
+<div *ngIf="showPlayersStats" class="nhl-stat-container">
+    <p (click)="showLeaders();">< Leaders</p>
+    <app-nhl-players-stats></app-nhl-players-stats>
+</div>
+
+<div *ngIf="showGoalieStats" class="nhl-stat-container">
+    <p (click)="showLeaders();">< Leaders</p>
+    <app-nhl-goalie-stats></app-nhl-goalie-stats>
+</div>
+
+<div *ngIf="showRookieStats" class="nhl-stat-container">
+    <p (click)="showLeaders();">< Leaders</p>
+    <app-nhl-rookie-stats></app-nhl-rookie-stats>
+</div>

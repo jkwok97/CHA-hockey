@@ -5,7 +5,7 @@
 <div class="container" *ngIf="!isLoading && !errored">
 
     <div class="details">
-        <p class="link" (click)="sendToFullPlayers()">See Skater Details ></p>
+        <p class="link" (click)="displayFullStats('players')">See Skater Details ></p>
     </div>
 
     <mat-accordion multi="false" >
@@ -133,7 +133,7 @@
     </mat-accordion>
 
     <div class="details">
-        <p class="link" (click)="sendToFullGoalies()">See Goalie Details ></p>
+        <p class="link" (click)="displayFullStats('goalies')">See Goalie Details ></p>
     </div>
 
     <mat-accordion multi="false" >
@@ -301,7 +301,7 @@
     </mat-accordion>
 
     <div class="details">
-        <p class="link" (click)="sendToFullRookies()">See Rookie Details ></p>
+        <p class="link" (click)="displayFullStats('rookies')">See Rookie Details ></p>
     </div>
 
     <mat-accordion multi="false" >

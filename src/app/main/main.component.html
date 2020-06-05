@@ -1,17 +1,17 @@
-<div class="container">
+<div class="container" *ngIf="team && currentUser">
 
     <div class="welcome">
         <mat-form-field color="accent">
-            <mat-label>Welcome {{currentUser[0].f_name}} {{currentUser[0].l_name}}!</mat-label>
+            <mat-label>Welcome {{currentUser.firstname}} {{currentUser.lastname}}!</mat-label>
             <mat-select>
                 <mat-option (click)="logout()">Logout</mat-option>
             </mat-select>
         </mat-form-field>
     </div>
 
-    <div class="team-header" [style.background-color]='team.color'>
-        <img src="{{team.image}}">
-        <p [style.color]='team.fontColor'>{{team.name}}</p>
+    <div class="team-header" [style.background-color]='team.teamcolor'>
+        <img src="{{team.teamlogo}}">
+        <p [style.color]='team.teamtextcolor'>{{team.city}} {{team.nickname}}</p>
     </div>
 
     <div class="stat-container">
@@ -20,72 +20,48 @@
 
             <mat-tab label="NHL Info">
                 <ng-template matTabContent>
-                    <div [ngClass]="{'nhl-container': !isMobile, 'mobile-nhl-container': isMobile}" *ngIf="!showPlayersStats && !showGoalieStats && !showRookieStats">
-                        <div [ngClass]="{'twitter-container': !isMobile, 'mobile-twitter-container': isMobile }">
-                            <app-twitter></app-twitter>
-                        </div>
-                        <div [ngClass]="{'twitter-container': !isMobile, 'mobile-twitter-container': isMobile }">
-                            <app-nhl-leaders></app-nhl-leaders>
-                        </div>
-                    </div>
-                    <div *ngIf="showPlayersStats" class="nhl-stat-container">
-                        <p (click)="showLeaders();">< Leaders</p>
-                        <app-nhl-players-stats></app-nhl-players-stats>
-                    </div>
-                    <div *ngIf="showGoalieStats" class="nhl-stat-container">
-                        <p (click)="showLeaders();">< Leaders</p>
-                        <app-nhl-goalie-stats></app-nhl-goalie-stats>
-                    </div>
-                    <div *ngIf="showRookieStats" class="nhl-stat-container">
-                        <p (click)="showLeaders();">< Leaders</p>
-                        <app-nhl-rookie-stats></app-nhl-rookie-stats>
-                    </div>
+                    <app-nhl-info></app-nhl-info>
                 </ng-template>
             </mat-tab>
 
             <mat-tab label="Player Roster">
                 <ng-template matTabContent>
-                    <div class="playerStatsTable cha-dark" *ngIf="!isLoading">
-                        <div class="table">
-                            <app-player-stats-table
-                                [players]="players"
-                                [statsColumnsToDisplay]="playersColumnsToDisplay"
-                            >
-                            </app-player-stats-table>
-                        </div>
+                    <div class="add-padding">
+                        <app-player-stats-table
+                            [players]="playersData"
+                            [statsColumnsToDisplay]="playersColumnsToDisplay"
+                        ></app-player-stats-table>
                     </div>
                 </ng-template>
             </mat-tab>
 
             <mat-tab label="Goalie Roster">
                 <ng-template matTabContent>
-                    <div class="playerStatsTable cha-dark" *ngIf="!isLoading">
-                        <div class="table">
-                            <app-goalie-stats-table 
-                                [goalies]="goalies"
-                                [statsColumnsToDisplay]="goaliesColumnsToDisplay"
-                            ></app-goalie-stats-table>
-                        </div>
+                    <div class="add-padding">
+                        <app-goalie-stats-table 
+                            [goalies]="goaliesData"
+                            [statsColumnsToDisplay]="goaliesColumnsToDisplay"
+                        ></app-goalie-stats-table>
                     </div>
                 </ng-template>
             </mat-tab>
 
-            <mat-tab label="Team Charts">
+            <!-- <mat-tab label="Team Charts">
                 <ng-template matTabContent>
                     <app-team-chart
                         [stats]="stats"
                         [team]="team"
                     ></app-team-chart>
                 </ng-template>
-            </mat-tab>
+            </mat-tab> -->
 
-            <mat-tab label="Player Charts">
+            <!-- <mat-tab label="Player Charts">
                 <ng-template matTabContent>
                     <app-player-chart
                         [playerStats]="playerStats"
                     ></app-player-chart>
                 </ng-template>
-            </mat-tab>
+            </mat-tab> -->
 
             <mat-tab label="Team History">
                 <ng-template matTabContent>

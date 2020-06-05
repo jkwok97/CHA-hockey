@@ -1,9 +1,9 @@
-export class User {
-    id: number;
-    team_name: string;
-    short_name: string;
-    f_name: string;
-    l_name: string;
-    email: string;
-    authdata?: string;
+export interface User {
+    id: number,
+    firstname: string,
+    lastname: string,
+    email: string,
+    isadmin: boolean,
+    isactive: boolean
+    authdata?: string
 }

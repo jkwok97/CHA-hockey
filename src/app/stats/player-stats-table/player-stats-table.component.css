@@ -1,15 +1,11 @@
 table {
     text-align: center;
-    margin-top: 20px;
+    width: 100%;
 }
 
 table img {
     height: 30px;
     width: 30px;
-}
-
-.full-width {
-    width: 100%;
 }
 
 .mat-row:hover {

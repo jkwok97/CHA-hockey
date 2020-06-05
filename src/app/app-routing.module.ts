@@ -18,7 +18,7 @@ import { WaiverPriorityComponent } from './waiver-priority/waiver-priority.compo
 import { ArchivesComponent } from './history/archives/archives.component';
 import { MainComponent } from './main/main.component';
 import { LoginComponent } from './main/login/login.component';
-import { AuthGuard } from './main/auth.guard';
+import { AuthGuard } from './services/auth.guard';
 import { PlayerInfoComponent } from './stats/player-info/player-info.component';
 import { SalaryComponent } from './salary/salary.component';
 import { PicksComponent } from './picks/picks.component';

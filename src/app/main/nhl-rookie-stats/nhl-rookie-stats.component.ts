@@ -4,6 +4,7 @@ import { MainService } from '../main.service';
 import { TeamsService } from 'src/app/teams/teams.service';
 import { Router } from '@angular/router';
 import { takeWhile } from 'rxjs/operators';
+import { NhlService } from 'src/app/services/nhl.service';
 
 @Component({
   selector: 'app-nhl-rookie-stats',
@@ -35,7 +36,8 @@ export class NhlRookieStatsComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   constructor(
-    private _mainService: MainService,
+    private _nhlService: NhlService,
+
     private _teamsService: TeamsService,
     private _router: Router
   ) { }
@@ -46,14 +48,14 @@ export class NhlRookieStatsComponent implements OnInit, OnDestroy {
   }
 
   getSummary(start, pageSize, type, statType, sortOrder) {
-    this._mainService.getNHLRookiesummary("20192020", "skater", statType, sortOrder, start, pageSize).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      // console.log(resp);
-      let stats = resp['data'] as [];
-      stats.forEach( element => { this.playersList.push(element); });
-      this.playersList.forEach(player => {
-        player.firstName = this.splitName(player['skaterFullName'])[0];
-        player = this.findChaTeam(player.playerId, player, "player");
-      });
+    this._nhlService.getNHLRookiesummary('20192020', 'skater', statType, sortOrder, start, pageSize).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+      const stats = resp['data'];
+
+      this.playersList = stats.map(stat => ({
+        ...stat,
+        chaInfo: this.findChaTeam(stat.playerId, stat, 'player')
+      }));
+
       this.players = new MatTableDataSource<any[]>(stats);
       this.isLoading = false;
       if (type == "start") {
@@ -80,7 +82,7 @@ export class NhlRookieStatsComponent implements OnInit, OnDestroy {
   }
 
   findChaTeam(id, player, type) {
-    this._mainService.getChaTeam(id, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+    this._nhlService.getChaTeam(id, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       player.chaTeam = resp['team_name'];
       player.cha_player_id = resp['player_id'];
       return player;

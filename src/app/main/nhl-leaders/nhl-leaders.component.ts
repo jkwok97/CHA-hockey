@@ -4,6 +4,8 @@ import { MainService } from '../main.service';
 import { TeamsService } from 'src/app/teams/teams.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { DisplayService } from 'src/app/services/display.service';
+import { NhlService } from 'src/app/services/nhl.service';
 
 @Component({
   selector: 'app-nhl-leaders',
@@ -55,14 +57,16 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
   shutoutsColumnsToDisplay = ['team_logo', 'playerName', 'shutouts'];
 
   constructor(
-    private _mainService: MainService,
+    private _displayService: DisplayService,
+    private _nhlService: NhlService,
+
     private _teamsService: TeamsService,
     private _router: Router
   ) { }
 
   ngOnInit() {
     this.isLoading = true;
-    this.checkMobile();
+    this.isMobile = this._displayService.isMobile;
     this.getNHLPointLeaders();
     this.getNHLGoalLeaders();
     this.getNHLAssistsLeaders();
@@ -75,16 +79,8 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
     this.getNHLRookieLeaders("assists");
   }
 
-  sendToFullPlayers() {
-    this._mainService.triggerFullPageStats("players");
-  }
-
-  sendToFullGoalies() {
-    this._mainService.triggerFullPageStats("goalies");
-  }
-
-  sendToFullRookies() {
-    this._mainService.triggerFullPageStats("rookies");
+  displayFullStats(type: string) {
+    this._displayService.triggerFullPageStats(type);
   }
 
   openPlayer(player, type) {
@@ -92,20 +88,8 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
     window.scrollTo(0,0);
   }
 
-  checkMobile() {
-    if ( navigator.userAgent.match(/Android/i)
-        || navigator.userAgent.match(/webOS/i)
-        || navigator.userAgent.match(/iPhone/i)
-        || navigator.userAgent.match(/BlackBerry/i)
-        || navigator.userAgent.match(/Windows Phone/i) ) {
-          this.isMobile = true;
-        } else {
-          this.isMobile = false;
-        }
-  }
-
   findChaTeam(name, player, type) {
-    this._mainService.getChaTeam(name, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+    this._nhlService.getChaTeam(name, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       // console.log(resp);
       player.chaTeam = resp['team_name'];
       player.cha_player_id = resp['player_id'];
@@ -132,7 +116,7 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
   }
 
   getNHLRookieLeaders(type) {
-    this._mainService.getNhlRookieLeaders(this.currentSeason, "skater", type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+    this._nhlService.getNhlRookieLeaders(this.currentSeason, "skater", type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       // console.log(resp);
       let tempLeaders = resp as [];
       if (type === "points") {
@@ -171,7 +155,7 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
   }
 
   getNHLPointLeaders() {
-    this._mainService.getNhlLeaders(this.currentSeason, "skater", "points", "no", "trim").pipe(takeWhile(() => this._alive)).subscribe(resp => {
+    this._nhlService.getNhlLeaders(this.currentSeason, "skater", "points", "no", "trim").pipe(takeWhile(() => this._alive)).subscribe(resp => {
       // console.log(resp);
       let tempLeaders = resp as [];
       let pointLeaders = [];
@@ -189,7 +173,7 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
   }
 
   getNHLGoalLeaders() {
-    this._mainService.getNhlLeaders(this.currentSeason, "skater", "goals", "no", "trim").pipe(takeWhile(() => this._alive)).subscribe(resp => {
+    this._nhlService.getNhlLeaders(this.currentSeason, "skater", "goals", "no", "trim").pipe(takeWhile(() => this._alive)).subscribe(resp => {
       // console.log(resp);
       let tempLeaders = resp as [];
       let goalLeaders = [];
@@ -207,7 +191,7 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
   }
 
   getNHLAssistsLeaders() {
-    this._mainService.getNhlLeaders(this.currentSeason, "skater", "assists", "no", "trim").pipe(takeWhile(() => this._alive)).subscribe(resp => {
+    this._nhlService.getNhlLeaders(this.currentSeason, "skater", "assists", "no", "trim").pipe(takeWhile(() => this._alive)).subscribe(resp => {
       // console.log(resp);
       let tempLeaders = resp as [];
       let assistsLeaders = [];
@@ -225,7 +209,7 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
   }
 
   // getNHLWinsLeaders() {
-  //   this._mainService.getNhlLeaders(this.currentSeason, "goalie", "wins", "reverse", "trim").pipe(takeWhile(() => this._alive)).subscribe(resp => {
+  //   this._nhlService.getNhlLeaders(this.currentSeason, "goalie", "wins", "reverse", "trim").pipe(takeWhile(() => this._alive)).subscribe(resp => {
   //     // console.log(resp);
   //     let tempLeaders = resp as [];
   //     let winsLeaders = [];
@@ -243,7 +227,7 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
   // }
 
   getNHLGaaLeaders() {
-    this._mainService.getNhlLeaders(this.currentSeason, "goalie", "gaa", "no", "trim").pipe(takeWhile(() => this._alive)).subscribe(resp => {
+    this._nhlService.getNhlLeaders(this.currentSeason, "goalie", "gaa", "no", "trim").pipe(takeWhile(() => this._alive)).subscribe(resp => {
       // console.log(resp);
       let tempLeaders = resp as [];
       let gaaLeaders = [];
@@ -261,7 +245,7 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
   }
 
   getNHLSavePctLeaders() {
-    this._mainService.getNhlLeaders(this.currentSeason, "goalie", "savePctg", "no", "trim").pipe(takeWhile(() => this._alive)).subscribe(resp => {
+    this._nhlService.getNhlLeaders(this.currentSeason, "goalie", "savePctg", "no", "trim").pipe(takeWhile(() => this._alive)).subscribe(resp => {
       // console.log(resp);
       let tempLeaders = resp as [];
       let savePctgLeaders = [];
@@ -279,7 +263,7 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
   }
 
   getNHLShutoutsLeaders() {
-    this._mainService.getNhlLeaders(this.currentSeason, "goalie", "shutouts", "no", "trim").pipe(takeWhile(() => this._alive)).subscribe(resp => {
+    this._nhlService.getNhlLeaders(this.currentSeason, "goalie", "shutouts", "no", "trim").pipe(takeWhile(() => this._alive)).subscribe(resp => {
       // console.log(resp);
       let tempLeaders = resp as [];
       let shutoutsLeaders = [];

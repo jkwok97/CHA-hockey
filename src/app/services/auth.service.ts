@@ -23,20 +23,17 @@ export class AuthService {
     }
 
     login(email: string) {
-      // console.log(email);
-      return this.http.get<any>(`${environment.back_end_url}/users/${email}`)
-          .pipe(map(user => {
-            // console.log(user);
-              // store user details and basic auth credentials in local storage to keep user logged in between page refreshes
+      return this.http.get<any>(`${environment.back_end_url}/v2/users/${email}`).pipe(
+        map(user => {
               user.authdata = window.btoa(email);
               localStorage.setItem('currentUser', JSON.stringify(user));
               this.currentUserSubject.next(user);
               return user;
-          }));
+          })
+        );
     }
 
     logout() {
-        // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
     }
