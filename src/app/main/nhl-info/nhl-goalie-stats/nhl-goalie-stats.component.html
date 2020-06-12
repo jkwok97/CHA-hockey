@@ -1,8 +1,9 @@
 <p class="title">NHL Goalie Stats</p>
 
-<mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
+<div class="container">
 
-<div class="table">
+    <mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
+
     <table 
         mat-table 
         [dataSource]="goalies" 
