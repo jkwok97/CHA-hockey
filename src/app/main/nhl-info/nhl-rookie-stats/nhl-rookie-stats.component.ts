@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort, PageEvent } from '@angular/material';
-import { MainService } from '../main.service';
+import { MainService } from '../../main.service';
 import { TeamsService } from 'src/app/teams/teams.service';
 import { Router } from '@angular/router';
 import { takeWhile } from 'rxjs/operators';

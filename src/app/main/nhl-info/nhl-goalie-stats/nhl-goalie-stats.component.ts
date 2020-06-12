@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { takeWhile } from 'rxjs/operators';
-import { TeamsService } from './node_modules/src/app/teams/teams.service';
+import { TeamsService } from 'src/app/teams/teams.service';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { NhlService } from './node_modules/src/app/_services/nhl.service';
+import { NhlService } from 'src/app/_services/nhl.service';
 
 @Component({
   selector: 'app-nhl-goalie-stats',
