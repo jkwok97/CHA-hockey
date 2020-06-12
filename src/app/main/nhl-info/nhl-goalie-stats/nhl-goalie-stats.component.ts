@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { takeWhile } from 'rxjs/operators';
-import { TeamsService } from 'src/app/teams/teams.service';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { NhlService } from 'src/app/_services/nhl.service';
+import { TeamsService } from 'src/app/teams/teams.service';
 
 @Component({
   selector: 'app-nhl-goalie-stats',
@@ -14,6 +14,7 @@ import { NhlService } from 'src/app/_services/nhl.service';
 })
 export class NhlGoalieStatsComponent implements OnInit, OnDestroy {
 
+  
   private _alive:boolean = true;
   isLoading: boolean = false;
 
