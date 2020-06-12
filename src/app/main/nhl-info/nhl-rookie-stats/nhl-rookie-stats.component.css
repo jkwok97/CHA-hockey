@@ -2,7 +2,7 @@
     display: grid;
     justify-content: center;
     width: 100%;
-    overflow-x: hidden;
+    grid-template-columns: minmax(350px, auto);
 }
 
 .title {
