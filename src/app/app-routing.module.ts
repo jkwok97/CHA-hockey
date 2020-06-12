@@ -38,7 +38,7 @@ const routes: Routes = [
   { path: 'main', component: MainComponent, canActivate: [AuthGuard] },
   { path: 'main/:teamName', component: MainComponent,
       children: [
-        { path: 'nhl-info', component: NhlInfoComponent },
+        { path: 'nhl-info', component: NhlInfoComponent, canActivate: [AuthGuard] },
         { path: 'roster', component: RosterComponent },
         { path: 'charts', component: ChartsComponent },
         { path: 'history', component: MainHistoryComponent },
