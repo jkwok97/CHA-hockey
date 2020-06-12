@@ -2,12 +2,13 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Team } from 'src/app/_models/team';
 import { MatTableDataSource } from '@angular/material';
-import { TeamsService } from 'src/app/teams/teams.service';
 import { takeWhile } from 'rxjs/operators';
 import { User } from 'src/app/_models/user';
 import { AuthService } from 'src/app/_services/auth.service';
 import { TeamInfoService } from 'src/app/_services/team-info.service';
 import { CurrentSeasonService } from 'src/app/_services/current-season.service';
+import { PlayerStatsService } from 'src/app/_services/player-stats.service';
+import { GoalieStatsService } from 'src/app/_services/goalie-stats.service';
 
 @Component({
   selector: 'app-roster',
@@ -48,8 +49,8 @@ export class RosterComponent implements OnInit, OnDestroy {
     private _authService: AuthService,
     private _teamInfoService: TeamInfoService,
     private _currentSeasonService: CurrentSeasonService,
-    //replace service
-    private _teamsService: TeamsService,
+    private _playerStatsService: PlayerStatsService,
+    private _goalieStatsService: GoalieStatsService
   ) { 
     this._authService.currentUser.subscribe( x => this.currentUser = x[0] );
     this.teams$ = this._teamInfoService.getUserTeams(this.currentUser.id);
@@ -73,11 +74,13 @@ export class RosterComponent implements OnInit, OnDestroy {
 
   }
 
+
   getTeamPlayerStatsForSeason(team: Team) {
-    this._teamsService.getTeamPlayerStatsByYearByType(team.shortname, this.currentSeason, this.currentSeasonType).pipe(
+    this._playerStatsService.getPlayersBySeasonByTypeByTeam(team.id, this.currentSeason, this.currentSeasonType).pipe(
       takeWhile(() => this._alive)
       ).subscribe(resp => {
-        const stats = resp as [{}];
+
+        const stats = resp;
 
         this.playerStats = stats.map(stat => ({
           ...stat,
@@ -90,11 +93,13 @@ export class RosterComponent implements OnInit, OnDestroy {
   }
 
   getTeamGoalieStatsForSeason(team: Team) {
-    this._teamsService.getTeamGoalieStatsByYearByType(team.shortname, this.currentSeason, this.currentSeasonType).pipe(
+    console.log(team);
+    this._goalieStatsService.getGoaliesBySeasonByTypeByTeam(team.id, this.currentSeason, this.currentSeasonType).pipe(
       takeWhile(() => this._alive)
       ).subscribe(resp => {
-          const stats = resp as [];
-          this.goaliesData = new MatTableDataSource<any[]>(stats);
+        console.log(resp);
+          const stats = resp;
+          this.goaliesData = new MatTableDataSource<any[]>(stats as []);
           this.isGoaliesLoading = false;
       });
   }
