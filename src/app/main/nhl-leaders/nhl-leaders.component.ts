@@ -4,8 +4,8 @@ import { MainService } from '../main.service';
 import { TeamsService } from 'src/app/teams/teams.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { DisplayService } from 'src/app/services/display.service';
-import { NhlService } from 'src/app/services/nhl.service';
+import { DisplayService } from 'src/app/_services/display.service';
+import { NhlService } from 'src/app/_services/nhl.service';
 
 @Component({
   selector: 'app-nhl-leaders',

@@ -31,7 +31,7 @@ import { WaiverPriorityComponent } from './waiver-priority/waiver-priority.compo
 import { ArchivesComponent } from './history/archives/archives.component';
 import { MainComponent } from './main/main.component';
 import { LoginComponent } from './main/login/login.component';
-import { AuthService } from './services/auth.service';
+import { AuthService } from './_services/auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PlayerInfoComponent } from './stats/player-info/player-info.component';
 import { PlayerArchivesComponent } from './history/player-archives/player-archives.component';
@@ -61,6 +61,9 @@ import { PlayerChartComponent } from './stats/player-chart/player-chart.componen
 import { TeamSeasonComponent } from './history/team-archives/team-season/team-season.component';
 import { AwardTableViewComponent } from './history/awards/award-table-view/award-table-view.component';
 import { NhlInfoComponent } from './main/nhl-info/nhl-info.component';
+import { RosterComponent } from './main/roster/roster.component';
+import { ChartsComponent } from './main/charts/charts.component';
+import { MainHistoryComponent } from './main/main-history/main-history.component';
 
 @NgModule({
   declarations: [
@@ -117,7 +120,10 @@ import { NhlInfoComponent } from './main/nhl-info/nhl-info.component';
     TeamChartComponent,
     PlayerChartComponent,
     AwardTableViewComponent,
-    NhlInfoComponent
+    NhlInfoComponent,
+    RosterComponent,
+    ChartsComponent,
+    MainHistoryComponent
   ],
   imports: [
     BrowserModule,

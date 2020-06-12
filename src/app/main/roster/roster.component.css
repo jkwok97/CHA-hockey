@@ -1,0 +1,18 @@
+:host {
+    display: grid;
+    padding: 20px;
+    justify-content: center;
+    grid-template-columns: minmax(350px, auto);
+}
+
+.container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.title {
+    color: white;
+    font-weight: 100;
+    font-size: x-large;
+    text-align: center;
+}

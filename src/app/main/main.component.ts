@@ -1,15 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../_services/auth.service';
 import { User } from '../_models/user';
 import { Team, TeamStat } from '../_models/team';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TeamsService } from '../teams/teams.service';
 import { takeWhile } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
-import { TeamInfoService } from '../services/team-info.service';
+import { TeamInfoService } from '../_services/team-info.service';
 import { Observable } from 'rxjs';
-import { CurrentSeasonService } from '../services/current-season.service';
-import { DisplayService } from '../services/display.service';
+import { CurrentSeasonService } from '../_services/current-season.service';
+import { DisplayService } from '../_services/display.service';
 
 @Component({
   selector: 'app-main',
@@ -35,16 +35,13 @@ export class MainComponent implements OnInit, OnDestroy {
   currentSeason: string;
   currentSeasonType: string;
 
-  playersData: MatTableDataSource<any[]>;
-  playersColumnsToDisplay = [
-    'player_name', 'position', 'games_played','goals', 'assists', 'points', 'points_per_sixty', 'plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals',
-    'gw_goals', 'gt_goals', 'shots', 'shooting_pct', 'minutes_per_game', 'fo_pct', 'pass_pct', 'corner_pct', 'hits', 'blocked_shots'
-  ];
+  activeLinkIndex = -1;
 
-  goaliesData: MatTableDataSource<any[]>;
-  goaliesColumnsToDisplay = [
-    'player_name', 'games_played','minutes_played', 'goals_against_avg', 'wins','loss', 'ties', 'en_goals',
-    'shutouts', 'goals_against', 'saves', 'shots_for', 'save_pct', 'goals', 'assists', 'points', 'penalty_minutes', 'pass_pct'
+  routes = [
+    {name: 'NHL Info', url: 'nhl-info', current: false},
+    {name: 'Roster', url: 'roster', current: false},
+    // {name: 'Charts', url: 'charts', current: false},
+    // {name: 'History', url: 'history', current: false},
   ];
 
   teamsData: MatTableDataSource<any[]>;
@@ -64,7 +61,7 @@ export class MainComponent implements OnInit, OnDestroy {
     private _teamsService: TeamsService,
     private _route: ActivatedRoute,
   ) {
-    this._authService.currentUser.subscribe(x => this.currentUser = x[0]);
+    this._authService.currentUser.subscribe( x => this.currentUser = x[0] );
 
     if (!this.currentUser) {
       this._router.navigate(['/login']);
@@ -87,52 +84,30 @@ export class MainComponent implements OnInit, OnDestroy {
       this.team = teams.find((team: Team) => team.isactive);
       this.routeToTeam(this.team);
       this.getAllTeamStatsForSeason();
-      this.getTeamPlayerStatsForSeason(this.team);
-      this.getTeamGoalieStatsForSeason(this.team);
     })
 
   }
 
   getAllTeamStatsForSeason() {
-    this._teamsService.getLeagueTeamsStats(this.currentSeason, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      console.log(resp);
-      this.stats = resp as Team[];
-
-      // this.stats = allTeams.map(team => )
-      // allTeams.forEach(team => {
-      //   if (team['playing_year'] === this.currentSeason && team['season_type'] === this.currentSeasonType) { this.stats.push(team); }
-      // });
-      this.isLoading = false;
-    });
-  }
-
-  getTeamPlayerStatsForSeason(team: Team) {
-    this._teamsService.getTeamPlayerStatsByYearByType(team.shortname, this.currentSeason, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      const stats = resp as [{}];
-
-      this.playerStats = stats.map(stat => ({
-        ...stat,
-        points_per_sixty: ((stat['points']/stat['minutes_played']) * 60).toFixed(2)
-      }))
-
-      this.playersData = new MatTableDataSource<any[]>(this.playerStats);
-    });
-  }
-
-  getTeamGoalieStatsForSeason(team: Team) {
-    this._teamsService.getTeamGoalieStatsByYearByType(team.shortname, this.currentSeason, this.currentSeasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-          const stats = resp as [];
-          this.goaliesData = new MatTableDataSource<any[]>(stats);
-        });
+    this._teamsService.getLeagueTeamsStats(this.currentSeason, this.currentSeasonType).pipe(
+      takeWhile(() => this._alive)
+      ).subscribe(resp => {
+        this.stats = resp as Team[];
+        this.isLoading = false;
+      });
   }
 
   routeToTeam(team: Team) {
-    this._router.navigate([`/main/`], {
-      relativeTo: this._route,
-      queryParams: { team: team.shortname },
-      queryParamsHandling: 'merge',
-      skipLocationChange: false
-    })
+    this._router.navigate([`/main/${team.shortname}/nhl-info`], {
+        queryParamsHandling: 'merge',
+    });
+
+    // this._router.navigate([`/main/${team.shortname}`], {
+    //   relativeTo: this._route,
+    //   queryParams: { team: team.shortname },
+    //   queryParamsHandling: 'merge',
+    //   skipLocationChange: false
+    // })
   }
 
   openTeam(shortName, season, type) {
@@ -186,19 +161,6 @@ export class MainComponent implements OnInit, OnDestroy {
   //     this.checkString(this.team);
   //   }
   // }
-
-  onTabChange(event) {
-    // console.log(event);
-    if (event.tab.textLabel === "Player Charts") {
-
-    } else if (event.tab.textLabel === "Team History") {
-      // this.checkString(this.team);
-    } else if (event.tab.textLabel === "Team Charts") {
-      
-    } else if (event.tab.textLabel === 'NHL Info') {
-      
-    }
-  }
 
   getKillerBeesStats(team, type) {
     this._teamsService.getAlltimeTeamStatsByType(team.shortName, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {

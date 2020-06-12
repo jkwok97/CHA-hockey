@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { takeWhile } from 'rxjs/operators';
 
-import { DisplayService } from 'src/app/services/display.service';
+import { DisplayService } from 'src/app/_services/display.service';
 
 @Component({
   selector: 'app-nhl-info',

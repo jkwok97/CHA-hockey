@@ -7,7 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { TeamsService } from 'src/app/teams/teams.service';
 import { Router } from '@angular/router';
 import { PageEvent } from '@angular/material';
-import { NhlService } from 'src/app/services/nhl.service';
+import { NhlService } from 'src/app/_services/nhl.service';
 
 @Component({
   selector: 'app-nhl-players-stats',

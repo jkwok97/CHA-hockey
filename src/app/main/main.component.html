@@ -16,7 +16,19 @@
 
     <div class="stat-container">
 
-        <mat-tab-group color="accent" (selectedTabChange)="onTabChange($event)">
+        <nav mat-tab-nav-bar color="accent">
+            <a mat-tab-link
+                *ngFor="let route of routes"
+                [routerLink]="route.url"
+                routerLinkActive #rla="routerLinkActive"
+                [active]="rla.isActive">
+                {{route.name}}
+            </a>
+        </nav>
+        
+        <router-outlet></router-outlet>
+
+        <!-- <mat-tab-group color="accent" (selectedTabChange)="onTabChange($event)">
 
             <mat-tab label="NHL Info">
                 <ng-template matTabContent>
@@ -46,22 +58,22 @@
                 </ng-template>
             </mat-tab>
 
-            <!-- <mat-tab label="Team Charts">
+            <mat-tab label="Team Charts">
                 <ng-template matTabContent>
                     <app-team-chart
                         [stats]="stats"
                         [team]="team"
                     ></app-team-chart>
                 </ng-template>
-            </mat-tab> -->
+            </mat-tab>
 
-            <!-- <mat-tab label="Player Charts">
+            <mat-tab label="Player Charts">
                 <ng-template matTabContent>
                     <app-player-chart
                         [playerStats]="playerStats"
                     ></app-player-chart>
                 </ng-template>
-            </mat-tab> -->
+            </mat-tab>
 
             <mat-tab label="Team History">
                 <ng-template matTabContent>
@@ -81,7 +93,7 @@
                 </ng-template>
             </mat-tab>
 
-        </mat-tab-group>
+        </mat-tab-group> -->
 
     </div>
 

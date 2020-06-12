@@ -5,7 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { NhlService } from 'src/app/services/nhl.service';
+import { NhlService } from 'src/app/_services/nhl.service';
 
 @Component({
   selector: 'app-nhl-goalie-stats',

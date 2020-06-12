@@ -1,0 +1,23 @@
+<h3 class="title">Players</h3>
+
+<div class="container">
+    <mat-progress-bar mode="query" color="accent" *ngIf="isPlayersLoading"></mat-progress-bar>
+
+    <app-player-stats-table
+        [players]="playersData"
+        [statsColumnsToDisplay]="playersColumnsToDisplay"
+        *ngIf="!isPlayersLoading"
+    ></app-player-stats-table>
+</div>
+
+<h3 class="title">Goalies</h3>
+
+<div class="container">
+    <mat-progress-bar mode="query" color="accent" *ngIf="isGoaliesLoading"></mat-progress-bar>
+
+    <app-goalie-stats-table 
+        [goalies]="goaliesData"
+        [statsColumnsToDisplay]="goaliesColumnsToDisplay"
+        *ngIf="!isGoaliesLoading"
+    ></app-goalie-stats-table>
+</div>

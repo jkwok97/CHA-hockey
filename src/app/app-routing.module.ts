@@ -18,7 +18,7 @@ import { WaiverPriorityComponent } from './waiver-priority/waiver-priority.compo
 import { ArchivesComponent } from './history/archives/archives.component';
 import { MainComponent } from './main/main.component';
 import { LoginComponent } from './main/login/login.component';
-import { AuthGuard } from './services/auth.guard';
+import { AuthGuard } from './_services/auth.guard';
 import { PlayerInfoComponent } from './stats/player-info/player-info.component';
 import { SalaryComponent } from './salary/salary.component';
 import { PicksComponent } from './picks/picks.component';
@@ -26,11 +26,27 @@ import { TeamSalaryComponent } from './salary/team-salary/team-salary.component'
 import { PlayoffTreeComponent } from './schedule/playoff-tree/playoff-tree.component';
 import { NewPlayoffTreeComponent } from './schedule/playoff-tree/new-playoff-tree/new-playoff-tree.component';
 import { TeamSeasonComponent } from './history/team-archives/team-season/team-season.component';
+import { NhlInfoComponent } from './main/nhl-info/nhl-info.component';
+import { RosterComponent } from './main/roster/roster.component';
+import { ChartsComponent } from './main/charts/charts.component';
+import { MainHistoryComponent } from './main/main-history/main-history.component';
 
 
 const routes: Routes = [
-  { path: 'main', component: MainComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent},
+
+  { path: 'main', component: MainComponent, canActivate: [AuthGuard] },
+  { path: 'main/:teamName', component: MainComponent,
+      children: [
+        { path: 'nhl-info', component: NhlInfoComponent },
+        { path: 'roster', component: RosterComponent },
+        { path: 'charts', component: ChartsComponent },
+        { path: 'history', component: MainHistoryComponent },
+      ]
+  },
+
+
+
   { path: 'stats', component: StatsComponent, canActivate: [AuthGuard] },
   { path: 'stats/players', component: PlayersStatsComponent, canActivate: [AuthGuard] },
   { path: 'info/:type/:id/:name', component: PlayerInfoComponent, canActivate: [AuthGuard] },

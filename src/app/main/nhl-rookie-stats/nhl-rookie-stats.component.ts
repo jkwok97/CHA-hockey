@@ -4,7 +4,7 @@ import { MainService } from '../main.service';
 import { TeamsService } from 'src/app/teams/teams.service';
 import { Router } from '@angular/router';
 import { takeWhile } from 'rxjs/operators';
-import { NhlService } from 'src/app/services/nhl.service';
+import { NhlService } from 'src/app/_services/nhl.service';
 
 @Component({
   selector: 'app-nhl-rookie-stats',
