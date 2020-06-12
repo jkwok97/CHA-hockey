@@ -1,26 +1,19 @@
-.goalieStatsTable {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
+:host {
+    display: grid;
     justify-content: center;
-    align-content: flex-start;
+    width: 100%;
 }
 
-.tableHeader {
+.title {
     color: white;
     font-size: x-large;
     font-weight: 100;
     text-align: center;
-    width: 100%;
 }
 
 .table {
-    width: 95%;
-    overflow-x: auto;
-}
-
-.full-width {
     width: 100%;
+    overflow-x: auto;
 }
 
 .mat-row:hover {
@@ -57,18 +50,8 @@ table {
     text-align: center;
 }
 
-.mat-paginator {
-    width: 95%;
-}
-
 th, td {
     color: white;
     text-align: center;
     font-weight: 100;
-}
-
-.mat-form-field {
-    font-size: 14px;
-    width: 75%;
-    color: red;
 }

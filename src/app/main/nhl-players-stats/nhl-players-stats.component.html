@@ -1,125 +1,112 @@
-<div class="playerStatsTable cha-dark">
+<p class="title">NHL Players Stats</p>
+    
+<mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
 
-    <div class="tableHeader">
-        <p>NHL Players Stats</p>
-    </div>
+<div class="table" *ngIf="!isLoading">
 
-    <!-- <mat-form-field color="accent">
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
-    </mat-form-field> -->
+    <table 
+        mat-table 
+        [dataSource]="players" 
+        matSort 
+        (matSortChange)="onSort($event)" 
+        class="mat-elevation-z8" 
+        matSortActive="points" 
+        matSortDirection="DESC"
+    >
 
-    <div class="spinner" *ngIf="isLoading">
-        <mat-spinner color="accent"></mat-spinner>
-    </div>
+        <ng-container matColumnDef="team_logo">
+            <th mat-header-cell *matHeaderCellDef> CHA Team </th>
+            <td mat-cell *matCellDef="let player"> 
+                <img src="{{ findLogo(player.chaTeam).image }}"> 
+            </td>
+        </ng-container>
 
-    <div class="table" *ngIf="!isLoading">
+        <ng-container matColumnDef="playerName" sticky>
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let player"> {{player.skaterFullName}} </td>
+        </ng-container>
 
-        <table 
-            mat-table 
-            [dataSource]="players" 
-            matSort 
-            (matSortChange)="onSort($event)" 
-            class="mat-elevation-z8 full-width" 
-            matSortActive="points" 
-            matSortDirection="DESC"
-        >
+        <ng-container matColumnDef="positionCode">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true" start='desc'> Position </th>
+            <td mat-cell *matCellDef="let player"> {{player.positionCode}} </td>
+        </ng-container>
 
-            <ng-container matColumnDef="team_logo">
-                <th mat-header-cell *matHeaderCellDef> CHA Team </th>
-                <td mat-cell *matCellDef="let player"> 
-                    <img src="{{ findLogo(player.chaTeam).image }}"> 
-                </td>
-            </ng-container>
+        <ng-container matColumnDef="gamesPlayed">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true" start='desc'> GP </th>
+            <td mat-cell *matCellDef="let player"> {{player.gamesPlayed}} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="goals">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true" start='desc'> G </th>
+            <td mat-cell *matCellDef="let player"> {{player.goals}} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="assists">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true" start='desc'> A </th>
+            <td mat-cell *matCellDef="let player"> {{player.assists}} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="points">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true" start='desc'> Pts </th>
+            <td mat-cell *matCellDef="let player"> {{player.points}} </td>
+        </ng-container>
 
-            <ng-container matColumnDef="playerName" sticky>
-                <th mat-header-cell *matHeaderCellDef> Name </th>
-                <td mat-cell *matCellDef="let player"> {{player.skaterFullName}} </td>
-            </ng-container>
+        <ng-container matColumnDef="plusMinus">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true" start='desc'> +/- </th>
+            <td mat-cell *matCellDef="let player"> {{player.plusMinus}} </td>
+        </ng-container>
 
-            <ng-container matColumnDef="positionCode">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true" start='desc'> Position </th>
-                <td mat-cell *matCellDef="let player"> {{player.positionCode}} </td>
-            </ng-container>
+        <ng-container matColumnDef="penaltyMinutes">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true" start='desc'> PIM </th>
+            <td mat-cell *matCellDef="let player"> {{player.penaltyMinutes}} </td>
+        </ng-container>
 
-            <ng-container matColumnDef="gamesPlayed">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true" start='desc'> GP </th>
-                <td mat-cell *matCellDef="let player"> {{player.gamesPlayed}} </td>
-            </ng-container>
-            
-            <ng-container matColumnDef="goals">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true" start='desc'> G </th>
-                <td mat-cell *matCellDef="let player"> {{player.goals}} </td>
-            </ng-container>
-            
-            <ng-container matColumnDef="assists">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true" start='desc'> A </th>
-                <td mat-cell *matCellDef="let player"> {{player.assists}} </td>
-            </ng-container>
-            
-            <ng-container matColumnDef="points">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true" start='desc'> Pts </th>
-                <td mat-cell *matCellDef="let player"> {{player.points}} </td>
-            </ng-container>
+        <ng-container matColumnDef="ppPoints">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true" start='desc'> PPP </th>
+            <td mat-cell *matCellDef="let player"> {{player.ppPoints}} </td>
+        </ng-container>
 
-            <ng-container matColumnDef="plusMinus">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true" start='desc'> +/- </th>
-                <td mat-cell *matCellDef="let player"> {{player.plusMinus}} </td>
-            </ng-container>
+        <ng-container matColumnDef="shPoints">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true" start='desc'> SHP </th>
+            <td mat-cell *matCellDef="let player"> {{player.shPoints}} </td>
+        </ng-container>
 
-            <ng-container matColumnDef="penaltyMinutes">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true" start='desc'> PIM </th>
-                <td mat-cell *matCellDef="let player"> {{player.penaltyMinutes}} </td>
-            </ng-container>
+        <ng-container matColumnDef="gameWinningGoals">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true" start='desc'> GWG </th>
+            <td mat-cell *matCellDef="let player"> {{player.gameWinningGoals}} </td>
+        </ng-container>
 
-            <ng-container matColumnDef="ppPoints">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true" start='desc'> PPP </th>
-                <td mat-cell *matCellDef="let player"> {{player.ppPoints}} </td>
-            </ng-container>
+        <ng-container matColumnDef="shots">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true" start='desc'> SOG </th>
+            <td mat-cell *matCellDef="let player"> {{player.shots}} </td>
+        </ng-container>
 
-            <ng-container matColumnDef="shPoints">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true" start='desc'> SHP </th>
-                <td mat-cell *matCellDef="let player"> {{player.shPoints}} </td>
-            </ng-container>
+        <ng-container matColumnDef="shootingPctg">
+            <th mat-header-cell *matHeaderCellDef> Sh% </th>
+            <td mat-cell *matCellDef="let player"> {{((player.shootingPct)*100).toFixed(1)}}% </td>
+        </ng-container>
 
-            <ng-container matColumnDef="gameWinningGoals">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true" start='desc'> GWG </th>
-                <td mat-cell *matCellDef="let player"> {{player.gameWinningGoals}} </td>
-            </ng-container>
+        <ng-container matColumnDef="faceoffWinPctg">
+            <th mat-header-cell *matHeaderCellDef> FO% </th>
+            <td mat-cell *matCellDef="let player"> {{((player.faceoffWinPct)*100).toFixed(1)}}% </td>
+        </ng-container>
+        
+        <tr mat-header-row *matHeaderRowDef="playersColumnsToDisplay; sticky: true"></tr>
+        <tr 
+            mat-row 
+            *matRowDef="let player; columns: playersColumnsToDisplay"
+            (click)="openPlayer(player, 'player')"
+        ></tr>
 
-            <ng-container matColumnDef="shots">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear="true" start='desc'> SOG </th>
-                <td mat-cell *matCellDef="let player"> {{player.shots}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="shootingPctg">
-                <th mat-header-cell *matHeaderCellDef> Sh% </th>
-                <td mat-cell *matCellDef="let player"> {{((player.shootingPct)*100).toFixed(1)}}% </td>
-            </ng-container>
-
-            <ng-container matColumnDef="faceoffWinPctg">
-                <th mat-header-cell *matHeaderCellDef> FO% </th>
-                <td mat-cell *matCellDef="let player"> {{((player.faceoffWinPct)*100).toFixed(1)}}% </td>
-            </ng-container>
-            
-            <tr mat-header-row *matHeaderRowDef="playersColumnsToDisplay; sticky: true"></tr>
-            <tr 
-                mat-row 
-                *matRowDef="let player; columns: playersColumnsToDisplay"
-                (click)="openPlayer(player, 'player')"
-            ></tr>
-
-        </table>
-
-    </div>
-
-    <mat-paginator
-        [pageSizeOptions]="[25]"
-        [pageSize]="pageSize"
-        [length]="length"
-        color="accent"
-        (page)="onChangePage($event)"
-        *ngIf="length > 0"
-    ></mat-paginator>
+    </table>
 
 </div>
-    
+
+<mat-paginator
+    [pageSizeOptions]="[25]"
+    [pageSize]="pageSize"
+    [length]="length"
+    color="accent"
+    (page)="onChangePage($event)"
+    *ngIf="length > 0"
+></mat-paginator>
