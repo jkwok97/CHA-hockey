@@ -105,6 +105,7 @@ export class NhlRookieStatsComponent implements OnInit, OnDestroy {
 
   onSort(event) {
     // console.log(event);
+    this.isLoading = true;
     this.start = 0;
     this.sortOrder = (event.direction).toUpperCase();
     this.sortType = event.active;
