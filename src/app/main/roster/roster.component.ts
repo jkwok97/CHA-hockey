@@ -93,14 +93,12 @@ export class RosterComponent implements OnInit, OnDestroy {
   }
 
   getTeamGoalieStatsForSeason(team: Team) {
-    console.log(team);
     this._goalieStatsService.getGoaliesBySeasonByTypeByTeam(team.id, this.currentSeason, this.currentSeasonType).pipe(
       takeWhile(() => this._alive)
       ).subscribe(resp => {
-        console.log(resp);
-          const stats = resp;
-          this.goaliesData = new MatTableDataSource<any[]>(stats as []);
-          this.isGoaliesLoading = false;
+        const stats = resp;
+        this.goaliesData = new MatTableDataSource<any[]>(stats as []);
+        this.isGoaliesLoading = false;
       });
   }
 

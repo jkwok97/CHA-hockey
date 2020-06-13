@@ -32,34 +32,6 @@
 
         <!-- <mat-tab-group color="accent" (selectedTabChange)="onTabChange($event)">
 
-            <mat-tab label="NHL Info">
-                <ng-template matTabContent>
-                    <app-nhl-info></app-nhl-info>
-                </ng-template>
-            </mat-tab>
-
-            <mat-tab label="Player Roster">
-                <ng-template matTabContent>
-                    <div class="add-padding">
-                        <app-player-stats-table
-                            [players]="playersData"
-                            [statsColumnsToDisplay]="playersColumnsToDisplay"
-                        ></app-player-stats-table>
-                    </div>
-                </ng-template>
-            </mat-tab>
-
-            <mat-tab label="Goalie Roster">
-                <ng-template matTabContent>
-                    <div class="add-padding">
-                        <app-goalie-stats-table 
-                            [goalies]="goaliesData"
-                            [statsColumnsToDisplay]="goaliesColumnsToDisplay"
-                        ></app-goalie-stats-table>
-                    </div>
-                </ng-template>
-            </mat-tab>
-
             <mat-tab label="Team Charts">
                 <ng-template matTabContent>
                     <app-team-chart

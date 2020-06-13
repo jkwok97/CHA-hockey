@@ -7,6 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainHistoryComponent implements OnInit {
 
+  activeLinkIndex = -1;
+
+  routes = [
+    {name: 'Team', url: 'team', current: true},
+    // {name: 'Player', url: 'players', current: false},
+    // {name: 'Goalie', url: 'goalies', current: false},
+  ];
+
   constructor() { }
 
   ngOnInit() {

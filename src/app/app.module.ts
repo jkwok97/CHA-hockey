@@ -64,6 +64,7 @@ import { NhlInfoComponent } from './main/nhl-info/nhl-info.component';
 import { RosterComponent } from './main/roster/roster.component';
 import { ChartsComponent } from './main/charts/charts.component';
 import { MainHistoryComponent } from './main/main-history/main-history.component';
+import { UserTeamHistoryComponent } from './main/main-history/user-team-history/user-team-history.component';
 
 @NgModule({
   declarations: [
@@ -123,7 +124,8 @@ import { MainHistoryComponent } from './main/main-history/main-history.component
     NhlInfoComponent,
     RosterComponent,
     ChartsComponent,
-    MainHistoryComponent
+    MainHistoryComponent,
+    UserTeamHistoryComponent
   ],
   imports: [
     BrowserModule,

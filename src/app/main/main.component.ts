@@ -41,7 +41,7 @@ export class MainComponent implements OnInit, OnDestroy {
     {name: 'NHL Info', url: 'nhl-info', current: false},
     {name: 'Roster', url: 'roster', current: false},
     // {name: 'Charts', url: 'charts', current: false},
-    // {name: 'History', url: 'history', current: false},
+    {name: 'History', url: 'history/team', current: false},
   ];
 
   teamsData: MatTableDataSource<any[]>;
@@ -59,9 +59,8 @@ export class MainComponent implements OnInit, OnDestroy {
     private _displayService: DisplayService,
 
     private _teamsService: TeamsService,
-    private _route: ActivatedRoute,
   ) {
-    this._authService.currentUser.subscribe( x => this.currentUser = x[0] );
+    this._authService.currentUser.subscribe( x => this.currentUser = x[0]);
 
     if (!this.currentUser) {
       this._router.navigate(['/login']);
@@ -101,13 +100,6 @@ export class MainComponent implements OnInit, OnDestroy {
     this._router.navigate([`/main/${team.shortname}/nhl-info`], {
         queryParamsHandling: 'merge',
     });
-
-    // this._router.navigate([`/main/${team.shortname}`], {
-    //   relativeTo: this._route,
-    //   queryParams: { team: team.shortname },
-    //   queryParamsHandling: 'merge',
-    //   skipLocationChange: false
-    // })
   }
 
   openTeam(shortName, season, type) {
@@ -117,137 +109,6 @@ export class MainComponent implements OnInit, OnDestroy {
 
   toSalaryPage(link) {
     window.open(link);
-  }
-
-  findLogo(shortName) {
-    if (shortName) {
-      let team = this._teamsService.getTeamInfo(shortName);
-      return { image: team.image, name: team.name }
-    } else {
-      return { image: "../../assets/team_logos/Free_Agent_logo_square.jpg", name: "Free Agent"}
-    }
-  }
-
-  // checkString(team) {
-  //   if (team.shortName === "STA") {
-  //     this.getKillerBeesStats(team, this.seasonType);
-  //   } else if (team.shortName === "ATL") {
-  //     this.getFlashersStats(team, this.seasonType);
-  //   } else if (team.shortName === "CHY") {
-  //     this.getDesperadosStats(team, this.seasonType);
-  //   } else if (team.shortName === "SCS") {
-  //     this.getStringraysStats(team, this.seasonType);
-  //   } else if (team.shortName === "OAK") {
-  //     this.getAssassinsStats(team, this.seasonType);
-  //   } else {
-  //     this._teamsService.getAlltimeTeamStatsByType(team.shortName, this.seasonType).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-  //       // console.log(resp);
-  //       let teamStats = resp as [];
-  //       this.isLoading = false;
-  //       this.teamsData = new MatTableDataSource<any[]>(teamStats);
-  //     });
-  //   }
-  // }
-
-  // changeSeason(value) {
-  //   if (value === 'Playoffs') {
-  //     this.isLoading = true;
-  //     this.seasonType = value;
-  //     this.checkString(this.team);
-  //   } else {
-  //     this.isLoading = true;
-  //     this.seasonType = value;
-  //     // this.resetStats();
-  //     this.checkString(this.team);
-  //   }
-  // }
-
-  getKillerBeesStats(team, type) {
-    this._teamsService.getAlltimeTeamStatsByType(team.shortName, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      let teamStats = resp as [];
-      this._teamsService.getAlltimeTeamStatsByType("MIS", type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-        let oldTeamStats = resp as [];
-        oldTeamStats.forEach(element => {
-          teamStats.push(element);
-        })
-        // console.log(teamStats);
-        this.isLoading = false;
-        teamStats.sort((a,b) => b['playing_year'] - a['playing_year']);
-        this.teamsData = new MatTableDataSource<any[]>(teamStats);
-      });          
-    });
-  }
-
-  getFlashersStats(team, type) {
-    this._teamsService.getAlltimeTeamStatsByType(team.shortName, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      let teamStats = resp as [];
-      this._teamsService.getAlltimeTeamStatsByType("CHA", type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-        let oldTeamStats = resp as [];
-        oldTeamStats.forEach(element => {
-          teamStats.push(element);
-        })
-        // console.log(teamStats);
-        this.isLoading = false;
-        teamStats.sort((a,b) => b['playing_year'] - a['playing_year']);
-        this.teamsData = new MatTableDataSource<any[]>(teamStats);
-      });          
-    });
-  }
-
-  getDesperadosStats(team, type) {
-    this._teamsService.getAlltimeTeamStatsByType(team.shortName, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      let teamStats = resp as [];
-      this._teamsService.getAlltimeTeamStatsByType("LVD", type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-        let oldTeamStats = resp as [];
-        oldTeamStats.forEach(element => {
-          teamStats.push(element);
-        })
-        this._teamsService.getAlltimeTeamStatsByType("SDC", type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-          let oldTeamStats = resp as [];
-          oldTeamStats.forEach(element => {
-            teamStats.push(element);
-          })
-          // console.log(teamStats);
-          this.isLoading = false;
-          teamStats.sort((a,b) => b['playing_year'] - a['playing_year']);
-          this.teamsData = new MatTableDataSource<any[]>(teamStats);
-        });
-      });          
-    });
-  }
-
-  getStringraysStats(team, type) {
-    this._teamsService.getAlltimeTeamStatsByType(team.shortName, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      let teamStats = resp as [];
-      this._teamsService.getAlltimeTeamStatsByType("SAO", type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-        let oldTeamStats = resp as [];
-        oldTeamStats.forEach(element => {
-          teamStats.push(element);
-        })
-        // console.log(teamStats);
-        this.isLoading = false;
-        teamStats.sort((a,b) => b['playing_year'] - a['playing_year']);
-        this.teamsData = new MatTableDataSource<any[]>(teamStats);
-      });          
-    });
-  }
-
-  getAssassinsStats(team, type) {
-    this._teamsService.getAlltimeTeamStatsByType(team.shortName, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      let teamStats = resp as [];
-      this._teamsService.getAlltimeTeamStatsByType("OAO", type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-        let oldTeamStats = resp as [];
-        oldTeamStats.forEach(element => {
-          teamStats.push(element);
-        })
-        // console.log(teamStats);
-        this.isLoading = false;
-        teamStats.sort((a,b) => b['playing_year'] - a['playing_year']);
-        this.teamsData = new MatTableDataSource<any[]>(teamStats);
-      });          
-    }, error => {
-      console.log("baaaaaaaaaaaaaaa");
-    });
   }
 
   logout() {

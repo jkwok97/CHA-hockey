@@ -1,20 +1,21 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { takeWhile } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
-import { User } from 'src/app/_models/user';
-import { TeamStat } from 'src/app/_models/team';
 import { Observable } from 'rxjs';
+import { TeamStat } from 'src/app/_models/team';
+import { User } from 'src/app/_models/user';
+import { MatTableDataSource } from '@angular/material';
+import { TeamsService } from 'src/app/teams/teams.service';
 import { TeamStatsService } from 'src/app/_services/team-stats.service';
+import { AuthService } from 'src/app/_services/auth.service';
+import { ActivatedRoute } from '@angular/router';
+import { takeWhile } from 'rxjs/operators';
 import { CurrentSeasonService } from 'src/app/_services/current-season.service';
-import { TeamInfoService } from 'src/app/_services/team-info.service';
 
 @Component({
-  selector: 'app-team-archives',
-  templateUrl: './team-archives.component.html',
-  styleUrls: ['./team-archives.component.css']
+  selector: 'app-user-team-history',
+  templateUrl: './user-team-history.component.html',
+  styleUrls: ['./user-team-history.component.css']
 })
-export class TeamArchivesComponent implements OnInit, OnDestroy {
+export class UserTeamHistoryComponent implements OnInit, OnDestroy {
 
   private _alive:boolean = true;
   isLoading: boolean = false;
@@ -23,8 +24,6 @@ export class TeamArchivesComponent implements OnInit, OnDestroy {
   stats$: Observable<TeamStat[]>;
 
   currentUser: User;
-
-  teamUserId: number;
 
   short_team_name: string;
   seasonType: string = 'Regular';
@@ -37,53 +36,41 @@ export class TeamArchivesComponent implements OnInit, OnDestroy {
   ];
 
   constructor(
-    private _teamInfoService: TeamInfoService,
     private _teamStatsService: TeamStatsService,
-    private _currentSeasonService: CurrentSeasonService,
-    private _route: ActivatedRoute,
+    private _authService: AuthService,
+    private _currentSeasonService: CurrentSeasonService
   ) {
-
-    this.seasonType = this._currentSeasonService.currentSeasonType;
     
+    this._authService.currentUser.subscribe( x => this.currentUser = x[0] );
+    this.seasonType = this._currentSeasonService.currentSeasonType;
+  
   }
 
   ngOnInit() {
-    this.isLoading = true;
-
-    const teamSelected = this._route.snapshot.params.params;
-
-    this.getUserId(teamSelected)
-
-  }
-
-  getUserId(teamSelected: string) {
-    this._teamInfoService.getUserByTeamName(teamSelected).pipe(
-      takeWhile(() => this._alive)
-    ).subscribe((id: number) => {
-      this.teamUserId = id['users_id'];
-      this.getTeamStats(this.teamUserId, this.seasonType);
-    })
+    if (this.currentUser) {
+      this.isLoading = true;
+      this.getTeamStats(this.currentUser.id, this.seasonType);
+    }
   }
 
   getTeamStats(id: number, seasonType: string) {
-    this._teamStatsService.getTeamStatsByUser(id, seasonType).pipe(
+    this._teamStatsService.getTeamStatsByUser(this.currentUser.id, seasonType).pipe(
       takeWhile(() => this._alive)
     ).subscribe((teamStats: TeamStat[]) => {
       this.isLoading = false;
       this.teams = new MatTableDataSource<any[]>(teamStats as []);
     })
-
   }
 
   changeSeason(value) {
     if (value === 'Playoffs') {
       this.isLoading = true;
       this.seasonType = value;
-      this.getTeamStats(this.teamUserId, this.seasonType)
+      this.getTeamStats(this.currentUser.id, this.seasonType)
     } else {
       this.isLoading = true;
       this.seasonType = value;
-      this.getTeamStats(this.teamUserId, this.seasonType)
+      this.getTeamStats(this.currentUser.id, this.seasonType)
     }
   }
 
