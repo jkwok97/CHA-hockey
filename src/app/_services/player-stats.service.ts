@@ -26,4 +26,25 @@ export class PlayerStatsService {
     )
   }
 
+  getPlayersByUserByType(id: number, seasonType: string): Observable<PlayerStat[]> {
+
+    const options = {params: new HttpParams()
+      .set('season_type', seasonType)
+    }
+    
+    return this._http.get(`${environment.back_end_url}/v2/players-stats/history/user/${id}`, options).pipe(
+      map(result => result['result'])
+    )
+  }
+
+  getPlayersByUserByShowByType(id: number, seasonType: string): Observable<PlayerStat[]> {
+    
+    const options = {params: new HttpParams()
+      .set('season_type', seasonType)
+    }
+    
+    return this._http.get(`${environment.back_end_url}/v2/players-stats/show/history/user/${id}`, options).pipe(
+      map(result => result['result'])
+    )
+  }
 }

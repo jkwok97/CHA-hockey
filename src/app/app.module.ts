@@ -65,6 +65,8 @@ import { RosterComponent } from './main/roster/roster.component';
 import { ChartsComponent } from './main/charts/charts.component';
 import { MainHistoryComponent } from './main/main-history/main-history.component';
 import { UserTeamHistoryComponent } from './main/main-history/user-team-history/user-team-history.component';
+import { UserTeamPlayerHistoryComponent } from './main/main-history/user-team-player-history/user-team-player-history.component';
+import { UserTeamGoalieHistoryComponent } from './main/main-history/user-team-goalie-history/user-team-goalie-history.component';
 
 @NgModule({
   declarations: [
@@ -125,7 +127,9 @@ import { UserTeamHistoryComponent } from './main/main-history/user-team-history/
     RosterComponent,
     ChartsComponent,
     MainHistoryComponent,
-    UserTeamHistoryComponent
+    UserTeamHistoryComponent,
+    UserTeamPlayerHistoryComponent,
+    UserTeamGoalieHistoryComponent
   ],
   imports: [
     BrowserModule,

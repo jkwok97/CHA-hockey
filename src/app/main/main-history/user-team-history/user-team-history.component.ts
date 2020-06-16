@@ -3,10 +3,8 @@ import { Observable } from 'rxjs';
 import { TeamStat } from 'src/app/_models/team';
 import { User } from 'src/app/_models/user';
 import { MatTableDataSource } from '@angular/material';
-import { TeamsService } from 'src/app/teams/teams.service';
 import { TeamStatsService } from 'src/app/_services/team-stats.service';
 import { AuthService } from 'src/app/_services/auth.service';
-import { ActivatedRoute } from '@angular/router';
 import { takeWhile } from 'rxjs/operators';
 import { CurrentSeasonService } from 'src/app/_services/current-season.service';
 

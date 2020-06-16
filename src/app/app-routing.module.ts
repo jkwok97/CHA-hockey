@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { LeagueComponent } from './league/league.component';
 import { StatsComponent } from './stats/stats.component';
-import { TeamsComponent } from './teams/teams-header.component';
 import { HistoryComponent } from './history/history.component';
 import { RulesComponent } from './rules/rules.component';
 import { ScheduleComponent } from './schedule/schedule.component';
@@ -23,16 +22,15 @@ import { PlayerInfoComponent } from './stats/player-info/player-info.component';
 import { SalaryComponent } from './salary/salary.component';
 import { PicksComponent } from './picks/picks.component';
 import { TeamSalaryComponent } from './salary/team-salary/team-salary.component';
-import { PlayoffTreeComponent } from './schedule/playoff-tree/playoff-tree.component';
 import { NewPlayoffTreeComponent } from './schedule/playoff-tree/new-playoff-tree/new-playoff-tree.component';
 import { TeamSeasonComponent } from './history/team-archives/team-season/team-season.component';
 import { NhlInfoComponent } from './main/nhl-info/nhl-info.component';
 import { RosterComponent } from './main/roster/roster.component';
 import { ChartsComponent } from './main/charts/charts.component';
 import { MainHistoryComponent } from './main/main-history/main-history.component';
-import { PlayerArchivesComponent } from './history/player-archives/player-archives.component';
-import { GoalieArchivesComponent } from './history/goalie-archives/goalie-archives.component';
 import { UserTeamHistoryComponent } from './main/main-history/user-team-history/user-team-history.component';
+import { UserTeamPlayerHistoryComponent } from './main/main-history/user-team-player-history/user-team-player-history.component';
+import { UserTeamGoalieHistoryComponent } from './main/main-history/user-team-goalie-history/user-team-goalie-history.component';
 
 
 const routes: Routes = [
@@ -44,11 +42,11 @@ const routes: Routes = [
         { path: 'nhl-info', component: NhlInfoComponent, canActivate: [AuthGuard] },
         { path: 'roster', component: RosterComponent },
         { path: 'charts', component: ChartsComponent },
-        { path: 'history', component: MainHistoryComponent, 
+        { path: 'history', component: MainHistoryComponent, canActivate: [AuthGuard], 
           children: [
             { path: 'team', component: UserTeamHistoryComponent },
-            { path: 'players', component: PlayerArchivesComponent },
-            { path: 'goalies', component: GoalieArchivesComponent },
+            { path: 'players', component: UserTeamPlayerHistoryComponent },
+            { path: 'goalies', component: UserTeamGoalieHistoryComponent },
           ]
         },
       ]

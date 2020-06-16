@@ -1,6 +1,5 @@
 :host {
     display: grid;
-    /* grid-template-columns: minmax(350, auto); */
     padding: 20px;
     overflow-x: auto;
 }

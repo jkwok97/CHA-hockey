@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, ViewChild, AfterViewInit, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { TeamsService } from 'src/app/teams/teams.service';
-import { MatSort } from '@angular/material';
+import { MatSort, MatPaginator } from '@angular/material';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-player-stats-table',
@@ -14,7 +15,12 @@ export class PlayerStatsTableComponent implements OnInit, AfterViewInit, OnChang
   @Input() statsColumnsToDisplay: [];
   @Input() inPlayerInfo: boolean = false;
 
+  page: number = 1;
+  pageSize: number = 25;
+  length: number = 0;
+
   @ViewChild("playerSort", {static: false}) playerSort: MatSort;
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
 
   constructor(
     private _router: Router,
@@ -22,11 +28,12 @@ export class PlayerStatsTableComponent implements OnInit, AfterViewInit, OnChang
   ) { }
 
   ngOnInit() {
-    
+    this.length = this.players.length;
   }
 
   ngAfterViewInit() {
     this.players.sort = this.playerSort;
+    this.players.paginator = this.paginator;
   }
 
   ngOnChanges() {
