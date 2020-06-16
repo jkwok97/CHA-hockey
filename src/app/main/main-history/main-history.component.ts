@@ -12,7 +12,7 @@ export class MainHistoryComponent implements OnInit {
   routes = [
     {name: 'Team', url: 'team', current: true},
     {name: 'Player', url: 'players', current: false},
-    // {name: 'Goalie', url: 'goalies', current: false},
+    {name: 'Goalie', url: 'goalies', current: false},
   ];
 
   constructor() { }

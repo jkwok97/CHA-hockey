@@ -25,4 +25,26 @@ export class GoalieStatsService {
       map(result => result['result'])
     )
   }
+
+  getGoaliesByUserByType(id: number, seasonType: string): Observable<GoalieStat[]> {
+
+    const options = {params: new HttpParams()
+      .set('season_type', seasonType)
+    }
+    
+    return this._http.get(`${environment.back_end_url}/v2/goalies-stats/history/user/${id}`, options).pipe(
+      map(result => result['result'])
+    )
+  }
+
+  getGoaliesByUserByShowByType(id: number, seasonType: string): Observable<GoalieStat[]> {
+    
+    const options = {params: new HttpParams()
+      .set('season_type', seasonType)
+    }
+    
+    return this._http.get(`${environment.back_end_url}/v2/goalies-stats/show/history/user/${id}`, options).pipe(
+      map(result => result['result'])
+    )
+  }
 }

@@ -1,11 +1,10 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { MatTableDataSource } from '@angular/material';
 import { takeWhile, map } from 'rxjs/operators';
 import { AuthService } from 'src/app/_services/auth.service';
 import { User } from 'src/app/_models/user';
 import { CurrentSeasonService } from 'src/app/_services/current-season.service';
 import { PlayerStatsService } from 'src/app/_services/player-stats.service';
-import { Team } from 'src/app/_models/team';
 import { PlayerStat } from 'src/app/_models/player';
 
 @Component({
@@ -19,7 +18,6 @@ export class UserTeamPlayerHistoryComponent implements OnInit, OnDestroy {
   isLoading: boolean = false;
 
   currentUser: User;
-  userTeams: Team[];
 
   columns = [];
   players: MatTableDataSource<any[]>;
