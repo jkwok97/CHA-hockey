@@ -4,7 +4,7 @@
 
     <h4 class="card-header">CHA Login</h4>
 
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form">
+    <form [formGroup]="loginForm" class="form">
 
         <mat-form-field color="accent">
             <mat-icon matPrefix class="icons">mail_outline</mat-icon>
@@ -26,6 +26,14 @@
 
     </form> 
 
-    <button mat-raised-button color="accent" [disabled]="isLoading">Login</button>
+    <button 
+        mat-raised-button 
+        color="accent" 
+        type="submit" 
+        [disabled]="isLoading"
+        (click)="onSubmit()"
+    >
+        Login
+    </button>
 
 </div>
