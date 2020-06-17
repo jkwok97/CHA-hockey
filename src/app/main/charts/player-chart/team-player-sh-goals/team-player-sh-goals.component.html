@@ -1,0 +1,13 @@
+<div class="chart-container">
+    <canvas id="playerShGoalChart"></canvas>
+</div> 
+
+<div class="player-container">
+    <img src="{{ getPlayerPicture(shGoalsLeader.nhl_id) }}">
+    <div>
+        <p>Player Name: 
+        <p class="stats">{{shGoalsLeader.firstname}} {{shGoalsLeader.lastname}}</p>
+        <p>SH Goals:
+        <p class="stats">{{shGoalsLeader.sh_goals}}</p>
+    </div>
+</div>

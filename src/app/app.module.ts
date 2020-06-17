@@ -73,6 +73,12 @@ import { TeamGoalsAgainstComponent } from './main/charts/team-chart/team-goals-a
 import { TeamGoalsDiffComponent } from './main/charts/team-chart/team-goals-diff/team-goals-diff.component';
 import { TeamPpRankComponent } from './main/charts/team-chart/team-pp-rank/team-pp-rank.component';
 import { TeamPkRankComponent } from './main/charts/team-chart/team-pk-rank/team-pk-rank.component';
+import { TeamPlayerGoalsComponent } from './main/charts/player-chart/team-player-goals/team-player-goals.component';
+import { TeamPlayerPpGoalsComponent } from './main/charts/player-chart/team-player-pp-goals/team-player-pp-goals.component';
+import { TeamPlayerAssistsComponent } from './main/charts/player-chart/team-player-assists/team-player-assists.component';
+import { TeamPlayerPointsComponent } from './main/charts/player-chart/team-player-points/team-player-points.component';
+import { TeamPlayerShGoalsComponent } from './main/charts/player-chart/team-player-sh-goals/team-player-sh-goals.component';
+import { TeamPlayerPlusMinusComponent } from './main/charts/player-chart/team-player-plus-minus/team-player-plus-minus.component';
 
 @NgModule({
   declarations: [
@@ -141,7 +147,13 @@ import { TeamPkRankComponent } from './main/charts/team-chart/team-pk-rank/team-
     TeamGoalsAgainstComponent,
     TeamGoalsDiffComponent,
     TeamPpRankComponent,
-    TeamPkRankComponent
+    TeamPkRankComponent,
+    TeamPlayerGoalsComponent,
+    TeamPlayerPpGoalsComponent,
+    TeamPlayerAssistsComponent,
+    TeamPlayerPointsComponent,
+    TeamPlayerShGoalsComponent,
+    TeamPlayerPlusMinusComponent
   ],
   imports: [
     BrowserModule,

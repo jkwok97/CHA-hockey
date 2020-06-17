@@ -55,7 +55,7 @@ export class TeamGoalsAgainstComponent implements OnInit {
       }
     });
     const ctx = document.getElementById("goalsAgainstChart");
-    let chart = new Chart(ctx, {
+    const chart = new Chart(ctx, {
       type: "polarArea",
       data: {
         datasets: [{

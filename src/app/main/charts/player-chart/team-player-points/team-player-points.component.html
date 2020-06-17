@@ -1,0 +1,13 @@
+<div class="chart-container">
+    <canvas id="playerPointsChart"></canvas>
+</div>
+
+<div class="player-container">
+    <img src="{{ getPlayerPicture(pointsLeader.nhl_id) }}">
+    <div>
+        <p>Player Name: 
+        <p class="stats">{{pointsLeader.firstname}} {{pointsLeader.lastname}}</p>
+        <p>Points: 
+        <p class="stats">{{pointsLeader.points}}</p>
+    </div>
+</div>

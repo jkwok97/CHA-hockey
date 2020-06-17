@@ -1,0 +1,13 @@
+<div class="chart-container">
+    <canvas id="playerAssistChart"></canvas>
+</div> 
+
+<div class="player-container">
+    <img src="{{ getPlayerPicture(assistLeader.nhl_id) }}">
+    <div>
+        <p>Player Name: 
+        <p class="stats">{{assistLeader.firstname}} {{assistLeader.lastname}}</p>
+        <p>Assists: 
+        <p class="stats">{{assistLeader.assists}}</p>
+    </div>
+</div>

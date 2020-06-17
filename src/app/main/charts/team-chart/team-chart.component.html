@@ -1,6 +1,6 @@
 <mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
 
-<div class="stat-card" *ngIf="!isLoading">
+<div class="stat-card" *ngIf="!isLoading && userTeam">
 
     <app-team-points
         [userTeam]="userTeam"
@@ -9,7 +9,7 @@
     
 </div>
 
-<div class="stat-card" *ngIf="!isLoading">
+<div class="stat-card" *ngIf="!isLoading && userTeam">
 
     <app-team-goals-for
         [userTeam]="userTeam"
@@ -18,7 +18,7 @@
     
 </div>
 
-<div class="stat-card" *ngIf="!isLoading">
+<div class="stat-card" *ngIf="!isLoading && userTeam">
 
     <app-team-goals-against
         [userTeam]="userTeam"
@@ -27,7 +27,7 @@
     
 </div>
 
-<div class="stat-card" *ngIf="!isLoading">
+<div class="stat-card" *ngIf="!isLoading && userTeam">
 
     <app-team-goals-diff
         [userTeam]="userTeam"
@@ -36,7 +36,7 @@
 
 </div>
 
-<div class="stat-card" *ngIf="!isLoading">
+<div class="stat-card" *ngIf="!isLoading && userTeam">
 
     <app-team-pp-rank
         [userTeam]="userTeam"
@@ -45,7 +45,7 @@
 
 </div>
 
-<div class="stat-card" *ngIf="!isLoading">
+<div class="stat-card" *ngIf="!isLoading && userTeam">
 
     <app-team-pk-rank
         [userTeam]="userTeam"

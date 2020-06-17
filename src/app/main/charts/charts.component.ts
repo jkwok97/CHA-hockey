@@ -11,7 +11,7 @@ export class ChartsComponent implements OnInit {
 
   routes = [
     {name: 'Team', url: 'team', current: true},
-    // {name: 'Player', url: 'players', current: false},
+    {name: 'Player', url: 'players', current: false},
   ];
 
   constructor() { }

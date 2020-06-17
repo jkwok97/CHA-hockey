@@ -1,0 +1,13 @@
+<div class="chart-container">
+    <canvas id="playerPlusMinusChart"></canvas>
+</div> 
+
+<div class="player-container">
+    <img src="{{ getPlayerPicture(plusMinusLeader.nhl_id) }}">
+    <div>
+        <p>Player Name: 
+        <p class="stats">{{plusMinusLeader.firstname}} {{plusMinusLeader.lastname}}</p>
+        <p>Plus/Minus: 
+        <p class="stats">{{plusMinusLeader.plus_minus}}</p>
+    </div>
+</div>
