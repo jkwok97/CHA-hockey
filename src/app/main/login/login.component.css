@@ -1,56 +1,39 @@
-.container {
-    height: 100%;
-    width: 100%;
-    margin-top: 30px;
-    display: flex;
-    flex-wrap: wrap;
+:host {
     justify-content: center;
     align-content: flex-start;
+    justify-items: center;
+    display: grid;
+    padding: 20px;
+    grid-template-columns: minmax(350px, auto);
+    grid-row-gap: 30px;
 }
 
-.image {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 50px;
+img {
+    width: 200px;
 }
 
 .card {
     border: 1px solid lightgray;
     border-radius: 20px;
-    box-shadow: 0 0 50px lightsteelblue;
-    width: 50%;
+    box-shadow: 0 0 20px lightsteelblue;
     color: white;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    padding: 20px;
     justify-content: center;
+    justify-items: center;
     align-content: flex-start;
+    grid-template-columns: minmax(250px, auto);
+    grid-row-gap: 20px;
 }
 
 .card-header {
-    width: 100%;
     font-size: xx-large;
-    text-align: center;
     font-weight: 100;
+    margin: 20px 0;
 }
 
-.card-body {
+.mat-form-field {
     width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-.form {
-    width: 90%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 50px;
-}
-
-.form-field {
-    width: 100%;
-    margin-bottom: 20px;
 }
 
 .icons {
@@ -66,67 +49,9 @@
     color: red;
 }
 
-.spinner {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
 .error {
     width: 100%;
     display: flex;
     justify-content: center;
     margin-top: 20px;
-}
-
-/* *************************** MEDIA QUERIES **************************** */
-
-@media screen and (max-width: 1072px) {
-    
-}
-
-/* ***** IPHONE XS MAX ***** */
-@media screen and (max-width: 414px) and (max-height: 896px) and (orientation: portrait) {
-    .image {
-        display: none;
-    }
-    .card-header {
-        font-size: large;
-    }
-    .card {
-         margin-top: 30px;
-         width: 90%;
-         height: auto;
-     } 
-}
-
-/* ***** IPHONE 6,7,8 PLUS ***** */
-@media screen and (max-width: 414px) and (max-height: 736px) and (orientation: portrait) {
-    .image {
-        display: none;
-    }
-    .card-header {
-        font-size: large;
-    }
-    .card {
-         margin-top: 30px;
-         width: 90%;
-         height: auto;
-     }   
- }
-
-/* ***** IPHONE X ***** */
-@media screen and (max-width: 375px) and (max-height: 812px) and (orientation: portrait) {
-   .image {
-       display: none;
-   }
-   .card-header {
-    font-size: large;
-}
-   .card {
-        margin-top: 30px;
-        width: 90%;
-        height: auto;
-    }   
 }

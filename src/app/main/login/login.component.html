@@ -1,37 +1,31 @@
-<div class="col-md-6 offset-md-3 mt-5 cha-dark container">
+<img src="../../../assets/images/cha_logo.jpg">
 
-    <div class="image">
-        <img src="../../../assets/images/cha_logo.jpg">
-    </div>
+<div class="card">
 
-    <div class="card">
-        <h4 class="card-header">CHA Login</h4>
-        <div class="card-body">
-            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form">
+    <h4 class="card-header">CHA Login</h4>
 
-                <mat-form-field color="accent" class='form-field'>
-                    <mat-icon matPrefix class="icons">mail_outline</mat-icon>
-                    <mat-label>Email</mat-label>
-                    <input #emailInput matInput placeholder='Email' formControlName='email' required
-                    (keyup)='toLowerCase(emailInput.value)'>
-                    <mat-error *ngIf="email.invalid">
-                        {{ getError('email') }}
-                    </mat-error>
-                    <mat-icon matSuffix *ngIf="email.invalid && email.touched" class="unverified">error_outline</mat-icon>
-                    <mat-icon matSuffix *ngIf="email.valid" class="verified">check_circle_outline</mat-icon>
-                </mat-form-field>
-                
-                <button mat-raised-button color="accent" [disabled]="isLoading">Login</button>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form">
 
-                <div class="spinner" *ngIf="isLoading" >
-                    <mat-spinner diameter="50" color="accent"></mat-spinner>
-                </div>
+        <mat-form-field color="accent">
+            <mat-icon matPrefix class="icons">mail_outline</mat-icon>
+            <mat-label>Email</mat-label>
+            <input #emailInput matInput placeholder='Email' formControlName='email' required
+            (keyup)='toLowerCase(emailInput.value)'>
+            <mat-error *ngIf="email.invalid">
+                {{ getError('email') }}
+            </mat-error>
+            <mat-icon matSuffix *ngIf="email.invalid && email.touched" class="unverified">error_outline</mat-icon>
+            <mat-icon matSuffix *ngIf="email.valid" class="verified">check_circle_outline</mat-icon>
+        </mat-form-field>
 
-                <div class="error" *ngIf="error && showNotification">
-                    <mat-error >{{ error }}</mat-error>
-                </div>
+        <mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
 
-            </form>
+        <div class="error" *ngIf="error && showNotification">
+            <mat-error >{{ error }}</mat-error>
         </div>
-    </div>
+
+    </form> 
+
+    <button mat-raised-button color="accent" [disabled]="isLoading">Login</button>
+
 </div>

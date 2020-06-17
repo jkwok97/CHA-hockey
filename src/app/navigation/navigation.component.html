@@ -1,6 +1,8 @@
-<div class="main-container">
+<div class="main-container cha-dark">
 
-    <button mat-icon-button class="home-button" color="accent" routerLink="main"><mat-icon>home</mat-icon></button>
+    <button mat-icon-button class="home-button" color="accent" routerLink="main" *ngIf="currentUser">
+        <mat-icon>home</mat-icon>
+    </button>
 
     <div class="header-container">
 
