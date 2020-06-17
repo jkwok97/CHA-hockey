@@ -52,7 +52,7 @@ export class UserTeamHistoryComponent implements OnInit, OnDestroy {
   }
 
   getTeamStats(id: number, seasonType: string) {
-    this._teamStatsService.getTeamStatsByUser(this.currentUser.id, seasonType).pipe(
+    this._teamStatsService.getTeamStatsByUser(id, seasonType).pipe(
       takeWhile(() => this._alive)
     ).subscribe((teamStats: TeamStat[]) => {
       this.isLoading = false;
@@ -64,11 +64,11 @@ export class UserTeamHistoryComponent implements OnInit, OnDestroy {
     if (value === 'Playoffs') {
       this.isLoading = true;
       this.seasonType = value;
-      this.getTeamStats(this.currentUser.id, this.seasonType)
+      this.getTeamStats(this.currentUser.id, value)
     } else {
       this.isLoading = true;
       this.seasonType = value;
-      this.getTeamStats(this.currentUser.id, this.seasonType)
+      this.getTeamStats(this.currentUser.id, value)
     }
   }
 

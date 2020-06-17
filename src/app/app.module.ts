@@ -56,8 +56,8 @@ import { ConferenceComponent } from './schedule/playoff-tree/conference/conferen
 import { GoalieStatsTableComponent } from './stats/goalie-stats-table/goalie-stats-table.component';
 import { TeamStatsTableComponent } from './stats/team-stats-table/team-stats-table.component';
 import { PlayerStatsTableComponent } from './stats/player-stats-table/player-stats-table.component';
-import { TeamChartComponent } from './stats/team-chart/team-chart.component';
-import { PlayerChartComponent } from './stats/player-chart/player-chart.component';
+import { TeamChartComponent } from './main/charts/team-chart/team-chart.component';
+import { PlayerChartComponent } from './main/charts/player-chart/player-chart.component';
 import { TeamSeasonComponent } from './history/team-archives/team-season/team-season.component';
 import { AwardTableViewComponent } from './history/awards/award-table-view/award-table-view.component';
 import { NhlInfoComponent } from './main/nhl-info/nhl-info.component';
@@ -67,6 +67,12 @@ import { MainHistoryComponent } from './main/main-history/main-history.component
 import { UserTeamHistoryComponent } from './main/main-history/user-team-history/user-team-history.component';
 import { UserTeamPlayerHistoryComponent } from './main/main-history/user-team-player-history/user-team-player-history.component';
 import { UserTeamGoalieHistoryComponent } from './main/main-history/user-team-goalie-history/user-team-goalie-history.component';
+import { TeamPointsComponent } from './main/charts/team-chart/team-points/team-points.component';
+import { TeamGoalsForComponent } from './main/charts/team-chart/team-goals-for/team-goals-for.component';
+import { TeamGoalsAgainstComponent } from './main/charts/team-chart/team-goals-against/team-goals-against.component';
+import { TeamGoalsDiffComponent } from './main/charts/team-chart/team-goals-diff/team-goals-diff.component';
+import { TeamPpRankComponent } from './main/charts/team-chart/team-pp-rank/team-pp-rank.component';
+import { TeamPkRankComponent } from './main/charts/team-chart/team-pk-rank/team-pk-rank.component';
 
 @NgModule({
   declarations: [
@@ -129,7 +135,13 @@ import { UserTeamGoalieHistoryComponent } from './main/main-history/user-team-go
     MainHistoryComponent,
     UserTeamHistoryComponent,
     UserTeamPlayerHistoryComponent,
-    UserTeamGoalieHistoryComponent
+    UserTeamGoalieHistoryComponent,
+    TeamPointsComponent,
+    TeamGoalsForComponent,
+    TeamGoalsAgainstComponent,
+    TeamGoalsDiffComponent,
+    TeamPpRankComponent,
+    TeamPkRankComponent
   ],
   imports: [
     BrowserModule,

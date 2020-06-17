@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { MainService } from '../../main.service';
 import { takeWhile } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -40,8 +39,6 @@ export class NhlPlayersStatsComponent implements OnInit, OnDestroy {
 
   constructor(
     private _nhlService: NhlService,
-
-    private _mainService: MainService,
     private _teamsService: TeamsService,
     private _router: Router
   ) { }

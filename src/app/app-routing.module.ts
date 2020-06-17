@@ -31,6 +31,8 @@ import { MainHistoryComponent } from './main/main-history/main-history.component
 import { UserTeamHistoryComponent } from './main/main-history/user-team-history/user-team-history.component';
 import { UserTeamPlayerHistoryComponent } from './main/main-history/user-team-player-history/user-team-player-history.component';
 import { UserTeamGoalieHistoryComponent } from './main/main-history/user-team-goalie-history/user-team-goalie-history.component';
+import { TeamChartComponent } from './main/charts/team-chart/team-chart.component';
+import { PlayerChartComponent } from './main/charts/player-chart/player-chart.component';
 
 
 const routes: Routes = [
@@ -41,7 +43,12 @@ const routes: Routes = [
       children: [
         { path: 'nhl-info', component: NhlInfoComponent, canActivate: [AuthGuard] },
         { path: 'roster', component: RosterComponent },
-        { path: 'charts', component: ChartsComponent },
+        { path: 'charts', component: ChartsComponent, canActivate: [AuthGuard], 
+          children: [
+            { path: 'team', component: TeamChartComponent },
+            { path: 'players', component: PlayerChartComponent },
+          ] 
+        },
         { path: 'history', component: MainHistoryComponent, canActivate: [AuthGuard], 
           children: [
             { path: 'team', component: UserTeamHistoryComponent },

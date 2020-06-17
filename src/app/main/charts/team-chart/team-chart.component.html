@@ -1,0 +1,55 @@
+<mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
+
+<div class="stat-card" *ngIf="!isLoading">
+
+    <app-team-points
+        [userTeam]="userTeam"
+        [stats]="stats"
+    ></app-team-points>
+    
+</div>
+
+<div class="stat-card" *ngIf="!isLoading">
+
+    <app-team-goals-for
+        [userTeam]="userTeam"
+        [stats]="stats"
+    ></app-team-goals-for>
+    
+</div>
+
+<div class="stat-card" *ngIf="!isLoading">
+
+    <app-team-goals-against
+        [userTeam]="userTeam"
+        [stats]="stats"
+    ></app-team-goals-against>
+    
+</div>
+
+<div class="stat-card" *ngIf="!isLoading">
+
+    <app-team-goals-diff
+        [userTeam]="userTeam"
+        [stats]="stats"
+    ></app-team-goals-diff>
+
+</div>
+
+<div class="stat-card" *ngIf="!isLoading">
+
+    <app-team-pp-rank
+        [userTeam]="userTeam"
+        [stats]="stats"
+    ></app-team-pp-rank>
+
+</div>
+
+<div class="stat-card" *ngIf="!isLoading">
+
+    <app-team-pk-rank
+        [userTeam]="userTeam"
+        [stats]="stats"
+    ></app-team-pk-rank>
+    
+</div>

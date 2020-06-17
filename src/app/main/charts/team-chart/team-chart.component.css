@@ -1,0 +1,15 @@
+:host {
+    display: grid;
+    justify-content: space-around;
+    padding: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(350px, auto));
+    grid-column-gap: 20px;
+    grid-row-gap: 30px;
+}
+
+.stat-card {
+    border-radius: 25px;
+    border: 1px solid grey;
+    width: 100%;
+    display: grid;
+}

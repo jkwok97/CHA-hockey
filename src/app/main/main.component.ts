@@ -40,7 +40,7 @@ export class MainComponent implements OnInit, OnDestroy {
   routes = [
     {name: 'NHL Info', url: 'nhl-info', current: false},
     {name: 'Roster', url: 'roster', current: false},
-    // {name: 'Charts', url: 'charts', current: false},
+    {name: 'Charts', url: 'charts/team', current: false},
     {name: 'History', url: 'history/team', current: false},
   ];
 
