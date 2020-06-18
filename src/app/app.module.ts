@@ -11,7 +11,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { TeamsComponent } from './teams/teams-header.component';
 import { RulesComponent } from './rules/rules.component';
 import { ScheduleComponent } from './schedule/schedule.component';
-import { StatsComponent } from './stats/stats.component';
 import { HistoryComponent } from './history/history.component';
 import { TeamStatsComponent } from './teams/team-stats/team-stats.component';
 import { PlayersStatsComponent } from './stats/players-stats/players-stats.component';
@@ -121,7 +120,6 @@ import { GoalieLeaderCardComponent } from './overall-stats/overall-goalie-stats/
     TeamsComponent,
     RulesComponent,
     ScheduleComponent,
-    StatsComponent,
     HistoryComponent,
     TeamStatsComponent,
     PlayersStatsComponent,

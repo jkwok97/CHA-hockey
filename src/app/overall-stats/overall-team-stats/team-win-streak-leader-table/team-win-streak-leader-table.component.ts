@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { TeamStat } from 'src/app/_models/team';
 import { DisplayService } from 'src/app/_services/display.service';
-import { statSync } from 'fs';
 
 @Component({
   selector: 'app-team-win-streak-leader-table',
