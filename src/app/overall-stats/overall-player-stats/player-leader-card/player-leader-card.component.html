@@ -1,0 +1,75 @@
+<mat-card *ngIf="player">
+
+    <mat-card-header>
+
+      <div mat-card-avatar style="background-size: cover;">
+        <img [src]="player.teamlogo">
+      </div>
+    
+      <mat-card-title>{{player.firstname}} {{player.lastname}}</mat-card-title>
+      <mat-card-subtitle>{{player.nickname}}</mat-card-subtitle>
+
+    </mat-card-header>
+
+    <mat-card-content>
+
+        <img [src]="getPlayerPicture()" class="headshot">
+
+        <div *ngIf="statType === 'points'">
+            <p>Games Played: <span class="stat">{{player.games_played}}</span></p>
+            <p>Goals: <span class="stat">{{player.goals}}</span></p>
+            <p>Assists: <span class="stat">{{player.assists}}</span></p>
+            <p>Points: <span class="stat-highlight">{{player.points}}</span></p>
+        </div>
+
+        <div *ngIf="statType === 'assists'">
+            <p>Assists: <span class="stat-highlight">{{player.assists}}</span></p>
+        </div>
+
+        <div *ngIf="statType === 'goals'">
+            <p>Goals: <span class="stat-highlight">{{player.goals}}</span></p>
+        </div>
+
+        <div *ngIf="statType === 'ppGoals'">
+            <p>Power Play Goals: <span class="stat-highlight">{{player.pp_goals}}</span></p>
+        </div>
+
+        <div *ngIf="statType === 'shGoals'">
+            <p>Short Handed Goals: <span class="stat-highlight">{{player.sh_goals}}</span></p>
+        </div>
+
+        <div *ngIf="statType === 'blocked'">
+            <p>Blocked Shots: <span class="stat-highlight">{{player.blocked_shots}}</span></p>
+        </div>
+
+        <div *ngIf="statType === 'shots'">
+            <p>Shots: <span class="stat-highlight">{{player.shots}}</span></p>
+        </div>
+
+        <div *ngIf="statType === 'penalties'">
+            <p>Blocked Shots: <span class="stat-highlight">{{player.penalty_minutes}}</span></p>
+        </div>
+
+        <div *ngIf="statType === 'minutes'">
+            <p>Minutes Played: <span class="stat-highlight">{{player.minutes_played}}</span></p>
+        </div>
+
+        <div *ngIf="statType === 'plusMinus'">
+            <p>Plus/Minus: <span class="stat-highlight">{{player.plus_minus}}</span></p>
+        </div>
+
+        <div *ngIf="statType === 'hits'">
+            <p>Hits: <span class="stat-highlight">{{player.hits}}</span></p>
+        </div>
+
+        <div *ngIf="statType === 'current'">
+            <p>Current Streak: <span class="stat-highlight">{{player.current_points_streak}}</span></p>
+        </div>
+
+        <div *ngIf="statType === 'long'">
+            <p>Longest Streak: <span class="stat-highlight">{{player.longest_points_streak}}</span></p>
+        </div>
+        
+    </mat-card-content>
+
+  </mat-card>

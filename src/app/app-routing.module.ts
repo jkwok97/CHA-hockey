@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { LeagueComponent } from './league/league.component';
-import { StatsComponent } from './stats/stats.component';
+// import { StatsComponent } from './stats/stats.component';
 import { HistoryComponent } from './history/history.component';
 import { RulesComponent } from './rules/rules.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { TeamStatsComponent } from './teams/team-stats/team-stats.component';
-import { PlayersStatsComponent } from './stats/players-stats/players-stats.component';
-import { GoalieStatsComponent } from './stats/goalie-stats/goalie-stats.component';
-import { OverallTeamStatsComponent } from './stats/overall-team-stats/overall-team-stats.component';
+// import { PlayersStatsComponent } from './stats/players-stats/players-stats.component';
+// import { GoalieStatsComponent } from './stats/goalie-stats/goalie-stats.component';
+import { OverallTeamStatsComponent } from './overall-stats/overall-team-stats/overall-team-stats.component';
 import { ChampionsComponent } from './history/champions/champions.component';
 import { DraftsComponent } from './history/drafts/drafts.component';
 import { TradesComponent } from './trades/trades.component';
@@ -33,6 +33,9 @@ import { UserTeamPlayerHistoryComponent } from './main/main-history/user-team-pl
 import { UserTeamGoalieHistoryComponent } from './main/main-history/user-team-goalie-history/user-team-goalie-history.component';
 import { TeamChartComponent } from './main/charts/team-chart/team-chart.component';
 import { PlayerChartComponent } from './main/charts/player-chart/player-chart.component';
+import { OverallStatsComponent } from './overall-stats/overall-stats.component';
+import { OverallPlayerStatsComponent } from './overall-stats/overall-player-stats/overall-player-stats.component';
+import { OverallGoalieStatsComponent } from './overall-stats/overall-goalie-stats/overall-goalie-stats.component';
 
 
 const routes: Routes = [
@@ -58,15 +61,18 @@ const routes: Routes = [
         },
       ]
   },
+  { path: 'stats', component: OverallStatsComponent, canActivate: [AuthGuard],
+      children: [
+        { path: 'teams', component: OverallTeamStatsComponent },
+        { path: 'players', component: OverallPlayerStatsComponent },
+        { path: 'goalies', component: OverallGoalieStatsComponent },
+      ]
+  },
 
 
 
-  { path: 'stats', component: StatsComponent, canActivate: [AuthGuard] },
-  { path: 'stats/players', component: PlayersStatsComponent, canActivate: [AuthGuard] },
   { path: 'info/:type/:id/:name', component: PlayerInfoComponent, canActivate: [AuthGuard] },
-  { path: 'stats/goalies', component: GoalieStatsComponent, canActivate: [AuthGuard] },
   { path: 'info/goalies/:id/:name', component: PlayerInfoComponent, canActivate: [AuthGuard] },
-  { path: 'stats/league', component: OverallTeamStatsComponent, canActivate: [AuthGuard] },
   { path: 'teams', component: LeagueComponent, canActivate: [AuthGuard] },
   { path: 'teams/:params', component: TeamStatsComponent, canActivate: [AuthGuard] },
   { path: 'teams/:params/:params/:params', component: TeamSeasonComponent, canActivate: [AuthGuard] },

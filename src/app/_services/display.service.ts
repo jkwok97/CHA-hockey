@@ -7,9 +7,12 @@ import { Subject, Observable } from 'rxjs';
 export class DisplayService {
 
   private _subjectPageShow = new Subject<any>();
+  private _seasonTypeChange = new Subject<string>();
   isMobile: boolean;
 
-  constructor() { }
+  constructor() {
+    this.checkMobile();
+   }
 
   triggerFullPageStats(type) {
     this._subjectPageShow.next(type);
@@ -17,6 +20,14 @@ export class DisplayService {
 
   listenerFullPageStats(): Observable<any> {
     return this._subjectPageShow.asObservable();
+  }
+
+  triggerSeasonTypeChange(seasonType: string) {
+    this._seasonTypeChange.next(seasonType);
+  }
+
+  listenerSeasonTypeChange(): Observable<string> {
+    return this._seasonTypeChange.asObservable();
   }
 
   checkMobile() {

@@ -16,7 +16,7 @@ import { HistoryComponent } from './history/history.component';
 import { TeamStatsComponent } from './teams/team-stats/team-stats.component';
 import { PlayersStatsComponent } from './stats/players-stats/players-stats.component';
 import { GoalieStatsComponent } from './stats/goalie-stats/goalie-stats.component';
-import { OverallTeamStatsComponent } from './stats/overall-team-stats/overall-team-stats.component';
+// import { OverallTeamStatsComponent } from './stats/overall-team-stats/overall-team-stats.component';
 import { ChampionsComponent } from './history/champions/champions.component';
 import { DraftsComponent } from './history/drafts/drafts.component';
 import { TradesComponent } from './trades/trades.component';
@@ -79,6 +79,39 @@ import { TeamPlayerAssistsComponent } from './main/charts/player-chart/team-play
 import { TeamPlayerPointsComponent } from './main/charts/player-chart/team-player-points/team-player-points.component';
 import { TeamPlayerShGoalsComponent } from './main/charts/player-chart/team-player-sh-goals/team-player-sh-goals.component';
 import { TeamPlayerPlusMinusComponent } from './main/charts/player-chart/team-player-plus-minus/team-player-plus-minus.component';
+import { OverallStatsComponent } from './overall-stats/overall-stats.component';
+import { OverallPlayerStatsComponent } from './overall-stats/overall-player-stats/overall-player-stats.component';
+import { OverallGoalieStatsComponent } from './overall-stats/overall-goalie-stats/overall-goalie-stats.component';
+import { OverallTeamStatsComponent } from './overall-stats/overall-team-stats/overall-team-stats.component';
+import { TeamPointLeaderTableComponent } from './overall-stats/overall-team-stats/team-point-leader-table/team-point-leader-table.component';
+import { TeamPenaltiesLeaderTableComponent } from './overall-stats/overall-team-stats/team-penalties-leader-table/team-penalties-leader-table.component';
+import { TeamGoalDiffLeaderTableComponent } from './overall-stats/overall-team-stats/team-goal-diff-leader-table/team-goal-diff-leader-table.component';
+import { TeamPpLeaderTableComponent } from './overall-stats/overall-team-stats/team-pp-leader-table/team-pp-leader-table.component';
+import { TeamWinStreakLeaderTableComponent } from './overall-stats/overall-team-stats/team-win-streak-leader-table/team-win-streak-leader-table.component';
+import { TeamPkLeaderTableComponent } from './overall-stats/overall-team-stats/team-pk-leader-table/team-pk-leader-table.component';
+import { PlayerPointLeaderTableComponent } from './overall-stats/overall-player-stats/player-point-leader-table/player-point-leader-table.component';
+import { PlayerRookieLeaderTableComponent } from './overall-stats/overall-player-stats/player-rookie-leader-table/player-rookie-leader-table.component';
+import { PlayerGoalLeaderTableComponent } from './overall-stats/overall-player-stats/player-goal-leader-table/player-goal-leader-table.component';
+import { PlayerPpgLeaderTableComponent } from './overall-stats/overall-player-stats/player-ppg-leader-table/player-ppg-leader-table.component';
+import { PlayerPlusMinusLeaderTableComponent } from './overall-stats/overall-player-stats/player-plus-minus-leader-table/player-plus-minus-leader-table.component';
+import { PlayerPenaltyLeaderTableComponent } from './overall-stats/overall-player-stats/player-penalty-leader-table/player-penalty-leader-table.component';
+import { PlayerShotLeaderTableComponent } from './overall-stats/overall-player-stats/player-shot-leader-table/player-shot-leader-table.component';
+import { PlayerStreakLeaderTableComponent } from './overall-stats/overall-player-stats/player-streak-leader-table/player-streak-leader-table.component';
+import { PlayerDefenseLeaderTableComponent } from './overall-stats/overall-player-stats/player-defense-leader-table/player-defense-leader-table.component';
+import { PlayerAssistLeaderTableComponent } from './overall-stats/overall-player-stats/player-assist-leader-table/player-assist-leader-table.component';
+import { PlayerShgLeaderTableComponent } from './overall-stats/overall-player-stats/player-shg-leader-table/player-shg-leader-table.component';
+import { PlayerWorstPlusMinussLeaderTableComponent } from './overall-stats/overall-player-stats/player-worst-plus-minuss-leader-table/player-worst-plus-minuss-leader-table.component';
+import { PlayerBsLeaderTableComponent } from './overall-stats/overall-player-stats/player-bs-leader-table/player-bs-leader-table.component';
+import { PlayerHitLeaderTableComponent } from './overall-stats/overall-player-stats/player-hit-leader-table/player-hit-leader-table.component';
+import { PlayerLongStreakLeaderTableComponent } from './overall-stats/overall-player-stats/player-long-streak-leader-table/player-long-streak-leader-table.component';
+import { PlayerLeaderCardComponent } from './overall-stats/overall-player-stats/player-leader-card/player-leader-card.component';
+import { PlayerMinutesLeaderTableComponent } from './overall-stats/overall-player-stats/player-minutes-leader-table/player-minutes-leader-table.component';
+import { GoalieWinsLeaderTableComponent } from './overall-stats/overall-goalie-stats/goalie-wins-leader-table/goalie-wins-leader-table.component';
+import { GoalieSavePctLeaderTableComponent } from './overall-stats/overall-goalie-stats/goalie-save-pct-leader-table/goalie-save-pct-leader-table.component';
+import { GoalieShutoutLeaderTableComponent } from './overall-stats/overall-goalie-stats/goalie-shutout-leader-table/goalie-shutout-leader-table.component';
+import { GoalieGaaLeaderTableComponent } from './overall-stats/overall-goalie-stats/goalie-gaa-leader-table/goalie-gaa-leader-table.component';
+import { GoalieShotsFacedLeaderTableComponent } from './overall-stats/overall-goalie-stats/goalie-shots-faced-leader-table/goalie-shots-faced-leader-table.component';
+import { GoalieLeaderCardComponent } from './overall-stats/overall-goalie-stats/goalie-leader-card/goalie-leader-card.component';
 
 @NgModule({
   declarations: [
@@ -153,7 +186,39 @@ import { TeamPlayerPlusMinusComponent } from './main/charts/player-chart/team-pl
     TeamPlayerAssistsComponent,
     TeamPlayerPointsComponent,
     TeamPlayerShGoalsComponent,
-    TeamPlayerPlusMinusComponent
+    TeamPlayerPlusMinusComponent,
+    OverallStatsComponent,
+    OverallPlayerStatsComponent,
+    OverallGoalieStatsComponent,
+    TeamPointLeaderTableComponent,
+    TeamPenaltiesLeaderTableComponent,
+    TeamGoalDiffLeaderTableComponent,
+    TeamPpLeaderTableComponent,
+    TeamWinStreakLeaderTableComponent,
+    TeamPkLeaderTableComponent,
+    PlayerPointLeaderTableComponent,
+    PlayerRookieLeaderTableComponent,
+    PlayerGoalLeaderTableComponent,
+    PlayerPpgLeaderTableComponent,
+    PlayerPlusMinusLeaderTableComponent,
+    PlayerPenaltyLeaderTableComponent,
+    PlayerShotLeaderTableComponent,
+    PlayerStreakLeaderTableComponent,
+    PlayerDefenseLeaderTableComponent,
+    PlayerAssistLeaderTableComponent,
+    PlayerShgLeaderTableComponent,
+    PlayerWorstPlusMinussLeaderTableComponent,
+    PlayerBsLeaderTableComponent,
+    PlayerHitLeaderTableComponent,
+    PlayerLongStreakLeaderTableComponent,
+    PlayerLeaderCardComponent,
+    PlayerMinutesLeaderTableComponent,
+    GoalieWinsLeaderTableComponent,
+    GoalieSavePctLeaderTableComponent,
+    GoalieShutoutLeaderTableComponent,
+    GoalieGaaLeaderTableComponent,
+    GoalieShotsFacedLeaderTableComponent,
+    GoalieLeaderCardComponent
   ],
   imports: [
     BrowserModule,

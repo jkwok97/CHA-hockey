@@ -47,4 +47,71 @@ export class GoalieStatsService {
       map(result => result['result'])
     )
   }
+
+  getWinsLeaders(season: string, seasonType: string) {
+
+    const options = {params: new HttpParams()
+      .set('playing_year', season)
+      .set('season_type', seasonType)
+    }
+
+    return this._http.get(`${environment.back_end_url}/v2/goalies-stats/leaders/wins`, options).pipe(
+      map(result => result['result'])
+    )
+
+  }
+
+  getShutoutLeaders(season: string, seasonType: string) {
+
+    const options = {params: new HttpParams()
+      .set('playing_year', season)
+      .set('season_type', seasonType)
+    }
+
+    return this._http.get(`${environment.back_end_url}/v2/goalies-stats/leaders/shutouts`, options).pipe(
+      map(result => result['result'])
+    )
+
+  }
+
+  getSavePctLeaders(season: string, seasonType: string, minGames: number) {
+
+    const options = {params: new HttpParams()
+      .set('playing_year', season)
+      .set('season_type', seasonType)
+      .set('min_games', minGames.toString())
+    }
+
+    return this._http.get(`${environment.back_end_url}/v2/goalies-stats/leaders/savepct`, options).pipe(
+      map(result => result['result'])
+    )
+
+  }
+
+  getGaaLeaders(season: string, seasonType: string, minGames: number) {
+
+    const options = {params: new HttpParams()
+      .set('playing_year', season)
+      .set('season_type', seasonType)
+      .set('min_games', minGames.toString())
+    }
+
+    return this._http.get(`${environment.back_end_url}/v2/goalies-stats/leaders/gaa`, options).pipe(
+      map(result => result['result'])
+    )
+
+  }
+
+  getShotsFacedLeaders(season: string, seasonType: string) {
+
+    const options = {params: new HttpParams()
+      .set('playing_year', season)
+      .set('season_type', seasonType)
+    }
+
+    return this._http.get(`${environment.back_end_url}/v2/goalies-stats/leaders/shots`, options).pipe(
+      map(result => result['result'])
+    )
+
+  }
 }

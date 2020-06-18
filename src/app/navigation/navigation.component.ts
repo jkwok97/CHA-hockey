@@ -22,7 +22,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
   activeLinkIndex = -1;
 
   routes = [
-    {name: 'Statistics', url: 'stats', current: false},
+    {name: 'Statistics', url: 'stats/teams', current: false},
     {name: 'Teams', url: 'teams', current: false},
     // {name: 'Schedule', url: 'schedule', current: false},
     {name: 'Playoff Tree', url: 'playoffTree', current: false},

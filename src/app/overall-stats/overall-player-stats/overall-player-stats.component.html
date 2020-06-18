@@ -1,0 +1,210 @@
+<mat-button-toggle-group #bySeason="matButtonToggleGroup" [value]="currentSeasonType" (change)="changeSeason(bySeason.value)">
+    <mat-button-toggle value="Regular" color="accent">
+        Regular
+    </mat-button-toggle>
+    <mat-button-toggle value="Playoffs" color="accent">
+        Playoffs
+    </mat-button-toggle>
+</mat-button-toggle-group>
+
+<div class="panel-container">
+
+    <mat-accordion multi="true" color="accent">
+    
+        <mat-expansion-panel expanded="{{expand}}">
+
+            <mat-expansion-panel-header>
+                <mat-panel-title>Points Leaders</mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <app-player-point-leader-table 
+                [currentSeason]="currentSeason"
+            ></app-player-point-leader-table>
+
+        </mat-expansion-panel>
+
+        <mat-expansion-panel expanded="{{expand}}">
+
+            <mat-expansion-panel-header>
+                <mat-panel-title>Rookie Leaders</mat-panel-title>
+            </mat-expansion-panel-header>
+    
+            <app-player-rookie-leader-table 
+                [currentSeason]="currentSeason"
+            ></app-player-rookie-leader-table>
+
+        </mat-expansion-panel>
+
+        <mat-expansion-panel expanded="{{expand}}">
+
+            <mat-expansion-panel-header>
+                <mat-panel-title>Goals Leaders</mat-panel-title>
+            </mat-expansion-panel-header>
+    
+            <app-player-goal-leader-table 
+                [currentSeason]="currentSeason"
+            ></app-player-goal-leader-table>
+
+        </mat-expansion-panel>
+
+        <mat-expansion-panel expanded="{{expand}}">
+
+            <mat-expansion-panel-header>
+                <mat-panel-title>PPG Leaders</mat-panel-title>
+            </mat-expansion-panel-header>
+    
+            <app-player-ppg-leader-table 
+                [currentSeason]="currentSeason"
+            ></app-player-ppg-leader-table>
+
+        </mat-expansion-panel>
+
+        <mat-expansion-panel expanded="{{expand}}">
+
+            <mat-expansion-panel-header>
+                <mat-panel-title>+/- Leaders</mat-panel-title>
+            </mat-expansion-panel-header>
+    
+            <app-player-plus-minus-leader-table 
+                [currentSeason]="currentSeason"
+            ></app-player-plus-minus-leader-table>
+
+        </mat-expansion-panel>
+
+        <mat-expansion-panel expanded="{{expand}}">
+
+            <mat-expansion-panel-header>
+                <mat-panel-title>Penalty Leaders</mat-panel-title>
+            </mat-expansion-panel-header>
+    
+            <app-player-penalty-leader-table 
+                [currentSeason]="currentSeason"
+            ></app-player-penalty-leader-table>
+
+        </mat-expansion-panel>
+
+        <mat-expansion-panel expanded="{{expand}}">
+
+            <mat-expansion-panel-header>
+                <mat-panel-title>Shots Leaders</mat-panel-title>
+            </mat-expansion-panel-header>
+    
+            <app-player-shot-leader-table 
+                [currentSeason]="currentSeason"
+            ></app-player-shot-leader-table>
+
+        </mat-expansion-panel>
+
+        <mat-expansion-panel expanded="{{expand}}">
+
+            <mat-expansion-panel-header>
+                <mat-panel-title>Current Point Streak Leaders</mat-panel-title>
+            </mat-expansion-panel-header>
+    
+            <app-player-streak-leader-table 
+                [currentSeason]="currentSeason"
+            ></app-player-streak-leader-table>
+
+        </mat-expansion-panel>
+
+    </mat-accordion>
+
+    <mat-accordion multi="true" color="accent">
+
+        <mat-expansion-panel expanded="{{expand}}">
+
+            <mat-expansion-panel-header>
+                <mat-panel-title>Defense Leaders</mat-panel-title>
+            </mat-expansion-panel-header>
+    
+            <app-player-defense-leader-table 
+                [currentSeason]="currentSeason"
+            ></app-player-defense-leader-table>
+            
+        </mat-expansion-panel>
+
+        <mat-expansion-panel expanded="{{expand}}">
+
+            <mat-expansion-panel-header>
+                <mat-panel-title>Minutes Played Leaders</mat-panel-title>
+            </mat-expansion-panel-header>
+    
+            <app-player-minutes-leader-table [currentSeason]="currentSeason"></app-player-minutes-leader-table>
+            
+        </mat-expansion-panel>
+
+        <mat-expansion-panel expanded="{{expand}}">
+
+            <mat-expansion-panel-header>
+                <mat-panel-title>Assists Leaders</mat-panel-title>
+            </mat-expansion-panel-header>
+    
+            <app-player-assist-leader-table 
+                [currentSeason]="currentSeason"
+            ></app-player-assist-leader-table>
+        
+        </mat-expansion-panel>
+
+        <mat-expansion-panel expanded="{{expand}}">
+
+            <mat-expansion-panel-header>
+                <mat-panel-title>SHG Leaders</mat-panel-title>
+            </mat-expansion-panel-header>
+    
+            <app-player-shg-leader-table 
+                [currentSeason]="currentSeason"
+            ></app-player-shg-leader-table>
+        
+        </mat-expansion-panel>
+
+        <mat-expansion-panel expanded="{{expand}}">
+
+            <mat-expansion-panel-header>
+                <mat-panel-title>Worst +/- Leaders</mat-panel-title>
+            </mat-expansion-panel-header>
+    
+            <app-player-worst-plus-minuss-leader-table
+                [currentSeason]="currentSeason"
+            ></app-player-worst-plus-minuss-leader-table>
+        
+        </mat-expansion-panel>
+
+        <mat-expansion-panel expanded="{{expand}}">
+
+            <mat-expansion-panel-header>
+                <mat-panel-title>Hits Leaders</mat-panel-title>
+            </mat-expansion-panel-header>
+    
+            <app-player-hit-leader-table 
+                [currentSeason]="currentSeason"
+            ></app-player-hit-leader-table>
+        
+        </mat-expansion-panel>
+
+        <mat-expansion-panel expanded="{{expand}}">
+
+            <mat-expansion-panel-header>
+                <mat-panel-title>Blocked Shots Leaders</mat-panel-title>
+            </mat-expansion-panel-header>
+    
+            <app-player-bs-leader-table 
+                [currentSeason]="currentSeason"
+            ></app-player-bs-leader-table>
+        
+        </mat-expansion-panel>
+
+        <mat-expansion-panel expanded="{{expand}}">
+
+            <mat-expansion-panel-header>
+                <mat-panel-title>Longest Point Streak Leaders</mat-panel-title>
+            </mat-expansion-panel-header>
+    
+            <app-player-long-streak-leader-table 
+                [currentSeason]="currentSeason"
+            ></app-player-long-streak-leader-table>
+        
+        </mat-expansion-panel>
+
+    </mat-accordion> 
+
+</div>

@@ -1,0 +1,82 @@
+<mat-button-toggle-group #bySeason="matButtonToggleGroup" [value]="currentSeasonType" (change)="changeSeason(bySeason.value)">
+    <mat-button-toggle value="Regular" color="accent">
+        Regular
+    </mat-button-toggle>
+    <mat-button-toggle value="Playoffs" color="accent">
+        Playoffs
+    </mat-button-toggle>
+</mat-button-toggle-group>
+
+<mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
+
+<div class="panel-container">
+    <mat-accordion multi="true" color="accent" *ngIf="!isLoading">
+
+        <mat-expansion-panel expanded="{{expand}}">
+    
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    League Standings
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            
+            <app-team-point-leader-table [teamStats]="teamStats"></app-team-point-leader-table>
+    
+        </mat-expansion-panel>
+    
+        <mat-expansion-panel expanded="{{expand}}">
+            
+            <mat-expansion-panel-header>
+                <mat-panel-title>League Goal Differentials</mat-panel-title>
+            </mat-expansion-panel-header>
+    
+            <app-team-goal-diff-leader-table [teamStats]="teamStats"></app-team-goal-diff-leader-table>
+    
+        </mat-expansion-panel>
+    
+        <mat-expansion-panel expanded="{{expand}}">
+        
+            <mat-expansion-panel-header>
+                <mat-panel-title>Power Play Efficiency</mat-panel-title>
+            </mat-expansion-panel-header>
+    
+            <app-team-pp-leader-table [teamStats]="teamStats"></app-team-pp-leader-table>
+    
+        </mat-expansion-panel>
+    
+    </mat-accordion>
+    
+    <mat-accordion multi="true" color="accent" *ngIf="!isLoading">
+        
+        <mat-expansion-panel expanded="{{expand}}">
+    
+            <mat-expansion-panel-header>
+                <mat-panel-title>Team Penalties</mat-panel-title>
+            </mat-expansion-panel-header>
+    
+            <app-team-penalties-leader-table [teamStats]="teamStats"></app-team-penalties-leader-table>
+    
+        </mat-expansion-panel>
+    
+        <mat-expansion-panel expanded="{{expand}}">
+    
+            <mat-expansion-panel-header>
+                <mat-panel-title>Longest Winning Streak</mat-panel-title>
+            </mat-expansion-panel-header>
+    
+            <app-team-win-streak-leader-table [teamStats]="teamStats"></app-team-win-streak-leader-table>
+    
+        </mat-expansion-panel>
+    
+        <mat-expansion-panel expanded="{{expand}}">
+    
+            <mat-expansion-panel-header>
+                <mat-panel-title>Penalty Kill Efficiency</mat-panel-title>
+            </mat-expansion-panel-header>
+    
+            <app-team-pk-leader-table [teamStats]="teamStats"></app-team-pk-leader-table>
+    
+        </mat-expansion-panel>
+    
+    </mat-accordion>
+</div>

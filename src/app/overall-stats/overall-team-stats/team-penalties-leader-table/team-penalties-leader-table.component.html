@@ -1,0 +1,36 @@
+<table mat-table [dataSource]="leaders" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="team_logo">
+        <th mat-header-cell *matHeaderCellDef><span *ngIf="isMobile">Team</span></th>
+        <td mat-cell *matCellDef="let team"> 
+            <img src="{{ team.teamlogo }}">
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="team_name">
+        <th mat-header-cell *matHeaderCellDef> Team </th>
+        <td mat-cell *matCellDef="let team">
+            {{team.city}} {{team.nickname}} 
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="penalty_minutes">
+        <th mat-header-cell *matHeaderCellDef> PIM </th>
+        <td mat-cell *matCellDef="let team"> {{team.penalty_minutes}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="pim_game">
+        <th mat-header-cell *matHeaderCellDef> PIM/G </th>
+        <td mat-cell *matCellDef="let team"> {{ (team.penalty_minutes / team.games_played).toFixed(1) }} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="isMobile ? mobileColumns : columns"></tr>
+    <tr 
+        mat-row 
+        *matRowDef="let team; columns: isMobile ? mobileColumns : columns;" 
+    ></tr>
+
+    <!-- (click)="openTeam(team.team_name)" -->
+
+
+</table>

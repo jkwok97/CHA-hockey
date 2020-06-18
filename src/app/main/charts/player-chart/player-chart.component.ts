@@ -57,7 +57,7 @@ export class PlayerChartComponent implements OnInit {
   }
 
   getTeamPlayerStatsForSeason(team: Team) {
-    this._playerStatsService.getPlayersBySeasonByTypeByTeam(team.id, "2019-20", this.currentSeasonType).pipe(
+    this._playerStatsService.getPlayersBySeasonByTypeByTeam(team.id, this.currentSeason, this.currentSeasonType).pipe(
       takeWhile(() => this._alive)
       ).subscribe(resp => {
 

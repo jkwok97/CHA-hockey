@@ -51,7 +51,7 @@ export class TeamChartComponent implements OnInit, OnDestroy {
       this.userTeam = teams.find((team: Team) => team.isactive);
     });
 
-    this._teamStatsService.getTeamStatsBySeasonByType("2019-20", this.currentSeasonType).pipe(
+    this._teamStatsService.getTeamStatsBySeasonByType(this.currentSeason, this.currentSeasonType).pipe(
       takeWhile(() => this._alive)
     ).subscribe((teamStats: TeamStat[]) => {
       this.stats = teamStats;

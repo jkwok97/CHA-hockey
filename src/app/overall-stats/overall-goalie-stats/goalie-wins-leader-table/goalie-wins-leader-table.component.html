@@ -1,0 +1,44 @@
+<mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
+
+<app-goalie-leader-card 
+    [player]="leader" 
+    [statType]="'wins'"
+    *ngIf="!isLoading"
+></app-goalie-leader-card>
+
+<table mat-table [dataSource]="leaders" class="mat-elevation-z8">
+        
+    <ng-container matColumnDef="team_logo">
+        <th mat-header-cell *matHeaderCellDef> Team </th>
+        <td mat-cell *matCellDef="let player"> 
+            <img src="{{ player.teamlogo }}" matTooltip="player.nickname"> 
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="player_name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let player"> 
+            {{player.firstname}} {{player.lastname}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="games_played">
+        <th mat-header-cell *matHeaderCellDef> GP </th>
+        <td mat-cell *matCellDef="let player"> {{player.games_played}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="wins">
+        <th mat-header-cell *matHeaderCellDef> W </th>
+        <td mat-cell *matCellDef="let player"> {{player.wins}} </td>
+    </ng-container>
+    
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr 
+        mat-row 
+        *matRowDef="let player; columns: columns;" 
+        
+    ></tr>
+
+    <!-- (click)="openPlayer(goalie, 'goalie')" -->
+
+</table>

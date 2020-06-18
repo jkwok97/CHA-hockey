@@ -1,0 +1,70 @@
+<mat-button-toggle-group #bySeason="matButtonToggleGroup" [value]="currentSeasonType" (change)="changeSeason(bySeason.value)">
+    <mat-button-toggle value="Regular" color="accent">
+        Regular
+    </mat-button-toggle>
+    <mat-button-toggle value="Playoffs" color="accent">
+        Playoffs
+    </mat-button-toggle>
+</mat-button-toggle-group>
+
+<div class="panel-container">
+
+    <mat-accordion multi="true" color="accent">
+    
+        <mat-expansion-panel expanded="{{expand}}">
+
+            <mat-expansion-panel-header>
+                <mat-panel-title>Wins Leaders</mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <app-goalie-wins-leader-table [currentSeason]="currentSeason"></app-goalie-wins-leader-table>
+
+        </mat-expansion-panel>
+
+        <mat-expansion-panel expanded="{{expand}}">
+
+            <mat-expansion-panel-header>
+                <mat-panel-title>Save Pct Leaders</mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <app-goalie-save-pct-leader-table [currentSeason]="currentSeason"></app-goalie-save-pct-leader-table>
+
+        </mat-expansion-panel>
+
+        <mat-expansion-panel expanded="{{expand}}">
+
+            <mat-expansion-panel-header>
+                <mat-panel-title>Shutouts Leaders</mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <app-goalie-shutout-leader-table [currentSeason]="currentSeason"></app-goalie-shutout-leader-table>
+
+        </mat-expansion-panel>
+        
+    </mat-accordion>
+
+    <mat-accordion multi="true" color="accent" *ngIf="!isGoaliesLoading">
+
+        <mat-expansion-panel expanded="{{expand}}">
+
+            <mat-expansion-panel-header>
+                <mat-panel-title>GAA Leaders</mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <app-goalie-gaa-leader-table [currentSeason]="currentSeason"></app-goalie-gaa-leader-table>
+
+        </mat-expansion-panel>
+
+        <mat-expansion-panel expanded="{{expand}}">
+
+            <mat-expansion-panel-header>
+                <mat-panel-title>Shots Faced Leaders</mat-panel-title>
+            </mat-expansion-panel-header>
+            
+            <app-goalie-shots-faced-leader-table [currentSeason]="currentSeason"></app-goalie-shots-faced-leader-table>
+
+        </mat-expansion-panel>
+
+    </mat-accordion>
+
+</div>

@@ -76,7 +76,7 @@ export class RosterComponent implements OnInit, OnDestroy {
 
 
   getTeamPlayerStatsForSeason(team: Team) {
-    this._playerStatsService.getPlayersBySeasonByTypeByTeam(team.id, this.currentSeason, this.currentSeasonType).pipe(
+    this._playerStatsService.getPlayersBySeasonByTypeByTeam(team.id, '2020-21', this.currentSeasonType).pipe(
       takeWhile(() => this._alive)
       ).subscribe(resp => {
 
@@ -93,7 +93,7 @@ export class RosterComponent implements OnInit, OnDestroy {
   }
 
   getTeamGoalieStatsForSeason(team: Team) {
-    this._goalieStatsService.getGoaliesBySeasonByTypeByTeam(team.id, this.currentSeason, this.currentSeasonType).pipe(
+    this._goalieStatsService.getGoaliesBySeasonByTypeByTeam(team.id, '2020-21', this.currentSeasonType).pipe(
       takeWhile(() => this._alive)
       ).subscribe(resp => {
         const stats = resp;

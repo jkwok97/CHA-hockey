@@ -1,0 +1,32 @@
+:host {
+    display: grid;
+    padding: 20px;
+    grid-row-gap: 20px;
+}
+
+.panel-container {
+    display: grid;
+    grid-column-gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(325px, auto));
+    grid-row-gap: 20px;
+}
+
+.mat-accordion {
+    width: 100%;
+}
+
+.mat-accordion,
+.mat-expansion-panel,
+.mat-expansion-panel-header,
+.mat-expanded {
+    background-color: rgba(138, 136, 136, 0.4);
+}
+
+.mat-button-toggle-checked {
+    background-color: red;
+}
+
+.mat-button-toggle-group {
+    display: flex;
+    justify-self: center;
+}
