@@ -1,1 +1,27 @@
-<p>league-detail works!</p>
+<h3 class="title">League Stats</h3>
+
+<mat-button-toggle-group 
+    #bySeason="matButtonToggleGroup" 
+    [value]="currentSeasonType" 
+    (change)="changeSeason(bySeason.value)"
+>
+    <mat-button-toggle value="Regular" color="accent">
+        Regular
+    </mat-button-toggle>
+    <mat-button-toggle value="Playoffs" color="accent">
+        Playoffs
+    </mat-button-toggle>
+</mat-button-toggle-group>
+
+<div class="container">
+
+    <mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
+
+    <app-team-stats-table 
+        [teams]="teams"
+        [statsColumnsToDisplay]="columns"
+        [sortByPoints]="'true'"
+        *ngIf="!isLoading"
+    ></app-team-stats-table>
+
+</div>

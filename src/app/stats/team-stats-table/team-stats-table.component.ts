@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, AfterViewInit, OnChanges } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { TeamsService } from 'src/app/teams/teams.service';
 import { MatSort } from '@angular/material';
 
@@ -12,8 +12,7 @@ export class TeamStatsTableComponent implements OnInit, AfterViewInit, OnChanges
 
   @Input() teams:any;
   @Input() statsColumnsToDisplay: [];
-
-  sortByPoints: boolean = false;
+  @Input() sortByPoints: boolean;
 
   goalsForPerGame: string;
   goalsAgainstPerGame: string;
@@ -45,11 +44,10 @@ export class TeamStatsTableComponent implements OnInit, AfterViewInit, OnChanges
   constructor(
     private _router: Router,
     private _teamsService: TeamsService,
-    private _route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this.sortByPoints = this._route.snapshot.routeConfig.path === 'history';
+   
   }
 
   ngAfterViewInit() {
