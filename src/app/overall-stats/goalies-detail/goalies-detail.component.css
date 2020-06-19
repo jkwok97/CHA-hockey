@@ -2,12 +2,14 @@
     display: grid;
     padding: 20px;
     justify-content: center;
+    justify-items: center;
     grid-template-columns: minmax(350px, 1fr);
 }
 
 .container {
-    width: 100%;
     overflow-x: auto;
+    width: 100%;
+    padding: 10px;
 }
 
 .title {
@@ -15,4 +17,18 @@
     font-weight: 100;
     font-size: x-large;
     text-align: center;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 90%;
+    color: red;
+}
+
+.mat-button-toggle-group {
+    margin: 10px 0;
+}
+
+.mat-button-toggle-checked {
+    background-color: red;
 }

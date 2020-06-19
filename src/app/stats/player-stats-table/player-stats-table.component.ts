@@ -2,7 +2,6 @@ import { Component, OnInit, Input, ViewChild, AfterViewInit, OnChanges } from '@
 import { Router } from '@angular/router';
 import { TeamsService } from 'src/app/teams/teams.service';
 import { MatSort, MatPaginator } from '@angular/material';
-import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-player-stats-table',
@@ -38,6 +37,10 @@ export class PlayerStatsTableComponent implements OnInit, AfterViewInit, OnChang
 
   ngOnChanges() {
     this.players.sort = this.playerSort;
+  }
+
+  calcPtsPerSixty(points: number, minutes_played: number) {
+    return ((points/minutes_played) * 60)
   }
 
   openPlayer(player, type) {

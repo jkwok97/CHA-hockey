@@ -36,6 +36,15 @@ import { PlayerChartComponent } from './main/charts/player-chart/player-chart.co
 import { OverallStatsComponent } from './overall-stats/overall-stats.component';
 import { OverallPlayerStatsComponent } from './overall-stats/overall-player-stats/overall-player-stats.component';
 import { OverallGoalieStatsComponent } from './overall-stats/overall-goalie-stats/overall-goalie-stats.component';
+import { TeamsDetailComponent } from './overall-stats/teams-detail/teams-detail.component';
+import { PlayersDetailComponent } from './overall-stats/players-detail/players-detail.component';
+import { GoaliesDetailComponent } from './overall-stats/goalies-detail/goalies-detail.component';
+import { LeagueDetailComponent } from './overall-stats/teams-detail/league-detail/league-detail.component';
+import { ConferenceDetailComponent } from './overall-stats/teams-detail/conference-detail/conference-detail.component';
+import { DivisionDetailComponent } from './overall-stats/teams-detail/division-detail/division-detail.component';
+import { ForwardsDetailComponent } from './overall-stats/players-detail/forwards-detail/forwards-detail.component';
+import { DefenseDetailComponent } from './overall-stats/players-detail/defense-detail/defense-detail.component';
+import { AllPlayersDetailComponent } from './overall-stats/players-detail/all-players-detail/all-players-detail.component';
 
 
 const routes: Routes = [
@@ -63,9 +72,24 @@ const routes: Routes = [
   },
   { path: 'stats', component: OverallStatsComponent, canActivate: [AuthGuard],
       children: [
-        { path: 'teams', component: OverallTeamStatsComponent },
-        { path: 'players', component: OverallPlayerStatsComponent },
-        { path: 'goalies', component: OverallGoalieStatsComponent },
+        { path: 'teams/leaders', component: OverallTeamStatsComponent },
+        { path: 'players/leaders', component: OverallPlayerStatsComponent },
+        { path: 'goalies/leaders', component: OverallGoalieStatsComponent },
+        { path: 'teams/detail', component: TeamsDetailComponent, canActivate: [AuthGuard], 
+          children: [ 
+            { path: 'league', component: LeagueDetailComponent},
+            { path: 'conference', component: ConferenceDetailComponent}, 
+            { path: 'division', component: DivisionDetailComponent} 
+          ] 
+        },
+        { path: 'players/detail', component: PlayersDetailComponent, canActivate: [AuthGuard], 
+          children: [
+            { path: 'all', component: AllPlayersDetailComponent},
+            { path: 'forwards', component: ForwardsDetailComponent},
+            { path: 'defense', component: DefenseDetailComponent},
+          ]
+        },
+        { path: 'goalies/detail', component: GoaliesDetailComponent },
       ]
   },
 

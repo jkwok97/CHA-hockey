@@ -1,0 +1,31 @@
+<h3 class="title">Goalie Stats</h3>
+
+<mat-button-toggle-group 
+    #bySeason="matButtonToggleGroup" 
+    [value]="currentSeasonType" 
+    (change)="changeSeason(bySeason.value)"
+>
+    <mat-button-toggle value="Regular" color="accent">
+        Regular
+    </mat-button-toggle>
+    <mat-button-toggle value="Playoffs" color="accent">
+        Playoffs
+    </mat-button-toggle>
+</mat-button-toggle-group>
+
+<mat-form-field color="accent">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+    <mat-hint align="start">Player Name, Position, Experience (ex. Rookie, Veteran), Team Abbr. (ex. STA)</mat-hint>
+</mat-form-field>
+
+<div class="container">
+
+    <mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
+
+    <app-goalie-stats-table 
+        [goalies]="goalies"
+        [statsColumnsToDisplay]="columns"
+        *ngIf="!isLoading"
+    ></app-goalie-stats-table>
+
+</div>

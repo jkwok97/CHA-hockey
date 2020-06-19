@@ -111,6 +111,15 @@ import { GoalieShutoutLeaderTableComponent } from './overall-stats/overall-goali
 import { GoalieGaaLeaderTableComponent } from './overall-stats/overall-goalie-stats/goalie-gaa-leader-table/goalie-gaa-leader-table.component';
 import { GoalieShotsFacedLeaderTableComponent } from './overall-stats/overall-goalie-stats/goalie-shots-faced-leader-table/goalie-shots-faced-leader-table.component';
 import { GoalieLeaderCardComponent } from './overall-stats/overall-goalie-stats/goalie-leader-card/goalie-leader-card.component';
+import { PlayersDetailComponent } from './overall-stats/players-detail/players-detail.component';
+import { GoaliesDetailComponent } from './overall-stats/goalies-detail/goalies-detail.component';
+import { TeamsDetailComponent } from './overall-stats/teams-detail/teams-detail.component';
+import { LeagueDetailComponent } from './overall-stats/teams-detail/league-detail/league-detail.component';
+import { ConferenceDetailComponent } from './overall-stats/teams-detail/conference-detail/conference-detail.component';
+import { DivisionDetailComponent } from './overall-stats/teams-detail/division-detail/division-detail.component';
+import { ForwardsDetailComponent } from './overall-stats/players-detail/forwards-detail/forwards-detail.component';
+import { DefenseDetailComponent } from './overall-stats/players-detail/defense-detail/defense-detail.component';
+import { AllPlayersDetailComponent } from './overall-stats/players-detail/all-players-detail/all-players-detail.component';
 
 @NgModule({
   declarations: [
@@ -216,7 +225,16 @@ import { GoalieLeaderCardComponent } from './overall-stats/overall-goalie-stats/
     GoalieShutoutLeaderTableComponent,
     GoalieGaaLeaderTableComponent,
     GoalieShotsFacedLeaderTableComponent,
-    GoalieLeaderCardComponent
+    GoalieLeaderCardComponent,
+    PlayersDetailComponent,
+    GoaliesDetailComponent,
+    TeamsDetailComponent,
+    LeagueDetailComponent,
+    ConferenceDetailComponent,
+    DivisionDetailComponent,
+    ForwardsDetailComponent,
+    DefenseDetailComponent,
+    AllPlayersDetailComponent
   ],
   imports: [
     BrowserModule,

@@ -14,6 +14,18 @@ export class GoalieStatsService {
     private _http: HttpClient
   ) { }
 
+  getGoaliesBySeasonByType(season: string, seasonType: string): Observable<GoalieStat[]> {
+
+    const options = {params: new HttpParams()
+      .set('playing_year', season)
+      .set('season_type', seasonType)
+    }
+    
+    return this._http.get(`${environment.back_end_url}/v2/goalies-stats/season/current`, options).pipe(
+      map(result => result['result'])
+    )
+  }
+
   getGoaliesBySeasonByTypeByTeam(id: number, season: string, seasonType: string): Observable<GoalieStat[]> {
 
     const options = {params: new HttpParams()

@@ -14,6 +14,42 @@ export class PlayerStatsService {
     private _http: HttpClient
   ) { }
 
+  getPlayersBySeasonByType(season: string, seasonType: string): Observable<PlayerStat[]> {
+
+    const options = {params: new HttpParams()
+      .set('playing_year', season)
+      .set('season_type', seasonType)
+    }
+    
+    return this._http.get(`${environment.back_end_url}/v2/players-stats/season/current`, options).pipe(
+      map(result => result['result'])
+    )
+  }
+
+  getPlayersBySeasonByTypeByForwards(season: string, seasonType: string): Observable<PlayerStat[]> {
+
+    const options = {params: new HttpParams()
+      .set('playing_year', season)
+      .set('season_type', seasonType)
+    }
+    
+    return this._http.get(`${environment.back_end_url}/v2/players-stats/season/forwards`, options).pipe(
+      map(result => result['result'])
+    )
+  }
+
+  getPlayersBySeasonByDefense(season: string, seasonType: string): Observable<PlayerStat[]> {
+
+    const options = {params: new HttpParams()
+      .set('playing_year', season)
+      .set('season_type', seasonType)
+    }
+    
+    return this._http.get(`${environment.back_end_url}/v2/players-stats/season/defense`, options).pipe(
+      map(result => result['result'])
+    )
+  }
+
   getPlayersBySeasonByTypeByTeam(id: number, season: string, seasonType: string): Observable<PlayerStat[]> {
 
     const options = {params: new HttpParams()
