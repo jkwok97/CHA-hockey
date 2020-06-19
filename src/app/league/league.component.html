@@ -1,62 +1,35 @@
-<div class="leagueContainer">
+<ng-container *ngFor="let conference of conferences">
 
-    <div class="conference">
+    <div class="container">
 
-        <div class="conferenceHeader">
-            <p>Western Conference</p>
-            <hr class="line-style">
-        </div>
+        <h3>{{conference.name}} Conference</h3>
 
-        <div class="division">
-            <div class="headerText">
-                <p>North West Division</p>
-            </div>
-            <div class="team-card" *ngFor="let northwestTeam of northwestTeams" (click)="sendToTeam(northwestTeam.shortName)">
-                <img src="{{northwestTeam.image}}" class="logo">
-                <p>{{northwestTeam.name}}</p>
-            </div>
-        </div>
+        <section class="division-container">
 
-        <div class="division">
-            <div class="headerText">
-                <p>South West Division</p>
-            </div>
-            <div class="team-card" *ngFor="let southwestTeam of southwestTeams" (click)="sendToTeam(southwestTeam.shortName)">
-                <img src="{{southwestTeam.image}}" class="logo">
-                <p>{{southwestTeam.name}}</p>
-            </div>
-        </div>
+            <ng-container *ngFor="let division of conference.divisions">
+
+                <h4>{{division.name}} Division</h4>
+
+                <section class="teams-container">
+
+                    <div class="team" *ngFor="let team of division.teams" (click)="sendToTeam(team.shortname)">
+
+                        <img [src]="team.teamlogo" *ngIf="team.city !== 'Victoria'">
+                        <img [src]="team.teamaltlogo" *ngIf="team.city === 'Victoria'">
+
+                        <div>
+                            <p>{{team.city}}</p>
+                            <p>{{team.nickname}}</p>
+                        </div>
+                        
+                    </div>
+
+                </section>
+    
+            </ng-container>
+
+        </section>
 
     </div>
 
-    <div class="conference">
-
-        <div class="conferenceHeader">
-            <p>Eastern Conference</p>
-            <hr class="line-style">
-        </div>
-
-        <div class="division">
-            <div class="headerText">
-                <p>North East Division</p>
-            </div>
-            <div class="team-card" *ngFor="let northeastTeam of northeastTeams" (click)="sendToTeam(northeastTeam.shortName)">
-                <img src="{{northeastTeam.image}}" class="logo" >
-                <p>{{northeastTeam.name}}</p>
-            </div>
-        </div>
-
-        <div class="division">
-            <div class="headerText">
-                <p>South East Division</p>
-            </div>
-            <div class="team-card" *ngFor="let southeastTeam of southeastTeams" (click)="sendToTeam(southeastTeam.shortName)">
-                <img src="{{southeastTeam.image}}" class="logo" >
-                <p>{{southeastTeam.name}}</p>
-            </div>
-        </div>
-        
-    </div>
-
-</div>
-
+</ng-container>

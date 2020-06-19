@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TeamsService } from '../teams/teams.service';
+import { TeamInfoService } from '../_services/team-info.service';
+import { takeWhile } from 'rxjs/operators';
+import { Team } from '../_models/team';
 
 @Component({
   selector: 'app-league',
@@ -9,21 +12,21 @@ import { TeamsService } from '../teams/teams.service';
 })
 export class LeagueComponent implements OnInit {
 
-  northwestTeams = [];
-  southwestTeams = [];
-  northeastTeams = [];
-  southeastTeams = [];
+  private _alive: boolean = true;
+
+  conferences: [];
 
   constructor(
     private _router: Router,
-    private _teamsService: TeamsService
+    private _teamInfoService: TeamInfoService
   ) { }
 
   ngOnInit() {
-    this.northwestTeams = this._teamsService.league.conference[0].division[0].teams;
-    this.southwestTeams = this._teamsService.league.conference[0].division[1].teams;
-    this.northeastTeams = this._teamsService.league.conference[1].division[0].teams;
-    this.southeastTeams = this._teamsService.league.conference[1].division[1].teams;
+    this._teamInfoService.getAllCurrentTeams(true).pipe(
+      takeWhile(() => this._alive)
+    ).subscribe((teams: Team[]) => {
+      this.conferences = teams as [];
+    })
   }
 
   sendToTeam(team) {

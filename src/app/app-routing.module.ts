@@ -92,12 +92,12 @@ const routes: Routes = [
         { path: 'goalies/detail', component: GoaliesDetailComponent },
       ]
   },
+  { path: 'teams', component: LeagueComponent, canActivate: [AuthGuard] },
 
 
 
   { path: 'info/:type/:id/:name', component: PlayerInfoComponent, canActivate: [AuthGuard] },
   { path: 'info/goalies/:id/:name', component: PlayerInfoComponent, canActivate: [AuthGuard] },
-  { path: 'teams', component: LeagueComponent, canActivate: [AuthGuard] },
   { path: 'teams/:params', component: TeamStatsComponent, canActivate: [AuthGuard] },
   { path: 'teams/:params/:params/:params', component: TeamSeasonComponent, canActivate: [AuthGuard] },
   { path: 'history', component: HistoryComponent, canActivate: [AuthGuard] },

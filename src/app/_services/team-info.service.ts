@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -22,6 +22,17 @@ export class TeamInfoService {
 
   getUserByTeamName(teamName: string): Observable<number> {
     return this._http.get(`${environment.back_end_url}/v2/teams/${teamName}/user/`).pipe(
+      map(result => result['result'])
+    )
+  }
+
+  getAllCurrentTeams(bool: boolean): Observable<Team[]> {
+
+    const options = {params: new HttpParams()
+      .set('isactive', bool.toString())
+    }
+    
+    return this._http.get(`${environment.back_end_url}/v2/teams/current/all`, options).pipe(
       map(result => result['result'])
     )
   }
