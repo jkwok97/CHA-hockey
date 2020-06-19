@@ -1,1 +1,27 @@
-<p>conference-detail works!</p>
+<mat-button-toggle-group 
+    #bySeason="matButtonToggleGroup" 
+    [value]="currentSeasonType" 
+    (change)="changeSeason(bySeason.value)"
+>
+    <mat-button-toggle value="Regular" color="accent">
+        Regular
+    </mat-button-toggle>
+    <mat-button-toggle value="Playoffs" color="accent" [disabled]="!disablePlayoffButton">
+        Playoffs
+    </mat-button-toggle>
+</mat-button-toggle-group>
+
+<mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
+
+<div class="container" *ngFor="let conference of conferences">
+
+    <h3 class="title" *ngIf="!isLoading">{{conference.name}} Conference</h3>
+
+    <app-team-stats-table 
+        [teams]="getTeams(conference.teams)"
+        [statsColumnsToDisplay]="columns"
+        [sortByPoints]="'true'"
+        *ngIf="!isLoading"
+    ></app-team-stats-table>
+
+</div>

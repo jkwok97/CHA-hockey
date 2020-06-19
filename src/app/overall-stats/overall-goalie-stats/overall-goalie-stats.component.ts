@@ -10,6 +10,7 @@ import { DisplayService } from 'src/app/_services/display.service';
 export class OverallGoalieStatsComponent implements OnInit, AfterViewInit {
 
   expand: boolean = false;
+  disablePlayoffButton: boolean;
 
   currentSeason: string;
   currentSeasonType: string;
@@ -20,6 +21,7 @@ export class OverallGoalieStatsComponent implements OnInit, AfterViewInit {
   ) { 
     this.currentSeason = this._currentSeasonService.currentSeason;
     this.currentSeasonType = this._currentSeasonService.currentSeasonType;
+    this.disablePlayoffButton = this._currentSeasonService.seasonHasPlayoffs;
   }
 
   ngOnInit() {

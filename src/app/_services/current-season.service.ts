@@ -11,6 +11,8 @@ export class CurrentSeasonService {
   currentSeasonType: string = 'Regular';
 
   minGames: number = this.handleMinGames(this.isOffSeason);
+
+  seasonHasPlayoffs: boolean = this.handlePlayoffButton();
   
   // need to account for roster somehow
   constructor() { }
@@ -21,6 +23,10 @@ export class CurrentSeasonService {
 
   handleMinGames(bool: boolean) {
     return bool ? 10 : 0
+  }
+
+  handlePlayoffButton() {
+    return this.currentSeason === '2019-20' ? true : false;
   }
 
 }

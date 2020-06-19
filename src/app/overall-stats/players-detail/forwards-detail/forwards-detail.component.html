@@ -8,7 +8,7 @@
     <mat-button-toggle value="Regular" color="accent">
         Regular
     </mat-button-toggle>
-    <mat-button-toggle value="Playoffs" color="accent">
+    <mat-button-toggle value="Playoffs" color="accent" [disabled]="!disablePlayoffButton">
         Playoffs
     </mat-button-toggle>
 </mat-button-toggle-group>

@@ -15,6 +15,7 @@ export class OverallTeamStatsComponent implements OnInit, OnDestroy {
   private _alive:boolean = true;
   isLoading: boolean = true;
   expand: boolean = false;
+  disablePlayoffButton: boolean;
 
   currentSeason: string;
   currentSeasonType: string;
@@ -28,6 +29,7 @@ export class OverallTeamStatsComponent implements OnInit, OnDestroy {
   ) { 
     this.currentSeason = this._currentSeasonService.currentSeason;
     this.currentSeasonType = this._currentSeasonService.currentSeasonType;
+    this.disablePlayoffButton = this._currentSeasonService.seasonHasPlayoffs;
   }
 
   ngOnInit() {

@@ -34,4 +34,27 @@ export class TeamStatsService {
     )
   }
 
+  getTeamStatsBySeasonByTypeByConference(season: string, seasonType: string) {
+    const options = {params: new HttpParams()
+      .set('playing_year', season)
+      .set('season_type', seasonType)
+    }
+    
+    return this._http.get(`${environment.back_end_url}/v2/team-stats/season/conference`, options).pipe(
+      map(result => result['result'])
+    )
+  }
+
+  getTeamStatsBySeasonByTypeByDivision(season: string, seasonType: string) {
+
+    const options = {params: new HttpParams()
+      .set('playing_year', season)
+      .set('season_type', seasonType)
+    }
+    
+    return this._http.get(`${environment.back_end_url}/v2/team-stats/season/division`, options).pipe(
+      map(result => result['result'])
+    )
+  }
+
 }

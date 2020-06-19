@@ -19,12 +19,6 @@
     text-align: center;
 }
 
-.mat-form-field {
-    font-size: 14px;
-    width: 90%;
-    color: red;
-}
-
 .mat-button-toggle-group {
     margin: 10px 0;
 }
