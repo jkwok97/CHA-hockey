@@ -13,9 +13,10 @@ export class GoalieStatsTableComponent implements OnInit, AfterViewInit, OnChang
   @Input() goalies:any;
   @Input() statsColumnsToDisplay: [];
   @Input() inPlayerInfo: boolean = false;
+  @Input() showAll: boolean;
 
   page: number = 1;
-  pageSize: number = 25;
+  pageSize: number;
   length: number = 0;
 
   @ViewChild("goalieSort", {static: false}) goalieSort: MatSort;
@@ -27,6 +28,7 @@ export class GoalieStatsTableComponent implements OnInit, AfterViewInit, OnChang
   ) { }
 
   ngOnInit() {
+    this.showAll ? this.pageSize = 30 : 25;
     this.length = this.goalies.length;
   }
 

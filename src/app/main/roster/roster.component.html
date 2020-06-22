@@ -6,6 +6,7 @@
     <app-player-stats-table
         [players]="playersData"
         [statsColumnsToDisplay]="playersColumnsToDisplay"
+        [showAll]="true"
         *ngIf="!isPlayersLoading"
     ></app-player-stats-table>
 </div>
@@ -18,6 +19,7 @@
     <app-goalie-stats-table 
         [goalies]="goaliesData"
         [statsColumnsToDisplay]="goaliesColumnsToDisplay"
+        [showAll]="true"
         *ngIf="!isGoaliesLoading"
     ></app-goalie-stats-table>
 </div>

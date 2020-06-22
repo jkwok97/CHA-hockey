@@ -13,9 +13,10 @@ export class PlayerStatsTableComponent implements OnInit, AfterViewInit, OnChang
   @Input() players: any;
   @Input() statsColumnsToDisplay: [];
   @Input() inPlayerInfo: boolean = false;
+  @Input() showAll: boolean;
 
   page: number = 1;
-  pageSize: number = 25;
+  pageSize: number;
   length: number = 0;
 
   @ViewChild("playerSort", {static: false}) playerSort: MatSort;
@@ -27,6 +28,7 @@ export class PlayerStatsTableComponent implements OnInit, AfterViewInit, OnChang
   ) { }
 
   ngOnInit() {
+    this.showAll ? this.pageSize = 30 : 25;
     this.length = this.players.length;
   }
 
