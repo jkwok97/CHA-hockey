@@ -1,0 +1,75 @@
+.messages {
+    width: 100%;
+    font-weight: 300;
+    color: white;
+    text-align: center;
+    font-size: small;
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* border: 1px solid blue; */
+}
+
+.messages p {
+    margin: 5px 0;
+}
+
+.team-summary {
+    background-color: black;
+    width: 100%;
+}
+
+
+.team-summary-players {
+    width: 100%;
+    font-weight: 300;
+    color: white;
+    text-align: center;
+    font-size: small;
+    /* margin-top: 20px; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* border: 1px solid blue; */
+}
+
+.team-summary-players p {
+    margin: 5px 0;
+}
+
+.team-summary-cap-container {
+    /* border: 1px solid red; */
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 300;
+    color: white;
+    text-align: center;
+    font-size: small;
+}
+
+.team-summary-cap {
+    /* border: 1px solid pink; */
+    width: 48%;
+    text-align: left;
+    padding: 0 5px;
+}
+
+.med-text-height {
+    font-size: medium;
+    text-align: center;
+}
+
+.red-text {
+    color: red;
+    font-weight: 500;
+    font-style: italic;
+}
+
+.green-text {
+    color: green;
+    font-weight: 500;
+    font-style: italic;
+}

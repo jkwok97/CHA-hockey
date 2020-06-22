@@ -1,3 +1,5 @@
+<mat-progress-bar mode="query" color="accent" *ngIf="!conferences"></mat-progress-bar>
+
 <ng-container *ngFor="let conference of conferences">
 
     <div class="container">
@@ -12,7 +14,7 @@
 
                 <section class="teams-container">
 
-                    <div class="team" *ngFor="let team of division.teams" (click)="sendToTeam(team.shortname)">
+                    <div class="team" *ngFor="let team of division.teams" (click)="sendToTeam(team.nickname, team.id)">
 
                         <img [src]="team.teamlogo" *ngIf="team.city !== 'Victoria'">
                         <img [src]="team.teamaltlogo" *ngIf="team.city === 'Victoria'">

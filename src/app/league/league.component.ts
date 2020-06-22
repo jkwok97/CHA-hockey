@@ -29,8 +29,8 @@ export class LeagueComponent implements OnInit {
     })
   }
 
-  sendToTeam(team) {
-    this._router.navigate([`teams/${team}`]);
+  sendToTeam(team: string, id: number) {
+    this._router.navigate([`teams/${team}/${id}/salaries`]);
   }
 
 }

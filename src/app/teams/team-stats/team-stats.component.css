@@ -1,9 +1,5 @@
-.playerStatsContainer {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-content: center;
+:host {
+    display: grid;
 }
 
 .playerCard {
@@ -12,14 +8,6 @@
 
 .playerCard p {
     color: white;
-}
-
-.spinner {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .playerStatsTable {

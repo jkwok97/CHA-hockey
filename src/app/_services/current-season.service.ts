@@ -7,6 +7,9 @@ export class CurrentSeasonService {
 
   isOffSeason: boolean = true;
 
+  currentSeasonCap: number = 102.7;
+  nextSeasonCap: number = 102.7;
+
   currentSeason: string = this.handleSeason(this.isOffSeason);
   currentSeasonType: string = 'Regular';
 

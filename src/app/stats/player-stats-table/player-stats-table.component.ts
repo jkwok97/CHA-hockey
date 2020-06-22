@@ -10,7 +10,7 @@ import { MatSort, MatPaginator } from '@angular/material';
 })
 export class PlayerStatsTableComponent implements OnInit, AfterViewInit, OnChanges {
 
-  @Input() players:any;
+  @Input() players: any;
   @Input() statsColumnsToDisplay: [];
   @Input() inPlayerInfo: boolean = false;
 

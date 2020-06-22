@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TeamsService } from '../teams.service';
+import { TeamInfoService } from 'src/app/_services/team-info.service';
+import { takeWhile } from 'rxjs/operators';
+import { Team } from 'src/app/_models/team';
 
 @Component({
   selector: 'app-team-stats',
@@ -10,39 +12,38 @@ import { TeamsService } from '../teams.service';
 export class TeamStatsComponent implements OnInit, OnDestroy {
 
   private _alive:boolean = true;
-  isLoading: boolean = false;
-  currentTeam: boolean = false;
+  isLoading: boolean = true;
 
-  short_team_name: string = '';
+  team: Team;
 
-  currentTeams = [];
+  activeLinkIndex = -1;
 
-  team: any;
+  routes = [
+    {name: 'Salaries', url: 'salaries', current: true},
+    {name: 'Current', url: 'current', current: false},
+    {name: 'Team History', url: 'archives/team', current: false},
+    {name: 'Player History', url: 'archives/players', current: false},
+    {name: 'Goalie History', url: 'archives/goalies', current: false},
+  ];
   
   constructor(
     private _route: ActivatedRoute,
-    private _teamsService: TeamsService
+    private _teamInfoService: TeamInfoService,
   ) { 
-    this._teamsService.league.conference[0].division[0].teams.forEach(team => { this.currentTeams.push(team) });
-    this._teamsService.league.conference[0].division[1].teams.forEach(team => { this.currentTeams.push(team) });
-    this._teamsService.league.conference[1].division[0].teams.forEach(team => { this.currentTeams.push(team) });
-    this._teamsService.league.conference[1].division[1].teams.forEach(team => { this.currentTeams.push(team) });
-    // console.log(this.currentTeams);
+    this.getTeamInfo(this._route.snapshot.params.id);
   }
 
   ngOnInit() {
-    this.isLoading = true;
-    this.short_team_name = this._route.snapshot.paramMap.get("params");
-    this.team = this._teamsService.getTeamInfo(this.short_team_name);
-    if (this.currentTeams.find(team => team.shortName === this.team.shortName)) {
-      this.currentTeam = true;
-    }
-    // console.log(this.currentTeam);
-    this.isLoading = false;
+    
   }
 
-  toSalaryPage() {
-    window.open(this.team.link);
+  getTeamInfo(id: number) {
+    this._teamInfoService.getTeambyId(id).pipe(
+      takeWhile(() => this._alive)
+    ).subscribe((team:Team) => {
+      this.team = team;
+      this.isLoading = false;
+    })
   }
 
   ngOnDestroy() {

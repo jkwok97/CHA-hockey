@@ -1,0 +1,38 @@
+:host {
+    display: grid;
+    padding: 20px;
+}
+
+.salary-container {
+    display: grid;
+    justify-content: space-evenly;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-column-gap: 20px;
+    padding: 10px;
+}
+
+.salary-section {
+    width: 100%;
+}
+
+.salary-header {
+    font-size: medium;
+    font-weight: 200;
+    text-align: center;
+}
+
+.center {
+    text-align: center;
+}
+
+.black {
+    background-color: black;
+}
+
+.salary-header-summary {
+    font-size: medium;
+    font-weight: 200;
+    /* color: white; */
+    text-align: center;
+    margin: 20px 0;
+}

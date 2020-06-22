@@ -45,6 +45,11 @@ import { DivisionDetailComponent } from './overall-stats/teams-detail/division-d
 import { ForwardsDetailComponent } from './overall-stats/players-detail/forwards-detail/forwards-detail.component';
 import { DefenseDetailComponent } from './overall-stats/players-detail/defense-detail/defense-detail.component';
 import { AllPlayersDetailComponent } from './overall-stats/players-detail/all-players-detail/all-players-detail.component';
+import { TeamArchivesComponent } from './history/team-archives/team-archives.component';
+import { PlayerArchivesComponent } from './history/player-archives/player-archives.component';
+import { GoalieArchivesComponent } from './history/goalie-archives/goalie-archives.component';
+import { TeamCurrentComponent } from './teams/team-stats/team-current/team-current.component';
+import { TeamCurrentSalaryComponent } from './teams/team-current-salary/team-current-salary.component';
 
 
 const routes: Routes = [
@@ -93,12 +98,21 @@ const routes: Routes = [
       ]
   },
   { path: 'teams', component: LeagueComponent, canActivate: [AuthGuard] },
-
+  { path: 'teams/:team/:id', component: TeamStatsComponent, canActivate: [AuthGuard], 
+    children: [
+      { path: 'salaries', component: TeamCurrentSalaryComponent},
+      { path: 'current', component: TeamCurrentComponent},
+      { path: 'archives/team', component: TeamArchivesComponent},
+      { path: 'archives/players', component: PlayerArchivesComponent},
+      { path: 'archives/goalies', component: GoalieArchivesComponent},
+    ] 
+  },
+  
 
 
   { path: 'info/:type/:id/:name', component: PlayerInfoComponent, canActivate: [AuthGuard] },
   { path: 'info/goalies/:id/:name', component: PlayerInfoComponent, canActivate: [AuthGuard] },
-  { path: 'teams/:params', component: TeamStatsComponent, canActivate: [AuthGuard] },
+  
   { path: 'teams/:params/:params/:params', component: TeamSeasonComponent, canActivate: [AuthGuard] },
   { path: 'history', component: HistoryComponent, canActivate: [AuthGuard] },
   { path: 'history/champions', component: ChampionsComponent, canActivate: [AuthGuard] },

@@ -1,0 +1,58 @@
+<mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
+
+<div class="salary-container" [style.background-color]='team.teamcolor' *ngIf="!isLoading">
+
+    <div class="salary-section">
+
+        <p [style.color]='team.teamtextcolor' class="salary-header">Forwards</p>
+
+        <div class="table">
+
+            <app-current-forward-salaries
+                *ngIf="forwardSalaries"
+                [salaries]="forwardSalaries"
+            ></app-current-forward-salaries>
+    
+        </div>
+
+    </div>
+
+    <div class="salary-section">
+
+        <p [style.color]='team.teamtextcolor' class="salary-header">Defence</p>
+
+        <div class="table">
+
+            <app-current-defense-salaries
+                *ngIf="defenseSalaries"
+                [salaries]="defenseSalaries"
+            ></app-current-defense-salaries>
+
+        </div>
+
+    </div>
+
+    <div class="salary-section">
+
+        <p [style.color]='team.teamtextcolor' class="salary-header">Goalies</p>
+
+        <div class="table">
+
+            <app-current-goalies-salaries
+                *ngIf="goalieSalaries"
+                [salaries]="goalieSalaries"
+            ></app-current-goalies-salaries>
+
+        </div>
+
+        <p [style.color]='team.teamtextcolor' class="salary-header-summary">Team Summary</p>
+
+        <app-current-team-totals
+            *ngIf="goalieSalaries && defenseSalaries && forwardSalaries"
+            [salaries]="salaries"
+            [goalieSalaries]="goalieSalaries"
+        ></app-current-team-totals>
+
+    </div>
+
+</div>
