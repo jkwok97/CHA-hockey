@@ -1,93 +1,73 @@
-.container {
-    width: 100%;
-    height: 80%;
-    display: flex;
+:host {
+    color: white;
+    display: grid;
+    padding: 20px;
     justify-content: center;
-    align-items: flex-start;
-    /* border: 1px solid purple; */
+    justify-items: center;
+    grid-template-columns: minmax(350px, 1fr);
 }
 
-.drop-down-container {
-    width: 100%;
-    display: flex;
+.filter-add {
+    display: inline-grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+    grid-column-gap: 20px;
+    align-items: center;
     justify-content: center;
-    margin-top: 20px;
-}
-
-.mat-form-field {
-    width: 300px;
-}
-
-.mat-row:hover {
-    background-color: rgb(61, 90, 254);
-    cursor: pointer;
-}
-
-.frame {
-    width: 95%;
-    /* border: 1px solid red; */
-}
-
-.image {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    margin: 150px 0;
-}
-
-.iframe {
-    border: none;
-    overflow-x:hidden;
-    overflow-y:hidden;
-    /* border: 1px solid blue; */
-    height: 100%;
-    width: 100%;
-}
-
-.mat-option {
-    background: rgba(254, 61, 61, 0.9);
-}
-
-.salary-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    align-content: flex-start;
-}
-
-.full-width {
     width: 100%;
 }
 
 .table {
-    width: 95%;
+    width: 100%;
     overflow-x: auto;
+    margin-top: 20px;
 }
 
-.table img {
-    height: 30px;
-    width: 30px;
+table {
+    text-align: center;
+    width: 100%;
 }
 
-.mat-paginator {
-    width: 95%;
+.mat-row:hover {
+    background-color: rgb(61, 90, 254);
 }
 
-.filtering {
-    font-size: 14px;
+.mat-header-cell {
+    text-align: center;
+}
+
+.mat-cell, .mat-header-cell {
+    white-space: nowrap;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+:host ::ng-deep .mat-sort-header-container {
+    display: flex;
+    justify-content: center;
+}
+
+.mat-form-field {
+    width: 100%;
+}
+
+.mat-progress-bar {
     width: 75%;
-    color: red;
+    margin-top: 50px;
 }
 
+.mat-row:hover {
+    background-color: rgb(61, 90, 254)
+}
 
-/* *************************** MEDIA QUERIES **************************** */
+h3 {
+    font-size: x-large;
+    font-weight: 100;   
+}
 
-@media screen and (max-width: 800px) {
-    .mat-cell, .mat-header-cell {
-        /* white-space: nowrap; */
-        padding-left: 5px;
-        padding-right: 5px;
-    }
+.mat-button-toggle-group {
+    margin: auto;
+}
+
+.mat-button-toggle-checked {
+    background-color: red;
 }

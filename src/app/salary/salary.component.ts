@@ -1,11 +1,10 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { TeamsService } from '../teams/teams.service';
-import { SalaryService } from './salary.service';
+import { SalaryService } from '../_services/salary.service';
 import { takeWhile } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { Router } from '@angular/router';
+import { Salary } from '../_models/salary';
 
 @Component({
   selector: 'app-salary',
@@ -14,135 +13,65 @@ import { Router } from '@angular/router';
 })
 export class SalaryComponent implements OnInit, OnDestroy {
 
-  private _alive:boolean = true;
+  private _alive: boolean = true;
   isLoading: boolean = false;
-  teamPicked: boolean = false;
-  salaryPicked: boolean = false;
-  isMobile: boolean = false;
 
-  teams = [];
-  salaries: any[];
-  teamPage: any;
-  team: any;
+  salaries: Salary[];
 
-  type: string;
-  currentSeason: string;
-  seasonType: string;
+  showType: string = 'true';
+
+  salariesData: MatTableDataSource<any[]>;
+  columns = [ 'lastname', 'firstname', 'isactive',
+    'season_2020', 'season_2021', 'season_2022', 'season_2023', 'season_2024',
+    'season_2025', 'season_2026', 'season_2027', 'season_2028', 'season_2029'
+  ];
 
   page: number = 1;
   pageSize: number = 25;
   length: number = 0;
 
-  allSalaries: MatTableDataSource<any[]>;
-  mobileAllSalariesColumnsToDisplay = [ 'team_logo','player_name', 'year_two', 'year_three']
-  allSalariesColumnsToDisplay = [ 'team_logo', 'team_name', 'player_name', 'year_two', 'year_three', 'year_four', 'year_five' ];
-
-  @ViewChild('teamSelect', {static: false}) teamSelect;
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
-  
+
   constructor(
-    private _teamsService: TeamsService,
-    private _salaryService: SalaryService,
-    private _router: Router
-  ) { 
-    this.currentSeason = this._teamsService.currentSeason;
-    this.seasonType = this._teamsService.currentSeasonType;
-  }
+    private _salariesService: SalaryService,
+  ) { }
 
   ngOnInit() {
-    this.checkMobile();
-    this.teams = [];
-    this.teams = this._teamsService.allSalaryPagesArray;
-    this.teams.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
+    this.isLoading = true;
+
+    this.getSalaries(this.showType);
   }
 
-  toSalaryPage(event) {
-    this.teamSelect.value = event.value;
-    this.team = this.teams.find(team => team.name === this.teamSelect.value);
-    if (event.value == "All Forwards") {
-      this._router.navigate(['/salary/forwards']);
-      this.getSalaries("forward");
-      this.type = "Forward";
-    } else if (event.value == "All Defense") {
-      this._router.navigate(['/salary/defense']);
-      this.getSalaries("defense");
-      this.type = "Defense";
-    } else if (event.value == "All Goaltenders") {
-      this._router.navigate(['/salary/goalies']);
-      this.getSalaries("goalie");
-      this.type = "Goalie";
-    } else {
-      this.salaryPicked = false;
-      this.teamPicked = true;
-      this._salaryService.setTeamTrigger(this.team.shortName);
-      this.openTeamSalary(this.team);
-    }
+  changeActive(type: string) {
+    this.showType = type;
+    this.isLoading = true;
+    this.getSalaries(this.showType);
   }
 
-  openTeamSalary(team) {
-    // console.log(team);
-    this._router.navigate([`/salary/${team.shortName}`]);
-    window.scrollTo(0,0);
+  getSalaries(type: string) {
+    this._salariesService.getAllActiveSalaries(type).pipe(
+      takeWhile(() => this._alive)
+    ).subscribe((salaries: Salary[]) => {
+      this.isLoading = false;
+      this.salaries = salaries;
+      this.salariesData = new MatTableDataSource<any[]>(this.salaries as any[]);
+      setTimeout(() => {
+        this.salariesData.paginator = this.paginator;
+        this.salariesData.sort = this.sort;
+      }, 350);
+    })
   }
 
   applyFilter(filterValue: string) {
-    this.allSalaries.filter = filterValue.trim().toLowerCase();
-    if (this.allSalaries.paginator) {
-      this.allSalaries.paginator.firstPage();
+    this.salariesData.filter = filterValue.trim().toLowerCase();
+    if (this.salariesData.paginator) {
+      this.salariesData.paginator.firstPage();
     }
   }
 
-  getSalaries(position) {
-    this.teamPicked = true;
-    this.salaryPicked = true;
-    this.isLoading = true;
-    this._salaryService.getSalaries(position, this.seasonType, this.currentSeason).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      this.salaries = resp as [];
-      this.allSalaries = new MatTableDataSource<any[]>(this.salaries);
-      this.length = this.salaries.length;
-      this.isLoading = false;
-      setTimeout(() => {
-        this.allSalaries.paginator = this.paginator;
-        this.allSalaries.sort = this.sort;
-      }, 500);
-    });
-  }
-
-  findLogo(shortName) {
-    if (shortName) {
-      let team = this._teamsService.getTeamInfo(shortName);
-      return { image: team.image, name: team.name }
-    } else {
-      return { image: "../../assets/team_logos/Free_Agent_logo_square.jpg", name: "Free Agent"}
-    }
-  }
-
-  checkMobile() {
-    if ( navigator.userAgent.match(/Android/i)
-        || navigator.userAgent.match(/webOS/i)
-        || navigator.userAgent.match(/iPhone/i)
-        || navigator.userAgent.match(/BlackBerry/i)
-        || navigator.userAgent.match(/Windows Phone/i) ) {
-          this.isMobile = true;
-          this._teamsService.setMobile(true);
-        } else {
-          this.isMobile = false;
-          this._teamsService.setMobile(false);
-        }
-  }
-
-  // openPlayer(player) {
-  //   console.log(player)
-  //   let type;
-  //   player.position ? type = 'player' : type = 'goalie';
-  //   this._router.navigate([`/info/${type}s/${player.player_id}/${player.player_name}`]);
-  //   window.scrollTo(0,0);
-  // }
-
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this._alive = false;
-    this.teams = [];
   }
 
 }

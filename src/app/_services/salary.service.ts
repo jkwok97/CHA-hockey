@@ -35,4 +35,16 @@ export class SalaryService {
       map(result => result['result'])
     )
   }
+
+  getAllActiveSalaries(isactive: string) {
+
+    const options = {params: new HttpParams()
+      .set('isactive', isactive)
+    }
+
+    return this._http.get(`${environment.back_end_url}/v2/players/salaries/active`, options).pipe(
+      map(result => result['result'])
+    )
+
+  }
 }

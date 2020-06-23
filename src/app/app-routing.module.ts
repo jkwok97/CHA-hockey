@@ -107,6 +107,7 @@ const routes: Routes = [
       { path: 'archives/goalies', component: GoalieArchivesComponent},
     ] 
   },
+  { path: 'salary', component: SalaryComponent, canActivate: [AuthGuard]}, 
   
 
 
@@ -126,11 +127,7 @@ const routes: Routes = [
   { path: 'rules/rosters', component: RulesComponent, canActivate: [AuthGuard] },
   { path: 'rules/waivers', component: RulesComponent, canActivate: [AuthGuard] },
   { path: 'rules/winnings', component: RulesComponent, canActivate: [AuthGuard] },
-  { path: 'salary', component: SalaryComponent, 
-    children: [
-      { path: ':params', component: TeamSalaryComponent, canActivate: [AuthGuard]},
-    ]}, 
-  // { path: 'salary/:params', component: SalaryComponent, canActivate: [AuthGuard] },
+  
   { path: 'schedule', component: ScheduleComponent, canActivate: [AuthGuard] },
   { path: 'playoffTree', component: NewPlayoffTreeComponent, canActivate: [AuthGuard] },
   { path: 'trades', component: TradesComponent, canActivate: [AuthGuard] },

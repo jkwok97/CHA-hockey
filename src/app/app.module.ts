@@ -43,7 +43,6 @@ import { TwitterComponent } from './main/nhl-info/twitter/twitter.component';
 import { NhlLeadersComponent } from './main/nhl-info/nhl-leaders/nhl-leaders.component';
 import { NhlPlayersStatsComponent } from './main/nhl-info/nhl-players-stats/nhl-players-stats.component';
 import { NhlGoalieStatsComponent } from './main/nhl-info/nhl-goalie-stats/nhl-goalie-stats.component';
-import { TeamSalaryComponent } from './salary/team-salary/team-salary.component';
 import { PlayoffTreeComponent } from './schedule/playoff-tree/playoff-tree.component';
 import { NhlRookieStatsComponent } from './main/nhl-info/nhl-rookie-stats/nhl-rookie-stats.component';
 import { MatchupComponent } from './schedule/playoff-tree/matchup/matchup.component';
@@ -167,7 +166,6 @@ import { TeamCurrentRecordComponent } from './teams/team-stats/team-current/team
     NhlLeadersComponent,
     NhlPlayersStatsComponent,
     NhlGoalieStatsComponent,
-    TeamSalaryComponent,
     PlayoffTreeComponent,
     NhlRookieStatsComponent,
     MatchupComponent,
@@ -247,7 +245,7 @@ import { TeamCurrentRecordComponent } from './teams/team-stats/team-current/team
     CurrentDefenseSalariesComponent,
     CurrentGoaliesSalariesComponent,
     CurrentTeamTotalsComponent,
-    TeamCurrentRecordComponent
+    TeamCurrentRecordComponent,
   ],
   imports: [
     BrowserModule,
