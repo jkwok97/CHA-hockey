@@ -42,4 +42,15 @@ export class TeamInfoService {
       map(result => result['result'][0])
     )
   }
+
+  getTeamsByActive(bool: string): Observable<Team[]> {
+  
+    const options = {params: new HttpParams()
+      .set('isactive', bool)
+    }
+
+    return this._http.get(`${environment.back_end_url}/v2/teams/active`, options).pipe(
+      map(result => result['result'])
+    )
+  }
 }

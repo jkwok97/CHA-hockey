@@ -107,6 +107,8 @@ const routes: Routes = [
     ] 
   },
   { path: 'salary', component: SalaryComponent, canActivate: [AuthGuard]}, 
+  { path: 'picks', component: PicksComponent, canActivate: [AuthGuard] },
+  { path: 'trades', component: TradesComponent, canActivate: [AuthGuard] },
   
 
 
@@ -129,8 +131,8 @@ const routes: Routes = [
   
   { path: 'schedule', component: ScheduleComponent, canActivate: [AuthGuard] },
   { path: 'playoffTree', component: NewPlayoffTreeComponent, canActivate: [AuthGuard] },
-  { path: 'trades', component: TradesComponent, canActivate: [AuthGuard] },
-  { path: 'picks', component: PicksComponent, canActivate: [AuthGuard] },
+  
+  
   { path: 'waiver-priority', component: WaiverPriorityComponent, canActivate: [AuthGuard] },
 ];
 

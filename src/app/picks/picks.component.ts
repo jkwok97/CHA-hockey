@@ -1,8 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { MatTableDataSource } from '@angular/material';
 import { TeamsService } from '../teams/teams.service';
 import { takeWhile } from 'rxjs/operators';
+import { DisplayService } from '../_services/display.service';
+import { Observable } from 'rxjs';
+import { Team, TeamStat } from '../_models/team';
+import { TeamInfoService } from '../_services/team-info.service';
+import { CurrentSeasonService } from '../_services/current-season.service';
+import { DraftService } from '../_services/draft.service';
+import { DraftTable } from '../_models/draft-table';
+import { TeamStatsService } from '../_services/team-stats.service';
 
 @Component({
   selector: 'app-picks',
@@ -15,46 +22,89 @@ export class PicksComponent implements OnInit, OnDestroy {
   isMobile: boolean = false;
   isLoading: boolean = false;
 
-  picksPage: any;
+  teams$: Observable<Team[]>;
+
+  draftSeason: string = '2020';
+  currentSeason: string;
+  currentSeasonType: string = 'Regular';
+
+  table: DraftTable[];
+  teamStats: TeamStat[];
+
+  draftTableData: MatTableDataSource<any[]>;
+  columns = [ 'pick', 'logo', 'team_name','round_one', 'round_two', 'round_three', 'round_four', 'round_five'];
+  mobileColumns = [ 'pick', 'logo', 'round_one', 'round_two', 'round_three', 'round_four', 'round_five'];
+
   teams = [];
   drafts: any;
 
-  currentSeason: string = "2019-20";
-  draftSeason: string = '2020';
-
   draft: MatTableDataSource<any[]>;
-  draftColumnsToDisplay = ['pick', 'team_logo', 'team_name', 'round_one', 'round_two', 'round_three', 'round_four', 'round_five'];
-  draftMobileColumnsToDisplay = ['pick', 'round_one', 'round_two', 'round_three', 'round_four', 'round_five'];
 
   constructor(
-    private _teamsService: TeamsService
+    private _teamStatsService: TeamStatsService,
+    private _teamInfoService: TeamInfoService,
+    private _currentSeasonService: CurrentSeasonService,
+    private _displayService: DisplayService,
+    private _draftService: DraftService
   ) { 
-    this.checkMobile();
+    this.teams$ = this._teamInfoService.getTeamsByActive('true');
+    this.draftSeason = this._currentSeasonService.draftSeason;
+    this.currentSeason = this._currentSeasonService.currentSeason;
   }
 
   ngOnInit() {
     this.isLoading = true;
-    // this.currentSeason = this._teamsService.currentSeason;
-    this.getDraftTable(this.draftSeason);
+    this.isMobile = this._displayService.isMobile;
+
+    this.getDraftTableByYear(this.draftSeason);
+
+    this.teams$.pipe(
+      takeWhile(() => this._alive),
+    ).subscribe((teams: Team[]) => {
+      this.teams = teams;
+    })
   }
 
-  showToolTip(name: string) {
-    console.log(name);
-  }
-
-  changeSeason(season) {
+  changeActive(season) {
     this.isLoading = true;
     this.draftSeason = season;
-    this.getDraftTable(this.draftSeason);
+    this.getDraftTableByYear(season);
   }
 
-  getDraftTable(draftSeason) {
-    this._teamsService.getDraftTable(draftSeason).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      this.drafts = resp;
-      this._teamsService.getLeagueTeamsStats(this.currentSeason, 'Regular').pipe(takeWhile(() => this._alive)).subscribe(resp => {
-        this.getLeagueLeaders(resp, this.drafts);
-      });
-    });
+  getTeamLogo(id: number) {
+    if (this.teams) {
+      return this.teams.find((team: Team) => team.id === id).teamlogo;
+    }
+  }
+
+  getDraftTableByYear(draftSeason: string) {
+    this._draftService.getDraftTableByYear(draftSeason).pipe(
+      takeWhile(() => this._alive)
+    ).subscribe((table: DraftTable[]) => {
+      this.table = table;
+      this.getTeamStats(this.currentSeasonType);
+    })
+  }
+
+  // USE FOR NEXT SEASON ASSUMING NO NEW TEAMS
+  // getDraftTableByYearByStandings(draftSeason: string, season: string, seasonType: string) {
+  //   this._draftService.getDraftTableByStandings(draftSeason, season, seasonType).pipe(
+  //     takeWhile(() => this._alive)
+  //   ).subscribe((table: DraftTable[]) => {
+  //     console.log(table);
+  //     this.isLoading = false;
+  //     this.table = table;
+  //     this.draftTableData = new MatTableDataSource<any[]>(this.table as any[]);
+  //   })
+  // }
+
+  getTeamStats(seasonType: string) {
+    this._teamStatsService.getTeamStatsBySeasonByType(this.currentSeason, seasonType).pipe(
+      takeWhile(() => this._alive)
+    ).subscribe((teamStats: TeamStat[]) => {
+      this.teamStats = teamStats;
+      this.getLeagueLeaders(teamStats, this.table)
+    })
   }
 
   getLeagueLeaders(resp, drafts) {
@@ -62,42 +112,17 @@ export class PicksComponent implements OnInit, OnDestroy {
     drafts.forEach(element => {
 
       // THIS IS TEMPORARY
-      if (element.team_name === 'VSJ') {
-       let tempTeam = tempLeaders.find(team => team.team_name === 'VIC');
+      if (element.shortname === 'VSJ') {
+       let tempTeam = tempLeaders.find(team => team.shortname === 'VIC');
        element.points = tempTeam.points;
       } else {
-        let tempTeam = tempLeaders.find(team => team.team_name === element.team_name);
+        let tempTeam = tempLeaders.find(team => team.shortname === element.shortname);
         element.points = tempTeam.points;
       }
     });
     drafts.sort((a,b) => a.points - b.points);
     this.draft = new MatTableDataSource<any[]>(drafts);
     this.isLoading = false;
-  }
-
-  findLogo(shortName) {
-    if (shortName) {
-      let team = this._teamsService.getTeamInfo(shortName);
-      if (shortName === 'VSJ') {
-        return { image: team.altImage, name: team.name }
-      } else {
-        return { image: team.image, name: team.name }
-      }
-    } else {
-      return { image: "../../assets/team_logos/Free_Agent_logo_square.jpg", name: "Free Agent"}
-    }
-  }
-
-  checkMobile() {
-    if ( navigator.userAgent.match(/Android/i)
-        || navigator.userAgent.match(/webOS/i)
-        || navigator.userAgent.match(/iPhone/i)
-        || navigator.userAgent.match(/BlackBerry/i)
-        || navigator.userAgent.match(/Windows Phone/i) ) {
-          this.isMobile = true;
-        } else {
-          this.isMobile = false;
-        }
   }
 
   ngOnDestroy() {
