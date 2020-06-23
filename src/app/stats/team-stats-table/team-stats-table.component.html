@@ -159,7 +159,7 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="statsColumnsToDisplay"></tr>
-    <tr mat-row *matRowDef="let team; columns: statsColumnsToDisplay;" (click)="openTeam(team.team_name, team.playing_year, team.season_type)"></tr>
+    <tr mat-row *matRowDef="let team; columns: statsColumnsToDisplay;" (click)="routeToTeam(team)"></tr>
     <div *ngIf="!sortByPoints">
         <tr 
         mat-footer-row 

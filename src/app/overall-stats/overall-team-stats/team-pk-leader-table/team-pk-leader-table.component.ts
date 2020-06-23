@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { TeamStat } from 'src/app/_models/team';
+import { TeamStat, Team } from 'src/app/_models/team';
 import { MatTableDataSource } from '@angular/material';
 import { DisplayService } from 'src/app/_services/display.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-team-pk-leader-table',
@@ -19,7 +20,8 @@ export class TeamPkLeaderTableComponent implements OnInit {
   columns = [ 'team_logo','team_name', 'pk_attempts', 'pk_goals', 'pk_pct' ];
 
   constructor(
-    private _displayService: DisplayService
+    private _displayService: DisplayService,
+    private _router: Router
   ) { }
 
   ngOnInit() {
@@ -31,6 +33,10 @@ export class TeamPkLeaderTableComponent implements OnInit {
     const data = teamStats.filter((stat: TeamStat) => stat.games_played > 0);
     const sortedData = data.sort((a,b) => (((b.pk_attempts - b.pk_goals) / b.pk_attempts) * 100) - (((a.pk_attempts - a.pk_goals) / a.pk_attempts) * 100));
     this.leaders = new MatTableDataSource<any[]>(sortedData);
+  }
+
+  routeToTeam(team: Team) {
+    this._router.navigate([`/teams/${team.shortname}/${team['team_id']}/salaries`])
   }
 
 }

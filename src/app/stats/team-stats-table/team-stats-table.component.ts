@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild, AfterViewInit, OnChanges } from '@
 import { Router, ActivatedRoute } from '@angular/router';
 import { TeamsService } from 'src/app/teams/teams.service';
 import { MatSort } from '@angular/material';
+import { Team } from 'src/app/_models/team';
 
 @Component({
   selector: 'app-team-stats-table',
@@ -66,9 +67,8 @@ export class TeamStatsTableComponent implements OnInit, AfterViewInit, OnChanges
     }
   }
 
-  openTeam(shortName, season, type) {
-    this._router.navigate([`/teams/${shortName}/${season}/${type}`]);
-    window.scrollTo(0,0);
+  routeToTeam(team: Team) {
+    this._router.navigate([`/teams/${team.shortname}/${team['team_id']}/salaries`])
   }
 
   findLogo(shortName) {
