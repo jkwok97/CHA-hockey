@@ -21,7 +21,6 @@ import { AuthGuard } from './_services/auth.guard';
 import { PlayerInfoComponent } from './stats/player-info/player-info.component';
 import { SalaryComponent } from './salary/salary.component';
 import { PicksComponent } from './picks/picks.component';
-import { TeamSalaryComponent } from './salary/team-salary/team-salary.component';
 import { NewPlayoffTreeComponent } from './schedule/playoff-tree/new-playoff-tree/new-playoff-tree.component';
 import { TeamSeasonComponent } from './history/team-archives/team-season/team-season.component';
 import { NhlInfoComponent } from './main/nhl-info/nhl-info.component';
