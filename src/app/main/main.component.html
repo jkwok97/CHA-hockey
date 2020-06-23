@@ -1,6 +1,6 @@
-<mat-progress-bar mode="query" color="accent" *ngIf="!team && !currentUser"></mat-progress-bar>
+<mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
 
-<div class="container" *ngIf="team && currentUser">
+<div class="container" *ngIf="team && currentUser && !isLoading">
 
     <div class="welcome">
         <mat-form-field color="accent">

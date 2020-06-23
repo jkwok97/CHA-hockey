@@ -64,8 +64,6 @@ export class TeamArchivesComponent implements OnInit, OnDestroy {
 
   }
 
-  
-
   getUserId(teamSelected: string) {
     this._teamInfoService.getUserByTeamName(teamSelected).pipe(
       takeWhile(() => this._alive)

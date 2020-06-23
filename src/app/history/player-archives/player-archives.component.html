@@ -1,53 +1,36 @@
-<div class="container">
-    
-    <div class="playerStatsTable cha-dark">
+<div class="button-container">
 
-        <div class="button-container">
-            <mat-button-toggle-group #bySeason="matButtonToggleGroup" [value]="seasonType" (change)="changeSeason(bySeason.value)">
-                <mat-button-toggle value="Regular" color="accent">
-                    Regular
-                </mat-button-toggle>
-                <mat-button-toggle value="Playoffs" color="accent">
-                    Playoffs
-                </mat-button-toggle>
-            </mat-button-toggle-group>
-    
-            <mat-button-toggle-group #byShow="matButtonToggleGroup" [value]="showType" (change)="changeShow(byShow.value)">
-                <mat-button-toggle value="Season" color="accent">
-                    Per Season
-                </mat-button-toggle>
-                <mat-button-toggle value="Alltime" color="accent">
-                    All-time
-                </mat-button-toggle>
-            </mat-button-toggle-group>
-    
-            <mat-form-field color="accent">
-                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
-            </mat-form-field>
-        </div>
+    <mat-button-toggle-group #bySeason="matButtonToggleGroup" [value]="seasonType" (change)="changeSeason(bySeason.value)">
+        <mat-button-toggle value="Regular" color="accent">
+            Regular
+        </mat-button-toggle>
+        <mat-button-toggle value="Playoffs" color="accent">
+            Playoffs
+        </mat-button-toggle>
+    </mat-button-toggle-group>
 
-        <div class="spinner" *ngIf="isLoading">
-            <mat-spinner color="accent"></mat-spinner>
-        </div>
+    <mat-button-toggle-group #byShow="matButtonToggleGroup" [value]="showType" (change)="changeShow(byShow.value)">
+        <mat-button-toggle value="Season" color="accent">
+            Per Season
+        </mat-button-toggle>
+        <mat-button-toggle value="Alltime" color="accent">
+            All-time
+        </mat-button-toggle>
+    </mat-button-toggle-group>
 
-        <div class="table" *ngIf="!isLoading">
+    <mat-form-field color="accent">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+    </mat-form-field>
 
-            <app-player-stats-table 
-                [players]="players"
-                [statsColumnsToDisplay]="inMainPage ? playersTeamColumnsToDisplay : playersColumnsToDisplay"
-            ></app-player-stats-table>
-    
-        </div>
+</div>
 
-        <mat-paginator
-            [pageSizeOptions]="[10]"
-            [pageSize]="pageSize"
-            [length]="length"
-            color="accent"
-            showFirstLastButtons
-            *ngIf="!isLoading"
-        ></mat-paginator>
-    
-    </div>
-            
+<mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
+
+<div class="table" *ngIf="!isLoading">
+
+    <app-player-stats-table 
+        [players]="players"
+        [statsColumnsToDisplay]="columns"
+    ></app-player-stats-table>
+
 </div>

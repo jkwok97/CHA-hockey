@@ -38,7 +38,6 @@ export class TeamStatsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isMobile = this._displayService.isMobile;
-    console.log(this.isMobile);
   }
 
   getTeamInfo(id: number) {

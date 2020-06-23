@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { User } from '../_models/user';
-import { Team, TeamStat } from '../_models/team';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Team } from '../_models/team';
+import { Router } from '@angular/router';
 import { TeamsService } from '../teams/teams.service';
 import { takeWhile } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
@@ -72,6 +72,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isMobile = this._displayService.isMobile;
+    this.isLoading = true;
 
     this.currentSeason = this._currentSeasonService.currentSeason;
     this.currentSeasonType = this._currentSeasonService.currentSeasonType;
@@ -81,6 +82,7 @@ export class MainComponent implements OnInit, OnDestroy {
     ).subscribe((teams: Team[]) => {
       this.teams = teams;
       this.team = teams.find((team: Team) => team.isactive);
+      this.isLoading = false;
       this.routeToTeam(this.team);
       this.getAllTeamStatsForSeason();
     })
@@ -100,15 +102,6 @@ export class MainComponent implements OnInit, OnDestroy {
     this._router.navigate([`/main/${team.shortname}/nhl-info`], {
         queryParamsHandling: 'merge',
     });
-  }
-
-  openTeam(shortName, season, type) {
-    this._router.navigate([`/teams/${shortName}/${season}/${type}`]);
-    window.scrollTo(0,0);
-  }
-
-  toSalaryPage(link) {
-    window.open(link);
   }
 
   logout() {
