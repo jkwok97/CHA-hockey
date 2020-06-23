@@ -7,6 +7,7 @@ import { TeamStatsService } from 'src/app/_services/team-stats.service';
 import { AuthService } from 'src/app/_services/auth.service';
 import { takeWhile } from 'rxjs/operators';
 import { CurrentSeasonService } from 'src/app/_services/current-season.service';
+import { DisplayService } from 'src/app/_services/display.service';
 
 @Component({
   selector: 'app-user-team-history',
@@ -17,6 +18,7 @@ export class UserTeamHistoryComponent implements OnInit, OnDestroy {
 
   private _alive:boolean = true;
   isLoading: boolean = false;
+  isMobile: boolean;
 
   team: any;
   stats$: Observable<TeamStat[]>;
@@ -27,7 +29,12 @@ export class UserTeamHistoryComponent implements OnInit, OnDestroy {
   seasonType: string = 'Regular';
 
   teams: MatTableDataSource<any[]>;
-  teamsColumnsToDisplay = [
+  mobileColumns = [
+    'playing_year', 'team_logo', 'games_played', 'wins', 'loss', 'ties', 'points', 'goals_for', 'goals_for_game', 'goals_against', 'goals_against_game', 
+    'goals_diff', 'win_pct', 'pp_pct', 'pk_pct', 'sh_goals', 'penalty_minutes_game', 'shot_diff', 'div_record',
+    'home_record', 'away_record', 'trail_record'
+  ];
+  columns = [
     'playing_year', 'season_type', 'team_logo','team_name', 'games_played', 'wins', 'loss', 'ties', 'points', 'goals_for', 'goals_for_game', 'goals_against', 'goals_against_game', 
     'goals_diff', 'win_pct', 'pp_pct', 'pk_pct', 'sh_goals', 'penalty_minutes_game', 'shot_diff', 'div_record',
     'home_record', 'away_record', 'trail_record'
@@ -36,7 +43,8 @@ export class UserTeamHistoryComponent implements OnInit, OnDestroy {
   constructor(
     private _teamStatsService: TeamStatsService,
     private _authService: AuthService,
-    private _currentSeasonService: CurrentSeasonService
+    private _currentSeasonService: CurrentSeasonService,
+    private _displayService: DisplayService
   ) {
     
     this._authService.currentUser.subscribe( x => this.currentUser = x[0] );
@@ -45,6 +53,8 @@ export class UserTeamHistoryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
+    this.isMobile = this._displayService.isMobile;
     if (this.currentUser) {
       this.isLoading = true;
       this.getTeamStats(this.currentUser.id, this.seasonType);

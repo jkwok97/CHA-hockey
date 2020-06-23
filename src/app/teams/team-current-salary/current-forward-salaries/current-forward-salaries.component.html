@@ -9,7 +9,7 @@
 >
     
     <ng-container matColumnDef="player_name">
-        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <th mat-header-cell *matHeaderCellDef sticky> Name </th>
         <td mat-cell *matCellDef="let player"> {{player.firstname}} {{player.lastname}}</td>
         <td mat-footer-cell *matFooterCellDef class="black">Totals: {{total}}</td>
     </ng-container>

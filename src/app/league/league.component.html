@@ -14,7 +14,7 @@
 
                 <section class="teams-container">
 
-                    <div class="team" *ngFor="let team of division.teams" (click)="sendToTeam(team.nickname, team.id)">
+                    <div class="team" *ngFor="let team of division.teams" (click)="sendToTeam(team.shortname, team.id)">
 
                         <img [src]="team.teamlogo" *ngIf="team.city !== 'Victoria'">
                         <img [src]="team.teamaltlogo" *ngIf="team.city === 'Victoria'">

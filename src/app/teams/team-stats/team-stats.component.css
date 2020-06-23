@@ -1,54 +1,20 @@
-:host {
-    display: grid;
-}
-
-.playerCard {
-    border: 1px solid blue;
-}
-
-.playerCard p {
-    color: white;
-}
-
-.playerStatsTable {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    overflow-y: auto;
-}
-
-.table {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-mat-paginator {
-    width: 90%;
-}
-
-.mat-row:hover {
-    background-color: rgb(61, 90, 254);
-}
-
-.full-width {
-    width: 90%;
-}
-
 .teamInfoSection {
-    margin-top: 5px;
-    width: 100%;
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(min-content, auto) auto;
     justify-content: flex-start;
+    grid-column-gap: 5px;
     align-items: center;
+    padding: 10px;
 }
 
-.teamInfoSection img {
+.biglogo {
     height: 150px;
     width: 150px;
-    margin: 5px 0 5px 10px;
+}
+
+.smalllogo {
+    height: 100px;
+    width: 100px;
 }
 
 .teamInfoSection h1 {
@@ -61,39 +27,4 @@ mat-paginator {
     text-align: left;
     font-size: medium;
     font-weight: 200;
-}
-
-.teamCard {
-    width: 100%;
-    height: 100%;
-}
-
-.teamNameHeader {
-    margin: 0 20px 0 20px;
-}
-
-.tableHeader {
-    width: 100%;
-    text-align: center;
-    color: white;
-    font-weight: 100;
-    font-size: larger;
-}
-
-.table {
-    border: 1px solid red;
-    width: 100%;
-}
-
-.stats {
-    overflow-y: auto;
-}
-
-/* ***** IPHONE 6/7/8 ***** */
-@media screen and (max-width: 414px) {
-    .teamInfoSection img {
-        height: 100px;
-        width: 100px;
-        margin: 5px 0 5px 10px;
-    }
 }

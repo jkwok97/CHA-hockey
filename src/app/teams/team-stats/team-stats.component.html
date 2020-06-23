@@ -1,12 +1,15 @@
 <mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
 
 <div class="teamInfoSection" [style.background-color]='team.teamcolor' *ngIf="!isLoading">
-    <img src="{{team.teamlogo}}">
+
+    <img src="{{team.teamlogo}}" [ngClass]="{'biglogo': !isMobile, 'smalllogo': isMobile}">
+
     <div class="teamNameHeader">
         <h1 *ngIf="currentTeam" [style.color]='team.teamtextcolor'>{{team.city}} {{team.nickname}}</h1>
         <h1 *ngIf="!currentTeam" [style.color]='team.teamtextcolor'>{{team.city}} {{team.nickname}}</h1>
         <p [style.color]='team.teamtextcolor'>owner: {{team.firstname}} {{team.lastname}}</p>
     </div>
+
 </div>
 
 <nav mat-tab-nav-bar color="accent" *ngIf="!isLoading">
@@ -20,33 +23,3 @@
 </nav>
 
 <router-outlet></router-outlet>
-
-    <!-- <div class="stats"> -->
-
-        <!-- <mat-tab-group color="accent">
-
-            <mat-tab label="Current" *ngIf="currentTeam">
-                <app-teams-header></app-teams-header>
-
-                <app-players-stats></app-players-stats>
-                
-                <app-goalie-stats></app-goalie-stats> 
-            </mat-tab>
-
-            <mat-tab label="Team Archives">
-                <app-team-archives></app-team-archives>
-            </mat-tab>
-
-            <mat-tab label="Players Archives">
-                <app-player-archives></app-player-archives>
-            </mat-tab>
-
-            <mat-tab label="Goalies Archives">
-                <app-goalie-archives></app-goalie-archives>
-            </mat-tab>
-            
-        </mat-tab-group> -->
-        
-    <!-- </div> -->
-
-<!-- </div> -->

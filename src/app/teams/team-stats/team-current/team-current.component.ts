@@ -1,12 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Team } from 'src/app/_models/team';
+import { Team, TeamStat } from 'src/app/_models/team';
 import { MatTableDataSource } from '@angular/material';
 import { CurrentSeasonService } from 'src/app/_services/current-season.service';
 import { PlayerStatsService } from 'src/app/_services/player-stats.service';
 import { GoalieStatsService } from 'src/app/_services/goalie-stats.service';
 import { takeWhile } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
+import { TeamStatsService } from 'src/app/_services/team-stats.service';
+import { TeamInfoService } from 'src/app/_services/team-info.service';
+import { User } from 'src/app/_models/user';
 
 @Component({
   selector: 'app-team-current',
@@ -23,8 +26,7 @@ export class TeamCurrentComponent implements OnInit, OnDestroy {
   currentSeason: string;
   currentSeasonType: string;
 
-  team$: Observable<Team>;
-  team: Team;
+  team: TeamStat;
 
   playerStats = [];
 
@@ -43,6 +45,7 @@ export class TeamCurrentComponent implements OnInit, OnDestroy {
   constructor(
     private _route: ActivatedRoute,
     private _currentSeasonService: CurrentSeasonService,
+    private _teamStatsService: TeamStatsService,
     private _playerStatsService: PlayerStatsService,
     private _goalieStatsService: GoalieStatsService
   ) { 
@@ -57,7 +60,16 @@ export class TeamCurrentComponent implements OnInit, OnDestroy {
 
     this.getTeamPlayerStatsForSeason(this._route.snapshot['_urlSegment'].segments[2].path);
     this.getTeamGoalieStatsForSeason(this._route.snapshot['_urlSegment'].segments[2].path);
+    this.getTeamStatsForSeason(this._route.snapshot['_urlSegment'].segments[2].path)
+  }
 
+  getTeamStatsForSeason(id: number) {
+    this._teamStatsService.getTeamStatsByTeamIdBySeasonbyType(id, '2020-21', this.currentSeasonType).pipe(
+      takeWhile(() => this._alive)
+    ).subscribe((teamStat: TeamStat) => {
+      console.log(teamStat);
+      this.team = teamStat;
+    })
   }
 
 

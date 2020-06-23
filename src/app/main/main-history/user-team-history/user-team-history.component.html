@@ -13,7 +13,7 @@
 
     <app-team-stats-table
         [teams]="teams"
-        [statsColumnsToDisplay]="teamsColumnsToDisplay"
+        [statsColumnsToDisplay]="isMobile ? mobileColumns : columns"
     ></app-team-stats-table>
 
 </div>

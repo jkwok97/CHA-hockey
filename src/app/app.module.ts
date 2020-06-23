@@ -125,6 +125,7 @@ import { CurrentForwardSalariesComponent } from './teams/team-current-salary/cur
 import { CurrentDefenseSalariesComponent } from './teams/team-current-salary/current-defense-salaries/current-defense-salaries.component';
 import { CurrentGoaliesSalariesComponent } from './teams/team-current-salary/current-goalies-salaries/current-goalies-salaries.component';
 import { CurrentTeamTotalsComponent } from './teams/team-current-salary/current-team-totals/current-team-totals.component';
+import { TeamCurrentRecordComponent } from './teams/team-stats/team-current/team-current-record/team-current-record.component';
 
 @NgModule({
   declarations: [
@@ -245,7 +246,8 @@ import { CurrentTeamTotalsComponent } from './teams/team-current-salary/current-
     CurrentForwardSalariesComponent,
     CurrentDefenseSalariesComponent,
     CurrentGoaliesSalariesComponent,
-    CurrentTeamTotalsComponent
+    CurrentTeamTotalsComponent,
+    TeamCurrentRecordComponent
   ],
   imports: [
     BrowserModule,

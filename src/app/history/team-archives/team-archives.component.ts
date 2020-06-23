@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { TeamStatsService } from 'src/app/_services/team-stats.service';
 import { CurrentSeasonService } from 'src/app/_services/current-season.service';
 import { TeamInfoService } from 'src/app/_services/team-info.service';
+import { DisplayService } from 'src/app/_services/display.service';
 
 @Component({
   selector: 'app-team-archives',
@@ -18,6 +19,7 @@ export class TeamArchivesComponent implements OnInit, OnDestroy {
 
   private _alive:boolean = true;
   isLoading: boolean = false;
+  isMobile: boolean;
 
   team: any;
   stats$: Observable<TeamStat[]>;
@@ -30,7 +32,12 @@ export class TeamArchivesComponent implements OnInit, OnDestroy {
   seasonType: string = 'Regular';
 
   teams: MatTableDataSource<any[]>;
-  teamsColumnsToDisplay = [
+  mobileColumns = [
+    'playing_year', 'team_logo', 'games_played', 'wins', 'loss', 'ties', 'points', 'goals_for', 'goals_for_game', 'goals_against', 'goals_against_game', 
+    'goals_diff', 'win_pct', 'pp_pct', 'pk_pct', 'sh_goals', 'penalty_minutes_game', 'shot_diff', 'div_record',
+    'home_record', 'away_record', 'trail_record'
+  ];
+  columns = [
     'playing_year', 'season_type', 'team_logo','team_name', 'games_played', 'wins', 'loss', 'ties', 'points', 'goals_for', 'goals_for_game', 'goals_against', 'goals_against_game', 
     'goals_diff', 'win_pct', 'pp_pct', 'pk_pct', 'sh_goals', 'penalty_minutes_game', 'shot_diff', 'div_record',
     'home_record', 'away_record', 'trail_record'
@@ -40,21 +47,24 @@ export class TeamArchivesComponent implements OnInit, OnDestroy {
     private _teamInfoService: TeamInfoService,
     private _teamStatsService: TeamStatsService,
     private _currentSeasonService: CurrentSeasonService,
+    private _displayService: DisplayService,
     private _route: ActivatedRoute,
   ) {
 
     this.seasonType = this._currentSeasonService.currentSeasonType;
-    
   }
 
   ngOnInit() {
     this.isLoading = true;
+    this.isMobile = this._displayService.isMobile;
 
-    const teamSelected = this._route.snapshot.params.params;
+    const teamSelected = this._route.snapshot['_urlSegment'].segments[1].path;
 
     this.getUserId(teamSelected)
 
   }
+
+  
 
   getUserId(teamSelected: string) {
     this._teamInfoService.getUserByTeamName(teamSelected).pipe(

@@ -1,0 +1,31 @@
+<div class="stats" *ngIf="team">
+
+    <div class="stat-individual">
+        <p>Overall: {{team.wins}} - {{team.loss}} - {{team.ties}}</p>
+    </div>
+
+    <mat-divider [vertical]="true" class="white"></mat-divider>
+
+    <div class="stat-individual">
+        <p>Points: {{team.points}}</p>
+    </div>
+    
+    <mat-divider [vertical]="true" class="white"></mat-divider>
+
+    <div class="stat-individual">
+        <p>Home: {{team.home_wins}} - {{team.home_loss}} - {{team.home_ties}}</p>
+    </div>
+
+    <mat-divider [vertical]="true" class="white"></mat-divider>
+
+    <div class="stat-individual">
+        <p>Away: {{team.road_wins}} - {{team.road_loss}} - {{team.road_ties}}</p>
+    </div>
+
+    <mat-divider [vertical]="true" class="white"></mat-divider>
+
+    <div class="stat-individual">
+        <p>Division: {{team.div_win}} - {{team.div_loss}} - {{team.div_tie}}</p>
+    </div>
+
+</div>

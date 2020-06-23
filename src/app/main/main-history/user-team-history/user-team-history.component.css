@@ -2,7 +2,7 @@
     display: grid;
     padding: 20px;
     justify-items: center;
-    grid-template-columns: minmax(350px, auto);
+    grid-template-columns: minmax(325px, auto);
 }
 
 .table {

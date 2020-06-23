@@ -23,6 +23,17 @@ export class TeamStatsService {
     )
   }
 
+  getTeamStatsByTeamIdBySeasonbyType(id: number, season: string, seasonType: string) {
+    const options = {params: new HttpParams()
+      .set('playing_year', season)
+      .set('season_type', seasonType)
+    }
+    
+    return this._http.get(`${environment.back_end_url}/v2/team-stats/season/team/${id}`, options).pipe(
+      map(result => result['result'][0])
+    )
+  }
+
   getTeamStatsBySeasonByType(season: string, seasonType: string) {
     const options = {params: new HttpParams()
       .set('playing_year', season)

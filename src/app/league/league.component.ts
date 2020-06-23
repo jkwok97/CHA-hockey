@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TeamsService } from '../teams/teams.service';
 import { TeamInfoService } from '../_services/team-info.service';
 import { takeWhile } from 'rxjs/operators';
 import { Team } from '../_models/team';

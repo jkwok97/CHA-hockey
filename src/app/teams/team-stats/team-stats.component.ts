@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TeamInfoService } from 'src/app/_services/team-info.service';
 import { takeWhile } from 'rxjs/operators';
 import { Team } from 'src/app/_models/team';
+import { DisplayService } from 'src/app/_services/display.service';
 
 @Component({
   selector: 'app-team-stats',
@@ -13,6 +14,7 @@ export class TeamStatsComponent implements OnInit, OnDestroy {
 
   private _alive:boolean = true;
   isLoading: boolean = true;
+  isMobile: boolean;
 
   team: Team;
 
@@ -29,12 +31,14 @@ export class TeamStatsComponent implements OnInit, OnDestroy {
   constructor(
     private _route: ActivatedRoute,
     private _teamInfoService: TeamInfoService,
+    private _displayService: DisplayService
   ) { 
     this.getTeamInfo(this._route.snapshot.params.id);
   }
 
   ngOnInit() {
-    
+    this.isMobile = this._displayService.isMobile;
+    console.log(this.isMobile);
   }
 
   getTeamInfo(id: number) {
