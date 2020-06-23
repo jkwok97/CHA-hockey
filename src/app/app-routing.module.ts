@@ -49,6 +49,12 @@ import { PlayerArchivesComponent } from './teams/player-archives/player-archives
 import { GoalieArchivesComponent } from './teams/goalie-archives/goalie-archives.component';
 import { TeamCurrentComponent } from './teams/team-stats/team-current/team-current.component';
 import { TeamCurrentSalaryComponent } from './teams/team-current-salary/team-current-salary.component';
+import { TeamDetailArchivesComponent } from './overall-stats/team-detail-archives/team-detail-archives.component';
+import { PlayersDetailArchivesComponent } from './overall-stats/players-detail-archives/players-detail-archives.component';
+import { GoaliesDetailArchivesComponent } from './overall-stats/goalies-detail-archives/goalies-detail-archives.component';
+import { AllPlayersDetailArchiveComponent } from './overall-stats/players-detail-archives/all-players-detail-archive/all-players-detail-archive.component';
+import { AllForwardsDetailArchiveComponent } from './overall-stats/players-detail-archives/all-forwards-detail-archive/all-forwards-detail-archive.component';
+import { AllDefenseDetailArchiveComponent } from './overall-stats/players-detail-archives/all-defense-detail-archive/all-defense-detail-archive.component';
 
 
 const routes: Routes = [
@@ -94,6 +100,15 @@ const routes: Routes = [
           ]
         },
         { path: 'goalies/detail', component: GoaliesDetailComponent },
+        { path: 'teams/archive', component: TeamDetailArchivesComponent },
+        { path: 'players/archive', component: PlayersDetailArchivesComponent, canActivate: [AuthGuard], 
+          children: [
+            { path: 'all', component: AllPlayersDetailArchiveComponent},
+            { path: 'forwards', component: AllForwardsDetailArchiveComponent},
+            { path: 'defense', component: AllDefenseDetailArchiveComponent},
+          ]
+        },
+        { path: 'goalies/archive', component: GoaliesDetailArchivesComponent },
       ]
   },
   { path: 'teams', component: LeagueComponent, canActivate: [AuthGuard] },
@@ -109,6 +124,7 @@ const routes: Routes = [
   { path: 'salary', component: SalaryComponent, canActivate: [AuthGuard]}, 
   { path: 'picks', component: PicksComponent, canActivate: [AuthGuard] },
   { path: 'trades', component: TradesComponent, canActivate: [AuthGuard] },
+  { path: 'waiver-priority', component: WaiverPriorityComponent, canActivate: [AuthGuard] },
   
 
 
@@ -133,7 +149,7 @@ const routes: Routes = [
   { path: 'playoffTree', component: NewPlayoffTreeComponent, canActivate: [AuthGuard] },
   
   
-  { path: 'waiver-priority', component: WaiverPriorityComponent, canActivate: [AuthGuard] },
+  
 ];
 
 @NgModule({

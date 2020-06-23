@@ -125,6 +125,12 @@ import { CurrentDefenseSalariesComponent } from './teams/team-current-salary/cur
 import { CurrentGoaliesSalariesComponent } from './teams/team-current-salary/current-goalies-salaries/current-goalies-salaries.component';
 import { CurrentTeamTotalsComponent } from './teams/team-current-salary/current-team-totals/current-team-totals.component';
 import { TeamCurrentRecordComponent } from './teams/team-stats/team-current/team-current-record/team-current-record.component';
+import { TeamDetailArchivesComponent } from './overall-stats/team-detail-archives/team-detail-archives.component';
+import { GoaliesDetailArchivesComponent } from './overall-stats/goalies-detail-archives/goalies-detail-archives.component';
+import { PlayersDetailArchivesComponent } from './overall-stats/players-detail-archives/players-detail-archives.component';
+import { AllPlayersDetailArchiveComponent } from './overall-stats/players-detail-archives/all-players-detail-archive/all-players-detail-archive.component';
+import { AllForwardsDetailArchiveComponent } from './overall-stats/players-detail-archives/all-forwards-detail-archive/all-forwards-detail-archive.component';
+import { AllDefenseDetailArchiveComponent } from './overall-stats/players-detail-archives/all-defense-detail-archive/all-defense-detail-archive.component';
 
 @NgModule({
   declarations: [
@@ -246,6 +252,12 @@ import { TeamCurrentRecordComponent } from './teams/team-stats/team-current/team
     CurrentGoaliesSalariesComponent,
     CurrentTeamTotalsComponent,
     TeamCurrentRecordComponent,
+    TeamDetailArchivesComponent,
+    GoaliesDetailArchivesComponent,
+    PlayersDetailArchivesComponent,
+    AllPlayersDetailArchiveComponent,
+    AllForwardsDetailArchiveComponent,
+    AllDefenseDetailArchiveComponent,
   ],
   imports: [
     BrowserModule,
