@@ -46,8 +46,8 @@ import { ForwardsDetailComponent } from './overall-stats/players-detail/forwards
 import { DefenseDetailComponent } from './overall-stats/players-detail/defense-detail/defense-detail.component';
 import { AllPlayersDetailComponent } from './overall-stats/players-detail/all-players-detail/all-players-detail.component';
 import { TeamArchivesComponent } from './history/team-archives/team-archives.component';
-import { PlayerArchivesComponent } from './history/player-archives/player-archives.component';
-import { GoalieArchivesComponent } from './history/goalie-archives/goalie-archives.component';
+import { PlayerArchivesComponent } from './teams/player-archives/player-archives.component';
+import { GoalieArchivesComponent } from './teams/goalie-archives/goalie-archives.component';
 import { TeamCurrentComponent } from './teams/team-stats/team-current/team-current.component';
 import { TeamCurrentSalaryComponent } from './teams/team-current-salary/team-current-salary.component';
 

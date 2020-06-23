@@ -67,7 +67,6 @@ export class TeamCurrentComponent implements OnInit, OnDestroy {
     this._teamStatsService.getTeamStatsByTeamIdBySeasonbyType(id, '2020-21', this.currentSeasonType).pipe(
       takeWhile(() => this._alive)
     ).subscribe((teamStat: TeamStat) => {
-      console.log(teamStat);
       this.team = teamStat;
     })
   }

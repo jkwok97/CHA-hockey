@@ -31,3 +31,13 @@ table img {
 .black {
     background-color: black;
 }
+
+.red {
+    font-style: italic;
+    color: red;
+}
+
+.yellow {
+    font-style: italic;
+    color: yellow;
+}

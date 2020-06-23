@@ -2,7 +2,8 @@
 
 <div class="teamInfoSection" [style.background-color]='team.teamcolor' *ngIf="!isLoading">
 
-    <img src="{{team.teamlogo}}" [ngClass]="{'biglogo': !isMobile, 'smalllogo': isMobile}">
+    <img src="{{team.teamlogo}}" [ngClass]="{'biglogo': !isMobile, 'smalllogo': isMobile}" *ngIf="team.shortname !== 'VSJ'">
+    <img src="{{team.teamaltlogo}}" [ngClass]="{'biglogo': !isMobile, 'smalllogo': isMobile}" *ngIf="team.shortname === 'VSJ'">
 
     <div class="teamNameHeader">
         <h1 *ngIf="currentTeam" [style.color]='team.teamtextcolor'>{{team.city}} {{team.nickname}}</h1>

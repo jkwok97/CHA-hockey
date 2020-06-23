@@ -37,6 +37,13 @@ export class TeamSalaryComponent implements OnInit, OnDestroy {
   totalGoalie: number;
   totalPlayers: number;
 
+  currentSeasonCap: number;
+  nextSeasonCap: number;
+  currentSeasonPayroll: number = 0;
+  currentSeasonSpace: number = 0;
+  nextSeasonPayroll: number = 0;
+  nextSeasonSpace: number = 0;
+
   forwardSalaries: MatTableDataSource<any[]>;
   defenceSalaries: MatTableDataSource<any[]>;
   goalieSalaries: MatTableDataSource<any[]>;
