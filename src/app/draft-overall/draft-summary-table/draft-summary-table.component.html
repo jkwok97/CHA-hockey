@@ -23,11 +23,6 @@
                 {{player.firstname}} {{player.lastname}}
             </td>
         </ng-container>
-        
-        <ng-container matColumnDef="player_pos">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Position </th>
-            <td mat-cell *matCellDef="let player"> {{player.player_pos}} </td>
-        </ng-container>
 
         <ng-container matColumnDef="team_logo">
             <th mat-header-cell *matHeaderCellDef><span *ngIf="isMobile">Team</span></th>

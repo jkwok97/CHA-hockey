@@ -16,7 +16,7 @@ export class DraftSummaryComponent implements OnInit, OnDestroy {
   isMobile: boolean = false;
 
   players: MatTableDataSource<any[]>;
-  columns = ['draft_year', 'draft_overall', 'player_name', 'team_logo', 'team'];
+  columns = ['draft_year', 'draft_round', 'draft_overall', 'player_name', 'team_logo', 'team'];
   mobileColumns = ['draft_year','draft_overall', 'player_name', 'team_logo'];
 
   constructor(
