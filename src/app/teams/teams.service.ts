@@ -419,10 +419,6 @@ export class TeamsService {
     return this._http.get(`${environment.back_end_url}/draft-table/`, options);
   }
 
-  getWaiverTeams() {
-    return this._http.get(`${environment.back_end_url}/waivers/`);
-  }
-
   getAllSchedule() {
     return this._http.get(`${environment.back_end_url}/schedule/`);
   }

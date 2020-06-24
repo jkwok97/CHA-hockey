@@ -1,54 +1,8 @@
-.frame {
-    height: 800px;
-    width: 401px;
-    /* overflow-x: hidden; */
-    display: flex;
-    justify-items: center;
-    align-items: flex-start;
-}
-
-.mobile-frame {
-    height: 800px;
-    width: 401px;
-    overflow: auto;
-    display: flex;
-    justify-items: center;
-    align-items: flex-start;
-}
-
-.container {
-    width: 100%;
-    height: 90%;
-    display: flex;
-    flex-wrap: wrap;
+:host {
+    display: grid;
     justify-content: center;
-    align-items: flex-start;
-    margin-top: 30px;
-}
-
-.iframe {
-    border: none;
-    overflow-x:hidden;
-    overflow-y:hidden;
-    /* border: 1px solid blue; */
-    height: 100%;
-    width: 100%;
-}
-
-.playerStatsTable {
-    width: 50%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: flex-start;
-}
-
-.playerStatsTableMobile {
-    width: 95%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: flex-start;
+    grid-template-columns: minmax(350px, 1fr);
+    padding: 20px;
 }
 
 .tableHeader {
@@ -60,21 +14,10 @@
 }
 
 .table {
-    width: 95%;
+    display: grid;
+    /* justify-content: center; */
+    width: 100%;
     overflow-x: auto;
-    margin-bottom: 50px;
-}
-
-.full-width {
-    width: 100%;
-}
-
-.spinner {
-    width: 100%;
-    height: 80vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .table img {
@@ -99,12 +42,7 @@
 
 table {
     text-align: center;
-}
-
-.tableHeader {
-    color: white;
-    font-size: x-large;
-    font-weight: 100;
-    text-align: center;
-    width: 100%;
+    min-width: 50%;
+    max-width: min-content;
+    justify-self: center;
 }
