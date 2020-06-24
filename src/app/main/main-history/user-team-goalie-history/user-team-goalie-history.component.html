@@ -24,11 +24,7 @@
 
 <mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
 
-<div class="table" *ngIf="!isLoading">
-
-    <app-goalie-stats-table 
-        [goalies]="goalies"
-        [statsColumnsToDisplay]="displayColumns()"
-    ></app-goalie-stats-table>
-
-</div>
+<app-goalie-stats-table 
+    [goalies]="goalies"
+    [statsColumnsToDisplay]="displayColumns()"
+></app-goalie-stats-table>

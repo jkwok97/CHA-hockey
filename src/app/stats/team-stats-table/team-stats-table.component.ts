@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild, AfterViewInit, OnChanges } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TeamsService } from 'src/app/teams/teams.service';
-import { MatSort } from '@angular/material';
+import { MatSort, MatPaginator } from '@angular/material';
 import { Team } from 'src/app/_models/team';
 
 @Component({
@@ -14,6 +14,11 @@ export class TeamStatsTableComponent implements OnInit, AfterViewInit, OnChanges
   @Input() teams:any;
   @Input() statsColumnsToDisplay: [];
   @Input() sortByPoints: boolean;
+  @Input() showAll: boolean;
+
+  page: number = 1;
+  pageSize: number;
+  length: number = 0;
 
   goalsForPerGame: string;
   goalsAgainstPerGame: string;
@@ -41,6 +46,7 @@ export class TeamStatsTableComponent implements OnInit, AfterViewInit, OnChanges
   totalShotsAgainst: number = 0;
 
   @ViewChild("overallSort", {static: false}) overallSort: MatSort;
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
 
   constructor(
     private _router: Router,
@@ -48,7 +54,7 @@ export class TeamStatsTableComponent implements OnInit, AfterViewInit, OnChanges
   ) { }
 
   ngOnInit() {
-   
+    this.length = this.teams.length;
   }
 
   ngAfterViewInit() {
@@ -56,6 +62,7 @@ export class TeamStatsTableComponent implements OnInit, AfterViewInit, OnChanges
     if (this.teams) {
       this.getTeamTotals(this.teams);
       this.teams.sort = this.overallSort;
+      this.teams.paginator = this.paginator;
     }
   }
 
@@ -64,6 +71,7 @@ export class TeamStatsTableComponent implements OnInit, AfterViewInit, OnChanges
     if (this.teams) {
       this.getTeamTotals(this.teams);
       this.teams.sort = this.overallSort;
+      this.teams.paginator = this.paginator;
     }
   }
 

@@ -1,0 +1,29 @@
+:host {
+    display: grid;
+    padding: 20px;
+    grid-row-gap: 20px;
+    justify-items: center;
+    grid-template-columns: minmax(350px, auto);
+}
+
+.mat-button-toggle-group {
+    margin: 10px 20px;
+}
+
+.mat-button-toggle-checked {
+    background-color: red;
+}
+
+.mat-form-field {
+    width: 325px;
+    color: red;
+}
+
+.button-container {
+    display: grid;
+    width: 100%;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(350px, auto));
+    grid-column-gap: 20px;
+}

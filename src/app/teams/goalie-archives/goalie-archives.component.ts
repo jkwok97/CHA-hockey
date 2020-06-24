@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { takeWhile } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
@@ -26,9 +26,9 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
   showType: string = 'Season';
   currentSeason: string;
   
-  columnsToDisplay = [ 'team_logo', 'playing_year', 'season_type',
-    'player_name', 'games_played','minutes_played', 'goals_against_avg', 'wins','loss', 'ties', 'en_goals',
-    'shutouts', 'goals_against', 'saves', 'shots_for', 'save_pct', 'goals', 'assists', 'points', 'penalty_minutes', 'pass_pct', 'player_status'
+  columnsToDisplay = [ 'team_logo', 'player_name', 'games_played','minutes_played', 'goals_against_avg', 
+    'wins','loss', 'ties', 'en_goals', 'shutouts', 'goals_against', 'saves', 'shots_for', 'save_pct', 
+    'goals', 'assists', 'points', 'penalty_minutes', 'pass_pct', 'playing_year', 'season_type', 'player_status'
   ];
   columnsToDisplayForAllTime = [ 'season_type',
     'player_name', 'games_played','minutes_played', 'calc_goals_against_avg', 'wins','loss', 'ties', 'en_goals',

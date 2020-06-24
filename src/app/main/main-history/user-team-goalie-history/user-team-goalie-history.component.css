@@ -6,11 +6,6 @@
     grid-template-columns: minmax(350px, auto);
 }
 
-.table {
-    width: 100%;
-    overflow-x: auto;
-}
-
 .mat-button-toggle-group {
     margin: 10px 20px;
 }

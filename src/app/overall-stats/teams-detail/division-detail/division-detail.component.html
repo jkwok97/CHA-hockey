@@ -17,12 +17,16 @@
 
     <h3 class="title" *ngIf="!isLoading">{{division.name}} Division</h3>
 
-    <app-team-stats-table 
-        [teams]="getTeams(division.teams)"
-        [statsColumnsToDisplay]="columns"
-        [sortByPoints]="'true'"
-        *ngIf="!isLoading"
-    ></app-team-stats-table>
+    <section class="table">
+
+        <app-team-stats-table 
+            [teams]="getTeams(division.teams)"
+            [statsColumnsToDisplay]="columns"
+            [sortByPoints]="'true'"
+            *ngIf="!isLoading"
+        ></app-team-stats-table>
+
+    </section>
 
 </div>
 

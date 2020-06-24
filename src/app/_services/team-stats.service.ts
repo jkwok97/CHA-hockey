@@ -68,4 +68,24 @@ export class TeamStatsService {
     )
   }
 
+  getTeamStatsByType(seasonType: string) {
+    const options = {params: new HttpParams()
+      .set('season_type', seasonType)
+    }
+    
+    return this._http.get(`${environment.back_end_url}/v2/team-stats/type/season`, options).pipe(
+      map(result => result['result'])
+    )
+  }
+
+  getTeamStatsByTypeSummed(seasonType: string) {
+    const options = {params: new HttpParams()
+      .set('season_type', seasonType)
+    }
+    
+    return this._http.get(`${environment.back_end_url}/v2/team-stats/type/all-time`, options).pipe(
+      map(result => result['result'])
+    )
+  }
+
 }

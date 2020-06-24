@@ -26,11 +26,8 @@
 
 <mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
 
-<div class="table" *ngIf="!isLoading">
-
-    <app-player-stats-table 
-        [players]="players"
-        [statsColumnsToDisplay]="columns"
-    ></app-player-stats-table>
-
-</div>
+<app-player-stats-table 
+    [players]="players"
+    [statsColumnsToDisplay]="columns"
+    *ngIf="!isLoading"
+></app-player-stats-table>

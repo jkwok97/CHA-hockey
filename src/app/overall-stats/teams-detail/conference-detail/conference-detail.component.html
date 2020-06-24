@@ -17,11 +17,13 @@
 
     <h3 class="title" *ngIf="!isLoading">{{conference.name}} Conference</h3>
 
-    <app-team-stats-table 
-        [teams]="getTeams(conference.teams)"
-        [statsColumnsToDisplay]="columns"
-        [sortByPoints]="'true'"
-        *ngIf="!isLoading"
-    ></app-team-stats-table>
+    <section class="table">
+        <app-team-stats-table 
+            [teams]="getTeams(conference.teams)"
+            [statsColumnsToDisplay]="columns"
+            [sortByPoints]="'true'"
+            *ngIf="!isLoading"
+        ></app-team-stats-table>
+    </section>
 
 </div>

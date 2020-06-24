@@ -1,7 +1,14 @@
+:host {
+    width: 100%;
+}
+
+.table {
+    width: 100%;
+    overflow-x: auto;
+}
+
 table {
     text-align: center;
-    margin-top: 20px;
-    color: white;
     width: 100%;
 }
 
