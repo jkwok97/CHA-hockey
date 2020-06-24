@@ -1,0 +1,13 @@
+<h3 class="title">Draft Picks Summary</h3>
+
+<mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
+
+<mat-form-field color="accent" *ngIf="!isLoading">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+</mat-form-field>
+
+<app-draft-summary-table
+    [players]="players"
+    [columns]="isMobile ? mobileColumns : columns"
+    *ngIf="!isLoading"
+></app-draft-summary-table>

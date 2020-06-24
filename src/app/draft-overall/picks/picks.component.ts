@@ -1,15 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
-import { TeamsService } from '../teams/teams.service';
 import { takeWhile } from 'rxjs/operators';
-import { DisplayService } from '../_services/display.service';
+import { DisplayService } from '../../_services/display.service';
 import { Observable } from 'rxjs';
-import { Team, TeamStat } from '../_models/team';
-import { TeamInfoService } from '../_services/team-info.service';
-import { CurrentSeasonService } from '../_services/current-season.service';
-import { DraftService } from '../_services/draft.service';
-import { DraftTable } from '../_models/draft-table';
-import { TeamStatsService } from '../_services/team-stats.service';
+import { Team, TeamStat } from '../../_models/team';
+import { TeamInfoService } from '../../_services/team-info.service';
+import { CurrentSeasonService } from '../../_services/current-season.service';
+import { DraftService } from '../../_services/draft.service';
+import { DraftTable } from '../../_models/draft-table';
+import { TeamStatsService } from '../../_services/team-stats.service';
 
 @Component({
   selector: 'app-picks',

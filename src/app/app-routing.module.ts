@@ -11,7 +11,6 @@ import { TeamStatsComponent } from './teams/team-stats/team-stats.component';
 // import { GoalieStatsComponent } from './stats/goalie-stats/goalie-stats.component';
 import { OverallTeamStatsComponent } from './overall-stats/overall-team-stats/overall-team-stats.component';
 import { ChampionsComponent } from './history/champions/champions.component';
-import { DraftsComponent } from './history/drafts/drafts.component';
 import { TradesComponent } from './trades/trades.component';
 import { WaiverPriorityComponent } from './waiver-priority/waiver-priority.component';
 import { MainComponent } from './main/main.component';
@@ -19,7 +18,7 @@ import { LoginComponent } from './main/login/login.component';
 import { AuthGuard } from './_services/auth.guard';
 import { PlayerInfoComponent } from './stats/player-info/player-info.component';
 import { SalaryComponent } from './salary/salary.component';
-import { PicksComponent } from './picks/picks.component';
+import { PicksComponent } from './draft-overall/picks/picks.component';
 import { NewPlayoffTreeComponent } from './schedule/playoff-tree/new-playoff-tree/new-playoff-tree.component';
 import { NhlInfoComponent } from './main/nhl-info/nhl-info.component';
 import { RosterComponent } from './main/roster/roster.component';
@@ -53,7 +52,8 @@ import { GoaliesDetailArchivesComponent } from './overall-stats/goalies-detail-a
 import { AllPlayersDetailArchiveComponent } from './overall-stats/players-detail-archives/all-players-detail-archive/all-players-detail-archive.component';
 import { AllForwardsDetailArchiveComponent } from './overall-stats/players-detail-archives/all-forwards-detail-archive/all-forwards-detail-archive.component';
 import { AllDefenseDetailArchiveComponent } from './overall-stats/players-detail-archives/all-defense-detail-archive/all-defense-detail-archive.component';
-
+import { DraftSummaryComponent } from './draft-overall/draft-summary/draft-summary.component';
+import { DraftOverallComponent } from './draft-overall/draft-overall.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -120,7 +120,12 @@ const routes: Routes = [
     ] 
   },
   { path: 'salary', component: SalaryComponent, canActivate: [AuthGuard]}, 
-  { path: 'picks', component: PicksComponent, canActivate: [AuthGuard] },
+  { path: 'draft', component: DraftOverallComponent, canActivate: [AuthGuard],
+    children: [
+      { path: 'picks', component: PicksComponent},
+      { path: 'summary', component:DraftSummaryComponent},
+    ]
+  },
   { path: 'trades', component: TradesComponent, canActivate: [AuthGuard] },
   { path: 'waiver-priority', component: WaiverPriorityComponent, canActivate: [AuthGuard] },
   
@@ -131,7 +136,6 @@ const routes: Routes = [
   
   { path: 'history', component: HistoryComponent, canActivate: [AuthGuard] },
   { path: 'history/champions', component: ChampionsComponent, canActivate: [AuthGuard] },
-  { path: 'history/drafts', component: DraftsComponent, canActivate: [AuthGuard] },
   { path: 'rules', component: RulesComponent, canActivate: [AuthGuard] },
   { path: 'rules/equalization', component: RulesComponent, canActivate: [AuthGuard] },
   { path: 'rules/lottery', component: RulesComponent, canActivate: [AuthGuard] },

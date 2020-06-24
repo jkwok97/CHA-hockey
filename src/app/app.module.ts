@@ -16,7 +16,6 @@ import { TeamStatsComponent } from './teams/team-stats/team-stats.component';
 import { PlayersStatsComponent } from './stats/players-stats/players-stats.component';
 import { GoalieStatsComponent } from './stats/goalie-stats/goalie-stats.component';
 import { ChampionsComponent } from './history/champions/champions.component';
-import { DraftsComponent } from './history/drafts/drafts.component';
 import { TradesComponent } from './trades/trades.component';
 import { EqualizationComponent } from './rules/equalization/equalization.component';
 import { LotteryComponent } from './rules/lottery/lottery.component';
@@ -37,7 +36,7 @@ import { HistoricalTeamStatsComponent } from './teams/historical-team-stats/hist
 import { TeamArchivesComponent } from './teams/team-archives/team-archives.component';
 import { AwardsComponent } from './history/awards/awards.component';
 import { SalaryComponent } from './salary/salary.component';
-import { PicksComponent } from './picks/picks.component';
+import { PicksComponent } from './draft-overall/picks/picks.component';
 import { TwitterComponent } from './main/nhl-info/twitter/twitter.component';
 import { NhlLeadersComponent } from './main/nhl-info/nhl-leaders/nhl-leaders.component';
 import { NhlPlayersStatsComponent } from './main/nhl-info/nhl-players-stats/nhl-players-stats.component';
@@ -129,6 +128,9 @@ import { PlayersDetailArchivesComponent } from './overall-stats/players-detail-a
 import { AllPlayersDetailArchiveComponent } from './overall-stats/players-detail-archives/all-players-detail-archive/all-players-detail-archive.component';
 import { AllForwardsDetailArchiveComponent } from './overall-stats/players-detail-archives/all-forwards-detail-archive/all-forwards-detail-archive.component';
 import { AllDefenseDetailArchiveComponent } from './overall-stats/players-detail-archives/all-defense-detail-archive/all-defense-detail-archive.component';
+import { DraftSummaryComponent } from './draft-overall/draft-summary/draft-summary.component';
+import { DraftOverallComponent } from './draft-overall/draft-overall.component';
+import { DraftSummaryTableComponent } from './draft-overall/draft-summary-table/draft-summary-table.component';
 
 @NgModule({
   declarations: [
@@ -144,7 +146,6 @@ import { AllDefenseDetailArchiveComponent } from './overall-stats/players-detail
     GoalieStatsComponent,
     OverallTeamStatsComponent,
     ChampionsComponent,
-    DraftsComponent,
     TradesComponent,
     EqualizationComponent,
     LotteryComponent,
@@ -254,6 +255,9 @@ import { AllDefenseDetailArchiveComponent } from './overall-stats/players-detail
     AllPlayersDetailArchiveComponent,
     AllForwardsDetailArchiveComponent,
     AllDefenseDetailArchiveComponent,
+    DraftSummaryComponent,
+    DraftOverallComponent,
+    DraftSummaryTableComponent,
   ],
   imports: [
     BrowserModule,

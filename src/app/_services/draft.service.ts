@@ -36,4 +36,10 @@ export class DraftService {
       map(result => result['result'])
     )
   }
+
+  getDraftSummary() {
+    return this._http.get(`${environment.back_end_url}/v2/draft/ordered`).pipe(
+      map(result => result['result'])
+    )
+  }
 }

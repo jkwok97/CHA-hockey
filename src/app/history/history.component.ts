@@ -13,7 +13,6 @@ export class HistoryComponent implements OnInit {
 
   routes = [
     {name: 'Champions', url: 'champions', current: false},
-    {name: 'Drafts', url: 'drafts', current: false},
     {name: 'Archives', url: 'archives', current: false},
   ];
 

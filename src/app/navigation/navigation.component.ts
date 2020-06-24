@@ -24,7 +24,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
   routes = [
     {name: 'Statistics', url: 'stats/teams/leaders', current: false},
     {name: 'Teams', url: 'teams', current: false},
-    {name: 'Draft Table', url: 'picks', current: false},
+    {name: 'Draft', url: 'draft/picks', current: false},
     // {name: 'Schedule', url: 'schedule', current: false},
     {name: 'Playoff Tree', url: 'playoffTree', current: false},
     {name: 'Salaries', url: 'salary', current: false},
