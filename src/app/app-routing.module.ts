@@ -14,7 +14,6 @@ import { ChampionsComponent } from './history/champions/champions.component';
 import { DraftsComponent } from './history/drafts/drafts.component';
 import { TradesComponent } from './trades/trades.component';
 import { WaiverPriorityComponent } from './waiver-priority/waiver-priority.component';
-import { ArchivesComponent } from './history/archives/archives.component';
 import { MainComponent } from './main/main.component';
 import { LoginComponent } from './main/login/login.component';
 import { AuthGuard } from './_services/auth.guard';
@@ -135,7 +134,6 @@ const routes: Routes = [
   { path: 'history', component: HistoryComponent, canActivate: [AuthGuard] },
   { path: 'history/champions', component: ChampionsComponent, canActivate: [AuthGuard] },
   { path: 'history/drafts', component: DraftsComponent, canActivate: [AuthGuard] },
-  { path: 'history/archives', component: ArchivesComponent, canActivate: [AuthGuard] },
   { path: 'rules', component: RulesComponent, canActivate: [AuthGuard] },
   { path: 'rules/equalization', component: RulesComponent, canActivate: [AuthGuard] },
   { path: 'rules/lottery', component: RulesComponent, canActivate: [AuthGuard] },

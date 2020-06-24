@@ -26,7 +26,6 @@ import { RostersComponent } from './rules/rosters/rosters.component';
 import { WaiversComponent } from './rules/waivers/waivers.component';
 import { WinningsComponent } from './rules/winnings/winnings.component';
 import { WaiverPriorityComponent } from './waiver-priority/waiver-priority.component';
-import { ArchivesComponent } from './history/archives/archives.component';
 import { MainComponent } from './main/main.component';
 import { LoginComponent } from './main/login/login.component';
 import { AuthService } from './_services/auth.service';
@@ -156,7 +155,6 @@ import { AllDefenseDetailArchiveComponent } from './overall-stats/players-detail
     WaiversComponent,
     WinningsComponent,
     WaiverPriorityComponent,
-    ArchivesComponent,
     MainComponent,
     LoginComponent,
     PlayerInfoComponent,
