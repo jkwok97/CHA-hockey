@@ -21,8 +21,6 @@ export class TeamDetailArchivesComponent implements OnInit, OnDestroy {
   team: any;
   stats$: Observable<TeamStat[]>;
 
-  // short_team_name: string;
-
   teams: MatTableDataSource<any[]>;
 
   mobileColumns = [
@@ -48,7 +46,6 @@ export class TeamDetailArchivesComponent implements OnInit, OnDestroy {
 
   seasonType: string;
   showType: string = 'Season';
-  // currentSeason: string;
 
   constructor(
     private _currentSeasonService: CurrentSeasonService,

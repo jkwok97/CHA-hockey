@@ -60,6 +60,28 @@ export class GoalieStatsService {
     )
   }
 
+  getGoaliesStatsByType(seasonType: string) {
+
+    const options = {params: new HttpParams()
+      .set('season_type', seasonType)
+    }
+    
+    return this._http.get(`${environment.back_end_url}/v2/goalies-stats/type/season`, options).pipe(
+      map(result => result['result'])
+    )
+  }
+
+  getGoaliesStatsByTypeSummed(seasonType: string) {
+
+    const options = {params: new HttpParams()
+      .set('season_type', seasonType)
+    }
+    
+    return this._http.get(`${environment.back_end_url}/v2/goalies-stats/type/all-time`, options).pipe(
+      map(result => result['result'])
+    )
+  }
+
   getWinsLeaders(season: string, seasonType: string) {
 
     const options = {params: new HttpParams()

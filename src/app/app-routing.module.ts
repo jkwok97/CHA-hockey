@@ -21,7 +21,6 @@ import { PlayerInfoComponent } from './stats/player-info/player-info.component';
 import { SalaryComponent } from './salary/salary.component';
 import { PicksComponent } from './picks/picks.component';
 import { NewPlayoffTreeComponent } from './schedule/playoff-tree/new-playoff-tree/new-playoff-tree.component';
-import { TeamSeasonComponent } from './history/team-archives/team-season/team-season.component';
 import { NhlInfoComponent } from './main/nhl-info/nhl-info.component';
 import { RosterComponent } from './main/roster/roster.component';
 import { ChartsComponent } from './main/charts/charts.component';
@@ -43,7 +42,7 @@ import { DivisionDetailComponent } from './overall-stats/teams-detail/division-d
 import { ForwardsDetailComponent } from './overall-stats/players-detail/forwards-detail/forwards-detail.component';
 import { DefenseDetailComponent } from './overall-stats/players-detail/defense-detail/defense-detail.component';
 import { AllPlayersDetailComponent } from './overall-stats/players-detail/all-players-detail/all-players-detail.component';
-import { TeamArchivesComponent } from './history/team-archives/team-archives.component';
+import { TeamArchivesComponent } from './teams/team-archives/team-archives.component';
 import { PlayerArchivesComponent } from './teams/player-archives/player-archives.component';
 import { GoalieArchivesComponent } from './teams/goalie-archives/goalie-archives.component';
 import { TeamCurrentComponent } from './teams/team-stats/team-current/team-current.component';
@@ -130,7 +129,6 @@ const routes: Routes = [
   { path: 'info/:type/:id/:name', component: PlayerInfoComponent, canActivate: [AuthGuard] },
   { path: 'info/goalies/:id/:name', component: PlayerInfoComponent, canActivate: [AuthGuard] },
   
-  { path: 'teams/:params/:params/:params', component: TeamSeasonComponent, canActivate: [AuthGuard] },
   { path: 'history', component: HistoryComponent, canActivate: [AuthGuard] },
   { path: 'history/champions', component: ChampionsComponent, canActivate: [AuthGuard] },
   { path: 'history/drafts', component: DraftsComponent, canActivate: [AuthGuard] },

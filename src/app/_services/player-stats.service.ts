@@ -84,6 +84,72 @@ export class PlayerStatsService {
     )
   }
 
+  getPlayersStatsByType(seasonType: string) {
+
+    const options = {params: new HttpParams()
+      .set('season_type', seasonType)
+    }
+    
+    return this._http.get(`${environment.back_end_url}/v2/players-stats/type/season`, options).pipe(
+      map(result => result['result'])
+    )
+  }
+
+  getPlayerStatsByTypeSummed(seasonType: string) {
+
+    const options = {params: new HttpParams()
+      .set('season_type', seasonType)
+    }
+    
+    return this._http.get(`${environment.back_end_url}/v2/players-stats/type/all-time`, options).pipe(
+      map(result => result['result'])
+    )
+  }
+
+  getForwardStatsByType(seasonType: string) {
+    
+    const options = {params: new HttpParams()
+      .set('season_type', seasonType)
+    }
+    
+    return this._http.get(`${environment.back_end_url}/v2/players-stats/type/season/forward`, options).pipe(
+      map(result => result['result'])
+    )
+  }
+
+  getForwardStatsByTypeSummed(seasonType: string) {
+
+    const options = {params: new HttpParams()
+      .set('season_type', seasonType)
+    }
+    
+    return this._http.get(`${environment.back_end_url}/v2/players-stats/type/all-time/forward`, options).pipe(
+      map(result => result['result'])
+    )
+  }
+
+  getDefenseStatsByType(seasonType: string) {
+    
+    const options = {params: new HttpParams()
+      .set('season_type', seasonType)
+    }
+    
+    return this._http.get(`${environment.back_end_url}/v2/players-stats/type/season/defense`, options).pipe(
+      map(result => result['result'])
+    )
+  }
+
+  getDefenseStatsByTypeSummed(seasonType: string) {
+
+    const options = {params: new HttpParams()
+      .set('season_type', seasonType)
+    }
+    
+    return this._http.get(`${environment.back_end_url}/v2/players-stats/type/all-time/defense`, options).pipe(
+      map(result => result['result'])
+    )
+  }
+
   // ==================================== LEADERS ==========================================
 
   getPointLeaders(season: string, seasonType: string) {

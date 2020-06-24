@@ -1,1 +1,40 @@
-<p>goalies-detail-archives works!</p>
+<h3 class="title">All Goalies Archive</h3>
+
+<div class="button-container">
+
+    <mat-button-toggle-group #bySeason="matButtonToggleGroup" [value]="seasonType" (change)="changeSeason(bySeason.value)">
+        <mat-button-toggle value="Regular" color="accent">
+            Regular
+        </mat-button-toggle>
+        <mat-button-toggle value="Playoffs" color="accent">
+            Playoffs
+        </mat-button-toggle>
+    </mat-button-toggle-group>
+
+    <mat-button-toggle-group #byShow="matButtonToggleGroup" [value]="showType" (change)="changeShow(byShow.value)">
+        <mat-button-toggle value="Season" color="accent">
+            Per Season
+        </mat-button-toggle>
+        <mat-button-toggle value="Alltime" color="accent">
+            All-time
+        </mat-button-toggle>
+    </mat-button-toggle-group>
+
+    <mat-form-field color="accent">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+    </mat-form-field>
+
+</div>
+
+<div class="container">
+
+    <mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
+
+    <app-goalie-stats-table 
+        [goalies]="goalies"
+        [statsColumnsToDisplay]="showColumns()"
+        *ngIf="!isLoading"
+    ></app-goalie-stats-table>
+
+</div>
+

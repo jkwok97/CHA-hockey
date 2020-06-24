@@ -3,7 +3,7 @@ import { TeamsService } from 'src/app/teams/teams.service';
 import { takeWhile } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { TeamArchivesComponent } from '../team-archives/team-archives.component';
+import { TeamArchivesComponent } from '../../teams/team-archives/team-archives.component';
 
 @Component({
   selector: 'app-champions',

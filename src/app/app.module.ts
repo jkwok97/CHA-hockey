@@ -34,7 +34,7 @@ import { PlayerInfoComponent } from './stats/player-info/player-info.component';
 import { PlayerArchivesComponent } from './teams/player-archives/player-archives.component';
 import { GoalieArchivesComponent } from './teams/goalie-archives/goalie-archives.component';
 import { HistoricalTeamStatsComponent } from './teams/historical-team-stats/historical-team-stats.component';
-import { TeamArchivesComponent } from './history/team-archives/team-archives.component';
+import { TeamArchivesComponent } from './teams/team-archives/team-archives.component';
 import { AwardsComponent } from './history/awards/awards.component';
 import { SalaryComponent } from './salary/salary.component';
 import { PicksComponent } from './picks/picks.component';
@@ -54,7 +54,6 @@ import { TeamStatsTableComponent } from './stats/team-stats-table/team-stats-tab
 import { PlayerStatsTableComponent } from './stats/player-stats-table/player-stats-table.component';
 import { TeamChartComponent } from './main/charts/team-chart/team-chart.component';
 import { PlayerChartComponent } from './main/charts/player-chart/player-chart.component';
-import { TeamSeasonComponent } from './history/team-archives/team-season/team-season.component';
 import { AwardTableViewComponent } from './history/awards/award-table-view/award-table-view.component';
 import { NhlInfoComponent } from './main/nhl-info/nhl-info.component';
 import { RosterComponent } from './main/roster/roster.component';
@@ -162,7 +161,6 @@ import { AllDefenseDetailArchiveComponent } from './overall-stats/players-detail
     GoalieArchivesComponent,
     HistoricalTeamStatsComponent,
     TeamArchivesComponent,
-    TeamSeasonComponent,
     AwardsComponent,
     SalaryComponent,
     PicksComponent,
