@@ -6,3 +6,31 @@
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     grid-column-gap: 20px;
 }
+
+.mat-card-content {
+    display: grid;
+    grid-column-gap: 20px;
+    grid-template-columns: 100px auto;
+    margin-top: 20px;
+}
+
+.mat-card-content p {
+    margin: 3px 0;
+}
+
+.headshot {
+    height: 100px;
+    width: auto;
+    border-radius: 10px;
+}
+
+.stat {
+    color: whitesmoke;
+    font-style: italic; 
+}
+
+.stat-highlight {
+    color: whitesmoke;
+    font-style: italic;
+    font-size: large;
+}

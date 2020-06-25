@@ -30,4 +30,8 @@ export class DefenseAwardComponent implements OnInit {
     return `${color}95`
   }
 
+  getPlayerPicture(id: number) {
+    return `https://nhl.bamcontent.com/images/headshots/current/168x168/${id}.jpg`
+  }
+
 }

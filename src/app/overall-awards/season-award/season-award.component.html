@@ -11,9 +11,20 @@
             style="background-size: cover;">
         </div>
 
-        <mat-card-title>{{champion.cha_season}} - {{champion.city}} {{champion.nickname}}</mat-card-title>
+        <mat-card-title>{{champion.display_season}} - {{champion.city}} {{champion.nickname}}</mat-card-title>
         <mat-card-subtitle>Owner: {{champion.firstname}} {{champion.lastname}}</mat-card-subtitle>
 
     </mat-card-header>
+
+    <mat-card-content>
+
+        <div>
+            <p>Points: <span class="stat-highlight">{{champion.points}}</span></p>
+            <p>Wins: <span class="stat">{{champion.wins}}</span></p>
+            <p>GF: <span class="stat">{{champion.goals_for}}</span></p>
+            <p>GA: <span class="stat">{{champion.goals_against}}</span></p>
+        </div>
+
+    </mat-card-content>
 
 </mat-card>

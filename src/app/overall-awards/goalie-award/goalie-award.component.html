@@ -11,10 +11,23 @@
             style="background-size: cover;">
         </div>
 
-        <mat-card-title>{{scorer.cha_season}} - {{scorer.playerfirst}} {{scorer.playerlast}}</mat-card-title>
+        <mat-card-title>{{scorer.display_season}} - {{scorer.playerfirst}} {{scorer.playerlast}}</mat-card-title>
         <mat-card-subtitle>Team: {{scorer.city}} {{scorer.nickname}}</mat-card-subtitle>
         <mat-card-subtitle>Owner: {{scorer.ownerfirst}} {{scorer.ownerlast}}</mat-card-subtitle>
 
     </mat-card-header>
+
+    <mat-card-content>
+
+        <img [src]="getPlayerPicture(scorer.nhl_id)" class="headshot">
+
+        <div>
+            <p>Games Played: <span class="stat">{{scorer.games_played}}</span></p>
+            <p>Wins: <span class="stat">{{scorer.wins}}</span></p>
+            <p>GAA: <span class="stat">{{scorer.goals_against_avg}}</span></p>
+            <p>Save Pct %: <span class="stat">{{scorer.save_pct}}</span></p>
+        </div>
+
+    </mat-card-content>
 
 </mat-card>

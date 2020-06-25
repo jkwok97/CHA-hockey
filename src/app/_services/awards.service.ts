@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { OwnerAward, PlayerAward } from '../_models/awards';
+import { OwnerAward, PlayerAward, GoalieAward } from '../_models/awards';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
@@ -42,7 +42,7 @@ export class AwardsService {
     )
   }
 
-  getGoalies(): Observable<PlayerAward[]> {
+  getGoalies(): Observable<GoalieAward[]> {
 
     return this._http.get(`${environment.back_end_url}/v2/awards/goalies`).pipe(
       map(result => result['result'])

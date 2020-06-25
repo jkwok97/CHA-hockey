@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PlayerAward } from 'src/app/_models/awards';
+import { GoalieAward } from 'src/app/_models/awards';
 import { AwardsService } from 'src/app/_services/awards.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { AwardsService } from 'src/app/_services/awards.service';
 })
 export class GoalieAwardComponent implements OnInit {
 
-  scorers$: Observable<PlayerAward[]>;
+  scorers$: Observable<GoalieAward[]>;
 
   constructor(
     private _awardsService: AwardsService
@@ -28,6 +28,10 @@ export class GoalieAwardComponent implements OnInit {
 
   getColor(color:string) {
     return `${color}95`
+  }
+
+  getPlayerPicture(id: number) {
+    return `https://nhl.bamcontent.com/images/headshots/current/168x168/${id}.jpg`
   }
 
 }
