@@ -54,6 +54,13 @@ import { AllForwardsDetailArchiveComponent } from './overall-stats/players-detai
 import { AllDefenseDetailArchiveComponent } from './overall-stats/players-detail-archives/all-defense-detail-archive/all-defense-detail-archive.component';
 import { DraftSummaryComponent } from './draft-overall/draft-summary/draft-summary.component';
 import { DraftOverallComponent } from './draft-overall/draft-overall.component';
+import { EqualizationComponent } from './rules/equalization/equalization.component';
+import { LotteryComponent } from './rules/lottery/lottery.component';
+import { EgrComponent } from './rules/egr/egr.component';
+import { ProtectionComponent } from './rules/protection/protection.component';
+import { RostersComponent } from './rules/rosters/rosters.component';
+import { WaiversComponent } from './rules/waivers/waivers.component';
+import { WinningsComponent } from './rules/winnings/winnings.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -128,28 +135,26 @@ const routes: Routes = [
   },
   { path: 'trades', component: TradesComponent, canActivate: [AuthGuard] },
   { path: 'waiver-priority', component: WaiverPriorityComponent, canActivate: [AuthGuard] },
+  { path: 'rules', component: RulesComponent, canActivate: [AuthGuard], 
+  children: [
+    { path: 'equalization', component: EqualizationComponent },
+    { path: 'lottery', component: LotteryComponent },
+    { path: 'egr', component: EgrComponent },
+    { path: 'protection', component: ProtectionComponent },
+    { path: 'rosters', component: RostersComponent },
+    { path: 'waivers', component: WaiversComponent },
+    { path: 'winnings', component: WinningsComponent },
+    ]
+  },
   
 
 
   { path: 'info/:type/:id/:name', component: PlayerInfoComponent, canActivate: [AuthGuard] },
   { path: 'info/goalies/:id/:name', component: PlayerInfoComponent, canActivate: [AuthGuard] },
-  
   { path: 'history', component: HistoryComponent, canActivate: [AuthGuard] },
   { path: 'history/champions', component: ChampionsComponent, canActivate: [AuthGuard] },
-  { path: 'rules', component: RulesComponent, canActivate: [AuthGuard] },
-  { path: 'rules/equalization', component: RulesComponent, canActivate: [AuthGuard] },
-  { path: 'rules/lottery', component: RulesComponent, canActivate: [AuthGuard] },
-  { path: 'rules/egr', component: RulesComponent, canActivate: [AuthGuard] },
-  { path: 'rules/protection', component: RulesComponent, canActivate: [AuthGuard] },
-  { path: 'rules/rosters', component: RulesComponent, canActivate: [AuthGuard] },
-  { path: 'rules/waivers', component: RulesComponent, canActivate: [AuthGuard] },
-  { path: 'rules/winnings', component: RulesComponent, canActivate: [AuthGuard] },
-  
   { path: 'schedule', component: ScheduleComponent, canActivate: [AuthGuard] },
   { path: 'playoffTree', component: NewPlayoffTreeComponent, canActivate: [AuthGuard] },
-  
-  
-  
 ];
 
 @NgModule({

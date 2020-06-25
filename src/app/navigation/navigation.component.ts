@@ -32,7 +32,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     {name: 'Trades', url: 'trades', current: false},
     {name: 'Waiver Priority', url: 'waiver-priority', current: false},
     {name: 'History', url: 'history', current: false},
-    {name: 'Rules & Prizes', url: 'rules', current: false},
+    {name: 'Rules & Prizes', url: 'rules/equalization', current: false},
   ];
 
   constructor(

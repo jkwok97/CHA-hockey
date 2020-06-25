@@ -269,11 +269,6 @@ import { DraftSummaryTableComponent } from './draft-overall/draft-summary-table/
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],
-  entryComponents: [
-    EqualizationComponent, LotteryComponent,
-    EgrComponent, ProtectionComponent,
-    RostersComponent, WaiversComponent,
-    WinningsComponent
-  ]
+  entryComponents: []
 })
 export class AppModule { }
