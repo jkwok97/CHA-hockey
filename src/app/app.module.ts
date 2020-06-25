@@ -131,6 +131,14 @@ import { AllDefenseDetailArchiveComponent } from './overall-stats/players-detail
 import { DraftSummaryComponent } from './draft-overall/draft-summary/draft-summary.component';
 import { DraftOverallComponent } from './draft-overall/draft-overall.component';
 import { DraftSummaryTableComponent } from './draft-overall/draft-summary-table/draft-summary-table.component';
+import { OverallAwardsComponent } from './overall-awards/overall-awards.component';
+import { ChampionsAwardComponent } from './overall-awards/champions-award/champions-award.component';
+import { ScorerAwardComponent } from './overall-awards/scorer-award/scorer-award.component';
+import { DefenseAwardComponent } from './overall-awards/defense-award/defense-award.component';
+import { RookieAwardComponent } from './overall-awards/rookie-award/rookie-award.component';
+import { GoalieAwardComponent } from './overall-awards/goalie-award/goalie-award.component';
+import { GmAwardComponent } from './overall-awards/gm-award/gm-award.component';
+import { SeasonAwardComponent } from './overall-awards/season-award/season-award.component';
 
 @NgModule({
   declarations: [
@@ -258,6 +266,14 @@ import { DraftSummaryTableComponent } from './draft-overall/draft-summary-table/
     DraftSummaryComponent,
     DraftOverallComponent,
     DraftSummaryTableComponent,
+    OverallAwardsComponent,
+    ChampionsAwardComponent,
+    ScorerAwardComponent,
+    DefenseAwardComponent,
+    RookieAwardComponent,
+    GoalieAwardComponent,
+    GmAwardComponent,
+    SeasonAwardComponent,
   ],
   imports: [
     BrowserModule,

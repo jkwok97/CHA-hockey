@@ -1,0 +1,19 @@
+<mat-card 
+    *ngFor="let champion of champions$ | async"
+    [style.background-color]="getColor(champion.teamcolor)"
+>
+
+    <mat-card-header>
+
+        <div 
+            mat-card-avatar 
+            [style.background-image]="getLogo(champion.teamlogo)"
+            style="background-size: cover;">
+        </div>
+
+        <mat-card-title>{{champion.cha_season}} - {{champion.city}} {{champion.nickname}}</mat-card-title>
+        <mat-card-subtitle>Owner: {{champion.firstname}} {{champion.lastname}}</mat-card-subtitle>
+
+    </mat-card-header>
+
+</mat-card>

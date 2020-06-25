@@ -61,6 +61,14 @@ import { ProtectionComponent } from './rules/protection/protection.component';
 import { RostersComponent } from './rules/rosters/rosters.component';
 import { WaiversComponent } from './rules/waivers/waivers.component';
 import { WinningsComponent } from './rules/winnings/winnings.component';
+import { OverallAwardsComponent } from './overall-awards/overall-awards.component';
+import { ChampionsAwardComponent } from './overall-awards/champions-award/champions-award.component';
+import { ScorerAwardComponent } from './overall-awards/scorer-award/scorer-award.component';
+import { DefenseAwardComponent } from './overall-awards/defense-award/defense-award.component';
+import { RookieAwardComponent } from './overall-awards/rookie-award/rookie-award.component';
+import { GoalieAwardComponent } from './overall-awards/goalie-award/goalie-award.component';
+import { GmAwardComponent } from './overall-awards/gm-award/gm-award.component';
+import { SeasonAwardComponent } from './overall-awards/season-award/season-award.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -136,14 +144,25 @@ const routes: Routes = [
   { path: 'trades', component: TradesComponent, canActivate: [AuthGuard] },
   { path: 'waiver-priority', component: WaiverPriorityComponent, canActivate: [AuthGuard] },
   { path: 'rules', component: RulesComponent, canActivate: [AuthGuard], 
-  children: [
-    { path: 'equalization', component: EqualizationComponent },
-    { path: 'lottery', component: LotteryComponent },
-    { path: 'egr', component: EgrComponent },
-    { path: 'protection', component: ProtectionComponent },
-    { path: 'rosters', component: RostersComponent },
-    { path: 'waivers', component: WaiversComponent },
-    { path: 'winnings', component: WinningsComponent },
+    children: [
+      { path: 'equalization', component: EqualizationComponent },
+      { path: 'lottery', component: LotteryComponent },
+      { path: 'egr', component: EgrComponent },
+      { path: 'protection', component: ProtectionComponent },
+      { path: 'rosters', component: RostersComponent },
+      { path: 'waivers', component: WaiversComponent },
+      { path: 'winnings', component: WinningsComponent },
+    ]
+  },
+  { path: 'awards', component: OverallAwardsComponent, canActivate: [AuthGuard], 
+    children: [
+      { path: 'champions', component: ChampionsAwardComponent },
+      { path: 'scorer', component: ScorerAwardComponent },
+      { path: 'defense', component: DefenseAwardComponent },
+      { path: 'rookie', component: RookieAwardComponent },
+      { path: 'goalie', component: GoalieAwardComponent },
+      { path: 'gm', component: GmAwardComponent },
+      { path: 'season', component: SeasonAwardComponent },
     ]
   },
   
@@ -151,8 +170,6 @@ const routes: Routes = [
 
   { path: 'info/:type/:id/:name', component: PlayerInfoComponent, canActivate: [AuthGuard] },
   { path: 'info/goalies/:id/:name', component: PlayerInfoComponent, canActivate: [AuthGuard] },
-  { path: 'history', component: HistoryComponent, canActivate: [AuthGuard] },
-  { path: 'history/champions', component: ChampionsComponent, canActivate: [AuthGuard] },
   { path: 'schedule', component: ScheduleComponent, canActivate: [AuthGuard] },
   { path: 'playoffTree', component: NewPlayoffTreeComponent, canActivate: [AuthGuard] },
 ];
