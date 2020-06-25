@@ -11,11 +11,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { TeamsComponent } from './teams/teams-header.component';
 import { RulesComponent } from './rules/rules.component';
 import { ScheduleComponent } from './schedule/schedule.component';
-import { HistoryComponent } from './history/history.component';
 import { TeamStatsComponent } from './teams/team-stats/team-stats.component';
 import { PlayersStatsComponent } from './stats/players-stats/players-stats.component';
 import { GoalieStatsComponent } from './stats/goalie-stats/goalie-stats.component';
-import { ChampionsComponent } from './history/champions/champions.component';
 import { TradesComponent } from './trades/trades.component';
 import { EqualizationComponent } from './rules/equalization/equalization.component';
 import { LotteryComponent } from './rules/lottery/lottery.component';
@@ -34,7 +32,6 @@ import { PlayerArchivesComponent } from './teams/player-archives/player-archives
 import { GoalieArchivesComponent } from './teams/goalie-archives/goalie-archives.component';
 import { HistoricalTeamStatsComponent } from './teams/historical-team-stats/historical-team-stats.component';
 import { TeamArchivesComponent } from './teams/team-archives/team-archives.component';
-import { AwardsComponent } from './history/awards/awards.component';
 import { SalaryComponent } from './salary/salary.component';
 import { PicksComponent } from './draft-overall/picks/picks.component';
 import { TwitterComponent } from './main/nhl-info/twitter/twitter.component';
@@ -53,7 +50,6 @@ import { TeamStatsTableComponent } from './stats/team-stats-table/team-stats-tab
 import { PlayerStatsTableComponent } from './stats/player-stats-table/player-stats-table.component';
 import { TeamChartComponent } from './main/charts/team-chart/team-chart.component';
 import { PlayerChartComponent } from './main/charts/player-chart/player-chart.component';
-import { AwardTableViewComponent } from './history/awards/award-table-view/award-table-view.component';
 import { NhlInfoComponent } from './main/nhl-info/nhl-info.component';
 import { RosterComponent } from './main/roster/roster.component';
 import { ChartsComponent } from './main/charts/charts.component';
@@ -148,12 +144,10 @@ import { SeasonAwardComponent } from './overall-awards/season-award/season-award
     TeamsComponent,
     RulesComponent,
     ScheduleComponent,
-    HistoryComponent,
     TeamStatsComponent,
     PlayersStatsComponent,
     GoalieStatsComponent,
     OverallTeamStatsComponent,
-    ChampionsComponent,
     TradesComponent,
     EqualizationComponent,
     LotteryComponent,
@@ -170,7 +164,6 @@ import { SeasonAwardComponent } from './overall-awards/season-award/season-award
     GoalieArchivesComponent,
     HistoricalTeamStatsComponent,
     TeamArchivesComponent,
-    AwardsComponent,
     SalaryComponent,
     PicksComponent,
     TwitterComponent,
@@ -189,7 +182,6 @@ import { SeasonAwardComponent } from './overall-awards/season-award/season-award
     TeamStatsTableComponent,
     TeamChartComponent,
     PlayerChartComponent,
-    AwardTableViewComponent,
     NhlInfoComponent,
     RosterComponent,
     ChartsComponent,

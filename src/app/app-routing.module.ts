@@ -2,15 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { LeagueComponent } from './league/league.component';
-// import { StatsComponent } from './stats/stats.component';
-import { HistoryComponent } from './history/history.component';
 import { RulesComponent } from './rules/rules.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { TeamStatsComponent } from './teams/team-stats/team-stats.component';
-// import { PlayersStatsComponent } from './stats/players-stats/players-stats.component';
-// import { GoalieStatsComponent } from './stats/goalie-stats/goalie-stats.component';
 import { OverallTeamStatsComponent } from './overall-stats/overall-team-stats/overall-team-stats.component';
-import { ChampionsComponent } from './history/champions/champions.component';
 import { TradesComponent } from './trades/trades.component';
 import { WaiverPriorityComponent } from './waiver-priority/waiver-priority.component';
 import { MainComponent } from './main/main.component';
