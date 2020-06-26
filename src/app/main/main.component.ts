@@ -3,7 +3,6 @@ import { AuthService } from '../_services/auth.service';
 import { User } from '../_models/user';
 import { Team } from '../_models/team';
 import { Router } from '@angular/router';
-import { TeamsService } from '../teams/teams.service';
 import { takeWhile } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { TeamInfoService } from '../_services/team-info.service';
@@ -57,8 +56,6 @@ export class MainComponent implements OnInit, OnDestroy {
     private _teamInfoService: TeamInfoService,
     private _currentSeasonService: CurrentSeasonService,
     private _displayService: DisplayService,
-
-    private _teamsService: TeamsService,
   ) {
     this._authService.currentUser.subscribe( x => this.currentUser = x[0]);
 
@@ -84,18 +81,8 @@ export class MainComponent implements OnInit, OnDestroy {
       this.team = teams.find((team: Team) => team.isactive);
       this.isLoading = false;
       this.routeToTeam(this.team);
-      this.getAllTeamStatsForSeason();
     })
 
-  }
-
-  getAllTeamStatsForSeason() {
-    this._teamsService.getLeagueTeamsStats(this.currentSeason, this.currentSeasonType).pipe(
-      takeWhile(() => this._alive)
-      ).subscribe(resp => {
-        this.stats = resp as Team[];
-        this.isLoading = false;
-      });
   }
 
   routeToTeam(team: Team) {

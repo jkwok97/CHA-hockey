@@ -3,9 +3,7 @@ import { takeWhile } from 'rxjs/operators';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
 import { NhlService } from 'src/app/_services/nhl.service';
-import { TeamsService } from 'src/app/teams/teams.service';
 import { PlayerService } from 'src/app/_services/player.service';
 
 @Component({

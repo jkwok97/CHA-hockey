@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, ViewChild, AfterViewInit, OnChanges } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { TeamsService } from 'src/app/teams/teams.service';
+import { Router } from '@angular/router';
 import { MatSort, MatPaginator } from '@angular/material';
 import { Team } from 'src/app/_models/team';
 
@@ -50,7 +49,6 @@ export class TeamStatsTableComponent implements OnInit, AfterViewInit, OnChanges
 
   constructor(
     private _router: Router,
-    private _teamsService: TeamsService,
   ) { }
 
   ngOnInit() {
@@ -77,15 +75,6 @@ export class TeamStatsTableComponent implements OnInit, AfterViewInit, OnChanges
 
   routeToTeam(team: Team) {
     this._router.navigate([`/teams/${team.shortname}/${team['team_id']}/salaries`])
-  }
-
-  findLogo(shortName) {
-    if (shortName) {
-      let team = this._teamsService.getTeamInfo(shortName);
-      return { image: team.image, name: team.name }
-    } else {
-      return { image: "../../assets/team_logos/Free_Agent_logo_square.jpg", name: "Free Agent"}
-    }
   }
 
   getTeamTotals(stats) {

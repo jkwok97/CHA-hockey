@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
 import { User } from '../_models/user';
-import { TeamsService } from '../teams/teams.service';
+import { CurrentSeasonService } from '../_services/current-season.service';
 
 @Component({
   selector: 'app-navigation',
@@ -38,7 +38,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
   constructor(
     private _router: Router, 
     private _authService: AuthService,
-    private _teamsService: TeamsService
+    private _currentSeasonService: CurrentSeasonService,
   ) { 
 
     if (this._authService.currentUserValue) { 
@@ -68,7 +68,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this._router.navigate(['login']);
-    this.currentSeasonType = this._teamsService.currentSeasonType;
+    this.currentSeasonType = this._currentSeasonService.currentSeasonType;
     if (this.currentSeasonType === "Playoffs") {
       let found = this.routes.find(route => route.name === "Schedule");
       found.name = "Playoff Tree";

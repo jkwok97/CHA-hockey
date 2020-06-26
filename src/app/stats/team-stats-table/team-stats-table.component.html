@@ -25,8 +25,7 @@
         <ng-container matColumnDef="team_logo" sticky>
             <th mat-header-cell *matHeaderCellDef> </th>
             <td mat-cell *matCellDef="let team"> 
-                <img src="{{ findLogo(team.team_name).image }}" *ngIf="team.team_name"> 
-                <img src="{{team.teamlogo}}" *ngIf="!team.team_name"> 
+                <img src="{{team.teamlogo}}"> 
             </td>
             <td mat-footer-cell *matFooterCellDef>  </td>
         </ng-container>
@@ -34,8 +33,7 @@
         <ng-container matColumnDef="team_name">
             <th mat-header-cell *matHeaderCellDef> Team </th>
             <td mat-cell *matCellDef="let team">
-                <span *ngIf="team.team_name">{{findLogo(team.team_name).name}}</span>
-                <span *ngIf="!team.team_name">{{team.city}} {{team.nickname}}</span>  
+                {{team.city}} {{team.nickname}}
             </td>
             <td mat-footer-cell *matFooterCellDef> TOTAL </td>
         </ng-container>

@@ -8,12 +8,9 @@ import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { LeagueComponent } from './league/league.component';
 import { AppRoutingModule } from './app-routing.module';
-import { TeamsComponent } from './teams/teams-header.component';
 import { RulesComponent } from './rules/rules.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { TeamStatsComponent } from './teams/team-stats/team-stats.component';
-import { PlayersStatsComponent } from './stats/players-stats/players-stats.component';
-import { GoalieStatsComponent } from './stats/goalie-stats/goalie-stats.component';
 import { TradesComponent } from './trades/trades.component';
 import { EqualizationComponent } from './rules/equalization/equalization.component';
 import { LotteryComponent } from './rules/lottery/lottery.component';
@@ -30,7 +27,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PlayerInfoComponent } from './stats/player-info/player-info.component';
 import { PlayerArchivesComponent } from './teams/player-archives/player-archives.component';
 import { GoalieArchivesComponent } from './teams/goalie-archives/goalie-archives.component';
-import { HistoricalTeamStatsComponent } from './teams/historical-team-stats/historical-team-stats.component';
 import { TeamArchivesComponent } from './teams/team-archives/team-archives.component';
 import { SalaryComponent } from './salary/salary.component';
 import { PicksComponent } from './draft-overall/picks/picks.component';
@@ -149,12 +145,9 @@ import { PlayerInformationNhlTableComponent } from './player-information/player-
     AppComponent,
     NavigationComponent,
     LeagueComponent,
-    TeamsComponent,
     RulesComponent,
     ScheduleComponent,
     TeamStatsComponent,
-    PlayersStatsComponent,
-    GoalieStatsComponent,
     OverallTeamStatsComponent,
     TradesComponent,
     EqualizationComponent,
@@ -170,7 +163,6 @@ import { PlayerInformationNhlTableComponent } from './player-information/player-
     PlayerInfoComponent,
     PlayerArchivesComponent,
     GoalieArchivesComponent,
-    HistoricalTeamStatsComponent,
     TeamArchivesComponent,
     SalaryComponent,
     PicksComponent,
