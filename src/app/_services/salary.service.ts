@@ -25,6 +25,18 @@ export class SalaryService {
     )
   }
 
+  getPlayerSalariesByPlayerId(id: number) {
+    return this._http.get(`${environment.back_end_url}/v2/salaries/players/${id}`).pipe(
+      map(result => result['result'])
+    )
+  }
+
+  getGoalieSalariesByPlayerId(id: number) {
+    return this._http.get(`${environment.back_end_url}/v2/salaries/goalies/${id}`).pipe(
+      map(result => result['result'])
+    )
+  }
+
   getGoalieSalaryById(id: number, season:string): Observable<PlayerSalary[]> {
 
     const options = {params: new HttpParams()
@@ -47,4 +59,17 @@ export class SalaryService {
     )
 
   }
+
+  getGoalieSalaryByPlayerId(id: number) {
+    return this._http.get(`${environment.back_end_url}/v2/salaries/goalies/${id}`).pipe(
+      map(result => result['result'])
+    )
+  }
+
+  getPlayerSalaryByPlayerId(id: number) {
+    return this._http.get(`${environment.back_end_url}/v2/salaries/players/${id}`).pipe(
+      map(result => result['result'])
+    )
+  }
+
 }

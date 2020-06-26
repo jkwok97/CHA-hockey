@@ -1,3 +1,14 @@
+export interface Player {
+    id: number,
+    firstname: string,
+    lastname: string,
+    nhl_id: string,
+    isactive: boolean,
+    isgoalie: boolean,
+    isdefense: boolean,
+    isforward: boolean
+};
+
 export interface PlayerStat {
     id: number,
     player_id: number,

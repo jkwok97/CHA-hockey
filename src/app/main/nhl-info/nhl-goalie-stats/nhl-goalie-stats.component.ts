@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { NhlService } from 'src/app/_services/nhl.service';
 import { TeamsService } from 'src/app/teams/teams.service';
+import { PlayerService } from 'src/app/_services/player.service';
 
 @Component({
   selector: 'app-nhl-goalie-stats',
@@ -23,10 +24,8 @@ export class NhlGoalieStatsComponent implements OnInit, OnDestroy {
   length: number = 0;
   start: number = 0;
 
-  sortType: string = "wins"
-  sortOrder: string = "DESC"
-
-  playersList = [];
+  sortType: string = "wins";
+  sortOrder: string = "DESC";
 
   goalies: MatTableDataSource<any[]>;
   goaliesColumnsToDisplay = [
@@ -39,13 +38,21 @@ export class NhlGoalieStatsComponent implements OnInit, OnDestroy {
 
   constructor(
     private _nhlService: NhlService,
-    private _teamsService: TeamsService,
-    private _router: Router
+    private _playerService: PlayerService,
   ) { }
 
   ngOnInit() {
     this.isLoading = true;
     this.getSummary(this.start, this.pageSize, "start", this.sortType, this.sortOrder);
+  }
+
+  getGoalieLogo(id: number, leader: any) {
+    this._playerService.getGoalieTeamLogo(id).pipe(
+      takeWhile(() => this._alive)
+    ).subscribe(logo => {
+      leader.cha_logo = logo;
+      return leader;
+    });
   }
 
   splitName(name) {
@@ -56,10 +63,9 @@ export class NhlGoalieStatsComponent implements OnInit, OnDestroy {
     this._nhlService.getNHLsummary('20192020', 'goalie', statType, sortOrder, start, pageSize).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       const stats = resp['data'];
 
-      this.playersList = stats.map(stat => ({
-        ...stat,
-        chaInfo: this.findChaTeam(stat.playerId, stat, 'goalie')
-      }))
+      stats.forEach(stat => {
+        stat = this.getGoalieLogo(stat.playerId, stat)
+      });
 
       this.goalies = new MatTableDataSource<any[]>(stats);
       this.isLoading = false;
@@ -93,35 +99,10 @@ export class NhlGoalieStatsComponent implements OnInit, OnDestroy {
     this.getSummary(this.start, this.pageSize, "next", this.sortType, this.sortOrder);
   }
 
-  openPlayer(player, type) {
-    this._router.navigate([`/info/${type}s/${player.cha_player_id}/${player.lastName}, ${player.firstName}`]);
-    window.scrollTo(0,0);
-  }
-
-  findChaTeam(id, player, type) {
-    this._nhlService.getChaTeam(id, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      player.chaTeam = resp['team_name'];
-      player.cha_player_id = resp['player_id'];
-      return player;
-    }, error => {
-      player.chaTeam = null;
-      return player;
-    });
-  }
-
   applyFilter(filterValue: string) {
     this.goalies.filter = filterValue.trim().toLowerCase();
     if (this.goalies.paginator) {
       this.goalies.paginator.firstPage();
-    }
-  }
-
-  findLogo(shortName) {
-    if (shortName) {
-      let team = this._teamsService.getTeamInfo(shortName);
-      return { image: team.image, name: team.name }
-    } else {
-      return { image: "../../assets/team_logos/Free_Agent_logo_square.jpg", name: "Free Agent"}
     }
   }
 

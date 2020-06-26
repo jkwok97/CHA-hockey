@@ -148,4 +148,10 @@ export class GoalieStatsService {
     )
 
   }
+
+  getGoalieStatsById(id: number) {
+    return this._http.get(`${environment.back_end_url}/v2/goalies-stats/player/${id}`).pipe(
+      map(result => result['result'])
+    )
+  }
 }

@@ -62,4 +62,18 @@ export class NhlService {
     }
     return this._http.get(`${environment.back_end_url}/nhl-leaders/`, options);
   }
+
+  getIndividualNHLRealStats(id) {
+    let options = {params: new HttpParams()
+      .set('id', id)}
+    return this._http.get(`${environment.back_end_url}/nhl-stats/player`, options);
+  }
+
+  getIndividualOnPaceNHLRealStats(id, pace) {
+    let options = {params: new HttpParams()
+      .set('pace', pace)
+      .set('id', id)}
+    return this._http.get(`${environment.back_end_url}/nhl-stats/player`, options);
+  }
+
 }

@@ -1,0 +1,40 @@
+<mat-card 
+    *ngIf="(player$ | async) as player"
+    [style.background-color]="getColor(player.teamcolor)"
+>
+
+    <mat-card-header>
+
+        <div 
+            mat-card-avatar 
+            [style.background-image]="getLogo(player.teamlogo)"
+            style="background-size: cover;">
+        </div>
+
+        <mat-card-title>{{player.firstname}} {{player.lastname}}</mat-card-title>
+        <mat-card-subtitle *ngIf="player.city">Team: {{player.city}} {{player.nickname}}</mat-card-subtitle>
+
+    </mat-card-header>
+
+    <mat-card-content>
+
+        <img 
+            [src]="getPlayerPicture(player.nhl_id)" 
+            class="headshot"
+            *ngIf="player.nhl_id"
+        >
+
+        <img 
+            src="../../../assets/images/cha_logo.jpg" 
+            class="headshot"
+            *ngIf="!player.nhl_id"
+        >
+
+        <div *ngIf="(salary$ | async) as salary">
+            <p>Current Season Salary: <span class="stat">{{salary.season_2020}}</span></p>
+            <p>Next Season Salary: <span class="stat">{{salary.season_2021}}</span></p>
+        </div>
+
+    </mat-card-content>
+
+</mat-card>

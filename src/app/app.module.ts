@@ -135,6 +135,14 @@ import { RookieAwardComponent } from './overall-awards/rookie-award/rookie-award
 import { GoalieAwardComponent } from './overall-awards/goalie-award/goalie-award.component';
 import { GmAwardComponent } from './overall-awards/gm-award/gm-award.component';
 import { SeasonAwardComponent } from './overall-awards/season-award/season-award.component';
+import { PlayerInformationComponent } from './player-information/player-information.component';
+import { PlayerInformationStatsComponent } from './player-information/player-information-stats/player-information-stats.component';
+import { PlayerInformationNhlStatsComponent } from './player-information/player-information-nhl-stats/player-information-nhl-stats.component';
+import { PlayerInformationRatingsComponent } from './player-information/player-information-ratings/player-information-ratings.component';
+import { PlayerInformationPlayerTableComponent } from './player-information/player-information-player-table/player-information-player-table.component';
+import { PlayerInformationGoalieTableComponent } from './player-information/player-information-goalie-table/player-information-goalie-table.component';
+import { PlayerInformationCardComponent } from './player-information/player-information-card/player-information-card.component';
+import { PlayerInformationNhlTableComponent } from './player-information/player-information-nhl-table/player-information-nhl-table.component';
 
 @NgModule({
   declarations: [
@@ -266,6 +274,14 @@ import { SeasonAwardComponent } from './overall-awards/season-award/season-award
     GoalieAwardComponent,
     GmAwardComponent,
     SeasonAwardComponent,
+    PlayerInformationComponent,
+    PlayerInformationStatsComponent,
+    PlayerInformationNhlStatsComponent,
+    PlayerInformationRatingsComponent,
+    PlayerInformationPlayerTableComponent,
+    PlayerInformationGoalieTableComponent,
+    PlayerInformationCardComponent,
+    PlayerInformationNhlTableComponent,
   ],
   imports: [
     BrowserModule,

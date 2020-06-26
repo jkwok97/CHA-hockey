@@ -1,10 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { takeWhile } from 'rxjs/operators';
-import { TeamsService } from 'src/app/teams/teams.service';
+import { takeWhile, take, map } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
 import { DisplayService } from 'src/app/_services/display.service';
 import { NhlService } from 'src/app/_services/nhl.service';
+import { PlayerService } from 'src/app/_services/player.service';
 
 @Component({
   selector: 'app-nhl-leaders',
@@ -58,9 +57,7 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
   constructor(
     private _displayService: DisplayService,
     private _nhlService: NhlService,
-
-    private _teamsService: TeamsService,
-    private _router: Router
+    private _playerService: PlayerService,
   ) { }
 
   ngOnInit() {
@@ -82,31 +79,22 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
     this._displayService.triggerFullPageStats(type);
   }
 
-  openPlayer(player, type) {
-    this._router.navigate([`/info/${type}s/${player.cha_player_id}/${player.player.lastName}, ${player.player.firstName}`]);
-    window.scrollTo(0,0);
-  }
-
-  findChaTeam(name, player, type) {
-    this._nhlService.getChaTeam(name, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      // console.log(resp);
-      player.chaTeam = resp['team_name'];
-      player.cha_player_id = resp['player_id'];
-      return player;
-    }, error => {
-      player.chaTeam = null;
-      player.cha_player_id = null;
-      return player;
+  getPlayerLogo(id: number, leader: any) {
+    this._playerService.getPlayerTeamLogo(id).pipe(
+      takeWhile(() => this._alive)
+    ).subscribe(logo => {
+      leader.cha_logo = logo;
+      return leader;
     });
   }
 
-  findLogo(shortName) {
-    if (shortName) {
-      let team = this._teamsService.getTeamInfo(shortName);
-      return { image: team.image, name: team.name }
-    } else {
-      return { image: "../../assets/team_logos/Free_Agent_logo_square.jpg", name: "Free Agent"}
-    }
+  getGoalieLogo(id: number, leader: any) {
+    this._playerService.getGoalieTeamLogo(id).pipe(
+      takeWhile(() => this._alive)
+    ).subscribe(logo => {
+      leader.cha_logo = logo;
+      return leader;
+    });
   }
 
   findNHLLogo(player) {
@@ -154,18 +142,17 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
   }
 
   getNHLPointLeaders() {
-    this._nhlService.getNhlLeaders(this.currentSeason, "skater", "points", "no", "trim").pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      // console.log(resp);
-      let tempLeaders = resp as [];
-      let pointLeaders = [];
-      tempLeaders.forEach(element => { pointLeaders.push(element); });
-      pointLeaders.forEach(player => {
-        player = this.findChaTeam(player.player.id, player, "player");
+    this._nhlService.getNhlLeaders(this.currentSeason, "skater", "points", "no", "trim").pipe(
+      takeWhile(() => this._alive)
+    ).subscribe(resp => {
+      let leaders = [];
+      leaders = resp as [];
+      leaders.forEach((leader) => {
+        leader = this.getPlayerLogo(leader['player']['id'], leader);
       });
-      this.points = new MatTableDataSource<any[]>(pointLeaders);
+      this.points = new MatTableDataSource<any[]>(resp as []);
       this.isLoading = false;
     }, error => {
-      console.log(error);
       this.errored = true;
       this.isLoading = false;
     });
@@ -178,7 +165,7 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
       let goalLeaders = [];
       tempLeaders.forEach(element => { goalLeaders.push(element); });
       goalLeaders.forEach(player => {
-        player = this.findChaTeam(player.player.id, player, "player");
+        player = this.getPlayerLogo(player.player.id, player);
       });
       this.goals = new MatTableDataSource<any[]>(goalLeaders);
       this.isLoading = false;
@@ -196,7 +183,7 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
       let assistsLeaders = [];
       tempLeaders.forEach(element => { assistsLeaders.push(element); });
       assistsLeaders.forEach(player => {
-        player = this.findChaTeam(player.player.id, player, "player");
+        player = this.getPlayerLogo(player.player.id, player);
       });
       this.assists = new MatTableDataSource<any[]>(assistsLeaders);
       this.isLoading = false;
@@ -232,7 +219,7 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
       let gaaLeaders = [];
       tempLeaders.forEach(element => { gaaLeaders.push(element); });
       gaaLeaders.forEach(player => {
-        player = this.findChaTeam(player.player.id, player, "goalie");
+        player = this.getGoalieLogo(player.player.id, player);
       });
       this.gaa = new MatTableDataSource<any[]>(gaaLeaders);
       this.isLoading = false;
@@ -250,7 +237,7 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
       let savePctgLeaders = [];
       tempLeaders.forEach(element => { savePctgLeaders.push(element); });
       savePctgLeaders.forEach(player => {
-        player = this.findChaTeam(player.player.id, player, "goalie");
+        player = this.getGoalieLogo(player.player.id, player);
       });
       this.savePctg = new MatTableDataSource<any[]>(savePctgLeaders);
       this.isLoading = false;
@@ -268,7 +255,7 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
       let shutoutsLeaders = [];
       tempLeaders.forEach(element => { shutoutsLeaders.push(element); });
       shutoutsLeaders.forEach(player => {
-        player = this.findChaTeam(player.player.id, player, "goalie");
+        player = this.getGoalieLogo(player.player.id, player);
       });
       this.shutouts = new MatTableDataSource<any[]>(shutoutsLeaders);
       this.isLoading = false;

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Input, AfterViewInit, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
-import { TeamsService } from 'src/app/teams/teams.service';
 import { MatSort, MatPaginator } from '@angular/material';
+import { GoalieStat } from 'src/app/_models/player';
 
 @Component({
   selector: 'app-goalie-stats-table',
@@ -24,7 +24,6 @@ export class GoalieStatsTableComponent implements OnInit, AfterViewInit, OnChang
 
   constructor(
     private _router: Router,
-    private _teamsService: TeamsService
   ) { }
 
   ngOnInit() {
@@ -41,18 +40,9 @@ export class GoalieStatsTableComponent implements OnInit, AfterViewInit, OnChang
     this.goalies.sort = this.goalieSort;
   }
 
-  openPlayer(player, type) {
-    this._router.navigate([`/info/${type}s/${player.player_id}/${player.player_name}`]);
-    window.scrollTo(0,0);
-  }
-
-  findLogo(shortName) {
-    if (shortName) {
-      let team = this._teamsService.getTeamInfo(shortName);
-      return { image: team.image, name: team.name }
-    } else {
-      return { image: "../../assets/team_logos/Free_Agent_logo_square.jpg", name: "Free Agent"}
-    }
+  openPlayer(player: GoalieStat) {
+    const type = player['isgoalie'] ? 'goalie' : 'player';
+    this._router.navigate([`player-info/${player.player_id}/${type}/stats`]);
   }
 
   calcGAA(goalsAgainst, minutes) {

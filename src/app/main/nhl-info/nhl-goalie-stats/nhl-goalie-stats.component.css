@@ -17,11 +17,6 @@
     overflow-x: auto;
 }
 
-.mat-row:hover {
-    background-color: rgb(61, 90, 254);
-    cursor: pointer;
-}
-
 table img {
     height: 30px;
     width: 30px;

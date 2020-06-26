@@ -3,6 +3,8 @@ import { DisplayService } from 'src/app/_services/display.service';
 import { takeWhile } from 'rxjs/operators';
 import { PlayerStatsService } from 'src/app/_services/player-stats.service';
 import { MatTableDataSource } from '@angular/material';
+import { Router } from '@angular/router';
+import { PlayerStat } from 'src/app/_models/player';
 
 @Component({
   selector: 'app-player-assist-leader-table',
@@ -23,7 +25,8 @@ export class PlayerAssistLeaderTableComponent implements OnInit, OnDestroy {
 
   constructor(
     private _displayService: DisplayService,
-    private _playerStatsService: PlayerStatsService
+    private _playerStatsService: PlayerStatsService,
+    private _router: Router
   ) { }
 
   ngOnInit() {
@@ -46,6 +49,11 @@ export class PlayerAssistLeaderTableComponent implements OnInit, OnDestroy {
       const data = leaders.slice(1,10);
       this.leaders = new MatTableDataSource<any[]>(data);
     })
+  }
+
+  openPlayer(player: PlayerStat) {
+    const type = player['isgoalie'] ? 'goalie' : 'player';
+    this._router.navigate([`player-info/${player.player_id}/${type}/stats`]);
   }
 
   ngOnDestroy(): void {

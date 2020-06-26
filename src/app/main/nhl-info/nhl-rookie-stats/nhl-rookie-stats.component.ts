@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort, PageEvent } from '@angular/material';
-import { TeamsService } from 'src/app/teams/teams.service';
 import { takeWhile } from 'rxjs/operators';
 import { NhlService } from 'src/app/_services/nhl.service';
+import { PlayerService } from 'src/app/_services/player.service';
 
 @Component({
   selector: 'app-nhl-rookie-stats',
@@ -19,10 +19,8 @@ export class NhlRookieStatsComponent implements OnInit, OnDestroy {
   start: number = 0;
   length: number = 0;
 
-  sortType: string = "points"
-  sortOrder: string = "DESC"
-
-  playersList = [];
+  sortType: string = "points";
+  sortOrder: string = "DESC";
 
   players: MatTableDataSource<any[]>;
   playersColumnsToDisplay = [
@@ -35,7 +33,7 @@ export class NhlRookieStatsComponent implements OnInit, OnDestroy {
 
   constructor(
     private _nhlService: NhlService,
-    private _teamsService: TeamsService,
+    private _playerService: PlayerService,
   ) { }
 
   ngOnInit() {
@@ -47,10 +45,9 @@ export class NhlRookieStatsComponent implements OnInit, OnDestroy {
     this._nhlService.getNHLRookiesummary('20192020', 'skater', statType, sortOrder, start, pageSize).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       const stats = resp['data'];
 
-      this.playersList = stats.map(stat => ({
-        ...stat,
-        chaInfo: this.findChaTeam(stat.playerId, stat, 'player')
-      }));
+      stats.forEach(stat => {
+        stat = this.getPlayerLogo(stat.playerId, stat)
+      });
 
       this.players = new MatTableDataSource<any[]>(stats);
       this.isLoading = false;
@@ -64,28 +61,17 @@ export class NhlRookieStatsComponent implements OnInit, OnDestroy {
     });
   }
 
-  findLogo(shortName) {
-    if (shortName) {
-      let team = this._teamsService.getTeamInfo(shortName);
-      return { image: team.image, name: team.name }
-    } else {
-      return { image: "../../assets/team_logos/Free_Agent_logo_square.jpg", name: "Free Agent"}
-    }
+  getPlayerLogo(id: number, leader: any) {
+    this._playerService.getPlayerTeamLogo(id).pipe(
+      takeWhile(() => this._alive)
+    ).subscribe(logo => {
+      leader.cha_logo = logo;
+      return leader;
+    });
   }
 
   splitName(name) {
     return name.split(" ");
-  }
-
-  findChaTeam(id, player, type) {
-    this._nhlService.getChaTeam(id, type).pipe(takeWhile(() => this._alive)).subscribe(resp => {
-      player.chaTeam = resp['team_name'];
-      player.cha_player_id = resp['player_id'];
-      return player;
-    }, error => {
-      player.chaTeam = null;
-      return player;
-    });
   }
 
   onChangePage(pageData: PageEvent) {

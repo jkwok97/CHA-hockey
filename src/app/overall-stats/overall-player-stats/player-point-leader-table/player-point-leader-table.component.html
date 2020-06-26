@@ -46,9 +46,7 @@
     <tr 
         mat-row 
         *matRowDef="let player; columns: isMobile ? mobileColumns : columns;" 
-        
+        (click)="openPlayer(player)"
     ></tr>
-
-    <!-- (click)="openPlayer(player, 'player')" -->
 
 </table>

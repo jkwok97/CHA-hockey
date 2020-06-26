@@ -1,0 +1,23 @@
+<h3 class="title">Season Stats</h3>
+
+<mat-progress-bar mode="query" color="accent" *ngIf="isStatsLoading"></mat-progress-bar>
+
+<p class="text" *ngIf="!isStatsLoading && statsError">No NHL Stats This Season!</p>
+
+<app-player-information-nhl-table
+    *ngIf="!isOnPaceStatsLoading && !statsError"
+    [stats]="stats"
+    [columns]="playerType === 'player' ? playersColumns : goalieColumns"
+></app-player-information-nhl-table>
+
+<h3 class="title">On Pace Stats</h3>
+
+<mat-progress-bar mode="query" color="accent" *ngIf="isOnPaceStatsLoading"></mat-progress-bar>
+
+<p class="text" *ngIf="!isOnPaceStatsLoading && statsError">No NHL Stats This Season!</p>
+
+<app-player-information-nhl-table
+    *ngIf="!isOnPaceStatsLoading && !statsError"
+    [stats]="onPaceStats"
+    [columns]="playerType === 'player' ? playersOnPaceColumns : goalieOnPaceColumns"
+></app-player-information-nhl-table>

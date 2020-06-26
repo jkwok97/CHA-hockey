@@ -10,7 +10,8 @@ img {
 }
 
 .mat-card {
-    background: linear-gradient(rgba(61, 90, 254, 0.25), rgba(61, 90, 254, 0.5), rgba(61, 90, 254, 0.95))
+    background: linear-gradient(rgba(61, 90, 254, 0.25), rgba(61, 90, 254, 0.5), rgba(61, 90, 254, 0.95));
+    cursor: pointer;
 }
 
 .headshot {

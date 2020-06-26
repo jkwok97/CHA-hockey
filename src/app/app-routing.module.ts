@@ -11,7 +11,6 @@ import { WaiverPriorityComponent } from './waiver-priority/waiver-priority.compo
 import { MainComponent } from './main/main.component';
 import { LoginComponent } from './main/login/login.component';
 import { AuthGuard } from './_services/auth.guard';
-import { PlayerInfoComponent } from './stats/player-info/player-info.component';
 import { SalaryComponent } from './salary/salary.component';
 import { PicksComponent } from './draft-overall/picks/picks.component';
 import { NewPlayoffTreeComponent } from './schedule/playoff-tree/new-playoff-tree/new-playoff-tree.component';
@@ -64,6 +63,10 @@ import { RookieAwardComponent } from './overall-awards/rookie-award/rookie-award
 import { GoalieAwardComponent } from './overall-awards/goalie-award/goalie-award.component';
 import { GmAwardComponent } from './overall-awards/gm-award/gm-award.component';
 import { SeasonAwardComponent } from './overall-awards/season-award/season-award.component';
+import { PlayerInformationComponent } from './player-information/player-information.component';
+import { PlayerInformationStatsComponent } from './player-information/player-information-stats/player-information-stats.component';
+import { PlayerInformationNhlStatsComponent } from './player-information/player-information-nhl-stats/player-information-nhl-stats.component';
+import { PlayerInformationRatingsComponent } from './player-information/player-information-ratings/player-information-ratings.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -160,11 +163,16 @@ const routes: Routes = [
       { path: 'season', component: SeasonAwardComponent },
     ]
   },
+  { path: 'player-info/:id/:type', component: PlayerInformationComponent, canActivate: [AuthGuard],
+    children: [
+      { path: 'stats', component: PlayerInformationStatsComponent },
+      { path: 'nhl-stats', component: PlayerInformationNhlStatsComponent },
+      { path: 'ratings', component: PlayerInformationRatingsComponent },
+    ]
+  },
+
   
-
-
-  { path: 'info/:type/:id/:name', component: PlayerInfoComponent, canActivate: [AuthGuard] },
-  { path: 'info/goalies/:id/:name', component: PlayerInfoComponent, canActivate: [AuthGuard] },
+  
   { path: 'schedule', component: ScheduleComponent, canActivate: [AuthGuard] },
   { path: 'playoffTree', component: NewPlayoffTreeComponent, canActivate: [AuthGuard] },
 ];

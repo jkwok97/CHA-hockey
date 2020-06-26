@@ -1,0 +1,13 @@
+:host {
+    display: grid;
+    padding: 20px;
+    justify-content: center;
+    grid-template-columns: minmax(350px, 1fr);
+}
+
+.title {
+    color: white;
+    font-weight: 100;
+    font-size: x-large;
+    text-align: center;
+}

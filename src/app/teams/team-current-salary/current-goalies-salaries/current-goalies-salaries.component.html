@@ -52,10 +52,9 @@
     <tr 
         mat-row 
         *matRowDef="let player; columns: columns;"
-        
+        (click)="openPlayer(player)"
     ></tr>
-
-    <!-- (click)="openPlayer(player, 'goalie')" -->
+    
     <tr mat-footer-row *matFooterRowDef="columns;"></tr>
 
 </table>

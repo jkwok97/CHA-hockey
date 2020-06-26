@@ -150,6 +150,12 @@ export class PlayerStatsService {
     )
   }
 
+  getPlayerStatsById(id: number) {
+    return this._http.get(`${environment.back_end_url}/v2/players-stats/player/${id}`).pipe(
+      map(result => result['result'])
+    )
+  }
+
   // ==================================== LEADERS ==========================================
 
   getPointLeaders(season: string, seasonType: string) {

@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
 import { MatTableDataSource, MatSort } from '@angular/material';
+import { PlayerStat } from 'src/app/_models/player';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-current-goalies-salaries',
@@ -20,7 +22,9 @@ export class CurrentGoaliesSalariesComponent implements OnInit, AfterViewInit {
 
   @ViewChild("goalieSort", {static: false}) goalieSort: MatSort;
 
-  constructor() {
+  constructor(
+    private _router: Router
+  ) {
     
    }
 
@@ -52,6 +56,11 @@ export class CurrentGoaliesSalariesComponent implements OnInit, AfterViewInit {
       });
       return total.toFixed(3);
     } 
+  }
+
+  openPlayer(player: PlayerStat) {
+    const type = player['isgoalie'] ? 'goalie' : 'player';
+    this._router.navigate([`player-info/${player.player_id}/${type}/stats`]);
   }
 
 }

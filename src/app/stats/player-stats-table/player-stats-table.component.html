@@ -25,7 +25,6 @@
         <ng-container matColumnDef="team_logo" sticky>
             <th mat-header-cell *matHeaderCellDef> Team </th>
             <td mat-cell *matCellDef="let player"> 
-                <img src="{{ findLogo(player.team_name).image }}" *ngIf="!player.city"> 
                 <img src="{{player.teamlogo}}" *ngIf="player.city" [matTooltip]="player.nickname">
             </td>
         </ng-container>
@@ -160,9 +159,9 @@
         <tr 
             mat-row 
             *matRowDef="let player; columns: statsColumnsToDisplay" 
-            
+            (click)="openPlayer(player)"
         ></tr>
-        <!-- (click)="openPlayer(player, 'player')" -->
+        
         <!-- <tr 
             mat-footer-row 
             *matFooterRowDef="statsColumnsToDisplay"

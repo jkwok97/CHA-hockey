@@ -1,0 +1,23 @@
+<h3 class="title">Season Stats</h3>
+
+<app-player-information-goalie-table
+    *ngIf="playerType === 'goalie'"
+    [stats]="seasonStats"
+></app-player-information-goalie-table>
+
+<app-player-information-player-table
+    *ngIf="playerType === 'player'"
+    [stats]="seasonStats"
+></app-player-information-player-table>
+
+<h3 class="title">Playoff Stats</h3>
+
+<app-player-information-goalie-table
+    *ngIf="playerType === 'goalie'"
+    [stats]="playoffStats"
+></app-player-information-goalie-table>
+
+<app-player-information-player-table
+    *ngIf="playerType === 'player'"
+    [stats]="playoffStats"
+></app-player-information-player-table>

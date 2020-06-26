@@ -1,0 +1,13 @@
+<app-player-information-card></app-player-information-card>
+
+<nav mat-tab-nav-bar color="accent">
+    <a mat-tab-link
+        *ngFor="let route of routes"
+        [routerLink]="route.url"
+        routerLinkActive #rla="routerLinkActive"
+        [active]="rla.isActive">
+        {{route.name}}
+    </a>
+</nav>
+
+<router-outlet></router-outlet>

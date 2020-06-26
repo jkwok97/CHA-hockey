@@ -36,9 +36,7 @@
     <tr 
         mat-row 
         *matRowDef="let player; columns: columns;" 
+        (click)="openPlayer(player)"
     ></tr>
-
-    <!-- (click)="openPlayer(goalie, 'goalie')" -->
-
 
 </table>
