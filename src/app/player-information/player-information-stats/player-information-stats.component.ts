@@ -13,6 +13,7 @@ import { GoalieStatsService } from 'src/app/_services/goalie-stats.service';
 export class PlayerInformationStatsComponent implements OnInit, OnDestroy {
 
   private _alive: boolean = true;
+  isLoading: boolean = false;
 
   playerType: string;
 
@@ -33,7 +34,7 @@ export class PlayerInformationStatsComponent implements OnInit, OnDestroy {
    }
 
   ngOnInit() {
-    
+    this.isLoading = true;
   }
 
   getPlayerStats(id: number) {
@@ -42,6 +43,7 @@ export class PlayerInformationStatsComponent implements OnInit, OnDestroy {
     ).subscribe((playerStats: PlayerStat[]) => {
       this.seasonStats = playerStats.filter((stat: PlayerStat) => stat.season_type === 'Regular');
       this.playoffStats = playerStats.filter((stat: PlayerStat) => stat.season_type === 'Playoffs');
+      this.isLoading = false;
     })
   }
 
@@ -51,6 +53,7 @@ export class PlayerInformationStatsComponent implements OnInit, OnDestroy {
     ).subscribe((playerStats: PlayerStat[]) => {
       this.seasonStats = playerStats.filter((stat: PlayerStat) => stat.season_type === 'Regular');
       this.playoffStats = playerStats.filter((stat: PlayerStat) => stat.season_type === 'Playoffs');
+      this.isLoading = false;
     })
   }
 

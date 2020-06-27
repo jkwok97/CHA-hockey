@@ -1,23 +1,27 @@
 <h3 class="title">Season Stats</h3>
 
+<mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
+
 <app-player-information-goalie-table
-    *ngIf="playerType === 'goalie'"
+    *ngIf="playerType === 'goalie' && !isLoading"
     [stats]="seasonStats"
 ></app-player-information-goalie-table>
 
 <app-player-information-player-table
-    *ngIf="playerType === 'player'"
+    *ngIf="playerType === 'player' && !isLoading"
     [stats]="seasonStats"
 ></app-player-information-player-table>
 
 <h3 class="title">Playoff Stats</h3>
 
+<mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
+
 <app-player-information-goalie-table
-    *ngIf="playerType === 'goalie'"
+    *ngIf="playerType === 'goalie' && !isLoading"
     [stats]="playoffStats"
 ></app-player-information-goalie-table>
 
 <app-player-information-player-table
-    *ngIf="playerType === 'player'"
+    *ngIf="playerType === 'player' && !isLoading"
     [stats]="playoffStats"
 ></app-player-information-player-table>

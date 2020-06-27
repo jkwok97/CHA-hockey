@@ -12,6 +12,7 @@ import { takeWhile } from 'rxjs/operators';
 export class PlayerInformationRatingsComponent implements OnInit, OnDestroy {
 
   private _alive: boolean = true;
+  isLoading: boolean = false;
 
   playerType: string;
   season: string;
@@ -51,6 +52,7 @@ export class PlayerInformationRatingsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.isLoading = true;
   }
 
   showColumns() {
@@ -66,6 +68,7 @@ export class PlayerInformationRatingsComponent implements OnInit, OnDestroy {
       takeWhile(() => this._alive)
     ).subscribe((ratings) => {
       this.statRatings = [ratings];
+      this.isLoading = false;
     })
   }
 
@@ -74,6 +77,7 @@ export class PlayerInformationRatingsComponent implements OnInit, OnDestroy {
       takeWhile(() => this._alive)
     ).subscribe((ratings) => {
       this.statRatings = [ratings];
+      this.isLoading = false;
     })
   }
 

@@ -1,8 +1,11 @@
 <h3 class="title">Previous NHL Season Stats</h3>
 
+<mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
+
 <app-ratings-stats-table
     [stats]="statRatings"
     [columns]="showColumns()"
+    *ngIf="!isLoading"
 ></app-ratings-stats-table>
 
 <h3 class="title">Ratings</h3>
@@ -10,4 +13,5 @@
 <app-ratings-rate-table
     [stats]="statRatings"
     [columns]="showRateColumns()"
+    *ngIf="!isLoading"
 ></app-ratings-rate-table>
