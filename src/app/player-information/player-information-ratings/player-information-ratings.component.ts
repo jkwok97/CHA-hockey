@@ -20,15 +20,6 @@ export class PlayerInformationRatingsComponent implements OnInit, OnDestroy {
   statRatings: any[];
   goalieStatRatings: any[];
 
-  playersColumns = [
-    'games_played','goals', 'assists', 'points','plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals', 'gw_goals', 'shots', 'shooting_pct'
-  ];
-
-  goalieColumns = [
-    'games_played','wins', 'loss', 'ties','goals_against', 'goals_against_avg', 'shots_for', 'saves', 'save_pct',
-    'shutouts', 'penalty_minutes', 'minutes_played'
-  ];
-
   playersRateColumns = [ 
     'c_rate', 'l_rate', 'r_rate', 'ld_rate', 'rd_rate', 'skating', 'speed', 'passing',
     'shooting', 'face_off', 'forecheck', 'assist_rating', 'clear_crease', 'shot_block', 'pk', 'physical',
@@ -53,10 +44,6 @@ export class PlayerInformationRatingsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isLoading = true;
-  }
-
-  showColumns() {
-    return this.playerType === 'player' ? this.playersColumns : this.goalieColumns;
   }
 
   showRateColumns() {
