@@ -40,10 +40,34 @@
             <td mat-cell *matCellDef="let salary"> {{salary.lastname}} </td>
         </ng-container>
 
+        <ng-container matColumnDef="isgoalie" sticky>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Goalie </th>
+            <td mat-cell *matCellDef="let salary">
+                <mat-icon *ngIf="salary.isgoalie" class="green">done</mat-icon>
+                <mat-icon color="warn" *ngIf="!salary.isgoalie">block</mat-icon>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="isforward" sticky>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Forward </th>
+            <td mat-cell *matCellDef="let salary"> 
+                <mat-icon *ngIf="salary.isforward" class="green">done</mat-icon>
+                <mat-icon color="warn" *ngIf="!salary.isforward">block</mat-icon> 
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="isdefense" sticky>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Defense </th>
+            <td mat-cell *matCellDef="let salary">
+                <mat-icon *ngIf="salary.isdefense" class="green">done</mat-icon>
+                <mat-icon color="warn" *ngIf="!salary.isdefense">block</mat-icon> 
+            </td>
+        </ng-container>
+
         <ng-container matColumnDef="isactive">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> On Disk </th>
             <td mat-cell *matCellDef="let salary">
-                    <mat-icon *ngIf="salary.isactive">done</mat-icon>
+                    <mat-icon *ngIf="salary.isactive" class="green">done</mat-icon>
                     <mat-icon color="warn" *ngIf="!salary.isactive">block</mat-icon>
             </td>
         </ng-container>

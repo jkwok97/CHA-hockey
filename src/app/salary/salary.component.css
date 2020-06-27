@@ -71,3 +71,7 @@ h3 {
 .mat-button-toggle-checked {
     background-color: red;
 }
+
+.green {
+    color: green;
+}

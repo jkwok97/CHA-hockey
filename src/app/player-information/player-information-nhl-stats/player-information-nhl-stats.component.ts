@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NhlService } from 'src/app/_services/nhl.service';
-import { takeWhile, take } from 'rxjs/operators';
+import { takeWhile } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { PlayerService } from 'src/app/_services/player.service';
 import { Player } from 'src/app/_models/player';
@@ -89,8 +89,6 @@ export class PlayerInformationNhlStatsComponent implements OnInit, OnDestroy {
       const playerStats = s as [];
 
       const p = playerStats.filter((stat) => stat['league']['name'] === "National Hockey League");
-
-      console.log(p);
 
       if (this.playerType === 'player') {
         this.extractPlayerStats(p);
