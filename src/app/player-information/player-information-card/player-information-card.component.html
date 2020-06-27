@@ -31,10 +31,19 @@
                 *ngIf="!player.nhl_id"
             >
 
-            <div *ngIf="(salary$ | async) as salary">
-                <p>Current Season Salary: <span class="stat">{{salary.season_2020}}</span></p>
-                <p>Next Season Salary: <span class="stat">{{salary.season_2021}}</span></p>
+            <div *ngIf="nhlPlayerInfo">
+                <p>Country: <span class="stat">{{nhlPlayerInfo.birthCountry}}</span></p>
+                <p>Height: <span class="stat">{{nhlPlayerInfo.height}}</span></p>
+                <p>Age: <span class="stat">{{nhlPlayerInfo.age}}</span></p>
+                <p>Position: <span class="stat">{{nhlPlayerInfo.position}}</span></p>
+                <p>Shoots: <span class="stat">{{nhlPlayerInfo.shoots}}</span></p>
             </div>
+
+        </div>
+
+        <div *ngIf="(salary$ | async) as salary">
+            <p>Current Season Salary: <span class="stat">{{salary.season_2020}}</span></p>
+            <p>Next Season Salary: <span class="stat">{{salary.season_2021}}</span></p>
         </div>
 
         <div *ngIf="(awards$ | async)?.length > 0">

@@ -2,6 +2,11 @@
             
     <table mat-table [dataSource]="stats" matSort class="mat-elevation-z8" matSortActive="playing_year" matSortDirection="desc">
 
+        <ng-container matColumnDef="season">
+            <th mat-header-cell *matHeaderCellDef sticky> Season </th>
+            <td mat-cell *matCellDef="let player"> {{ getSeason(player.season)}} </td>
+        </ng-container>
+
         <ng-container matColumnDef="games">
             <th mat-header-cell *matHeaderCellDef sticky> GP </th>
             <td mat-cell *matCellDef="let player"> {{player.games}} </td>
@@ -155,6 +160,21 @@
         <ng-container matColumnDef="timeOnIcePerGame">
             <th mat-header-cell *matHeaderCellDef> TOI/G </th>
             <td mat-cell *matCellDef="let player"> {{player.timeOnIcePerGame}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="powerPlayTimeOnIce">
+            <th mat-header-cell *matHeaderCellDef> PPTOI </th>
+            <td mat-cell *matCellDef="let player"> {{player.powerPlayTimeOnIce}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="shortHandedTimeOnIce">
+            <th mat-header-cell *matHeaderCellDef> SHTOI </th>
+            <td mat-cell *matCellDef="let player"> {{player.shortHandedTimeOnIce}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="timeOnIce">
+            <th mat-header-cell *matHeaderCellDef> TOI </th>
+            <td mat-cell *matCellDef="let player"> {{player.timeOnIce}} </td>
         </ng-container>
         
         <tr mat-header-row *matHeaderRowDef="columns"></tr>

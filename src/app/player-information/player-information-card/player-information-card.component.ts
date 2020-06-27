@@ -5,6 +5,9 @@ import { takeWhile } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { PlayerService } from 'src/app/_services/player.service';
 import { AwardsService } from 'src/app/_services/awards.service';
+import { NhlService } from 'src/app/_services/nhl.service';
+import { Player } from 'src/app/_models/player';
+import { identifierModuleUrl, isNgTemplate } from '@angular/compiler';
 
 @Component({
   selector: 'app-player-information-card',
@@ -17,15 +20,19 @@ export class PlayerInformationCardComponent implements OnInit, OnDestroy {
 
   playerType: string;
 
+  nhlPlayerInfo$: Observable<any>;
   player$: Observable<any>;
   salary$: Observable<any>;
   awards$: Observable<any>;
+
+  nhlPlayerInfo: any;
 
   constructor(
     private _route: ActivatedRoute,
     private _salaryService: SalaryService,
     private _playerService: PlayerService,
-    private _awardService: AwardsService
+    private _awardService: AwardsService,
+    private _nhlService: NhlService
   ) {
 
     const playerId = this._route.snapshot.params.id;
@@ -52,15 +59,44 @@ export class PlayerInformationCardComponent implements OnInit, OnDestroy {
   }
 
   getPlayerInfo(id: number) {
+    
     this.player$ = this._playerService.getPlayerInfoById(id);
     this.salary$ = this._salaryService.getPlayerSalaryByPlayerId(id);
     this.awards$ = this._awardService.getPlayerAwardByPlayerId(id);
+
+    this._playerService.getPlayerInfoById(id).pipe(
+      takeWhile(() => this._alive)
+    ).subscribe((player: Player) => {
+      if (player.nhl_id) {
+        this.getNHLInfo(player.nhl_id);
+      }
+    })
+
   }
 
   getGoalieInfo(id: number) {
+    this.nhlPlayerInfo$ = this._nhlService.getPlayerInfo(id);
     this.player$ = this._playerService.getGoalieInfoById(id);
     this.salary$ = this._salaryService.getGoalieSalaryByPlayerId(id);
     this.awards$ = this._awardService.getGoalieAwardByPlayerId(id);
+  }
+
+  getNHLInfo(id) {
+    this.nhlPlayerInfo$ = this._nhlService.getPlayerInfo(id);
+
+    this.nhlPlayerInfo$.pipe(
+      takeWhile(() => this._alive)
+    ).subscribe(player => {
+      const info = player['people'];
+
+      this.nhlPlayerInfo = info.map((item => ({
+        height: item.height,
+        birthCountry: item.birthCountry,
+        age: item.currentAge,
+        position: item.primaryPosition.code,
+        shoots: item.shootsCatches
+      })))[0];
+    });
   }
 
   ngOnDestroy(): void {

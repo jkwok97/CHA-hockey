@@ -13,6 +13,11 @@ export class PlayerInformationNhlTableComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    
+  }
+
+  getSeason(season: string) {
+    return season.slice(season.length - 4);
   }
 
 }

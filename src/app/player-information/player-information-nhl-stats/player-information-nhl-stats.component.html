@@ -1,4 +1,4 @@
-<h3 class="title">Season Stats</h3>
+<h3 class="title">NHL Stats</h3>
 
 <mat-progress-bar mode="query" color="accent" *ngIf="isStatsLoading"></mat-progress-bar>
 
@@ -6,7 +6,7 @@
 
 <app-player-information-nhl-table
     *ngIf="!isOnPaceStatsLoading && !statsError"
-    [stats]="stats"
+    [stats]="nhlStats"
     [columns]="playerType === 'player' ? playersColumns : goalieColumns"
 ></app-player-information-nhl-table>
 

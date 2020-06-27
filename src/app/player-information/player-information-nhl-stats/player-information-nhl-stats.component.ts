@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NhlService } from 'src/app/_services/nhl.service';
-import { takeWhile } from 'rxjs/operators';
+import { takeWhile, take } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { PlayerService } from 'src/app/_services/player.service';
 import { Player } from 'src/app/_models/player';
@@ -17,15 +17,17 @@ export class PlayerInformationNhlStatsComponent implements OnInit, OnDestroy {
   isOnPaceStatsLoading: boolean;
   statsError: boolean = false;
 
+  nhlStats: any[];
+
   stats: any[];
   onPaceStats: any[];
 
   playerType: string;
 
-  playersColumns = [
+  playersColumns = [ 'season',
     'games', 'goals', 'assists', 'points', 'powerPlayGoals', 'powerPlayPoints', 'shortHandedGoals', 'shortHandedPoints', 'gameWinningGoals', 
-    'plusMinus', 'penaltyMinutes', 'shots', 'shotPct', 'faceOffPct', 'hits', 'blocked', 'powerPlayTimeOnIcePerGame', 'shortHandedTimeOnIcePerGame',
-    'timeOnIcePerGame'
+    'plusMinus', 'penaltyMinutes', 'shots', 'shotPct', 'faceOffPct', 'hits', 'blocked', 'powerPlayTimeOnIce', 'shortHandedTimeOnIce',
+    'timeOnIce'
   ];
 
   goalieColumns = [
@@ -65,8 +67,9 @@ export class PlayerInformationNhlStatsComponent implements OnInit, OnDestroy {
       takeWhile(() => this._alive)
     ).subscribe((player: Player) => {
       if (player.nhl_id) {
-        this.getRealNHLStats(player.nhl_id);
+        // this.getRealNHLStats(player.nhl_id);
         this.getOnPaceNHLStats(player.nhl_id, '');
+        this.getNHLInfo(player.nhl_id);
       } else {
         this.statsError = true;
         this.isStatsLoading = false;
@@ -76,14 +79,57 @@ export class PlayerInformationNhlStatsComponent implements OnInit, OnDestroy {
     })
   }
 
-  getRealNHLStats(id) {
-    this._nhlService.getIndividualNHLRealStats(id).pipe(
+  getNHLInfo(id) {
+    this._nhlService.getPlayerInfo(id).pipe(
       takeWhile(() => this._alive)
-    ).subscribe(resp => {
-      this.stats = [resp['stats'][0]['splits'][0]['stat']];
+    ).subscribe((player) => {
+
+      const s = player['people'][0]['stats'][0]['splits'];
+
+      const playerStats = s as [];
+
+      const p = playerStats.filter((stat) => stat['league']['name'] === "National Hockey League");
+
+      this.nhlStats = p.map(stat => ({
+        season: stat['season'],
+        assists: stat['stat']['assists'],
+        blocked: stat['stat']['blocked'],
+        evenTimeOnIce: stat['stat']['evenTimeOnIce'],
+        faceOffPct: stat['stat']['faceOffPct'],
+        gameWinningGoals: stat['stat']['gameWinningGoals'],
+        games: stat['stat']['games'],
+        goals: stat['stat']['goals'],
+        hits: stat['stat']['hits'],
+        overTimeGoals: stat['stat']['overTimeGoals'],
+        penaltyMinutes: stat['stat']['penaltyMinutes'],
+        pim: stat['stat']['pim'],
+        plusMinus: stat['stat']['plusMinus'],
+        points: stat['stat']['points'],
+        powerPlayGoals: stat['stat']['powerPlayGoals'],
+        powerPlayPoints: stat['stat']['powerPlayPoints'],
+        powerPlayTimeOnIce: stat['stat']['powerPlayTimeOnIce'],
+        shifts: stat['stat']['shifts'],
+        shortHandedGoals: stat['stat']['shortHandedGoals'],
+        shortHandedPoints: stat['stat']['shortHandedPoints'],
+        shortHandedTimeOnIce: stat['stat']['shortHandedTimeOnIce'],
+        shotPct: stat['stat']['shotPct'],
+        shots: stat['stat']['shots'],
+        timeOnIce: stat['stat']['timeOnIce']
+      }))
+
       this.isStatsLoading = false;
-    });
+
+    })
   }
+
+  // getRealNHLStats(id) {
+  //   this._nhlService.getIndividualNHLRealStats(id).pipe(
+  //     takeWhile(() => this._alive)
+  //   ).subscribe(resp => {
+  //     this.stats = [resp['stats'][0]['splits'][0]['stat']];
+  //     this.isStatsLoading = false;
+  //   });
+  // }
 
   getOnPaceNHLStats(id, pace) {
     this._nhlService.getIndividualOnPaceNHLRealStats(id, pace).pipe(

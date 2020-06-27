@@ -33,7 +33,6 @@ import { TwitterComponent } from './main/nhl-info/twitter/twitter.component';
 import { NhlLeadersComponent } from './main/nhl-info/nhl-leaders/nhl-leaders.component';
 import { NhlPlayersStatsComponent } from './main/nhl-info/nhl-players-stats/nhl-players-stats.component';
 import { NhlGoalieStatsComponent } from './main/nhl-info/nhl-goalie-stats/nhl-goalie-stats.component';
-import { PlayoffTreeComponent } from './schedule/playoff-tree/playoff-tree.component';
 import { NhlRookieStatsComponent } from './main/nhl-info/nhl-rookie-stats/nhl-rookie-stats.component';
 import { MatchupComponent } from './schedule/playoff-tree/matchup/matchup.component';
 import { ChampionComponent } from './schedule/playoff-tree/champion/champion.component';
@@ -172,7 +171,6 @@ import { UserTeamAwardsComponent } from './main/main-history/user-team-awards/us
     NhlLeadersComponent,
     NhlPlayersStatsComponent,
     NhlGoalieStatsComponent,
-    PlayoffTreeComponent,
     NhlRookieStatsComponent,
     MatchupComponent,
     ChampionComponent,

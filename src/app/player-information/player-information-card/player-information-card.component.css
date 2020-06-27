@@ -7,7 +7,10 @@
 .mat-card-content {
     display: grid;
     grid-column-gap: 5px;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    justify-content: start;
+    grid-template-columns: repeat(auto-fit, minmax(min-content, 300px));
+    grid-template-rows: min-content;
+    grid-row-gap: 10px;
     margin-top: 20px;
 }
 

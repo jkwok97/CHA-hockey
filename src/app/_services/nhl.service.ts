@@ -76,4 +76,10 @@ export class NhlService {
     return this._http.get(`${environment.back_end_url}/nhl-stats/player`, options);
   }
 
+  getPlayerInfo(nhlId: number) {
+    return this._http.get(
+      `https://statsapi.web.nhl.com/api/v1/people/${nhlId}?expand=person.stats&stats=yearByYear,yearByYearPlayoffs,careerRegularSeason&expand=stats.team&site=en_nhlCA`
+      )
+  }
+
 }
