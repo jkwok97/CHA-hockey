@@ -75,10 +75,18 @@ export class PlayerInformationCardComponent implements OnInit, OnDestroy {
   }
 
   getGoalieInfo(id: number) {
-    this.nhlPlayerInfo$ = this._nhlService.getPlayerInfo(id);
+    
     this.player$ = this._playerService.getGoalieInfoById(id);
     this.salary$ = this._salaryService.getGoalieSalaryByPlayerId(id);
     this.awards$ = this._awardService.getGoalieAwardByPlayerId(id);
+
+    this._playerService.getPlayerInfoById(id).pipe(
+      takeWhile(() => this._alive)
+    ).subscribe((player: Player) => {
+      if (player.nhl_id) {
+        this.getNHLInfo(player.nhl_id);
+      }
+    })
   }
 
   getNHLInfo(id) {
