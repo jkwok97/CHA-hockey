@@ -74,7 +74,6 @@ export class TeamStatsTableComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   routeToTeam(team: Team) {
-    console.log(team);
     if (team.isactive) {
       this._router.navigate([`/teams/${team.shortname}/${team['team_id']}/salaries`])
     } else {

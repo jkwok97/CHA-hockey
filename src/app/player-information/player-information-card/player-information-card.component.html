@@ -18,21 +18,31 @@
 
     <mat-card-content>
 
-        <img 
-            [src]="getPlayerPicture(player.nhl_id)" 
-            class="headshot"
-            *ngIf="player.nhl_id"
-        >
+        <div class="main">
+            <img 
+                [src]="getPlayerPicture(player.nhl_id)" 
+                class="headshot"
+                *ngIf="player.nhl_id"
+            >
 
-        <img 
-            src="../../../assets/images/cha_logo.jpg" 
-            class="headshot"
-            *ngIf="!player.nhl_id"
-        >
+            <img 
+                src="../../../assets/images/cha_logo.jpg" 
+                class="headshot"
+                *ngIf="!player.nhl_id"
+            >
 
-        <div *ngIf="(salary$ | async) as salary">
-            <p>Current Season Salary: <span class="stat">{{salary.season_2020}}</span></p>
-            <p>Next Season Salary: <span class="stat">{{salary.season_2021}}</span></p>
+            <div *ngIf="(salary$ | async) as salary">
+                <p>Current Season Salary: <span class="stat">{{salary.season_2020}}</span></p>
+                <p>Next Season Salary: <span class="stat">{{salary.season_2021}}</span></p>
+            </div>
+        </div>
+
+        <div *ngIf="(awards$ | async)?.length > 0">
+            <p>Awards: </p>
+            <ul *ngFor="let award of awards$ | async">
+                <li>{{award.display_season}} - {{award.display_name}} ({{award.nickname}})</li>
+            </ul>
+            
         </div>
 
     </mat-card-content>

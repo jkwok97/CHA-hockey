@@ -63,4 +63,16 @@ export class AwardsService {
     )
   }
 
+  getPlayerAwardByPlayerId(id: number): Observable<PlayerAward[]> {
+    return this._http.get(`${environment.back_end_url}/v2/awards/player/${id}`).pipe(
+      map(result => result['result'])
+    )
+  }
+
+  getGoalieAwardByPlayerId(id: number): Observable<PlayerAward[]> {
+    return this._http.get(`${environment.back_end_url}/v2/awards/goalie/${id}`).pipe(
+      map(result => result['result'])
+    )
+  }
+
 }

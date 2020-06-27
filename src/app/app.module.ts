@@ -134,10 +134,10 @@ import { PlayerInformationComponent } from './player-information/player-informat
 import { PlayerInformationStatsComponent } from './player-information/player-information-stats/player-information-stats.component';
 import { PlayerInformationNhlStatsComponent } from './player-information/player-information-nhl-stats/player-information-nhl-stats.component';
 import { PlayerInformationRatingsComponent } from './player-information/player-information-ratings/player-information-ratings.component';
-import { PlayerInformationPlayerTableComponent } from './player-information/player-information-player-table/player-information-player-table.component';
-import { PlayerInformationGoalieTableComponent } from './player-information/player-information-goalie-table/player-information-goalie-table.component';
+import { PlayerInformationPlayerTableComponent } from './player-information/player-information-stats/player-information-player-table/player-information-player-table.component';
+import { PlayerInformationGoalieTableComponent } from './player-information/player-information-stats/player-information-goalie-table/player-information-goalie-table.component';
 import { PlayerInformationCardComponent } from './player-information/player-information-card/player-information-card.component';
-import { PlayerInformationNhlTableComponent } from './player-information/player-information-nhl-table/player-information-nhl-table.component';
+import { PlayerInformationNhlTableComponent } from './player-information/player-information-nhl-stats/player-information-nhl-table/player-information-nhl-table.component';
 import { RatingsStatsTableComponent } from './player-information/player-information-ratings/ratings-stats-table/ratings-stats-table.component';
 import { RatingsRateTableComponent } from './player-information/player-information-ratings/ratings-rate-table/ratings-rate-table.component';
 
