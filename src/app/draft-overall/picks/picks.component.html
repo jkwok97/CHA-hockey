@@ -13,6 +13,14 @@
 
 </section>
 
+<!-- REMOVE AFTER DRAFT -->
+<p 
+    *ngIf="draftSeason === '2020'"
+    class="lottery"
+>
+    Lottery was won by Green Bay. 1st Overall is now Green Bay's Pick. 2nd ATL's, 3rd WIT'S. All other picks remain the same.
+</p>
+
 <mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
 
 <div class="table" *ngIf="!isLoading">

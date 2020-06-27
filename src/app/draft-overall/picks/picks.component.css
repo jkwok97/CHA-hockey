@@ -81,3 +81,10 @@ h3 {
 .mat-button-toggle-checked {
     background-color: red;
 }
+
+.lottery {
+    font-size: large;
+    font-weight: 200;
+    font-style: italic;
+    text-align: center;
+}
