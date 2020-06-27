@@ -1,1 +1,13 @@
-<p>player-information-ratings works!</p>
+<h3 class="title">Previous NHL Season Stats</h3>
+
+<app-ratings-stats-table
+    [stats]="statRatings"
+    [columns]="showColumns()"
+></app-ratings-stats-table>
+
+<h3 class="title">Ratings</h3>
+
+<app-ratings-rate-table
+    [stats]="statRatings"
+    [columns]="showRateColumns()"
+></app-ratings-rate-table>

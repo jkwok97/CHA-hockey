@@ -21,11 +21,11 @@ export class TeamStatsComponent implements OnInit, OnDestroy {
   activeLinkIndex = -1;
 
   routes = [
-    {name: 'Salaries', url: 'salaries', current: true},
-    {name: 'Current', url: 'current', current: false},
-    {name: 'Team History', url: 'archives/team', current: false},
-    {name: 'Player History', url: 'archives/players', current: false},
-    {name: 'Goalie History', url: 'archives/goalies', current: false},
+    {name: 'Salaries', url: 'salaries', current: true, disabled: false},
+    {name: 'Current', url: 'current', current: false, disabled: false},
+    {name: 'Team History', url: 'archives/team', current: false, disabled: false},
+    {name: 'Player History', url: 'archives/players', current: false, disabled: false},
+    {name: 'Goalie History', url: 'archives/goalies', current: false, disabled: false},
   ];
   
   constructor(
@@ -40,11 +40,21 @@ export class TeamStatsComponent implements OnInit, OnDestroy {
     this.isMobile = this._displayService.isMobile;
   }
 
+  checkTeamStatus() {
+    setTimeout(() => {
+      return !this.team.isactive;
+    }, 500)
+  }
+
   getTeamInfo(id: number) {
     this._teamInfoService.getTeambyId(id).pipe(
       takeWhile(() => this._alive)
     ).subscribe((team:Team) => {
       this.team = team;
+      if (!this.team.isactive) {
+        this.routes[0].disabled = true;
+        this.routes[1].disabled = true;
+      }
       this.isLoading = false;
     })
   }

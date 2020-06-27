@@ -16,6 +16,7 @@
 <nav mat-tab-nav-bar color="accent" *ngIf="!isLoading">
     <a mat-tab-link
         *ngFor="let route of routes"
+        [disabled]="route.disabled"
         [routerLink]="route.url"
         routerLinkActive #rla="routerLinkActive"
         [active]="rla.isActive">

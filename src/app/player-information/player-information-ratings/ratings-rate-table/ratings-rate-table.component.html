@@ -1,0 +1,144 @@
+<div class="table">
+            
+    <table mat-table [dataSource]="stats" matSort class="mat-elevation-z8 full-width" matSortActive="playing_year" matSortDirection="desc">
+
+        <ng-container matColumnDef="c_rate">
+            <th mat-header-cell *matHeaderCellDef sticky> C </th>
+            <td mat-cell *matCellDef="let player"> 
+                <span *ngIf="player.c_rate !== '0'">{{player.c_rate}} </span>
+                <mat-icon color="warn" *ngIf="player.c_rate === '0'">block</mat-icon>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="l_rate">
+            <th mat-header-cell *matHeaderCellDef sticky> LW </th>
+            <td mat-cell *matCellDef="let player"> 
+                <span *ngIf="player.l_rate !== '0'">{{player.l_rate}} </span>
+                <mat-icon color="warn" *ngIf="player.l_rate === '0'">block</mat-icon>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="r_rate">
+            <th mat-header-cell *matHeaderCellDef sticky> RW </th>
+            <td mat-cell *matCellDef="let player"> 
+                <span *ngIf="player.r_rate !== '0'">{{player.r_rate}}</span>
+                <mat-icon color="warn" *ngIf="player.r_rate === '0'">block</mat-icon>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="ld_rate">
+            <th mat-header-cell *matHeaderCellDef sticky> LD </th>
+            <td mat-cell *matCellDef="let player">
+                 <span *ngIf="player.ld_rate !== '0'">{{player.ld_rate}}</span>
+                 <mat-icon color="warn" *ngIf="player.ld_rate === '0'">block</mat-icon> 
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="rd_rate">
+            <th mat-header-cell *matHeaderCellDef sticky> RD </th>
+            <td mat-cell *matCellDef="let player">
+                 <span *ngIf="player.rd_rate !== '0'">{{player.rd_rate}}</span> 
+                 <mat-icon color="warn" *ngIf="player.rd_rate === '0'">block</mat-icon>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="skating">
+            <th mat-header-cell *matHeaderCellDef sticky> Skating </th>
+            <td mat-cell *matCellDef="let player"> {{player.skating}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="speed">
+            <th mat-header-cell *matHeaderCellDef sticky> Speed </th>
+            <td mat-cell *matCellDef="let player"> {{player.speed}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="passing">
+            <th mat-header-cell *matHeaderCellDef sticky> Passing </th>
+            <td mat-cell *matCellDef="let player"> {{player.passing}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="shooting">
+            <th mat-header-cell *matHeaderCellDef sticky> Shooting </th>
+            <td mat-cell *matCellDef="let player"> {{player.shooting}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="face_off">
+            <th mat-header-cell *matHeaderCellDef sticky> Faceoff </th>
+            <td mat-cell *matCellDef="let player"> 
+                <span *ngIf="player.face_off !== '0'">{{player.face_off}} </span>
+                <mat-icon color="warn" *ngIf="player.face_off === '0'">block</mat-icon>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="forecheck">
+            <th mat-header-cell *matHeaderCellDef sticky> Forecheck </th>
+            <td mat-cell *matCellDef="let player"> 
+                <span *ngIf="player.forecheck !== '0'">{{player.forecheck}} </span>
+                <mat-icon color="warn" *ngIf="player.forecheck === '0'">block</mat-icon>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="assist_rating">
+            <th mat-header-cell *matHeaderCellDef sticky> Assist </th>
+            <td mat-cell *matCellDef="let player"> {{player.assist_rating}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="clear_crease">
+            <th mat-header-cell *matHeaderCellDef sticky> Clear Crease </th>
+            <td mat-cell *matCellDef="let player"> 
+                <span *ngIf="player.clear_crease !== '0'">{{player.clear_crease}}</span> 
+                <mat-icon color="warn" *ngIf="player.clear_crease === '0'">block</mat-icon>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="shot_block">
+            <th mat-header-cell *matHeaderCellDef sticky> Shot Block </th>
+            <td mat-cell *matCellDef="let player"> 
+                <span *ngIf="player.shot_block !== '0'">{{player.shot_block}}</span>
+                <mat-icon color="warn" *ngIf="player.shot_block === '0'">block</mat-icon> 
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="pk">
+            <th mat-header-cell *matHeaderCellDef sticky> PK </th>
+            <td mat-cell *matCellDef="let player"> 
+                <span *ngIf="player.pk !== '0'">{{player.pk}}</span>
+                <mat-icon color="warn" *ngIf="player.pk === '0'">block</mat-icon> 
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="physical">
+            <th mat-header-cell *matHeaderCellDef sticky> Physical </th>
+            <td mat-cell *matCellDef="let player"> {{player.physical}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="rock">
+            <th mat-header-cell *matHeaderCellDef sticky> Rock </th>
+            <td mat-cell *matCellDef="let player"> 
+                <span *ngIf="player.rock !== '0'">{{player.rock}}</span>
+                <mat-icon color="warn" *ngIf="player.rock === '0'">block</mat-icon> 
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="intimidation">
+            <th mat-header-cell *matHeaderCellDef sticky> Intimidation </th>
+            <td mat-cell *matCellDef="let player"> {{player.intimidation}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="game_fatigue">
+            <th mat-header-cell *matHeaderCellDef sticky> Game Fatigue </th>
+            <td mat-cell *matCellDef="let player"> {{player.game_fatigue}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="shift_fatigue">
+            <th mat-header-cell *matHeaderCellDef sticky> Shift Fatigue </th>
+            <td mat-cell *matCellDef="let player"> {{player.shift_fatigue}} </td>
+        </ng-container>
+        
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let player; columns: columns"></tr>
+
+    </table>
+
+</div>
+

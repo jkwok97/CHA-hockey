@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { MatSort, MatPaginator } from '@angular/material';
+import { PlayerStat } from 'src/app/_models/player';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-draft-summary-table',
@@ -20,10 +22,17 @@ export class DraftSummaryTableComponent implements OnInit {
   @ViewChild(MatSort, {static: false}) playerSort: MatSort;
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
 
-  constructor() { }
+  constructor(
+    private _router: Router
+  ) { }
 
   ngOnInit() {
     this.length = this.players.length;
+  }
+
+  openPlayer(player: PlayerStat) {
+    const type = player['isgoalie'] ? 'goalie' : 'player';
+    this._router.navigate([`player-info/${player.player_id}/${type}/stats`]);
   }
 
   ngAfterViewInit() {

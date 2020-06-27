@@ -24,7 +24,6 @@ import { MainComponent } from './main/main.component';
 import { LoginComponent } from './main/login/login.component';
 import { AuthService } from './_services/auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
-import { PlayerInfoComponent } from './stats/player-info/player-info.component';
 import { PlayerArchivesComponent } from './teams/player-archives/player-archives.component';
 import { GoalieArchivesComponent } from './teams/goalie-archives/goalie-archives.component';
 import { TeamArchivesComponent } from './teams/team-archives/team-archives.component';
@@ -139,6 +138,8 @@ import { PlayerInformationPlayerTableComponent } from './player-information/play
 import { PlayerInformationGoalieTableComponent } from './player-information/player-information-goalie-table/player-information-goalie-table.component';
 import { PlayerInformationCardComponent } from './player-information/player-information-card/player-information-card.component';
 import { PlayerInformationNhlTableComponent } from './player-information/player-information-nhl-table/player-information-nhl-table.component';
+import { RatingsStatsTableComponent } from './player-information/player-information-ratings/ratings-stats-table/ratings-stats-table.component';
+import { RatingsRateTableComponent } from './player-information/player-information-ratings/ratings-rate-table/ratings-rate-table.component';
 
 @NgModule({
   declarations: [
@@ -160,7 +161,6 @@ import { PlayerInformationNhlTableComponent } from './player-information/player-
     WaiverPriorityComponent,
     MainComponent,
     LoginComponent,
-    PlayerInfoComponent,
     PlayerArchivesComponent,
     GoalieArchivesComponent,
     TeamArchivesComponent,
@@ -274,6 +274,8 @@ import { PlayerInformationNhlTableComponent } from './player-information/player-
     PlayerInformationGoalieTableComponent,
     PlayerInformationCardComponent,
     PlayerInformationNhlTableComponent,
+    RatingsStatsTableComponent,
+    RatingsRateTableComponent,
   ],
   imports: [
     BrowserModule,
