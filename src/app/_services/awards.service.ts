@@ -75,4 +75,10 @@ export class AwardsService {
     )
   }
 
+  getTeamAwardsByUserId(id: number) {
+    return this._http.get(`${environment.back_end_url}/v2/awards/user/${id}`).pipe(
+      map(result => result['result'])
+    )
+  }
+
 }

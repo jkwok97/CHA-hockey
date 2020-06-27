@@ -13,6 +13,7 @@ export class MainHistoryComponent implements OnInit {
     {name: 'Team', url: 'team', current: true},
     {name: 'Player', url: 'players', current: false},
     {name: 'Goalie', url: 'goalies', current: false},
+    {name: 'Awards', url: 'awards', current: false},
   ];
 
   constructor() { }

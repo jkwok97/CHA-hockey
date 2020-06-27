@@ -67,6 +67,8 @@ import { PlayerInformationComponent } from './player-information/player-informat
 import { PlayerInformationStatsComponent } from './player-information/player-information-stats/player-information-stats.component';
 import { PlayerInformationNhlStatsComponent } from './player-information/player-information-nhl-stats/player-information-nhl-stats.component';
 import { PlayerInformationRatingsComponent } from './player-information/player-information-ratings/player-information-ratings.component';
+import { TeamAwardsComponent } from './teams/team-awards/team-awards.component';
+import { UserTeamAwardsComponent } from './main/main-history/user-team-awards/user-team-awards.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -87,6 +89,7 @@ const routes: Routes = [
             { path: 'team', component: UserTeamHistoryComponent },
             { path: 'players', component: UserTeamPlayerHistoryComponent },
             { path: 'goalies', component: UserTeamGoalieHistoryComponent },
+            { path: 'awards', component: UserTeamAwardsComponent },
           ]
         },
       ]
@@ -127,6 +130,7 @@ const routes: Routes = [
     children: [
       { path: 'salaries', component: TeamCurrentSalaryComponent},
       { path: 'current', component: TeamCurrentComponent},
+      { path: 'awards', component: TeamAwardsComponent},
       { path: 'archives/team', component: TeamArchivesComponent},
       { path: 'archives/players', component: PlayerArchivesComponent},
       { path: 'archives/goalies', component: GoalieArchivesComponent},

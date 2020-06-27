@@ -140,6 +140,8 @@ import { PlayerInformationCardComponent } from './player-information/player-info
 import { PlayerInformationNhlTableComponent } from './player-information/player-information-nhl-stats/player-information-nhl-table/player-information-nhl-table.component';
 import { RatingsStatsTableComponent } from './player-information/player-information-ratings/ratings-stats-table/ratings-stats-table.component';
 import { RatingsRateTableComponent } from './player-information/player-information-ratings/ratings-rate-table/ratings-rate-table.component';
+import { TeamAwardsComponent } from './teams/team-awards/team-awards.component';
+import { UserTeamAwardsComponent } from './main/main-history/user-team-awards/user-team-awards.component';
 
 @NgModule({
   declarations: [
@@ -276,6 +278,8 @@ import { RatingsRateTableComponent } from './player-information/player-informati
     PlayerInformationNhlTableComponent,
     RatingsStatsTableComponent,
     RatingsRateTableComponent,
+    TeamAwardsComponent,
+    UserTeamAwardsComponent,
   ],
   imports: [
     BrowserModule,

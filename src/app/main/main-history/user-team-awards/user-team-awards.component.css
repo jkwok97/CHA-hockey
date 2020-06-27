@@ -1,0 +1,22 @@
+:host {
+    display: grid;
+    padding: 20px;
+    grid-row-gap: 20px;
+    justify-content: space-around;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-column-gap: 20px;
+    color: whitesmoke;
+}
+
+.headshot {
+    height: 100px;
+    width: auto;
+    border-radius: 10px;
+}
+
+.no-awards {
+    font-size: x-large;
+    font-weight: 100;
+    font-style: italic;
+    text-align: center;
+}

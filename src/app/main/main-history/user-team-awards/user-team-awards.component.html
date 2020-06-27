@@ -1,0 +1,41 @@
+<p *ngIf="!(awards$ | async)" class="no-awards">
+    Team Has No Awards
+</p>
+
+<mat-card 
+    *ngFor="let award of awards$ | async"
+    [style.background-color]="getColor(award.teamcolor)"
+>
+
+    <mat-card-header>
+
+        <div 
+            mat-card-avatar 
+            [style.background-image]="getLogo(award.teamlogo)"
+            style="background-size: cover;"
+            *ngIf="!award.nhl_id"
+        >
+        </div>
+
+        <div 
+            mat-card-avatar 
+            [style.background-image]="getPlayerPicture(award.nhl_id)"
+            style="background-size: cover;"
+            *ngIf="award.nhl_id"
+        >
+        </div>
+
+        <mat-card-title>{{award.display_season}} - {{award.display_name}}</mat-card-title>
+
+        <mat-card-subtitle *ngIf="!award.playerfirst">
+            {{award.ownerfirst}} {{award.ownerlast}}
+        </mat-card-subtitle>
+
+        <mat-card-subtitle *ngIf="award.playerfirst">
+            {{award.playerfirst}} {{award.playerlast}}
+        </mat-card-subtitle>
+
+    </mat-card-header>
+
+</mat-card>
+

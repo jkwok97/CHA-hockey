@@ -23,6 +23,7 @@ export class TeamStatsComponent implements OnInit, OnDestroy {
   routes = [
     {name: 'Salaries', url: 'salaries', current: true, disabled: false},
     {name: 'Current', url: 'current', current: false, disabled: false},
+    {name: 'Awards', url: 'awards', current: false, disabled: false},
     {name: 'Team History', url: 'archives/team', current: false, disabled: false},
     {name: 'Player History', url: 'archives/players', current: false, disabled: false},
     {name: 'Goalie History', url: 'archives/goalies', current: false, disabled: false},
