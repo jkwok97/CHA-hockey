@@ -1,18 +1,25 @@
 <mat-card 
     *ngIf="(player$ | async) as player"
-    [style.background-color]="getColor(player.teamcolor)"
+    [style.background-color]="getColor(player)"
 >
 
     <mat-card-header>
 
         <div 
             mat-card-avatar 
-            [style.background-image]="getLogo(player.teamlogo)"
+            [style.background-image]="getLogo(player)"
             style="background-size: cover;">
         </div>
 
         <mat-card-title>{{player.firstname}} {{player.lastname}}</mat-card-title>
-        <mat-card-subtitle *ngIf="player.city">Team: {{player.city}} {{player.nickname}}</mat-card-subtitle>
+
+        <mat-card-subtitle *ngIf="!player.isactive">
+            Status: Inactive
+        </mat-card-subtitle>
+        
+        <mat-card-subtitle *ngIf="player.city && player.isactive">
+            Team: {{player.city}} {{player.nickname}}
+        </mat-card-subtitle>
 
     </mat-card-header>
 

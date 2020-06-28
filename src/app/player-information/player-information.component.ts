@@ -36,7 +36,7 @@ export class PlayerInformationComponent implements OnInit, OnDestroy {
       takeWhile(() => this._alive)
     ).subscribe(player => {
       if (!player.isactive) {
-        this.routes[1].disabled = true;
+        // this.routes[1].disabled = true;
         this.routes[2].disabled = true;
       }
     })

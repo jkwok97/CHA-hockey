@@ -23,15 +23,16 @@ export class PlayerInformationNhlStatsComponent implements OnInit, OnDestroy {
   onPaceStats: any[];
 
   playerType: string;
+  player: any;
 
-  playersColumns = [ 'season',
+  playersColumns = [ 'season', 'team',
     'games', 'goals', 'assists', 'points', 'powerPlayGoals', 'powerPlayPoints', 'shortHandedGoals', 'shortHandedPoints', 'gameWinningGoals', 
     'plusMinus', 'penaltyMinutes', 'shots', 'shotPct', 'faceOffPct', 'hits', 'blocked', 'powerPlayTimeOnIce', 'shortHandedTimeOnIce',
     'timeOnIce'
   ];
 
-  goalieColumns = [ 'season',
-    'games', 'wins', 'losses', 'ties', 'goalsAgainst', 'goalAgainstAverage', 'shutouts', 'shotsAgainst', 'saves', 'savePercentage',
+  goalieColumns = [ 'season', 'team',
+    'games', 'wins', 'losses', 'goalsAgainst', 'goalAgainstAverage', 'shutouts', 'shotsAgainst', 'saves', 'savePercentage',
     'powerPlaySavePercentage', 'evenStrengthSavePercentage'
   ];
 
@@ -66,8 +67,11 @@ export class PlayerInformationNhlStatsComponent implements OnInit, OnDestroy {
     this._playerService.getPlayerInfoById(playerId).pipe(
       takeWhile(() => this._alive)
     ).subscribe((player: Player) => {
+      this.player = player;
       if (player.nhl_id) {
-        this.getOnPaceNHLStats(player.nhl_id, '');
+        if (player.isactive) {
+          this.getOnPaceNHLStats(player.nhl_id, '');
+        }
         this.getNhlCareerStats(player.nhl_id)
       } else {
         this.statsError = true;

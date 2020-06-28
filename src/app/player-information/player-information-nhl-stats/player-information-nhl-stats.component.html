@@ -1,11 +1,11 @@
-<h3 class="title">On Pace Stats</h3>
+<h3 class="title" *ngIf="player?.isactive">On Pace Stats</h3>
 
-<mat-progress-bar mode="query" color="accent" *ngIf="isOnPaceStatsLoading"></mat-progress-bar>
+<mat-progress-bar mode="query" color="accent" *ngIf="isOnPaceStatsLoading && player?.isactive"></mat-progress-bar>
 
 <p class="text" *ngIf="!isOnPaceStatsLoading && statsError">No NHL Stats This Season!</p>
 
 <app-player-information-nhl-table
-    *ngIf="!isOnPaceStatsLoading && !statsError"
+    *ngIf="!isOnPaceStatsLoading && !statsError && player?.isactive"
     [stats]="onPaceStats"
     [columns]="playerType === 'player' ? playersOnPaceColumns : goalieOnPaceColumns"
 ></app-player-information-nhl-table>
@@ -17,7 +17,7 @@
 <p class="text" *ngIf="!isStatsLoading && statsError">No NHL Stats This Season!</p>
 
 <app-player-information-nhl-table
-    *ngIf="!isOnPaceStatsLoading && !statsError"
+    *ngIf="!isStatsLoading && !statsError"
     [stats]="nhlStats"
     [columns]="playerType === 'player' ? playersColumns : goalieColumns"
 ></app-player-information-nhl-table>

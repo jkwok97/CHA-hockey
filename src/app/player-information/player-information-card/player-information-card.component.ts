@@ -43,12 +43,12 @@ export class PlayerInformationCardComponent implements OnInit, OnDestroy {
     
   }
 
-  getLogo(logo: string) {
-    return logo ? `url(${logo})` : 'url(../../../assets/images/cha_logo.jpg)' 
+  getLogo(player: Player) {
+    return player.isactive ? `url(${player['teamlogo']})` : 'url(../../../assets/images/cha_logo.jpg)' 
   }
 
-  getColor(color:string) {
-    return `${color}95`
+  getColor(player: Player) {
+    return player.isactive ? `${player['teamcolor']}95` : `#77889995`
   }
 
   getPlayerPicture(id: number) {

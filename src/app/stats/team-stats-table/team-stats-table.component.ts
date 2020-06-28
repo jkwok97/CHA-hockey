@@ -52,7 +52,7 @@ export class TeamStatsTableComponent implements OnInit, AfterViewInit, OnChanges
   ) { }
 
   ngOnInit() {
-    this.length = this.teams.length;
+    // this.length = this.teams.length;
   }
 
   ngAfterViewInit() {
