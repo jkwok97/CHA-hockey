@@ -31,12 +31,12 @@
                 *ngIf="!player.nhl_id"
             >
 
-            <div *ngIf="nhlPlayerInfo">
-                <p>Country: <span class="stat">{{nhlPlayerInfo.birthCountry}}</span></p>
-                <p>Height: <span class="stat">{{nhlPlayerInfo.height}}</span></p>
-                <p>Age: <span class="stat">{{nhlPlayerInfo.age}}</span></p>
-                <p>Position: <span class="stat">{{nhlPlayerInfo.position}}</span></p>
-                <p>Shoots: <span class="stat">{{nhlPlayerInfo.shoots}}</span></p>
+            <div *ngIf="(nhlPlayerInfo$ | async) as info">
+                <p>Country: <span class="stat">{{info.birthCountry}}</span></p>
+                <p>Height: <span class="stat">{{info.height}}</span></p>
+                <p>Age: <span class="stat">{{info.age}}</span></p>
+                <p>Position: <span class="stat">{{info.position}}</span></p>
+                <p>Shoots: <span class="stat">{{info.shoots}}</span></p>
             </div>
 
         </div>

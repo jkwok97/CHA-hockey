@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -77,9 +78,18 @@ export class NhlService {
   }
 
   getPlayerInfo(nhlId: number) {
-    return this._http.get(
-      `https://statsapi.web.nhl.com/api/v1/people/${nhlId}?expand=person.stats&stats=yearByYear,yearByYearPlayoffs,careerRegularSeason&expand=stats.team&site=en_nhlCA`
-      )
+    return this._http.get(`${environment.back_end_url}/nhl-stats/player-info/${nhlId}`).pipe(
+      map(result => result['result'])
+    )
+    // return this._http.get(
+    //   `https://statsapi.web.nhl.com/api/v1/people/${nhlId}?expand=person.stats&stats=yearByYear,yearByYearPlayoffs,careerRegularSeason&expand=stats.team&site=en_nhlCA`
+    //   )
+  }
+
+  getNhlCareerStats(nhlId: number) {
+    return this._http.get(`${environment.back_end_url}/nhl-stats/career/${nhlId}`).pipe(
+      map(result => result['result'])
+    )
   }
 
 }

@@ -7,7 +7,6 @@ import { PlayerService } from 'src/app/_services/player.service';
 import { AwardsService } from 'src/app/_services/awards.service';
 import { NhlService } from 'src/app/_services/nhl.service';
 import { Player } from 'src/app/_models/player';
-import { identifierModuleUrl, isNgTemplate } from '@angular/compiler';
 
 @Component({
   selector: 'app-player-information-card',
@@ -24,8 +23,6 @@ export class PlayerInformationCardComponent implements OnInit, OnDestroy {
   player$: Observable<any>;
   salary$: Observable<any>;
   awards$: Observable<any>;
-
-  nhlPlayerInfo: any;
 
   constructor(
     private _route: ActivatedRoute,
@@ -91,20 +88,6 @@ export class PlayerInformationCardComponent implements OnInit, OnDestroy {
 
   getNHLInfo(id) {
     this.nhlPlayerInfo$ = this._nhlService.getPlayerInfo(id);
-
-    this.nhlPlayerInfo$.pipe(
-      takeWhile(() => this._alive)
-    ).subscribe(player => {
-      const info = player['people'];
-
-      this.nhlPlayerInfo = info.map((item => ({
-        height: item.height,
-        birthCountry: item.birthCountry,
-        age: item.currentAge,
-        position: item.primaryPosition.code,
-        shoots: item.shootsCatches
-      })))[0];
-    });
   }
 
   ngOnDestroy(): void {

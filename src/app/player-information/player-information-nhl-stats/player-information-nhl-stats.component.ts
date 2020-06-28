@@ -67,9 +67,8 @@ export class PlayerInformationNhlStatsComponent implements OnInit, OnDestroy {
       takeWhile(() => this._alive)
     ).subscribe((player: Player) => {
       if (player.nhl_id) {
-        // this.getRealNHLStats(player.nhl_id);
         this.getOnPaceNHLStats(player.nhl_id, '');
-        this.getNHLInfo(player.nhl_id);
+        this.getNhlCareerStats(player.nhl_id)
       } else {
         this.statsError = true;
         this.isStatsLoading = false;
@@ -79,34 +78,14 @@ export class PlayerInformationNhlStatsComponent implements OnInit, OnDestroy {
     })
   }
 
-  getNHLInfo(id) {
-    this._nhlService.getPlayerInfo(id).pipe(
+  getNhlCareerStats(id) {
+    this._nhlService.getNhlCareerStats(id).pipe(
       takeWhile(() => this._alive)
-    ).subscribe((player) => {
-
-      const s = player['people'][0]['stats'][0]['splits'];
-
-      const playerStats = s as [];
-
-      const p = playerStats.filter((stat) => stat['league']['name'] === "National Hockey League");
-
-      if (this.playerType === 'player') {
-        this.extractPlayerStats(p);
-      } else {
-        this.extractGoalieStats(p)
-      }
-
+    ).subscribe((stats) => {
+      this.nhlStats = stats;
+      this.isStatsLoading = false;
     })
   }
-
-  // getRealNHLStats(id) {
-  //   this._nhlService.getIndividualNHLRealStats(id).pipe(
-  //     takeWhile(() => this._alive)
-  //   ).subscribe(resp => {
-  //     this.stats = [resp['stats'][0]['splits'][0]['stat']];
-  //     this.isStatsLoading = false;
-  //   });
-  // }
 
   getOnPaceNHLStats(id, pace) {
     this._nhlService.getIndividualOnPaceNHLRealStats(id, pace).pipe(
@@ -115,66 +94,6 @@ export class PlayerInformationNhlStatsComponent implements OnInit, OnDestroy {
       this.onPaceStats = [resp['stats'][0]['splits'][0]['stat']];
       this.isOnPaceStatsLoading = false;
     });
-  }
-
-  extractPlayerStats(p) {
-    this.nhlStats = p.map(stat => ({
-      season: stat['season'],
-      assists: stat['stat']['assists'],
-      blocked: stat['stat']['blocked'],
-      evenTimeOnIce: stat['stat']['evenTimeOnIce'],
-      faceOffPct: stat['stat']['faceOffPct'],
-      gameWinningGoals: stat['stat']['gameWinningGoals'],
-      games: stat['stat']['games'],
-      goals: stat['stat']['goals'],
-      hits: stat['stat']['hits'],
-      overTimeGoals: stat['stat']['overTimeGoals'],
-      penaltyMinutes: stat['stat']['penaltyMinutes'],
-      pim: stat['stat']['pim'],
-      plusMinus: stat['stat']['plusMinus'],
-      points: stat['stat']['points'],
-      powerPlayGoals: stat['stat']['powerPlayGoals'],
-      powerPlayPoints: stat['stat']['powerPlayPoints'],
-      powerPlayTimeOnIce: stat['stat']['powerPlayTimeOnIce'],
-      shifts: stat['stat']['shifts'],
-      shortHandedGoals: stat['stat']['shortHandedGoals'],
-      shortHandedPoints: stat['stat']['shortHandedPoints'],
-      shortHandedTimeOnIce: stat['stat']['shortHandedTimeOnIce'],
-      shotPct: stat['stat']['shotPct'],
-      shots: stat['stat']['shots'],
-      timeOnIce: stat['stat']['timeOnIce']
-    }));
-
-    this.isStatsLoading = false;
-  }
-
-  extractGoalieStats(p) {
-    this.nhlStats = p.map(stat => ({
-      season: stat['season'],
-      evenSaves: stat['stat']['evenSaves'],
-      evenShots: stat['stat']['evenShots'],
-      evenStrengthSavePercentage: stat['stat']['evenStrengthSavePercentage'],
-      games: stat['stat']['games'],
-      gamesStarted: stat['stat']['gamesStarted'],
-      goalAgainstAverage: stat['stat']['goalAgainstAverage'],
-      goalsAgainst: stat['stat']['goalsAgainst'],
-      losses: stat['stat']['losses'],
-      powerPlaySavePercentage: stat['stat']['powerPlaySavePercentage'],
-      powerPlaySaves: stat['stat']['powerPlaySaves'],
-      powerPlayShots: stat['stat']['powerPlayShots'],
-      savePercentage: stat['stat']['savePercentage'],
-      saves: stat['stat']['saves'],
-      shortHandedSavePercentage: stat['stat']['shortHandedSavePercentage'],
-      shortHandedSaves: stat['stat']['shortHandedSaves'],
-      shortHandedShots: stat['stat']['shortHandedShots'],
-      shotsAgainst: stat['stat']['shotsAgainst'],
-      shutouts: stat['stat']['shutouts'],
-      ties: stat['stat']['ties'],
-      timeOnIce: stat['stat']['timeOnIce'],
-      wins: stat['stat']['wins'],
-    }));
-
-    this.isStatsLoading = false;
   }
 
   ngOnDestroy(): void {
