@@ -20,4 +20,5 @@
     *ngIf="!isStatsLoading && !statsError"
     [stats]="nhlStats"
     [columns]="playerType === 'player' ? playersColumns : goalieColumns"
+    [totals]="totals"
 ></app-player-information-nhl-table>

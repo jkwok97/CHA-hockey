@@ -8,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class PlayerInformationNhlTableComponent implements OnInit {
 
   @Input() stats;
+  @Input() totals;
   @Input() columns;
 
   constructor() { }

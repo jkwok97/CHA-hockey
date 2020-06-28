@@ -18,6 +18,7 @@ export class PlayerInformationNhlStatsComponent implements OnInit, OnDestroy {
   statsError: boolean = false;
 
   nhlStats: any[];
+  totals: any;
 
   stats: any[];
   onPaceStats: any[];
@@ -42,7 +43,7 @@ export class PlayerInformationNhlStatsComponent implements OnInit, OnDestroy {
   ];
 
   goalieOnPaceColumns = [
-    'games', 'wins', 'losses', 'ties', 'goalsAgainst', 'goalAgainstAverage', 'shutouts', 'shotsAgainst', 'saves', 'savePercentage',
+    'games', 'wins', 'losses', 'goalsAgainst', 'goalAgainstAverage', 'shutouts', 'shotsAgainst', 'saves', 'savePercentage',
     'powerPlaySavePercentage', 'evenStrengthSavePercentage'
   ];
 
@@ -86,6 +87,7 @@ export class PlayerInformationNhlStatsComponent implements OnInit, OnDestroy {
     this._nhlService.getNhlCareerStats(id).pipe(
       takeWhile(() => this._alive)
     ).subscribe((stats) => {
+      this.totals = stats[0].totals;
       this.nhlStats = stats;
       this.isStatsLoading = false;
     })
