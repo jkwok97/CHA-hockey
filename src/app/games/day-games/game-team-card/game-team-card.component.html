@@ -1,0 +1,30 @@
+<mat-card
+    [style.background-color]="getColor(team.teamcolor)"
+>
+
+    <mat-card-header>
+
+        <div mat-card-avatar style="background-size: cover;">
+            <img [src]="team.teamlogo">
+        </div>
+
+        <mat-card-title><span *ngIf="!isMobile">{{team.city}}</span> {{team.nickname}}</mat-card-title>
+
+        <mat-card-subtitle *ngIf="record">Record: {{record.wins}} - {{record.loss}} - {{record.ties}}</mat-card-subtitle>
+        
+        <mat-card-subtitle>Last 5: 
+            <mat-icon 
+                *ngFor="let record of lastFiveRecord" 
+                [ngClass]="{'win': record === 'W', 'loss': record === 'L', 'tie': record === 'T'}"
+            >
+                lens
+            </mat-icon>
+        </mat-card-subtitle>
+
+    </mat-card-header>
+    
+    <mat-card-content>
+      
+    </mat-card-content>
+    
+  </mat-card>

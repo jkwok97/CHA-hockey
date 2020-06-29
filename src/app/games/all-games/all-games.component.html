@@ -1,0 +1,14 @@
+<p class="title">{{currentSeason}} Schedule</p>
+
+<mat-form-field color="accent" class="filtering">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+    <mat-hint align="start">Game Day or Team Abbr. (ex. OAK)</mat-hint>
+</mat-form-field>
+
+<mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
+
+<app-all-games-table
+    [games]="games"
+    [columns]="isMobile ? mobileColumns : columns"
+    *ngIf="!isLoading"
+></app-all-games-table>

@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../_services/auth.service';
 import { User } from '../_models/user';
-import { CurrentSeasonService } from '../_services/current-season.service';
 
 @Component({
   selector: 'app-navigation',
@@ -25,10 +24,9 @@ export class NavigationComponent implements OnInit, OnDestroy {
     {name: 'Statistics', url: 'stats/teams/leaders', current: false},
     {name: 'Teams', url: 'teams', current: false},
     {name: 'Draft', url: 'draft/picks', current: false},
-    // {name: 'Schedule', url: 'schedule', current: false},
-    {name: 'Playoff Tree', url: 'playoffTree', current: false},
+    {name: 'Games', url: 'games/day', current: false},
+    {name: 'sched', url: 'schedule', current: false},
     {name: 'Salaries', url: 'salary', current: false},
-    
     {name: 'Trades', url: 'trades', current: false},
     {name: 'Waiver Priority', url: 'waiver-priority', current: false},
     {name: 'Awards', url: 'awards/champions', current: false},
@@ -38,7 +36,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
   constructor(
     private _router: Router, 
     private _authService: AuthService,
-    private _currentSeasonService: CurrentSeasonService,
   ) { 
 
     if (this._authService.currentUserValue) { 
@@ -53,29 +50,11 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this._router.events.subscribe((res) => {
       this.activeLinkIndex = this.routes.indexOf(this.routes.find(tab => tab.url === '.' + this._router.url));
     });
-
-  }
-
-  onTabChange(event) {
-    if (event.tab.textLabel === "Statistics") {
-      this._router.navigate(['stats']);
-    } else if (event.tab.textLabel === "Conference") {
-      
-    } else if (event.tab.textLabel === "Division") {
-      
-    }
   }
 
   ngOnInit() {
     this._router.navigate(['login']);
-    this.currentSeasonType = this._currentSeasonService.currentSeasonType;
-    if (this.currentSeasonType === "Playoffs") {
-      let found = this.routes.find(route => route.name === "Schedule");
-      found.name = "Playoff Tree";
-      found.url = "playoffTree";
-      found.current = false;
-      // found = {name: "Playoff Tree", url: "playoffTree", current: false};
-    }
+    
   }
 
   ngOnDestroy() {

@@ -88,4 +88,14 @@ export class TeamStatsService {
     )
   }
 
+  getScheduleTeamStats(season: string, id: number) {
+    const options = {params: new HttpParams()
+      .set('playing_year', season)
+    }
+    
+    return this._http.get(`${environment.back_end_url}/v2/team-stats/schedule/team/${id}`, options).pipe(
+      map(result => result['result'])
+    )
+  }
+
 }

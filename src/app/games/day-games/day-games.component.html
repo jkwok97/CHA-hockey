@@ -1,0 +1,68 @@
+<mat-button-toggle-group #bySeason="matButtonToggleGroup" [value]="dayValue" (change)="changeSchedule(bySeason.value)">
+    <mat-button-toggle value="prev" color="accent">
+        << Prev
+    </mat-button-toggle>
+    <mat-button-toggle value="day" color="accent">
+        Day
+    </mat-button-toggle>
+    <mat-button-toggle value="next" color="accent" [disabled]="currentDay === 226">
+        Next >>
+    </mat-button-toggle>
+</mat-button-toggle-group>
+
+<mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
+
+<div class="container" *ngIf="!isLoading">
+    <mat-card *ngFor="let games of groupGames; let i = index" class="games">
+
+        <mat-card-header>
+            <mat-card-title>Day - {{ games[0].game_day }}</mat-card-title>
+        </mat-card-header>
+    
+        <mat-card-content class="match-up-content">
+
+            <div class="matchup">
+
+                <mat-card *ngFor="let game of games; let i = index" class="game">
+                
+                    <mat-card-content class="team-content">
+
+                        <app-game-team-card
+                            [team]="game.vis_team"
+                            [lastFive]="visTeamLastFive"
+                        ></app-game-team-card>
+
+                        <div>
+                            <p *ngIf="game.vis_team.score" class="result">Results: </p>
+
+                            <p class="result">
+                                <span *ngIf="game.vis_team.score" class="score">
+                                    {{game.vis_team.score}} 
+                                </span>
+                                  @  
+                                <span *ngIf="game.vis_team.score" class="score"> 
+                                    {{game.home_team.score}}
+                                </span>
+                            </p>
+
+                            <p class="result">Matchup: </p>
+                        </div>
+
+                        <app-game-team-card
+                            [team]="game.home_team"
+                            [lastFive]="homeTeamLastFive"
+                        ></app-game-team-card>
+            
+                    </mat-card-content>
+                    
+                </mat-card>
+            
+            </div>
+
+        </mat-card-content>
+        
+    </mat-card>
+
+</div>
+
+

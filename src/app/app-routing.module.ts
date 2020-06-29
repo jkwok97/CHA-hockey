@@ -69,6 +69,10 @@ import { PlayerInformationNhlStatsComponent } from './player-information/player-
 import { PlayerInformationRatingsComponent } from './player-information/player-information-ratings/player-information-ratings.component';
 import { TeamAwardsComponent } from './teams/team-awards/team-awards.component';
 import { UserTeamAwardsComponent } from './main/main-history/user-team-awards/user-team-awards.component';
+import { GamesComponent } from './games/games.component';
+import { AllGamesComponent } from './games/all-games/all-games.component';
+import { DayGamesComponent } from './games/day-games/day-games.component';
+import { PlayoffTreeGamesComponent } from './games/playoff-tree-games/playoff-tree-games.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -174,11 +178,14 @@ const routes: Routes = [
       { path: 'ratings', component: PlayerInformationRatingsComponent },
     ]
   },
-
-  
-  
-  { path: 'schedule', component: ScheduleComponent, canActivate: [AuthGuard] },
-  { path: 'playoffTree', component: NewPlayoffTreeComponent, canActivate: [AuthGuard] },
+  { path: 'games', component: GamesComponent, canActivate: [AuthGuard], 
+    children: [
+      { path: 'all', component: AllGamesComponent },
+      { path: 'day', component: DayGamesComponent },
+      { path: 'playoffs', component: PlayoffTreeGamesComponent },
+    ]
+  },
+  { path: 'schedule', component: ScheduleComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

@@ -1,0 +1,74 @@
+<div class="table" *ngIf="games">
+            
+    <table mat-table [dataSource]="games" matSort class="mat-elevation-z8" matSortActive="game_day" matSortDirection="asc">
+
+        <ng-container matColumnDef="game_day">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Day </th>
+            <td mat-cell *matCellDef="let day"> {{day.game_day}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="vis_team">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Visitor </th>
+            <td mat-cell *matCellDef="let day"> 
+                <img [src]="day.visteamteamlogo"> 
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="vis_team_name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Team Name </th>
+            <td mat-cell *matCellDef="let day"> 
+                {{ day.visteamcity }} {{ day.visteamnickname }}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="vis_team_score">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Score </th>
+            <td mat-cell *matCellDef="let day">{{day.vis_team_score}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="versus">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Versus </th>
+            <td mat-cell *matCellDef="let day">@</td>
+        </ng-container>
+
+        <ng-container matColumnDef="home_team">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Home </th>
+            <td mat-cell *matCellDef="let day">
+                <img [src]="day.hometeamteamlogo">
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="home_team_name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Team Name </th>
+            <td mat-cell *matCellDef="let day"> 
+                {{ day.hometeamcity }} {{ day.hometeamnickname }}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="home_team_score">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Score </th>
+            <td mat-cell *matCellDef="let day">{{day.home_team_score}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="result">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Results </th>
+            <td mat-cell *matCellDef="let day">{{day.vis_team_score}} - {{day.home_team_score}}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr 
+            mat-row 
+            *matRowDef="let day; columns: columns;"
+        ></tr>
+
+    </table>
+
+</div>
+
+<mat-paginator
+    [pageSizeOptions]="[25, 50, 100]"
+    [pageSize]="pageSize"
+    [length]="length"
+    color="accent"
+    showFirstLastButtons
+></mat-paginator>

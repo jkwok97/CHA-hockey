@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { TeamsService } from '../teams/teams.service';
 import { takeWhile } from 'rxjs/operators';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { DisplayService } from '../_services/display.service';
 
 @Component({
   selector: 'app-schedule',
@@ -17,7 +18,6 @@ export class ScheduleComponent implements OnInit, OnDestroy {
 
   schedulePage: any;
   currentSeason: string;
-  // range: string = 'a402:f821';
   currentDay: number = 226;
   scheduleType: string = "day";
 
@@ -40,29 +40,18 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   constructor(
-    private _teamsService: TeamsService
+    private _teamsService: TeamsService,
+    private _displayService: DisplayService,
   ) { 
-    this.currentSeason = this._teamsService.currentSeason;
+    this.currentSeason = '2019-20';
     this.teams = this._teamsService.currentLeague.teams;
   }
 
   ngOnInit() {
     this.isLoading = true;
-    this.checkMobile();
+    this.isMobile = this._displayService.isMobile;
     this.getMatchupTotals();
     this.getNextDaysSchedule(this.currentDay);
-  }
-
-  checkMobile() {
-    if ( navigator.userAgent.match(/Android/i)
-        || navigator.userAgent.match(/webOS/i)
-        || navigator.userAgent.match(/iPhone/i)
-        || navigator.userAgent.match(/BlackBerry/i)
-        || navigator.userAgent.match(/Windows Phone/i) ) {
-          this.isMobile = true;
-        } else {
-          this.isMobile = false;
-        }
   }
 
   applyFilter(filterValue: string) {
