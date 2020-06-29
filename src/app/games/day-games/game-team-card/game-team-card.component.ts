@@ -22,7 +22,7 @@ export class GameTeamCardComponent implements OnInit, OnDestroy {
   lastFiveRecord: string[];
 
   @Input() team;
-  @Input() lastFive;
+  @Input() opposingTeam;
 
   constructor(
     private _displayService: DisplayService,
@@ -37,6 +37,7 @@ export class GameTeamCardComponent implements OnInit, OnDestroy {
     this.isMobile = this._displayService.isMobile;
     this.getTeamStats(this.team.team_id, this.currentSeason);
     this.getLastFiveRecord(this.team.team_id, this.currentSeason);
+    this.getMatchupRecord(this.team.team_id, this.opposingTeam.team_id, this.currentSeason);
   }
 
   getColor(color:string) {
@@ -59,6 +60,14 @@ export class GameTeamCardComponent implements OnInit, OnDestroy {
     })
   }
 
+  getMatchupRecord(teamIdOne: number, teamIdTwo: number, season: string) {
+    this._gamesService.getMatchUpRecord(teamIdOne, teamIdTwo, season).pipe(
+      takeWhile(() => this._alive)
+    ).subscribe((data) => {
+      console.log(data);
+    })
+  }
+
   getLastFive(data, id) {
     let lastFive = [];
 
@@ -68,7 +77,7 @@ export class GameTeamCardComponent implements OnInit, OnDestroy {
             game.vis_team_score === game.home_team_score ? lastFive.push('T') : lastFive.push('L')
         } else if (game.home_team_id === id) {
             game.home_team_score > game.vis_team_score ? lastFive.push('W') : 
-            game.vis_team_score === game.home_team_score ? lastFive.push('T') : lastFive.push('L')
+            game.home_team_score === game.vis_team_score ? lastFive.push('T') : lastFive.push('L')
         }
     });
 

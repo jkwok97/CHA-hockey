@@ -50,5 +50,18 @@ export class GamesService {
     )
   }
 
+  getMatchUpRecord(teamIdOne: number, teamIdTwo: number, currentSeason: string): Observable<any> {
+
+    const options = {params: new HttpParams()
+      .set('playing_year', currentSeason)
+      .set('team_one_id', teamIdOne.toString())
+      .set('team_two_id', teamIdTwo.toString())
+    };
+
+    return this._http.get(`${environment.back_end_url}/v2/schedule/match-up`, options).pipe(
+      map(result => result['result'])
+    )
+
+  }
 
 }

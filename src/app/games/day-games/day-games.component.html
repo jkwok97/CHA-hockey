@@ -1,5 +1,5 @@
 <mat-button-toggle-group #bySeason="matButtonToggleGroup" [value]="dayValue" (change)="changeSchedule(bySeason.value)">
-    <mat-button-toggle value="prev" color="accent">
+    <mat-button-toggle value="prev" color="accent" [disabled]="currentDay === 1">
         << Prev
     </mat-button-toggle>
     <mat-button-toggle value="day" color="accent">
@@ -29,7 +29,7 @@
 
                         <app-game-team-card
                             [team]="game.vis_team"
-                            [lastFive]="visTeamLastFive"
+                            [opposingTeam]="game.home_team"
                         ></app-game-team-card>
 
                         <div>
@@ -50,7 +50,7 @@
 
                         <app-game-team-card
                             [team]="game.home_team"
-                            [lastFive]="homeTeamLastFive"
+                            [opposingTeam]="game.vis_team"
                         ></app-game-team-card>
             
                     </mat-card-content>
