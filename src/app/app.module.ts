@@ -9,7 +9,6 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { LeagueComponent } from './league/league.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RulesComponent } from './rules/rules.component';
-import { ScheduleComponent } from './schedule/schedule.component';
 import { TeamStatsComponent } from './teams/team-stats/team-stats.component';
 import { TradesComponent } from './trades/trades.component';
 import { EqualizationComponent } from './rules/equalization/equalization.component';
@@ -153,7 +152,6 @@ import { GameTeamCardComponent } from './games/day-games/game-team-card/game-tea
     NavigationComponent,
     LeagueComponent,
     RulesComponent,
-    ScheduleComponent,
     TeamStatsComponent,
     OverallTeamStatsComponent,
     TradesComponent,

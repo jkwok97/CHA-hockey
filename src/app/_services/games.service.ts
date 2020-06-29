@@ -50,7 +50,7 @@ export class GamesService {
     )
   }
 
-  getMatchUpRecord(teamIdOne: number, teamIdTwo: number, currentSeason: string): Observable<any> {
+  getMatchUpRecord(teamIdOne, teamIdTwo, currentSeason: string): Observable<any> {
 
     const options = {params: new HttpParams()
       .set('playing_year', currentSeason)

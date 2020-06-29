@@ -20,6 +20,7 @@ export class GameTeamCardComponent implements OnInit, OnDestroy {
 
   record: any;
   lastFiveRecord: string[];
+  matchUpRecord: any;
 
   @Input() team;
   @Input() opposingTeam;
@@ -37,7 +38,7 @@ export class GameTeamCardComponent implements OnInit, OnDestroy {
     this.isMobile = this._displayService.isMobile;
     this.getTeamStats(this.team.team_id, this.currentSeason);
     this.getLastFiveRecord(this.team.team_id, this.currentSeason);
-    this.getMatchupRecord(this.team.team_id, this.opposingTeam.team_id, this.currentSeason);
+    this.getMatchupRecord(this.team, this.opposingTeam, this.currentSeason);
   }
 
   getColor(color:string) {
@@ -60,11 +61,11 @@ export class GameTeamCardComponent implements OnInit, OnDestroy {
     })
   }
 
-  getMatchupRecord(teamIdOne: number, teamIdTwo: number, season: string) {
-    this._gamesService.getMatchUpRecord(teamIdOne, teamIdTwo, season).pipe(
+  getMatchupRecord(team, opposingTeam, season: string) {
+    this._gamesService.getMatchUpRecord(team.team_id, opposingTeam.team_id, season).pipe(
       takeWhile(() => this._alive)
     ).subscribe((data) => {
-      console.log(data);
+      this.matchUpRecord = this.getMatchUp(data, team.team_id, opposingTeam);
     })
   }
 
@@ -82,6 +83,29 @@ export class GameTeamCardComponent implements OnInit, OnDestroy {
     });
 
     return lastFive
+  }
+
+  getMatchUp(data, id, opposingTeam) {
+    let wins = 0;
+    let loss = 0;
+    let ties = 0;
+
+    data.forEach((game) => {
+      if (game.vis_team_id === id) {
+          game.vis_team_score > game.home_team_score ? wins++ : 
+          game.vis_team_score === game.home_team_score ? ties++ : loss++
+      } else if (game.home_team_id === id) {
+          game.home_team_score > game.vis_team_score ? wins++ : 
+          game.home_team_score === game.vis_team_score ? ties++ : loss++
+      }
+    });
+
+    return {
+      opposingTeam: opposingTeam.nickname,
+      wins: wins,
+      loss: loss,
+      ties: ties
+    }
   }
 
   ngOnDestroy(): void {

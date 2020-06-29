@@ -11,6 +11,10 @@
         <mat-card-title><span *ngIf="!isMobile">{{team.city}}</span> {{team.nickname}}</mat-card-title>
 
         <mat-card-subtitle *ngIf="record">Record: {{record.wins}} - {{record.loss}} - {{record.ties}}</mat-card-subtitle>
+
+        <mat-card-subtitle *ngIf="matchUpRecord">
+            Vs {{matchUpRecord.opposingTeam}}: {{matchUpRecord.wins}} - {{matchUpRecord.loss}} - {{matchUpRecord.ties}}
+        </mat-card-subtitle>
         
         <mat-card-subtitle>Last 5: 
             <mat-icon 

@@ -184,8 +184,7 @@ const routes: Routes = [
       { path: 'day', component: DayGamesComponent },
       { path: 'playoffs', component: PlayoffTreeGamesComponent },
     ]
-  },
-  { path: 'schedule', component: ScheduleComponent, canActivate: [AuthGuard]}
+  }
 ];
 
 @NgModule({
