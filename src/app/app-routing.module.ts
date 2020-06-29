@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { LeagueComponent } from './league/league.component';
 import { RulesComponent } from './rules/rules.component';
-import { ScheduleComponent } from './schedule/schedule.component';
 import { TeamStatsComponent } from './teams/team-stats/team-stats.component';
 import { OverallTeamStatsComponent } from './overall-stats/overall-team-stats/overall-team-stats.component';
 import { TradesComponent } from './trades/trades.component';
@@ -13,7 +12,6 @@ import { LoginComponent } from './main/login/login.component';
 import { AuthGuard } from './_services/auth.guard';
 import { SalaryComponent } from './salary/salary.component';
 import { PicksComponent } from './draft-overall/picks/picks.component';
-import { NewPlayoffTreeComponent } from './schedule/playoff-tree/new-playoff-tree/new-playoff-tree.component';
 import { NhlInfoComponent } from './main/nhl-info/nhl-info.component';
 import { RosterComponent } from './main/roster/roster.component';
 import { ChartsComponent } from './main/charts/charts.component';
