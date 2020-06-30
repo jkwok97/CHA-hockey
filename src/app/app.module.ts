@@ -33,11 +33,6 @@ import { NhlLeadersComponent } from './main/nhl-info/nhl-leaders/nhl-leaders.com
 import { NhlPlayersStatsComponent } from './main/nhl-info/nhl-players-stats/nhl-players-stats.component';
 import { NhlGoalieStatsComponent } from './main/nhl-info/nhl-goalie-stats/nhl-goalie-stats.component';
 import { NhlRookieStatsComponent } from './main/nhl-info/nhl-rookie-stats/nhl-rookie-stats.component';
-import { MatchupComponent } from './schedule/playoff-tree/matchup/matchup.component';
-import { ChampionComponent } from './schedule/playoff-tree/champion/champion.component';
-import { NewPlayoffTreeComponent } from './schedule/playoff-tree/new-playoff-tree/new-playoff-tree.component';
-import { TeamCardComponent } from './schedule/playoff-tree/matchup/team-card/team-card.component';
-import { ConferenceComponent } from './schedule/playoff-tree/conference/conference.component';
 import { GoalieStatsTableComponent } from './stats/goalie-stats-table/goalie-stats-table.component';
 import { TeamStatsTableComponent } from './stats/team-stats-table/team-stats-table.component';
 import { PlayerStatsTableComponent } from './stats/player-stats-table/player-stats-table.component';
@@ -175,11 +170,6 @@ import { GameTeamCardComponent } from './games/day-games/game-team-card/game-tea
     NhlPlayersStatsComponent,
     NhlGoalieStatsComponent,
     NhlRookieStatsComponent,
-    MatchupComponent,
-    ChampionComponent,
-    NewPlayoffTreeComponent,
-    TeamCardComponent,
-    ConferenceComponent,
     PlayerStatsTableComponent,
     GoalieStatsTableComponent,
     TeamStatsTableComponent,
