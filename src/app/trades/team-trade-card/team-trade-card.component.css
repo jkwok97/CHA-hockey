@@ -1,0 +1,13 @@
+.mat-card-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-row-gap: 10px;
+    grid-column-gap: 20px;
+}
+
+.mat-card-content img {
+    height: 44px;
+    width: 44px;
+    border-radius: 22px;
+    margin-right: 10px;
+}

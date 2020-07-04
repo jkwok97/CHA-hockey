@@ -1,0 +1,48 @@
+<mat-card [style.background-color]="getColor(teamInfo.teamcolor)">
+
+    <mat-card-header>
+
+        <div 
+            mat-card-avatar 
+            [style.background-image]="getLogo(teamInfo.teamlogo)"
+            style="background-size: cover;"
+        ></div>
+
+        <mat-card-title
+            [style.color]="teamInfo.teamtextcolor"
+        >
+            {{teamInfo.city}} {{teamInfo.nickname}}
+        </mat-card-title>
+        
+    </mat-card-header>
+
+    <mat-card-content>
+
+        <mat-list role="list" *ngIf="teamPlayers.length > 0">
+
+            <mat-list-item 
+                role="listitem"
+                *ngFor="let player of teamPlayers"
+                [style.color]="teamInfo.teamtextcolor"
+            >
+                <img [src]="getPlayerPicture(player.nhl_id)">
+                {{player.firstname}} {{player.lastname}}
+            </mat-list-item>
+
+        </mat-list>
+
+        <mat-list role="list" *ngIf="teamPicks.length > 0">
+
+            <mat-list-item 
+                role="listitem"
+                *ngFor="let pick of teamPicks"
+                [style.color]="teamInfo.teamtextcolor"
+            >
+                {{pick}}
+            </mat-list-item>
+
+        </mat-list>
+
+    </mat-card-content>
+    
+</mat-card>

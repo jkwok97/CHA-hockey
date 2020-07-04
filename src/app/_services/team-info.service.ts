@@ -14,6 +14,12 @@ export class TeamInfoService {
     private _http: HttpClient
   ) { }
 
+  getTeams(): Observable<Team[]> {
+    return this._http.get(`${environment.back_end_url}/v2/teams`).pipe(
+      map(result => result['result'])
+    )
+  }
+
   getUserTeams(id: number): Observable<Team[]> {
     return this._http.get(`${environment.back_end_url}/v2/teams/user/${id}`).pipe(
       map(result => result['result'])
