@@ -106,18 +106,23 @@ export class TradesComponent implements OnInit, OnDestroy {
       takeWhile(() => this._alive)
     ).subscribe(resp => {
 
-      this.transactions = resp.map((item, index) => ({
-        id: item.id,
-        transaction_date: this.formatDate(item.transaction_date),
-        team_one: this.getTeamInfo(item.team_one_id),
-        team_one_picks: item.team_one_picks,
-        team_one_players:this.formatPlayers(item.team_one_players, item.team_one_firstnames, item.team_one_lastnames, item.team_one_nhlids),
-        team_two: this.getTeamInfo(item.team_two_id),
-        team_two_picks: item.team_two_picks,
-        team_two_players: this.formatPlayers(item.team_two_players, item.team_two_firstnames, item.team_two_lastname, item.team_two_nhlids)
-      }));
+      setTimeout(() => {
 
-      this.isLoading = false;
+        this.transactions = resp.map((item, index) => ({
+          id: item.id,
+          transaction_date: this.formatDate(item.transaction_date),
+          team_one: this.getTeamInfo(item.team_one_id),
+          team_one_picks: item.team_one_picks,
+          team_one_players:this.formatPlayers(item.team_one_players, item.team_one_firstnames, item.team_one_lastnames, item.team_one_nhlids),
+          team_two: this.getTeamInfo(item.team_two_id),
+          team_two_picks: item.team_two_picks,
+          team_two_players: this.formatPlayers(item.team_two_players, item.team_two_firstnames, item.team_two_lastname, item.team_two_nhlids)
+        }));
+  
+        this.isLoading = false;
+
+      }, 500)
+
     })
   }
 
