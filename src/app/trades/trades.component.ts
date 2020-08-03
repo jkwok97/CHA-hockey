@@ -71,7 +71,8 @@ export class TradesComponent implements OnInit, OnDestroy {
   tradePage: any;
   year: any;
 
-  @ViewChild('yearSelect', {static: false}) yearSelect
+  @ViewChild('yearSelect', {static: false}) yearSelect;
+
 
   constructor(
     private sanitizer: DomSanitizer,

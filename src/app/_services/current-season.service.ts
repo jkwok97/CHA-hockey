@@ -10,7 +10,7 @@ export class CurrentSeasonService {
   currentSeasonCap: number = 102.7;
   nextSeasonCap: number = 102.7;
 
-  draftSeason: string = '2020';
+  draftSeason: string = '2020'
 
   currentSeason: string = this.handleSeason(this.isOffSeason);
   currentSeasonType: string = 'Regular';

@@ -37,7 +37,8 @@ export class PlayerInformationRatingsComponent implements OnInit, OnDestroy {
   ) { 
     const playerId = this._route.snapshot.parent.params.id;
     this.playerType = this._route.snapshot.parent.params.type;
-    this.season = this._currentSeasonService.currentSeason;
+    // this.season = this._currentSeasonService.currentSeason;
+    this.season = '2020-21';
 
     this.playerType === 'player' ? this.getPlayerRatings(playerId, this.season) : this.getGoalieRatings(playerId, this.season);
   }
@@ -51,6 +52,7 @@ export class PlayerInformationRatingsComponent implements OnInit, OnDestroy {
   }
 
   getPlayerRatings(id: number, season: string) {
+    console.log(season);
     this._playerService.getPlayerRatings(id, season).pipe(
       takeWhile(() => this._alive)
     ).subscribe((ratings) => {
