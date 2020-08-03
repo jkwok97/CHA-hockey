@@ -27,6 +27,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     {name: 'Games', url: 'games/day', current: false},
     {name: 'Salaries', url: 'salary', current: false},
     {name: 'Trades', url: 'trades', current: false},
+    {name: 'Ratings', url: 'ratings', current: false},
     {name: 'Waiver Priority', url: 'waiver-priority', current: false},
     {name: 'Awards', url: 'awards/champions', current: false},
     {name: 'Rules & Prizes', url: 'rules/equalization', current: false},

@@ -141,6 +141,8 @@ import { PlayoffTreeGamesComponent } from './games/playoff-tree-games/playoff-tr
 import { AllGamesTableComponent } from './games/all-games/all-games-table/all-games-table.component';
 import { GameTeamCardComponent } from './games/day-games/game-team-card/game-team-card.component';
 import { TeamTradeCardComponent } from './trades/team-trade-card/team-trade-card.component';
+import { OverallRatingsComponent } from './overall-ratings/overall-ratings.component';
+import { OverallRatingsTableComponent } from './overall-ratings/overall-ratings-table/overall-ratings-table.component';
 
 @NgModule({
   declarations: [
@@ -278,6 +280,8 @@ import { TeamTradeCardComponent } from './trades/team-trade-card/team-trade-card
     AllGamesTableComponent,
     GameTeamCardComponent,
     TeamTradeCardComponent,
+    OverallRatingsComponent,
+    OverallRatingsTableComponent,
   ],
   imports: [
     BrowserModule,

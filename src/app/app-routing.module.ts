@@ -71,6 +71,7 @@ import { GamesComponent } from './games/games.component';
 import { AllGamesComponent } from './games/all-games/all-games.component';
 import { DayGamesComponent } from './games/day-games/day-games.component';
 import { PlayoffTreeGamesComponent } from './games/playoff-tree-games/playoff-tree-games.component';
+import { OverallRatingsComponent } from './overall-ratings/overall-ratings.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -146,6 +147,7 @@ const routes: Routes = [
     ]
   },
   { path: 'trades', component: TradesComponent, canActivate: [AuthGuard] },
+  { path: 'ratings', component: OverallRatingsComponent, canActivate: [AuthGuard] },
   { path: 'waiver-priority', component: WaiverPriorityComponent, canActivate: [AuthGuard] },
   { path: 'rules', component: RulesComponent, canActivate: [AuthGuard], 
     children: [

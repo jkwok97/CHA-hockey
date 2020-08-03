@@ -52,7 +52,6 @@ export class PlayerInformationRatingsComponent implements OnInit, OnDestroy {
   }
 
   getPlayerRatings(id: number, season: string) {
-    console.log(season);
     this._playerService.getPlayerRatings(id, season).pipe(
       takeWhile(() => this._alive)
     ).subscribe((ratings) => {

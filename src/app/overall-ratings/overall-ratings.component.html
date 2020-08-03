@@ -1,0 +1,23 @@
+<mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
+
+<h3 class="title">{{season}} Ratings</h3>
+
+<mat-button-toggle-group #bySeason="matButtonToggleGroup" [value]="playerType" (change)="changeSeason(bySeason.value)">
+    <mat-button-toggle value="player" color="accent">
+        Players
+    </mat-button-toggle>
+    <mat-button-toggle value="goalie" color="accent">
+        Goalies
+    </mat-button-toggle>
+</mat-button-toggle-group>
+
+<mat-form-field color="accent">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+    <mat-hint align="start">Player Name, Position, Experience (ex. Rookie, Veteran), Team Abbr. (ex. STA)</mat-hint>
+</mat-form-field>
+
+<app-overall-ratings-table
+    [stats]="statRatings"
+    [columns]="showRateColumns()"
+    *ngIf="!isLoading"
+></app-overall-ratings-table>
