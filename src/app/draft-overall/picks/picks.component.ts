@@ -108,20 +108,28 @@ export class PicksComponent implements OnInit, OnDestroy {
 
   getLeagueLeaders(resp, drafts) {
     let tempLeaders = resp;
+    
     drafts.forEach(element => {
 
       // THIS IS TEMPORARY
       if (element.shortname === 'VSJ') {
        let tempTeam = tempLeaders.find(team => team.shortname === 'VIC');
        element.points = tempTeam.points;
+      } else if (element.shortname === 'SJV') {
+        let tempTeam = tempLeaders.find(team => team.shortname === 'SCS');
+        element.points = tempTeam.points;
       } else {
         let tempTeam = tempLeaders.find(team => team.shortname === element.shortname);
         element.points = tempTeam.points;
       }
     });
+
     drafts.sort((a,b) => a.points - b.points);
-    this.draft = new MatTableDataSource<any[]>(drafts);
-    this.isLoading = false;
+    setTimeout(() => {
+      this.draft = new MatTableDataSource<any[]>(drafts);
+      this.isLoading = false;
+    }, 250)
+    
   }
 
   ngOnDestroy() {
