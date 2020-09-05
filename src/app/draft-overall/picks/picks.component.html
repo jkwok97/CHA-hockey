@@ -1,6 +1,6 @@
 <h3>Draft Table</h3>
 
-<section class="filter-add">
+<!-- <section class="filter-add">
 
     <mat-button-toggle-group #bySeason="matButtonToggleGroup" [value]="draftSeason" (change)="changeActive(bySeason.value)">
         <mat-button-toggle value="2020" color="accent">
@@ -11,15 +11,15 @@
         </mat-button-toggle>
     </mat-button-toggle-group>
 
-</section>
+</section> -->
 
 <!-- REMOVE AFTER DRAFT -->
-<p 
+<!-- <p 
     *ngIf="draftSeason === '2020'"
     class="lottery"
 >
     Lottery was won by Green Bay. 1st Overall is now Green Bay's Pick. 2nd ATL's, 3rd WIT'S. All other picks remain the same.
-</p>
+</p> -->
 
 <mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
 

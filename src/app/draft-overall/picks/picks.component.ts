@@ -23,7 +23,7 @@ export class PicksComponent implements OnInit, OnDestroy {
 
   teams$: Observable<Team[]>;
 
-  draftSeason: string = '2020';
+  draftSeason: string = '2021';
   currentSeason: string;
   currentSeasonType: string = 'Regular';
 
@@ -47,7 +47,7 @@ export class PicksComponent implements OnInit, OnDestroy {
     private _draftService: DraftService
   ) { 
     this.teams$ = this._teamInfoService.getTeamsByActive('true');
-    this.draftSeason = this._currentSeasonService.draftSeason;
+    this.draftSeason = '2021';
     this.currentSeason = this._currentSeasonService.currentSeason;
   }
 
@@ -77,6 +77,7 @@ export class PicksComponent implements OnInit, OnDestroy {
   }
 
   getDraftTableByYear(draftSeason: string) {
+    console.log(draftSeason);
     this._draftService.getDraftTableByYear(draftSeason).pipe(
       takeWhile(() => this._alive)
     ).subscribe((table: DraftTable[]) => {
