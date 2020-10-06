@@ -77,7 +77,7 @@ export class PicksComponent implements OnInit, OnDestroy {
   }
 
   getDraftTableByYear(draftSeason: string) {
-    console.log(draftSeason);
+    // console.log(draftSeason);
     this._draftService.getDraftTableByYear(draftSeason).pipe(
       takeWhile(() => this._alive)
     ).subscribe((table: DraftTable[]) => {
@@ -125,7 +125,8 @@ export class PicksComponent implements OnInit, OnDestroy {
       }
     });
 
-    drafts.sort((a,b) => a.points - b.points);
+    // drafts.sort((a,b) => a.points - b.points);
+    drafts.sort((a,b) => (a.city > b.city) ? 1 : -1);
     setTimeout(() => {
       this.draft = new MatTableDataSource<any[]>(drafts);
       this.isLoading = false;
