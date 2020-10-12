@@ -37,7 +37,7 @@ export class UserTeamAwardsComponent implements OnInit {
   }
 
   getPlayerPicture(id: number) {
-    return `url(https://nhl.bamcontent.com/images/headshots/current/168x168/${id}.jpg)`
+    return `https://cms.nhl.bamgrid.com/images/headshots/current/168x168/${id}@2x.jpg`
   }
 
 }

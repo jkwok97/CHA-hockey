@@ -52,7 +52,7 @@ export class PlayerInformationCardComponent implements OnInit, OnDestroy {
   }
 
   getPlayerPicture(id: number) {
-    return `https://nhl.bamcontent.com/images/headshots/current/168x168/${id}.jpg`
+    return `https://cms.nhl.bamgrid.com/images/headshots/current/168x168/${id}@2x.jpg`
   }
 
   getPlayerInfo(id: number) {

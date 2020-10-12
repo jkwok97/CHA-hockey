@@ -21,7 +21,7 @@ export class TeamPlayerAssistsComponent implements OnInit {
   }
 
   getPlayerPicture(id: number) {
-    return `https://nhl.bamcontent.com/images/headshots/current/168x168/${id}.jpg`
+    return `https://cms.nhl.bamgrid.com/images/headshots/current/168x168/${id}@2x.jpg`
   }
 
   randomizeArray(array) {

@@ -21,7 +21,7 @@ export class PlayerLeaderCardComponent implements OnInit {
   }
 
   getPlayerPicture() {
-    return `https://nhl.bamcontent.com/images/headshots/current/168x168/${this.player.nhl_id}.jpg`
+    return `https://cms.nhl.bamgrid.com/images/headshots/current/168x168/${this.player.nhl_id}@2x.jpg`
   }
 
   openPlayer(player: PlayerStat) {
