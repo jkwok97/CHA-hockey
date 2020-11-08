@@ -72,6 +72,7 @@ import { AllGamesComponent } from './games/all-games/all-games.component';
 import { DayGamesComponent } from './games/day-games/day-games.component';
 import { PlayoffTreeGamesComponent } from './games/playoff-tree-games/playoff-tree-games.component';
 import { OverallRatingsComponent } from './overall-ratings/overall-ratings.component';
+import { TeamRatingsComponent } from './teams/team-ratings/team-ratings.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -133,6 +134,7 @@ const routes: Routes = [
     children: [
       { path: 'salaries', component: TeamCurrentSalaryComponent},
       { path: 'current', component: TeamCurrentComponent},
+      { path: 'ratings', component: TeamRatingsComponent},
       { path: 'awards', component: TeamAwardsComponent},
       { path: 'archives/team', component: TeamArchivesComponent},
       { path: 'archives/players', component: PlayerArchivesComponent},

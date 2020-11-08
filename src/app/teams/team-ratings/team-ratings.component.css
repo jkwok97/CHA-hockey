@@ -1,0 +1,6 @@
+:host {
+    display: grid;
+    grid-row-gap: 20px;
+    overflow-y: auto;
+    padding: 20px;
+}

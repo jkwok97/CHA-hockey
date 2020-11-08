@@ -1,0 +1,13 @@
+<div class="team-ratings-goalie-title">Goalies</div>
+
+<mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
+
+<div class="team-ratings-goalie-table">
+
+    <app-overall-ratings-table
+        [stats]="goalieStatRatings"
+        [columns]="goalieRateColumns"
+        *ngIf="!isLoading"
+    ></app-overall-ratings-table>
+
+</div>

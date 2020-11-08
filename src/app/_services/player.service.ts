@@ -56,6 +56,16 @@ export class PlayerService {
     )
   }
 
+  getTeamPlayerRatings(teamName: string, season: string) {
+    const options = {params: new HttpParams()
+      .set('playing_year', season)
+    }
+
+    return this._http.get(`${environment.back_end_url}/v2/ratings/player/team/${teamName}`, options).pipe(
+      map(result => result['result'])
+    )
+  }
+
   getAllGoalieRatings(season: string) {
     const options = {params: new HttpParams()
       .set('playing_year', season)
@@ -72,6 +82,16 @@ export class PlayerService {
     }
 
     return this._http.get(`${environment.back_end_url}/v2/ratings/goalie/${id}`, options).pipe(
+      map(result => result['result'])
+    )
+  }
+
+  getTeamGoalieRatings(teamName: string, season: string) {
+    const options = {params: new HttpParams()
+      .set('playing_year', season)
+    }
+
+    return this._http.get(`${environment.back_end_url}/v2/ratings/goalie/team/${teamName}`, options).pipe(
       map(result => result['result'])
     )
   }

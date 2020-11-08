@@ -143,6 +143,9 @@ import { GameTeamCardComponent } from './games/day-games/game-team-card/game-tea
 import { TeamTradeCardComponent } from './trades/team-trade-card/team-trade-card.component';
 import { OverallRatingsComponent } from './overall-ratings/overall-ratings.component';
 import { OverallRatingsTableComponent } from './overall-ratings/overall-ratings-table/overall-ratings-table.component';
+import { TeamRatingsComponent } from './teams/team-ratings/team-ratings.component';
+import { TeamRatingsPlayerComponent } from './teams/team-ratings/team-ratings-player/team-ratings-player.component';
+import { TeamRatingsGoalieComponent } from './teams/team-ratings/team-ratings-goalie/team-ratings-goalie.component';
 
 @NgModule({
   declarations: [
@@ -282,6 +285,9 @@ import { OverallRatingsTableComponent } from './overall-ratings/overall-ratings-
     TeamTradeCardComponent,
     OverallRatingsComponent,
     OverallRatingsTableComponent,
+    TeamRatingsComponent,
+    TeamRatingsPlayerComponent,
+    TeamRatingsGoalieComponent,
   ],
   imports: [
     BrowserModule,

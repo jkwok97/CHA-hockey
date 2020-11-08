@@ -24,12 +24,16 @@ export class OverallRatingsTableComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit() {
-    this.length = this.stats.length;
+    if (this.stats) {
+      this.length = this.stats.length;
+    }
   }
 
   ngAfterViewInit() {
-    this.stats.sort = this.playerSort;
-    this.stats.paginator = this.paginator;
+    if (this.stats) {
+      this.stats.sort = this.playerSort;
+      this.stats.paginator = this.paginator;
+    }
   }
 
   openPlayer(player) {
