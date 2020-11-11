@@ -20,14 +20,14 @@ export class OverallRatingsComponent implements OnInit {
   statRatings: MatTableDataSource<any[]>;
   goalieStatRatings: any[];
 
-  playersRateColumns = [ 'player_name',
+  playersRateColumns = [ 'team', 'player_name', 
     'c_rate', 'l_rate', 'r_rate', 'ld_rate', 'rd_rate', 'skating', 'speed', 'passing',
     'shooting', 'face_off', 'forecheck', 'assist_rating', 'clear_crease', 'shot_block', 'pk', 'physical',
     'rock', 'intimidation', 'game_fatigue', 'shift_fatigue'
   ];
 
   goalieRateColumns = [
-    'player_name', 'passing', 'skating', 'speed'
+    'team', 'player_name', 'passing', 'skating', 'speed'
   ];
 
   constructor(
