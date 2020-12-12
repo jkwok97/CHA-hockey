@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class CurrentSeasonService {
 
-  isOffSeason: boolean = true;
+  isOffSeason: boolean = false;
 
   currentSeasonCap: number = 102.7;
   nextSeasonCap: number = 102.7;

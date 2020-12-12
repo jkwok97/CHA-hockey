@@ -25,7 +25,11 @@
     <app-goalie-stats-table 
         [goalies]="goalies"
         [statsColumnsToDisplay]="columns"
-        *ngIf="!isLoading"
+        *ngIf="!isLoading && goalies"
     ></app-goalie-stats-table>
+
+    <div class="no-data" *ngIf="!goalies">
+        No Stats To Display
+    </div>
 
 </div>

@@ -32,3 +32,10 @@
 .mat-button-toggle-checked {
     background-color: red;
 }
+
+.no-data {
+    font-size: xx-large;
+    text-align: center;
+    color: whitesmoke;
+    font-weight: 100;
+}

@@ -54,6 +54,9 @@ export class GoalieGaaLeaderTableComponent implements OnInit, OnDestroy {
       this.leader = leaders[0];
       const data = leaders.slice(1,10);
       this.leaders = new MatTableDataSource<any[]>(data);
+    }, 
+    error => {
+      this.isLoading = false;
     })
   }
 

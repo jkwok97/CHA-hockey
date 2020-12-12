@@ -65,6 +65,7 @@ export class GameTeamCardComponent implements OnInit, OnDestroy {
     this._gamesService.getMatchUpRecord(team.team_id, opposingTeam.team_id, season).pipe(
       takeWhile(() => this._alive)
     ).subscribe((data) => {
+      console.log(data);
       this.matchUpRecord = this.getMatchUp(data, team.team_id, opposingTeam);
     })
   }
@@ -92,11 +93,15 @@ export class GameTeamCardComponent implements OnInit, OnDestroy {
 
     data.forEach((game) => {
       if (game.vis_team_id === id) {
+        if (game.vis_team_score && game.home_team_score) {
           game.vis_team_score > game.home_team_score ? wins++ : 
           game.vis_team_score === game.home_team_score ? ties++ : loss++
+        }
       } else if (game.home_team_id === id) {
+        if (game.vis_team_score && game.home_team_score) {
           game.home_team_score > game.vis_team_score ? wins++ : 
           game.home_team_score === game.vis_team_score ? ties++ : loss++
+        }
       }
     });
 

@@ -54,7 +54,7 @@ export class GoalieSavePctLeaderTableComponent implements OnInit {
       this.leader = leaders[0];
       const data = leaders.slice(1,10);
       this.leaders = new MatTableDataSource<any[]>(data);
-    })
+    }, error => this.isLoading = false)
   }
 
   openPlayer(player: PlayerStat) {

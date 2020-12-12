@@ -49,7 +49,7 @@ export class AllPlayersDetailComponent implements OnInit, OnDestroy {
     ).subscribe((playerStats: PlayerStat[]) => {
       this.players = new MatTableDataSource<any[]>(playerStats as []);
       this.isLoading = false;
-    })
+    }, error => this.isLoading = false)
   }
 
   changeSeason(seasonType) {

@@ -25,7 +25,11 @@
     <app-player-stats-table 
         [players]="players"
         [statsColumnsToDisplay]="columns"
-        *ngIf="!isLoading"
+        *ngIf="!isLoading && players"
     ></app-player-stats-table>
+
+    <div *ngIf="!players" class="no-data">
+        No Stats To Display
+    </div>
 
 </div>
