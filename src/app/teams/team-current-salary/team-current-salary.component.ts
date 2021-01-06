@@ -24,6 +24,8 @@ export class TeamCurrentSalaryComponent implements OnInit, OnDestroy {
   defenseSalaries: PlayerSalary[];
   goalieSalaries: PlayerSalary[];
   salaries: PlayerSalary[] = [];
+  protectedPlayers: PlayerSalary[];
+  protectedGoalies: PlayerSalary[];
 
   constructor(
     private _route: ActivatedRoute,
@@ -33,6 +35,8 @@ export class TeamCurrentSalaryComponent implements OnInit, OnDestroy {
     this.getTeamInfo(this._route.snapshot['_urlSegment'].segments[2].path);
     this.getTeamPlayerSalary(this._route.snapshot['_urlSegment'].segments[2].path, this.currentSeason);
     this.getTeamGoalieSalary(this._route.snapshot['_urlSegment'].segments[2].path, this.currentSeason);
+    this.getProtectedPlayers(this._route.snapshot['_urlSegment'].segments[2].path, this.currentSeason);
+    // this.getProtectedGoalies(this._route.snapshot['_urlSegment'].segments[2].path, this.currentSeason);
    }
 
   ngOnInit() {
@@ -65,6 +69,29 @@ export class TeamCurrentSalaryComponent implements OnInit, OnDestroy {
     ).subscribe((salaries: PlayerSalary[]) => {
       this.goalieSalaries = salaries;
     })
+  }
+
+  getProtectedPlayers(id: number, season: string) {
+    this._salaryService.getProtectedPlayersById(id, season).pipe(
+      takeWhile(() => this._alive)
+    ).subscribe((salaries: PlayerSalary[]) => {
+      const forwards = salaries['forwards']['players'];
+      const defense = salaries['defense']['players'];
+      this.protectedPlayers = forwards.concat(defense);
+    }, error => {
+      console.log(error);
+    })
+  }
+
+  getProtectedGoalies(id: number, season: string) {
+    this._salaryService.getProtectedGoaliesById(id, season).pipe(
+      takeWhile(() => this._alive)
+    ).subscribe((salaries: PlayerSalary[]) => {
+      this.protectedGoalies = salaries;
+    }, error => {
+      console.log(error);
+    })
+    
   }
 
   ngOnDestroy(): void {

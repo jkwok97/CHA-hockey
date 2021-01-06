@@ -53,6 +53,34 @@
             [goalieSalaries]="goalieSalaries"
         ></app-current-team-totals>
 
+        <p 
+            [style.color]='team.teamtextcolor' 
+            class="salary-header" 
+            *ngIf="protectedPlayers && protectedPlayers.length > 0"
+        >Protected Players</p>
+
+        <div class="table" *ngIf="protectedPlayers && protectedPlayers.length > 0">
+
+            <app-current-forward-salaries
+                [salaries]="protectedPlayers"
+            ></app-current-forward-salaries>
+
+        </div>
+
+        <p 
+            [style.color]='team.teamtextcolor' 
+            class="salary-header" 
+            *ngIf="protectedGoalies && protectedGoalies.length > 0"
+        >Protected Goalies</p>
+
+        <div class="table" *ngIf="protectedGoalies && protectedGoalies.length > 0">
+
+            <app-current-goalies-salaries
+                [salaries]="protectedGoalies"
+            ></app-current-goalies-salaries>
+
+        </div>
+
     </div>
 
 </div>

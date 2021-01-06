@@ -20,7 +20,7 @@ export class SalaryService {
       .set('playing_year', season)
     }
   
-    return this._http.get(`${environment.back_end_url}/v2/salaries/team/${id}/players`, options).pipe(
+    return this._http.get(`${environment.back_end_url}/v2/salaries/team/${id}/players?is_protected=false`, options).pipe(
       map(result => result['result'])
     )
   }
@@ -43,7 +43,7 @@ export class SalaryService {
       .set('playing_year', season)
     }
 
-    return this._http.get(`${environment.back_end_url}/v2/salaries/team/${id}/goalies`, options).pipe(
+    return this._http.get(`${environment.back_end_url}/v2/salaries/team/${id}/goalies?is_protected=false`, options).pipe(
       map(result => result['result'])
     )
   }
@@ -68,6 +68,26 @@ export class SalaryService {
 
   getPlayerSalaryByPlayerId(id: number) {
     return this._http.get(`${environment.back_end_url}/v2/salaries/players/${id}`).pipe(
+      map(result => result['result'])
+    )
+  }
+
+  getProtectedPlayersById(id: number, season: string): Observable<PlayerSalary[]> {
+    const options = {params: new HttpParams()
+      .set('playing_year', season)
+    }
+  
+    return this._http.get(`${environment.back_end_url}/v2/salaries/team/${id}/players?is_protected=true`, options).pipe(
+      map(result => result['result'])
+    )
+  }
+
+  getProtectedGoaliesById(id: number, season: string): Observable<PlayerSalary[]> {
+    const options = {params: new HttpParams()
+      .set('playing_year', season)
+    }
+  
+    return this._http.get(`${environment.back_end_url}/v2/salaries/team/${id}/goalies?is_protected=true`, options).pipe(
       map(result => result['result'])
     )
   }
