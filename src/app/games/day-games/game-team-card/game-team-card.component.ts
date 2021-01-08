@@ -65,7 +65,7 @@ export class GameTeamCardComponent implements OnInit, OnDestroy {
     this._gamesService.getMatchUpRecord(team.team_id, opposingTeam.team_id, season).pipe(
       takeWhile(() => this._alive)
     ).subscribe((data) => {
-      console.log(data);
+      // console.log(data);
       this.matchUpRecord = this.getMatchUp(data, team.team_id, opposingTeam);
     })
   }

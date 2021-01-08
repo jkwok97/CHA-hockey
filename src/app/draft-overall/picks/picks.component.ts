@@ -86,7 +86,7 @@ export class PicksComponent implements OnInit, OnDestroy {
     })
   }
 
-  // USE FOR NEXT SEASON ASSUMING NO NEW TEAMS
+  // USE FOR NEXT SEASON ASSUMING NO NEW TEAMS ???
   // getDraftTableByYearByStandings(draftSeason: string, season: string, seasonType: string) {
   //   this._draftService.getDraftTableByStandings(draftSeason, season, seasonType).pipe(
   //     takeWhile(() => this._alive)
@@ -99,7 +99,7 @@ export class PicksComponent implements OnInit, OnDestroy {
   // }
 
   getTeamStats(seasonType: string) {
-    this._teamStatsService.getTeamStatsBySeasonByType('2019-20', seasonType).pipe(
+    this._teamStatsService.getTeamStatsBySeasonByType('2020-21', seasonType).pipe(
       takeWhile(() => this._alive)
     ).subscribe((teamStats: TeamStat[]) => {
       this.teamStats = teamStats;
@@ -108,25 +108,29 @@ export class PicksComponent implements OnInit, OnDestroy {
   }
 
   getLeagueLeaders(resp, drafts) {
+    
     let tempLeaders = resp;
     
     drafts.forEach(element => {
 
+      let tempTeam = tempLeaders.find(team => team.shortname === element.shortname);
+      element.points = tempTeam.points;
+
       // THIS IS TEMPORARY
-      if (element.shortname === 'VSJ') {
-       let tempTeam = tempLeaders.find(team => team.shortname === 'VIC');
-       element.points = tempTeam.points;
-      } else if (element.shortname === 'SJV') {
-        let tempTeam = tempLeaders.find(team => team.shortname === 'SCS');
-        element.points = tempTeam.points;
-      } else {
-        let tempTeam = tempLeaders.find(team => team.shortname === element.shortname);
-        element.points = tempTeam.points;
-      }
+      // if (element.shortname === 'VSJ') {
+      //  let tempTeam = tempLeaders.find(team => team.shortname === 'VIC');
+      //  element.points = tempTeam.points;
+      // } else if (element.shortname === 'SJV') {
+      //   let tempTeam = tempLeaders.find(team => team.shortname === 'SCS');
+      //   element.points = tempTeam.points;
+      // } else {
+      //   let tempTeam = tempLeaders.find(team => team.shortname === element.shortname);
+      //   element.points = tempTeam.points;
+      // }
     });
 
-    // drafts.sort((a,b) => a.points - b.points);
-    drafts.sort((a,b) => (a.city > b.city) ? 1 : -1);
+    drafts.sort((a,b) => a.points - b.points);
+    
     setTimeout(() => {
       this.draft = new MatTableDataSource<any[]>(drafts);
       this.isLoading = false;
