@@ -46,8 +46,10 @@ export class TeamCurrentSalaryComponent implements OnInit, OnDestroy {
       takeWhile(() => this._alive)
     ).subscribe((event) => {
       this.isLoading = true;
-      this.protectedPlayers = null;
+      this.re_init();
       const splitUrl = event['url'].split("/");
+
+      console.log(splitUrl[3]);
       this.getTeamInfo(splitUrl[3]);
       this.getTeamPlayerSalary(splitUrl[3], this.currentSeason);
       this.getTeamGoalieSalary(splitUrl[3], this.currentSeason);
@@ -56,12 +58,20 @@ export class TeamCurrentSalaryComponent implements OnInit, OnDestroy {
     });
   }
 
+  re_init() {
+    this.protectedPlayers = null;
+    this.forwardSalaries = null;
+    this.defenseSalaries = null;
+    this.goalieSalaries = null;
+    this.salaries = [];
+    this.protectedGoalies = null;
+  }
+
   getTeamInfo(id: number) {
     this._teamInfoService.getTeambyId(id).pipe(
       takeWhile(() => this._alive)
     ).subscribe((team:Team) => {
       this.team = team;
-      this.isLoading = false;
     })
   }
 
@@ -105,8 +115,10 @@ export class TeamCurrentSalaryComponent implements OnInit, OnDestroy {
       if (salaries) {
         this.protectedGoalies = salaries;
       }
+      this.isLoading = false;
     }, error => {
       console.log(error);
+      this.isLoading = false;
     })
     
   }
