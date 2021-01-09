@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Team } from 'src/app/_models/team';
 import { TeamInfoService } from 'src/app/_services/team-info.service';
-import { takeWhile } from 'rxjs/operators';
+import { filter, takeWhile } from 'rxjs/operators';
 import { SalaryService } from 'src/app/_services/salary.service';
 import { PlayerSalary } from 'src/app/_models/player';
 
@@ -31,16 +31,29 @@ export class TeamCurrentSalaryComponent implements OnInit, OnDestroy {
     private _route: ActivatedRoute,
     private _teamInfoService: TeamInfoService,
     private _salaryService: SalaryService,
+    private _router: Router
   ) {
     this.getTeamInfo(this._route.snapshot['_urlSegment'].segments[2].path);
     this.getTeamPlayerSalary(this._route.snapshot['_urlSegment'].segments[2].path, this.currentSeason);
     this.getTeamGoalieSalary(this._route.snapshot['_urlSegment'].segments[2].path, this.currentSeason);
     this.getProtectedPlayers(this._route.snapshot['_urlSegment'].segments[2].path, this.currentSeason);
-    // this.getProtectedGoalies(this._route.snapshot['_urlSegment'].segments[2].path, this.currentSeason);
+    this.getProtectedGoalies(this._route.snapshot['_urlSegment'].segments[2].path, this.currentSeason);
    }
 
   ngOnInit() {
-
+    this._router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      takeWhile(() => this._alive)
+    ).subscribe((event) => {
+      this.isLoading = true;
+      this.protectedPlayers = null;
+      const splitUrl = event['url'].split("/");
+      this.getTeamInfo(splitUrl[3]);
+      this.getTeamPlayerSalary(splitUrl[3], this.currentSeason);
+      this.getTeamGoalieSalary(splitUrl[3], this.currentSeason);
+      this.getProtectedPlayers(splitUrl[3], this.currentSeason);
+      this.getProtectedGoalies(splitUrl[3], this.currentSeason);
+    });
   }
 
   getTeamInfo(id: number) {
@@ -75,9 +88,11 @@ export class TeamCurrentSalaryComponent implements OnInit, OnDestroy {
     this._salaryService.getProtectedPlayersById(id, season).pipe(
       takeWhile(() => this._alive)
     ).subscribe((salaries: PlayerSalary[]) => {
-      const forwards = salaries['forwards']['players'];
-      const defense = salaries['defense']['players'];
-      this.protectedPlayers = forwards.concat(defense);
+      if (salaries) {
+        const forwards = salaries['forwards']['players'];
+        const defense = salaries['defense']['players'];
+        this.protectedPlayers = forwards.concat(defense);
+      }
     }, error => {
       console.log(error);
     })
@@ -87,7 +102,9 @@ export class TeamCurrentSalaryComponent implements OnInit, OnDestroy {
     this._salaryService.getProtectedGoaliesById(id, season).pipe(
       takeWhile(() => this._alive)
     ).subscribe((salaries: PlayerSalary[]) => {
-      this.protectedGoalies = salaries;
+      if (salaries) {
+        this.protectedGoalies = salaries;
+      }
     }, error => {
       console.log(error);
     })

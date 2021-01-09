@@ -5,8 +5,8 @@ import { MatTableDataSource } from '@angular/material';
 import { CurrentSeasonService } from 'src/app/_services/current-season.service';
 import { PlayerStatsService } from 'src/app/_services/player-stats.service';
 import { GoalieStatsService } from 'src/app/_services/goalie-stats.service';
-import { takeWhile } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { filter, takeWhile } from 'rxjs/operators';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { TeamStatsService } from 'src/app/_services/team-stats.service';
 import { TeamInfoService } from 'src/app/_services/team-info.service';
 import { User } from 'src/app/_models/user';
@@ -44,6 +44,7 @@ export class TeamCurrentComponent implements OnInit, OnDestroy {
 
   constructor(
     private _route: ActivatedRoute,
+    private _router: Router,
     private _currentSeasonService: CurrentSeasonService,
     private _teamStatsService: TeamStatsService,
     private _playerStatsService: PlayerStatsService,
@@ -60,7 +61,17 @@ export class TeamCurrentComponent implements OnInit, OnDestroy {
 
     this.getTeamPlayerStatsForSeason(this._route.snapshot['_urlSegment'].segments[2].path);
     this.getTeamGoalieStatsForSeason(this._route.snapshot['_urlSegment'].segments[2].path);
-    this.getTeamStatsForSeason(this._route.snapshot['_urlSegment'].segments[2].path)
+    this.getTeamStatsForSeason(this._route.snapshot['_urlSegment'].segments[2].path);
+
+    this._router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      takeWhile(() => this._alive)
+    ).subscribe((event) => {
+      const splitUrl = event['url'].split("/");
+      this.getTeamPlayerStatsForSeason(splitUrl[3]);
+      this.getTeamGoalieStatsForSeason(splitUrl[3]);
+      this.getTeamStatsForSeason(splitUrl[3]);
+    });
   }
 
   getTeamStatsForSeason(id: number) {

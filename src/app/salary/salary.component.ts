@@ -39,7 +39,6 @@ export class SalaryComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isLoading = true;
-
     this.getSalaries(this.showType);
   }
 
@@ -53,6 +52,7 @@ export class SalaryComponent implements OnInit, OnDestroy {
     this._salariesService.getAllActiveSalaries(type).pipe(
       takeWhile(() => this._alive)
     ).subscribe((salaries: Salary[]) => {
+      console.log(salaries[0]);
       this.isLoading = false;
       this.salaries = salaries;
       this.salariesData = new MatTableDataSource<any[]>(this.salaries as any[]);

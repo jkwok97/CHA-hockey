@@ -1,5 +1,17 @@
 <mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
 
+<div class="button-back" *ngIf="!isLoading">
+    <button mat-fab color="accent" (click)="selectBackTeam()">
+        <mat-icon>chevron_left</mat-icon>
+    </button>
+</div>
+
+<div class="button-forward" *ngIf="!isLoading">
+    <button mat-fab color="accent" (click)="selectForwardTeam()">
+        <mat-icon>chevron_right</mat-icon>
+    </button>
+</div>
+
 <div class="teamInfoSection" [style.background-color]='team.teamcolor' *ngIf="!isLoading">
 
     <img src="{{team.teamlogo}}" [ngClass]="{'biglogo': !isMobile, 'smalllogo': isMobile}" *ngIf="team.shortname !== 'VSJ'">

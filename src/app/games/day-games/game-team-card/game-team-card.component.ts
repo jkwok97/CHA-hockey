@@ -57,6 +57,7 @@ export class GameTeamCardComponent implements OnInit, OnDestroy {
     this._gamesService.getLastFiveGamesRecordForTeam(id, season).pipe(
       takeWhile(() => this._alive)
     ).subscribe((data) => {
+      // console.log(data);
       this.lastFiveRecord = this.getLastFive(data, id);
     })
   }

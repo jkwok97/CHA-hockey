@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { takeWhile } from 'rxjs/operators';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter, takeWhile } from 'rxjs/operators';
 import { CurrentSeasonService } from 'src/app/_services/current-season.service';
 import { PlayerService } from 'src/app/_services/player.service';
 
@@ -27,16 +27,26 @@ export class TeamRatingsPlayerComponent implements OnInit {
   constructor(
     private _route: ActivatedRoute,
     private _currentSeasonService: CurrentSeasonService,
-    private _playerService: PlayerService
+    private _playerService: PlayerService,
+    private _router: Router
   ) { 
-    // this.season = this._currentSeasonService.currentSeason;
-    this.season = '2020-21';
+    this.season = this._currentSeasonService.currentSeason;
+    // this.season = '2020-21';
   }
 
   ngOnInit() {
     this.isLoading = true;
     const teamName = this._route.snapshot.parent.params.team;
     this.getTeamPlayerRatings(teamName, this.season);
+
+    this._router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      takeWhile(() => this._alive)
+    ).subscribe((event) => {
+      this.isLoading = true;
+      const splitUrl = event['url'].split("/");
+      this.getTeamPlayerRatings(splitUrl[2], this.season);
+    });
   }
 
   getTeamPlayerRatings(teamName: string, season: string) {

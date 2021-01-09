@@ -28,3 +28,19 @@
     font-size: medium;
     font-weight: 200;
 }
+
+.button-back {
+    color: white;
+    position: fixed;
+    top: 50%;
+    left: 25px;
+    z-index: 99999;
+}
+
+.button-forward {
+    color: white;
+    position: fixed;
+    top: 50%;
+    right: 25px;
+    z-index: 99999;
+}

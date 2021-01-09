@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { takeWhile } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { filter, takeWhile } from 'rxjs/operators';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { CurrentSeasonService } from 'src/app/_services/current-season.service';
 import { GoalieStatsService } from 'src/app/_services/goalie-stats.service';
 import { GoalieStat } from 'src/app/_models/player';
@@ -39,6 +39,7 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
     private _currentSeasonService: CurrentSeasonService,
     private _goalieStatsService: GoalieStatsService,
     private _route: ActivatedRoute,
+    private _router: Router,
     private _teamInfoService: TeamInfoService,
   ) { 
     this.seasonType = this._currentSeasonService.currentSeasonType;
@@ -50,7 +51,16 @@ export class GoalieArchivesComponent implements OnInit, OnDestroy {
 
     const teamSelected = this._route.snapshot['_urlSegment'].segments[1].path;
 
-    this.getUserId(teamSelected)
+    this.getUserId(teamSelected);
+
+    this._router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      takeWhile(() => this._alive)
+    ).subscribe((event) => {
+      this.isLoading = true;
+      const splitUrl = event['url'].split("/");
+      this.getUserId(splitUrl[2]);
+    });
   }
 
   getUserId(teamSelected: string) {

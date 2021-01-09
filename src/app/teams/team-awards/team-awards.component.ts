@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AwardsService } from 'src/app/_services/awards.service';
 import { TeamInfoService } from 'src/app/_services/team-info.service';
-import { takeWhile } from 'rxjs/operators';
+import { filter, takeWhile } from 'rxjs/operators';
 
 @Component({
   selector: 'app-team-awards',
@@ -18,6 +18,7 @@ export class TeamAwardsComponent implements OnInit, OnDestroy {
 
   constructor(
     private _route: ActivatedRoute,
+    private _router: Router,
     private _awardsService: AwardsService,
     private _teamInfoService: TeamInfoService
     ) { 
@@ -34,11 +35,17 @@ export class TeamAwardsComponent implements OnInit, OnDestroy {
     ).subscribe((id: number) => {
       const teamUserId = id['users_id'];
       this.awards$ = this._awardsService.getTeamAwardsByUserId(teamUserId);
-    })
+    }, error => console.log(error));
   }
 
   ngOnInit() {
-    
+    this._router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      takeWhile(() => this._alive)
+    ).subscribe((event) => {
+      const splitUrl = event['url'].split("/");
+      this.getUserId(splitUrl[2]);
+    });
   }
 
   getLogo(logo: string) {
