@@ -33,14 +33,14 @@
                         ></app-game-team-card>
 
                         <div>
-                            <p *ngIf="game.vis_team.score" class="result">Results: </p>
+                            <p *ngIf="game.vis_team.score !== null" class="result">Results: </p>
 
                             <p class="result">
-                                <span *ngIf="game.vis_team.score" class="score">
+                                <span *ngIf="game.vis_team.score !== null" class="score">
                                     {{game.vis_team.score}} 
                                 </span>
                                   @  
-                                <span *ngIf="game.vis_team.score" class="score"> 
+                                <span *ngIf="game.vis_team.score !== null" class="score"> 
                                     {{game.home_team.score}}
                                 </span>
                             </p>
