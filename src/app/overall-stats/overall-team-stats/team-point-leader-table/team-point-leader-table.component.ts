@@ -32,7 +32,20 @@ export class TeamPointLeaderTableComponent implements OnInit {
 
   getLeagueLeaders(teamStats) {
     const data = teamStats.filter((stat: TeamStat) => stat.games_played > 0);
-    const sortedData = data.sort((a,b) => b.points - a.points);
+
+    const sortedData = data.sort((a,b) => {
+
+      if (b.points === a.points) {
+        if (b.wins === a.wins) {
+          return (b.goals_for-b.goals_against) - (a.goals_for-a.goals_against)
+        } else {
+          return b.wins - a.wins
+        }
+      } else {
+        return b.points - a.points
+      }
+    });
+
     this.leaders = new MatTableDataSource<any[]>(sortedData);
   }
 

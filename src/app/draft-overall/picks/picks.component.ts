@@ -115,6 +115,9 @@ export class PicksComponent implements OnInit, OnDestroy {
 
       let tempTeam = tempLeaders.find(team => team.shortname === element.shortname);
       element.points = tempTeam.points;
+      element.wins = tempTeam.wins;
+      element.goals_for = tempTeam.goals_for;
+      element.goals_against = tempTeam.goals_against;
 
       // THIS IS TEMPORARY
       // if (element.shortname === 'VSJ') {
@@ -129,7 +132,17 @@ export class PicksComponent implements OnInit, OnDestroy {
       // }
     });
 
-    drafts.sort((a,b) => a.points - b.points);
+    drafts.sort((a,b) => {
+      if (b.points === a.points) {
+        if (b.wins === a.wins) {
+          return (b.goals_for-b.goals_against) - (a.goals_for-a.goals_against)
+        } else {
+          return b.wins - a.wins
+        }
+      } else {
+        return b.points - a.points
+      }
+    }).reverse();
     
     setTimeout(() => {
       this.draft = new MatTableDataSource<any[]>(drafts);
