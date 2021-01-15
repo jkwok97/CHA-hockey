@@ -17,7 +17,7 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
   isMobile: boolean;
   errored: boolean = false;
 
-  currentSeason: string = "20192020";
+  currentSeason: string = "20202021";
 
   allPlayers: any[];
 

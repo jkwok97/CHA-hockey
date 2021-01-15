@@ -42,7 +42,7 @@ export class NhlRookieStatsComponent implements OnInit, OnDestroy {
   }
 
   getSummary(start, pageSize, type, statType, sortOrder) {
-    this._nhlService.getNHLRookiesummary('20192020', 'skater', statType, sortOrder, start, pageSize).pipe(takeWhile(() => this._alive)).subscribe(resp => {
+    this._nhlService.getNHLRookiesummary('20202021', 'skater', statType, sortOrder, start, pageSize).pipe(takeWhile(() => this._alive)).subscribe(resp => {
       const stats = resp['data'];
 
       stats.forEach(stat => {
