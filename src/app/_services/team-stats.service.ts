@@ -52,7 +52,6 @@ export class TeamStatsService {
     }
     
     return this._http.get(`${environment.back_end_url}/v2/team-stats/season/conference`, options).pipe(
-      tap(console.log),
       map(result => result['result'])
     )
   }
@@ -65,7 +64,6 @@ export class TeamStatsService {
     }
     
     return this._http.get(`${environment.back_end_url}/v2/team-stats/season/division`, options).pipe(
-      tap(console.log),
       map(result => result['result'])
     )
   }

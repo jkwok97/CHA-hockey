@@ -13,20 +13,22 @@
 
 <mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
 
-<div class="container" *ngFor="let division of divisions">
+<ng-container *ngIf="!isLoading">
 
-    <h3 class="title" *ngIf="!isLoading">{{division.name}} Division</h3>
+    <div class="container" *ngFor="let division of divisions">
 
-    <section class="table">
+        <h3 class="title">{{division.name}} Division</h3>
+    
+        <section class="table">
+    
+            <app-team-stats-table 
+                [teams]="division.teams"
+                [statsColumnsToDisplay]="columns"
+                [sortByPoints]="true"
+            ></app-team-stats-table>
+    
+        </section>
+    
+    </div>
 
-        <app-team-stats-table 
-            [teams]="getTeams(division.teams)"
-            [statsColumnsToDisplay]="columns"
-            [sortByPoints]="'true'"
-            *ngIf="!isLoading"
-        ></app-team-stats-table>
-
-    </section>
-
-</div>
-
+</ng-container>

@@ -13,17 +13,23 @@
 
 <mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
 
-<div class="container" *ngFor="let conference of conferences">
+<ng-container *ngIf="!isLoading">
 
-    <h3 class="title" *ngIf="!isLoading">{{conference.name}} Conference</h3>
+    <div class="container" *ngFor="let conference of conferences">
 
-    <section class="table">
-        <app-team-stats-table 
-            [teams]="getTeams(conference.teams)"
-            [statsColumnsToDisplay]="columns"
-            [sortByPoints]="'true'"
-            *ngIf="!isLoading"
-        ></app-team-stats-table>
-    </section>
+        <h3 class="title">{{conference.name}} Conference</h3>
+    
+        <section class="table">
+            <app-team-stats-table 
+                [teams]="conference.teams"
+                [statsColumnsToDisplay]="columns"
+                [sortByPoints]="true"
+            ></app-team-stats-table>
+        </section>
+    
+    </div>
 
-</div>
+</ng-container>
+
+
+

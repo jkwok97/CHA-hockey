@@ -82,7 +82,7 @@ export class TeamStatsTableComponent implements OnInit, AfterViewInit, OnChanges
   }
 
   getTeamTotals(stats) {
-    if (stats) {
+    if (stats && stats['data']) {
       stats['data'].forEach(year => {
         this.totalGP += Number(year.games_played);
         this.totalWins += Number(year.wins);

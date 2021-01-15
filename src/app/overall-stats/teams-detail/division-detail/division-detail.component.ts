@@ -58,10 +58,6 @@ export class DivisionDetailComponent implements OnInit {
     })
   }
 
-  getTeams(teams: TeamStat[]) {
-    return new MatTableDataSource<any[]>(teams as []);
-  }
-
   changeSeason(seasonType) {
     this.isLoading = true;
     this.currentSeasonType = seasonType;

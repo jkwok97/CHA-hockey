@@ -7,7 +7,7 @@
         matSort 
         class="mat-elevation-z8" 
         [matSortActive]="sortByPoints ? 'points' : 'playing_year'"
-        matSortDirection="desc"
+        matSortDirection="sortByPoints ? 'desc' : 'asc'"
     >
 
         <ng-container matColumnDef="playing_year" sticky>
