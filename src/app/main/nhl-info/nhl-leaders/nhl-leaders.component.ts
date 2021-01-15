@@ -98,9 +98,9 @@ export class NhlLeadersComponent implements OnInit, OnDestroy {
   }
 
   findNHLLogo(player) {
-    // console.log(player);
-    let logo = player.team.logos.sort((a,b) => b['endSeason'] - a['endSeason']);
-    return logo[0].url;
+    // console.log(player.team.logos);
+    let logo = player.team.logos.filter((logo) => logo.background === 'light').sort((a,b) => b['endSeason'] - a['endSeason']);
+    return logo[0].secureUrl;
   }
 
   getNHLRookieLeaders(type) {
