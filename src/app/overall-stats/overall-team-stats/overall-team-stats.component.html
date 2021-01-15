@@ -16,8 +16,11 @@
     
             <mat-expansion-panel-header>
                 <mat-panel-title>
-                    League Standings
+                    League Standings 
                 </mat-panel-title>
+                <mat-panel-description *ngIf="!isMobile">
+                    * Tie Breaker - Wins / Goal Differential
+                </mat-panel-description>
             </mat-expansion-panel-header>
             
             <app-team-point-leader-table [teamStats]="teamStats"></app-team-point-leader-table>

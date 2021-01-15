@@ -52,6 +52,9 @@ export class DivisionDetailComponent implements OnInit {
     ).subscribe((teamStats: TeamStat[]) => {
       this.divisions = teamStats as [];
       this.isLoading = false;
+    }, err => {
+      console.log(err);
+      this.isLoading = false;
     })
   }
 

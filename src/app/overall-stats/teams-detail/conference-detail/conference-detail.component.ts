@@ -21,7 +21,7 @@ export class ConferenceDetailComponent implements OnInit, OnDestroy {
   currentSeason: string;
   currentSeasonType: string;
 
-  conferences: [];
+  conferences: any[];
 
   teams: MatTableDataSource<any[]>;
   columns = [
@@ -47,12 +47,41 @@ export class ConferenceDetailComponent implements OnInit, OnDestroy {
   }
 
   getStats(season: string, seasonType: string) {
-    this._teamStatsService.getTeamStatsBySeasonByTypeByConference(season, seasonType).pipe(
+
+    this._teamStatsService.getTeamStatsBySeasonByType(season, seasonType).pipe(
       takeWhile(() => this._alive)
     ).subscribe((teamStats: TeamStat[]) => {
-      this.conferences = teamStats as [];
+      this.separateTeams(teamStats);
+      // this.teams = new MatTableDataSource<any[]>(teamStats as []);
       this.isLoading = false;
     })
+
+
+    // this._teamStatsService.getTeamStatsBySeasonByTypeByConference(season, seasonType).pipe(
+    //   takeWhile(() => this._alive)
+    // ).subscribe((teamStats: TeamStat[]) => {
+    //   console.log(teamStats);
+    //   this.conferences = teamStats as [];
+    //   this.isLoading = false;
+    // }, err => {
+    //   console.log(err);
+    //   this.isLoading = false;
+    // });
+    
+  }
+
+  separateTeams(teamStats) {
+    const eastern = teamStats.filter((team) => team['conferencename'] === 'Eastern');
+    const western = teamStats.filter((team) => team['conferencename'] === 'Western');
+
+    this.conferences = [
+      {name: 'Eastern', teams: eastern},
+      {name: 'Western', teams: western}
+    ];
+
+    console.log(this.conferences);
+
+    this.isLoading = false;
   }
 
   getTeams(teams: TeamStat[]) {

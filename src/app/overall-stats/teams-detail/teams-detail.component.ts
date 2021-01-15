@@ -11,8 +11,8 @@ export class TeamsDetailComponent implements OnInit {
 
   routes = [
     {name: 'League', url: 'league', current: true},
-    {name: 'Conference', url: 'conference', current: false},
-    {name: 'Division', url: 'division', current: false},
+    // {name: 'Conference', url: 'conference', current: false},
+    // {name: 'Division', url: 'division', current: false},
   ];
 
   constructor() { }
