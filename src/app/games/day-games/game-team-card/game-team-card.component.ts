@@ -94,12 +94,12 @@ export class GameTeamCardComponent implements OnInit, OnDestroy {
 
     data.forEach((game) => {
       if (game.vis_team_id === id) {
-        if (game.vis_team_score && game.home_team_score) {
+        if (game.vis_team_score !== null && game.home_team_score !== null) {
           game.vis_team_score > game.home_team_score ? wins++ : 
           game.vis_team_score === game.home_team_score ? ties++ : loss++
         }
       } else if (game.home_team_id === id) {
-        if (game.vis_team_score && game.home_team_score) {
+        if (game.vis_team_score !== null && game.home_team_score !== null) {
           game.home_team_score > game.vis_team_score ? wins++ : 
           game.home_team_score === game.vis_team_score ? ties++ : loss++
         }
