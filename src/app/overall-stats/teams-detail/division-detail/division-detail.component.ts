@@ -21,7 +21,7 @@ export class DivisionDetailComponent implements OnInit {
   currentSeason: string;
   currentSeasonType: string;
 
-  divisions: [];
+  divisions: any[];
 
   teams: MatTableDataSource<any[]>;
   columns = [
@@ -50,7 +50,30 @@ export class DivisionDetailComponent implements OnInit {
     this._teamStatsService.getTeamStatsBySeasonByTypeByDivision(season, seasonType).pipe(
       takeWhile(() => this._alive)
     ).subscribe((teamStats: TeamStat[]) => {
+
       this.divisions = teamStats as [];
+
+      this.divisions.forEach((division) => {
+
+        division['teams'].sort((a,b) => {
+
+          if (b.points === a.points) {
+            if (b.wins === a.wins) {
+              if ((b.goals_for-b.goals_against) === (a.goals_for-a.goals_against)) {
+                return b.goals_for - a.goals_for;
+              } else {
+                return (b.goals_for-b.goals_against) - (a.goals_for-a.goals_against);
+              }
+            } else {
+              return b.wins - a.wins;
+            }
+          } else {
+            return b.points - a.points;
+          }
+        });
+
+      });
+
       this.isLoading = false;
     }, err => {
       console.log(err);

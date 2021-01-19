@@ -135,12 +135,16 @@ export class PicksComponent implements OnInit, OnDestroy {
     drafts.sort((a,b) => {
       if (b.points === a.points) {
         if (b.wins === a.wins) {
-          return (b.goals_for-b.goals_against) - (a.goals_for-a.goals_against)
+          if ((b.goals_for-b.goals_against) === (a.goals_for-a.goals_against)) {
+            return b.goals_for - a.goals_for;
+          } else {
+            return (b.goals_for-b.goals_against) - (a.goals_for-a.goals_against);
+          }
         } else {
-          return b.wins - a.wins
+          return b.wins - a.wins;
         }
       } else {
-        return b.points - a.points
+        return b.points - a.points;
       }
     }).reverse();
     

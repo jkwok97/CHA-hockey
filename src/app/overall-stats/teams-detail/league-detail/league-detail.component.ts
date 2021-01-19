@@ -48,7 +48,25 @@ export class LeagueDetailComponent implements OnInit, OnDestroy {
     this._teamStatsService.getTeamStatsBySeasonByType(season, seasonType).pipe(
       takeWhile(() => this._alive)
     ).subscribe((teamStats: TeamStat[]) => {
-      this.teams = new MatTableDataSource<any[]>(teamStats as []);
+
+      const sortedData = teamStats.sort((a,b) => {
+
+        if (b.points === a.points) {
+          if (b.wins === a.wins) {
+            if ((b.goals_for-b.goals_against) === (a.goals_for-a.goals_against)) {
+              return b.goals_for - a.goals_for;
+            } else {
+              return (b.goals_for-b.goals_against) - (a.goals_for-a.goals_against);
+            }
+          } else {
+            return b.wins - a.wins;
+          }
+        } else {
+          return b.points - a.points;
+        }
+      });
+
+      this.teams = new MatTableDataSource<any[]>(sortedData as []);
       this.isLoading = false;
     })
   }
