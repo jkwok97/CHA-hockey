@@ -21,12 +21,16 @@ export class CurrentTeamTotalsComponent implements OnInit {
   currentSeasonSpace: number = 0;
   nextSeasonPayroll: number = 0;
   nextSeasonSpace: number = 0;
+  currentSeason: string;
+  nextSeason: string;
 
   constructor(
     private _currentSeasonService: CurrentSeasonService
   ) {
     this.currentSeasonCap = this._currentSeasonService.currentSeasonCap;
     this.nextSeasonCap = this._currentSeasonService.nextSeasonCap;
+    this.currentSeason = this._currentSeasonService.currentSeason;
+    this.nextSeason = this._currentSeasonService.nextSeason;
    }
 
   ngOnInit() {

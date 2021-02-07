@@ -14,6 +14,7 @@ export class CurrentSeasonService {
 
   currentSeason: string = this.handleSeason(this.isOffSeason);
   currentSeasonType: string = 'Regular';
+  nextSeason: string = '2021-22'
 
   minGames: number = this.handleMinGames(this.isOffSeason);
 
