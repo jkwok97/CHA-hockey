@@ -15,6 +15,8 @@ export class OverallGoalieStatsComponent implements OnInit, AfterViewInit {
   currentSeason: string;
   currentSeasonType: string;
 
+  minGames: number;
+
   constructor(
     private _currentSeasonService: CurrentSeasonService,
     private _displayService: DisplayService
@@ -22,6 +24,7 @@ export class OverallGoalieStatsComponent implements OnInit, AfterViewInit {
     this.currentSeason = this._currentSeasonService.currentSeason;
     this.currentSeasonType = this._currentSeasonService.currentSeasonType;
     this.disablePlayoffButton = this._currentSeasonService.seasonHasPlayoffs;
+    this.minGames = this._currentSeasonService.minGames;
   }
 
   ngOnInit() {

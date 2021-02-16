@@ -24,7 +24,9 @@
         <mat-expansion-panel expanded="{{expand}}">
 
             <mat-expansion-panel-header>
-                <mat-panel-title>Save Pct Leaders</mat-panel-title>
+                <mat-panel-title>
+                    Save Pct Leaders (min {{this.minGames}} GP)
+                </mat-panel-title>
             </mat-expansion-panel-header>
 
             <app-goalie-save-pct-leader-table [currentSeason]="currentSeason"></app-goalie-save-pct-leader-table>
@@ -48,7 +50,9 @@
         <mat-expansion-panel expanded="{{expand}}">
 
             <mat-expansion-panel-header>
-                <mat-panel-title>GAA Leaders</mat-panel-title>
+                <mat-panel-title>
+                    GAA Leaders (min {{this.minGames}} GP)
+                </mat-panel-title>
             </mat-expansion-panel-header>
 
             <app-goalie-gaa-leader-table [currentSeason]="currentSeason"></app-goalie-gaa-leader-table>

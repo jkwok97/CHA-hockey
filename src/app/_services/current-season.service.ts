@@ -28,7 +28,7 @@ export class CurrentSeasonService {
   }
 
   handleMinGames(bool: boolean) {
-    return bool ? 10 : 0
+    return bool ? 10 : 5
   }
 
   handlePlayoffButton() {
