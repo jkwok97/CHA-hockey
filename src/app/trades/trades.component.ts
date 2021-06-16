@@ -26,7 +26,7 @@ export class TradesComponent implements OnInit, OnDestroy {
     { 
       label: '20/21 Season', query: '21',
       dateStart: '2020-04-27', 
-      dateEnd: '2021-04-26', 
+      dateEnd: '2021-07-15', 
       link: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQhNH4rS2kl3afY5kfy6IpXo4x3u-XJnuBh01R4bleYWovIvt-pk2JhtzxW-10kMamkd2LgpzmvuiMP/pubhtml?gid=1702239337&single=true&widget=false&headers=false&chrome=false'
     },
     { 
