@@ -39,7 +39,6 @@ export class OverallTeamStatsComponent implements OnInit, OnDestroy {
     this.expand = !this._displayService.isMobile;
 
     this.getTeamStats(this.currentSeasonType);
-
   }
 
   getTeamStats(seasonType: string) {

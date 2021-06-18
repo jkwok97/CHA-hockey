@@ -146,6 +146,10 @@ import { OverallRatingsTableComponent } from './overall-ratings/overall-ratings-
 import { TeamRatingsComponent } from './teams/team-ratings/team-ratings.component';
 import { TeamRatingsPlayerComponent } from './teams/team-ratings/team-ratings-player/team-ratings-player.component';
 import { TeamRatingsGoalieComponent } from './teams/team-ratings/team-ratings-goalie/team-ratings-goalie.component';
+import { PlayoffTeamAvatarComponent } from './games/playoff-team-avatar/playoff-team-avatar.component';
+import { PlayoffMatchupCardComponent } from './games/playoff-matchup-card/playoff-matchup-card.component';
+import { PlayoffMatchupFinalCardComponent } from './games/playoff-matchup-final-card/playoff-matchup-final-card.component';
+import { PlayoffMatchupFinalChampionComponent } from './games/playoff-matchup-final-champion/playoff-matchup-final-champion.component';
 
 @NgModule({
   declarations: [
@@ -288,6 +292,10 @@ import { TeamRatingsGoalieComponent } from './teams/team-ratings/team-ratings-go
     TeamRatingsComponent,
     TeamRatingsPlayerComponent,
     TeamRatingsGoalieComponent,
+    PlayoffTeamAvatarComponent,
+    PlayoffMatchupCardComponent,
+    PlayoffMatchupFinalCardComponent,
+    PlayoffMatchupFinalChampionComponent,
   ],
   imports: [
     BrowserModule,

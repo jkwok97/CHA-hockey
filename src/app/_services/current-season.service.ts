@@ -13,10 +13,10 @@ export class CurrentSeasonService {
   draftSeason: string = '2020'
 
   currentSeason: string = this.handleSeason(this.isOffSeason);
-  currentSeasonType: string = 'Regular';
+  currentSeasonType: string = 'Playoffs';
   nextSeason: string = '2021-22'
 
-  minGames: number = this.handleMinGames(this.isOffSeason);
+  minGames: number = this.handleMinGames(this.isOffSeason, this.currentSeasonType);
 
   seasonHasPlayoffs: boolean = this.handlePlayoffButton();
   
@@ -27,12 +27,12 @@ export class CurrentSeasonService {
     return bool ? '2019-20' : '2020-21'
   }
 
-  handleMinGames(bool: boolean) {
-    return bool ? 10 : 5
+  handleMinGames(bool: boolean, type: string) {
+    return type === 'Regular' ? bool ? 10 : 5 : 1;
   }
 
   handlePlayoffButton() {
-    return this.currentSeason === '2019-20' ? true : false;
+    return this.currentSeason === '2020-21' ? true : false;
   }
 
 }

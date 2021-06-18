@@ -27,7 +27,7 @@ export class TeamPointLeaderTableComponent implements OnInit {
   ngOnInit() {
     this.isMobile = this._displayService.isMobile;
 
-    this.getLeagueLeaders(this.teamStats)
+    this.getLeagueLeaders(this.teamStats);
   }
 
   getLeagueLeaders(teamStats) {

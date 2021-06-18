@@ -1,1 +1,149 @@
-<p>playoff-tree-games works!</p>
+<mat-progress-bar mode="query" color="accent" *ngIf="!westernTeams && !easternTeams"></mat-progress-bar>
+
+<ng-container *ngIf="westernTeams && easternTeams">
+
+    <div class="playoff-tree-games-conference">
+
+        <h3>West</h3>
+
+        <div class="conference-container">
+
+            <div class="round-container">
+
+                <app-playoff-matchup-card 
+                    [homeTeam]="westernTeams[0]"
+                    [visTeam]="westernTeams[7]"
+                ></app-playoff-matchup-card>
+            
+                <app-playoff-matchup-card 
+                    [homeTeam]="westernTeams[2]"
+                    [visTeam]="westernTeams[5]"
+                ></app-playoff-matchup-card>
+            
+                <app-playoff-matchup-card 
+                    [homeTeam]="westernTeams[3]"
+                    [visTeam]="westernTeams[4]"
+                ></app-playoff-matchup-card>
+            
+                <app-playoff-matchup-card 
+                    [homeTeam]="westernTeams[1]"
+                    [visTeam]="westernTeams[6]"
+                ></app-playoff-matchup-card>
+    
+            </div>
+    
+            <div class="round-container">
+    
+                <app-playoff-matchup-card 
+                    [homeTeam]=""
+                    [visTeam]=""
+                ></app-playoff-matchup-card>
+            
+                <app-playoff-matchup-card 
+                    [homeTeam]=""
+                    [visTeam]=""
+                ></app-playoff-matchup-card>
+    
+            </div>
+    
+            <div class="round-container">
+    
+                <app-playoff-matchup-card 
+                    [homeTeam]=""
+                    [visTeam]=""
+                ></app-playoff-matchup-card>
+    
+            </div>
+
+        </div>
+    
+    </div>
+    
+    <div class="playoff-tree-games-final">
+
+        <h2>Liberty Cup</h2>
+
+        <div class="playoff-tree-games-final-matchup">
+
+            <img src="../../../assets/images/libertycup.jpg">
+
+            <app-playoff-matchup-final-card></app-playoff-matchup-final-card>
+
+        </div>
+
+        <div>
+
+            <app-playoff-matchup-final-champion></app-playoff-matchup-final-champion>
+
+            <h2>CHAMPION</h2>
+
+        </div>
+
+    </div>
+    
+    <div class="playoff-tree-games-conference">
+    
+        <h3>East</h3>
+
+        <div class="conference-container">
+
+            <div class="round-container">
+
+                <app-playoff-matchup-card 
+                    [homeTeam]=""
+                    [visTeam]=""
+                ></app-playoff-matchup-card>
+    
+            </div>
+    
+            <div class="round-container">
+    
+                <app-playoff-matchup-card 
+                    [homeTeam]=""
+                    [visTeam]=""
+                ></app-playoff-matchup-card>
+            
+                <app-playoff-matchup-card 
+                    [homeTeam]=""
+                    [visTeam]=""
+                ></app-playoff-matchup-card>
+    
+            </div>
+    
+            <div class="round-container">
+    
+                <app-playoff-matchup-card 
+                    [homeTeam]="easternTeams[0]"
+                    [visTeam]="easternTeams[7]"
+                ></app-playoff-matchup-card>
+            
+                <app-playoff-matchup-card 
+                    [homeTeam]="easternTeams[2]"
+                    [visTeam]="easternTeams[5]"
+                ></app-playoff-matchup-card>
+            
+                <app-playoff-matchup-card 
+                    [homeTeam]="easternTeams[3]"
+                    [visTeam]="easternTeams[4]"
+                ></app-playoff-matchup-card>
+            
+                <app-playoff-matchup-card 
+                    [homeTeam]="easternTeams[1]"
+                    [visTeam]="easternTeams[6]"
+                ></app-playoff-matchup-card>
+    
+            </div>
+
+        </div>
+
+    </div>
+
+</ng-container>
+
+
+
+
+
+
+
+

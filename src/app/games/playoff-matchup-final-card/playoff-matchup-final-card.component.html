@@ -1,0 +1,15 @@
+<div class="playoff-matchup-final-card">
+
+    <app-playoff-team-avatar [team]="visTeam"></app-playoff-team-avatar>
+
+    <div *ngIf="visTeam && homeTeam">
+        {{visTeam.shortname}} @ {{homeTeam.shortname}}
+    </div>
+
+    <div *ngIf="!visTeam && !homeTeam">
+        vs.
+    </div>
+
+    <app-playoff-team-avatar [team]="homeTeam"></app-playoff-team-avatar>
+
+</div>
