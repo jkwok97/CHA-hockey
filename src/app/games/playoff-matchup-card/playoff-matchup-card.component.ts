@@ -9,6 +9,11 @@ export class PlayoffMatchupCardComponent implements OnInit {
 
   @Input() homeTeam;
   @Input() visTeam;
+  @Input() winningTeam;
+  @Input() losingTeam;
+  @Input() seriesDone: boolean;
+  @Input() seriesScore: string;
+  @Input() seriesTied: boolean;
 
   constructor() { }
 
