@@ -6,7 +6,7 @@
         {{visTeam.shortname}} @ {{homeTeam.shortname}}
     </div>
 
-    <div *ngIf="winningTeam && losingTeam && !seriesTied">
+    <div *ngIf="winningTeam && losingTeam && !seriesTied && !seriesDone">
         {{winningTeam.shortname}} leads {{seriesScore}}
     </div>
 
