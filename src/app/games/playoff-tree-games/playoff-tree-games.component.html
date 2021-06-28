@@ -54,15 +54,23 @@
             </div>
     
             <div class="round-container">
-    
+                <!-- OAK / KEL -->
                 <app-playoff-matchup-card 
                     [homeTeam]="westernTeams[0]"
                     [visTeam]="westernTeams[6]"
+                    [winningTeam]="westernTeams[6]"
+                    [losingTeam]="westernTeams[0]"
+                    [seriesScore]="'1-1'"
+                    [seriesTied]="true"
                 ></app-playoff-matchup-card>
-            
+                <!-- LV / SEA -->
                 <app-playoff-matchup-card 
                     [homeTeam]="westernTeams[4]"
                     [visTeam]="westernTeams[5]"
+                    [winningTeam]="westernTeams[4]"
+                    [losingTeam]="westernTeams[5]"
+                    [seriesScore]="'1-1'"
+                    [seriesTied]="true"
                 ></app-playoff-matchup-card>
     
             </div>
@@ -118,15 +126,22 @@
             </div>
     
             <div class="round-container">
-    
+                <!-- ATL / MSG -->
                 <app-playoff-matchup-card 
                     [homeTeam]="easternTeams[0]"
                     [visTeam]="easternTeams[4]"
+                    [winningTeam]="easternTeams[4]"
+                    [losingTeam]="easternTeams[0]"
+                    [seriesScore]="'1-1'"
+                    [seriesTied]="true"
                 ></app-playoff-matchup-card>
-            
+                <!-- CIN / IND -->
                 <app-playoff-matchup-card 
                     [homeTeam]="easternTeams[1]"
                     [visTeam]="easternTeams[2]"
+                    [winningTeam]="easternTeams[2]"
+                    [losingTeam]="easternTeams[1]"
+                    [seriesScore]="'2-0'"
                 ></app-playoff-matchup-card>
     
             </div>
