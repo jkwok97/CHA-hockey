@@ -60,17 +60,19 @@
                     [visTeam]="westernTeams[6]"
                     [winningTeam]="westernTeams[0]"
                     [losingTeam]="westernTeams[6]"
-                    [seriesScore]="'3-1'"
+                    [seriesScore]="'4-1'"
                     [seriesTied]="false"
+                    [seriesDone]="true"
                 ></app-playoff-matchup-card>
                 <!-- LV / SEA -->
                 <app-playoff-matchup-card 
                     [homeTeam]="westernTeams[4]"
                     [visTeam]="westernTeams[5]"
-                    [winningTeam]="westernTeams[5]"
-                    [losingTeam]="westernTeams[4]"
-                    [seriesScore]="'2-2'"
-                    [seriesTied]="true"
+                    [winningTeam]="westernTeams[4]"
+                    [losingTeam]="westernTeams[5]"
+                    [seriesScore]="'4-3'"
+                    [seriesTied]="false"
+                    [seriesDone]="true"
                 ></app-playoff-matchup-card>
     
             </div>
@@ -78,8 +80,8 @@
             <div class="round-container">
     
                 <app-playoff-matchup-card 
-                    [homeTeam]=""
-                    [visTeam]=""
+                    [homeTeam]="westernTeams[0]"
+                    [visTeam]="westernTeams[4]"
                 ></app-playoff-matchup-card>
     
             </div>
@@ -119,8 +121,8 @@
             <div class="round-container">
 
                 <app-playoff-matchup-card 
-                    [homeTeam]="easternTeams[2]"
-                    [visTeam]=""
+                    [homeTeam]="easternTeams[0]"
+                    [visTeam]="easternTeams[2]"
                 ></app-playoff-matchup-card>
     
             </div>
@@ -132,8 +134,9 @@
                     [visTeam]="easternTeams[4]"
                     [winningTeam]="easternTeams[0]"
                     [losingTeam]="easternTeams[4]"
-                    [seriesScore]="'2-2'"
-                    [seriesTied]="true"
+                    [seriesScore]="'4-3'"
+                    [seriesTied]="false"
+                    [seriesDone]="true"
                 ></app-playoff-matchup-card>
                 <!-- CIN / IND -->
                 <app-playoff-matchup-card 
