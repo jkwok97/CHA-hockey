@@ -1,15 +1,33 @@
 <div class="playoff-matchup-final-card">
 
-    <app-playoff-team-avatar [team]="visTeam"></app-playoff-team-avatar>
+    <div class="playoff-matchup-final-card-matchup">
 
-    <div *ngIf="visTeam && homeTeam">
-        {{visTeam.shortname}} @ {{homeTeam.shortname}}
+        <app-playoff-team-avatar [team]="homeTeam"></app-playoff-team-avatar>
+
+        <app-playoff-team-avatar [team]="visTeam"></app-playoff-team-avatar>
+
     </div>
 
-    <div *ngIf="!visTeam && !homeTeam">
-        vs.
+    <div>
+        <div *ngIf="(visTeam && homeTeam) && !(winningTeam && losingTeam)">
+            {{visTeam.shortname}} @ {{homeTeam.shortname}}
+        </div>
+    
+        <div *ngIf="winningTeam && losingTeam && !seriesTied && !seriesDone">
+            {{winningTeam.shortname}} leads {{seriesScore}}
+        </div>
+    
+        <div *ngIf="seriesDone">
+            {{winningTeam.shortname}} wins {{seriesScore}}
+        </div>
+    
+        <div *ngIf="!visTeam && !homeTeam && !winningTeam && !losingTeam">
+            vs.
+        </div>
+    
+        <div *ngIf="seriesTied">
+            Tied {{seriesScore}}
+        </div>
     </div>
-
-    <app-playoff-team-avatar [team]="homeTeam"></app-playoff-team-avatar>
 
 </div>
