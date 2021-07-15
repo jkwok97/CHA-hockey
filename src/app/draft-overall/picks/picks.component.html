@@ -2,18 +2,18 @@
 
 <p>Order Based On Regular Season Standings</p>
 
-<!-- <section class="filter-add">
+<section class="filter-add">
 
     <mat-button-toggle-group #bySeason="matButtonToggleGroup" [value]="draftSeason" (change)="changeActive(bySeason.value)">
-        <mat-button-toggle value="2020" color="accent">
-            2020
-        </mat-button-toggle>
         <mat-button-toggle value="2021" color="accent">
             2021
         </mat-button-toggle>
+        <mat-button-toggle value="2022" color="accent">
+            2022
+        </mat-button-toggle>
     </mat-button-toggle-group>
 
-</section> -->
+</section>
 
 <mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
 
