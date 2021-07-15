@@ -29,7 +29,8 @@ export class CurrentTeamTotalsComponent implements OnInit {
   ) {
     this.currentSeasonCap = this._currentSeasonService.currentSeasonCap;
     this.nextSeasonCap = this._currentSeasonService.nextSeasonCap;
-    this.currentSeason = this._currentSeasonService.currentSeason;
+    // this.currentSeason = this._currentSeasonService.currentSeason;
+    this.currentSeason = '2021-22';
     this.nextSeason = this._currentSeasonService.nextSeason;
    }
 
