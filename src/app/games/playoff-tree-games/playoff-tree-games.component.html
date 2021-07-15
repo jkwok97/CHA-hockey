@@ -106,17 +106,20 @@
             <app-playoff-matchup-final-card
                 [homeTeam]="westernTeams[0]"
                 [visTeam]="easternTeams[0]"
-                [seriesScore]="'2-2'"
-                [winningTeam]="westernTeams[0]"
-                [losingTeam]="easternTeams[0]"
-                [seriesTied]="true"
+                [seriesScore]="'4-2'"
+                [winningTeam]="easternTeams[0]"
+                [losingTeam]="westernTeams[0]"
+                [seriesTied]="false"
+                [seriesDone]="true"
             ></app-playoff-matchup-final-card>
 
         </div>
 
         <div>
 
-            <app-playoff-matchup-final-champion></app-playoff-matchup-final-champion>
+            <app-playoff-matchup-final-champion
+                [champion]="easternTeams[0]"
+            ></app-playoff-matchup-final-champion>
 
             <h2>CHAMPION</h2>
 
