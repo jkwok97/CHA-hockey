@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class CurrentSeasonService {
 
-  isOffSeason: boolean = false;
+  isOffSeason: boolean = true;
 
   currentSeasonCap: number = 102.7;
   nextSeasonCap: number = 102.7;
@@ -13,7 +13,7 @@ export class CurrentSeasonService {
   draftSeason: string = '2020'
 
   currentSeason: string = this.handleSeason(this.isOffSeason);
-  currentSeasonType: string = 'Playoffs';
+  currentSeasonType: string = 'Regular';
   nextSeason: string = '2021-22'
 
   minGames: number = this.handleMinGames(this.isOffSeason, this.currentSeasonType);
@@ -24,7 +24,7 @@ export class CurrentSeasonService {
   constructor() { }
 
   handleSeason(bool: boolean) {
-    return bool ? '2019-20' : '2020-21'
+    return bool ? '2020-21' : '2021-22'
   }
 
   handleMinGames(bool: boolean, type: string) {

@@ -18,7 +18,7 @@ export class TeamCurrentSalaryComponent implements OnInit, OnDestroy {
 
   team: Team;
 
-  currentSeason: string = '2020-21';
+  currentSeason: string = '2021-22';
 
   forwardSalaries: PlayerSalary[];
   defenseSalaries: PlayerSalary[];

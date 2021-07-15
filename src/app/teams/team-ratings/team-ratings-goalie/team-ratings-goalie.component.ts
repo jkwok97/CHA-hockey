@@ -28,8 +28,8 @@ export class TeamRatingsGoalieComponent implements OnInit {
     private _currentSeasonService: CurrentSeasonService,
     private _playerService: PlayerService
   ) { 
-    this.season = this._currentSeasonService.currentSeason;
-    // this.season = '2020-21';
+    // this.season = this._currentSeasonService.currentSeason;
+    this.season = '2021-22';
   }
 
   ngOnInit() {

@@ -35,7 +35,7 @@ export class OverallRatingsComponent implements OnInit {
     private _playerService: PlayerService
   ) { 
     // this.season = this._currentSeasonService.currentSeason;
-    this.season = '2020-21';
+    this.season = '2021-22';
 
   }
 

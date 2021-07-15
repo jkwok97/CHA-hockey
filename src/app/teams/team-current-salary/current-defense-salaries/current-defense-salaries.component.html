@@ -19,22 +19,22 @@
         <td mat-footer-cell *matFooterCellDef class="center black"></td>
     </ng-container>
 
-    <ng-container matColumnDef="season_2020">
-        <th mat-header-cell *matHeaderCellDef class="center"> 2019-20 </th>
+    <ng-container matColumnDef="season_2021">
+        <th mat-header-cell *matHeaderCellDef class="center"> 2020-21 </th>
         <td mat-cell *matCellDef="let player" class="center">
-            <span *ngIf="player.season_2020 !== 'UFA' && player.season_2020 !== 'RFA'">{{ player.season_2020 }} </span>
-            <span *ngIf="player.season_2020 === 'UFA'" class="red">{{ player.season_2020 }} </span>
-            <span *ngIf="player.season_2020 === 'RFA'" class="yellow">{{ player.season_2020 }} </span>
+            <span *ngIf="player.season_2021 !== 'UFA' && player.season_2021 !== 'RFA'">{{ player.season_2021 }} </span>
+            <span *ngIf="player.season_2021 === 'UFA'" class="red">{{ player.season_2021 }} </span>
+            <span *ngIf="player.season_2021 === 'RFA'" class="yellow">{{ player.season_2021 }} </span>
         </td>
         <td mat-footer-cell *matFooterCellDef class="center black" [style.background-color]='black'>{{totalCurrentSalary}}</td>
     </ng-container>
 
     <ng-container matColumnDef="next">
-        <th mat-header-cell *matHeaderCellDef class="center"> 2020-21 </th>
+        <th mat-header-cell *matHeaderCellDef class="center"> 2021-22 </th>
         <td mat-cell *matCellDef="let player" class="center">
-            <span *ngIf="player.season_2021 !== 'UFA' && player.season_2021 !== 'RFA'">{{ player.season_2021 }} </span>
-            <span *ngIf="player.season_2021 === 'UFA'" class="red">{{ player.season_2021 }} </span>
-            <span *ngIf="player.season_2021 === 'RFA'" class="yellow">{{ player.season_2021 }} </span> 
+            <span *ngIf="player.season_2022 !== 'UFA' && player.season_2022 !== 'RFA'">{{ player.season_2022 }} </span>
+            <span *ngIf="player.season_2022 === 'UFA'" class="red">{{ player.season_2022 }} </span>
+            <span *ngIf="player.season_2022 === 'RFA'" class="yellow">{{ player.season_2022 }} </span> 
         </td>
         <td mat-footer-cell *matFooterCellDef class="center black" [style.background-color]='black'>{{totalNextSalary}}</td>
     </ng-container>

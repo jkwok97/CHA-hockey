@@ -18,7 +18,7 @@ export class CurrentForwardSalariesComponent implements OnInit, AfterViewInit {
   totalCurrentSalary: string;
   totalNextSalary: string;
 
-  columns = [ 'player_name', 'position', 'season_2020', 'next' ];
+  columns = [ 'player_name', 'position', 'season_2021', 'next' ];
 
   @ViewChild("forwardSort", {static: false}) forwardSort: MatSort;
 

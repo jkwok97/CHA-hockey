@@ -18,7 +18,7 @@ export class CurrentGoaliesSalariesComponent implements OnInit, AfterViewInit {
   totalCurrentSalary: string;
   totalNextSalary: string;
 
-  columns = [ 'player_name', 'season_2020', 'next' ];
+  columns = [ 'player_name', 'season_2021', 'next' ];
 
   @ViewChild("goalieSort", {static: false}) goalieSort: MatSort;
 

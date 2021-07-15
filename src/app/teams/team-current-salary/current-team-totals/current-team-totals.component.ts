@@ -43,11 +43,11 @@ export class CurrentTeamTotalsComponent implements OnInit {
 
   getTotals(salaries: PlayerSalary[]) {
     salaries.forEach((salary: PlayerSalary) => {
-      if (+salary.season_2020 > 0) {
-        this.currentSeasonPayroll += +salary.season_2020;
-      }
       if (+salary.season_2021 > 0) {
-        this.nextSeasonPayroll += +salary.season_2021;
+        this.currentSeasonPayroll += +salary.season_2021;
+      }
+      if (+salary.season_2022 > 0) {
+        this.nextSeasonPayroll += +salary.season_2022;
       } 
     })
   }

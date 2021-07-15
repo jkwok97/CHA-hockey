@@ -24,6 +24,12 @@ export class TradesComponent implements OnInit, OnDestroy {
 
   years = [
     { 
+      label: '21/22 Season', query: '22',
+      dateStart: '2021-07-15', 
+      dateEnd: '2022-06-01', 
+      link: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQhNH4rS2kl3afY5kfy6IpXo4x3u-XJnuBh01R4bleYWovIvt-pk2JhtzxW-10kMamkd2LgpzmvuiMP/pubhtml?gid=1702239337&single=true&widget=false&headers=false&chrome=false'
+    },
+    { 
       label: '20/21 Season', query: '21',
       dateStart: '2020-04-27', 
       dateEnd: '2021-07-15', 
@@ -87,7 +93,7 @@ export class TradesComponent implements OnInit, OnDestroy {
     this.isMobile = this._displayService.isMobile;
     this.isLoading = true;
     setTimeout(() => {
-      this.yearSelect.value = '21';
+      this.yearSelect.value = '22';
       const start = this.years.find((year) => year.query === this.yearSelect.value).dateStart;
       const end = this.years.find((year) => year.query === this.yearSelect.value).dateEnd;
       this.getTransactions(start, end);
@@ -124,6 +130,9 @@ export class TradesComponent implements OnInit, OnDestroy {
 
       }, 500)
 
+    }, error => {
+      this.isLoading = false;
+      this.transactions = [];
     })
   }
 
@@ -150,7 +159,7 @@ export class TradesComponent implements OnInit, OnDestroy {
 
   toTradeYear(event) {
     this.yearSelect.value = event.value;
-    if (this.yearSelect.value === '21') {
+    if (this.yearSelect.value >= '21') {
       const start = this.years.find((year) => year.query === this.yearSelect.value).dateStart;
       const end = this.years.find((year) => year.query === this.yearSelect.value).dateEnd;
       this.isLoading = true;

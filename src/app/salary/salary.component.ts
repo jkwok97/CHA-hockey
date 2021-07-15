@@ -22,7 +22,7 @@ export class SalaryComponent implements OnInit, OnDestroy {
 
   salariesData: MatTableDataSource<any[]>;
   columns = [ 'lastname', 'firstname', 'isgoalie', 'isforward', 'isdefense', 'isactive',
-    'season_2020', 'season_2021', 'season_2022', 'season_2023', 'season_2024',
+    'season_2021', 'season_2022', 'season_2023', 'season_2024',
     'season_2025', 'season_2026', 'season_2027', 'season_2028', 'season_2029'
   ];
 

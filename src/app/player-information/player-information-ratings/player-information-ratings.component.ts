@@ -37,8 +37,8 @@ export class PlayerInformationRatingsComponent implements OnInit, OnDestroy {
   ) { 
     const playerId = this._route.snapshot.parent.params.id;
     this.playerType = this._route.snapshot.parent.params.type;
-    // this.season = this._currentSeasonService.currentSeason;
-    this.season = '2020-21';
+    this.season = this._currentSeasonService.currentSeason;
+    // this.season = '2021-21';
 
     this.playerType === 'player' ? this.getPlayerRatings(playerId, this.season) : this.getGoalieRatings(playerId, this.season);
   }
