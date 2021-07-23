@@ -43,15 +43,15 @@ export class CurrentForwardSalariesComponent implements OnInit, AfterViewInit {
     let total = 0;
     if (string === "current") {
       array.forEach(element => {
-        if (+element.season_2020 > 0) {
-          total += +element.season_2020;
+        if (+element.season_2021 > 0) {
+          total += +element.season_2021;
         }
       });
       return total.toFixed(3);
     } else {
       array.forEach(element => {
-        if (+element.season_2021 > 0) {
-          total += +element.season_2021;
+        if (+element.season_2022 > 0) {
+          total += +element.season_2022;
         }
       });
       return total.toFixed(3);
