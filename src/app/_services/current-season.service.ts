@@ -32,7 +32,7 @@ export class CurrentSeasonService {
   }
 
   handlePlayoffButton() {
-    return this.currentSeason === '2021-22' ? true : false;
+    return this.currentSeason === '2021-22' ? false : true;
   }
 
 }
