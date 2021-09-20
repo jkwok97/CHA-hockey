@@ -5,12 +5,12 @@ import { Injectable } from '@angular/core';
 })
 export class CurrentSeasonService {
 
-  isOffSeason: boolean = true;
+  isOffSeason: boolean = false;
 
   currentSeasonCap: number = 102.7;
   nextSeasonCap: number = 102.7;
 
-  draftSeason: string = '2020'
+  draftSeason: string = '2022'
 
   currentSeason: string = this.handleSeason(this.isOffSeason);
   currentSeasonType: string = 'Regular';
@@ -32,7 +32,7 @@ export class CurrentSeasonService {
   }
 
   handlePlayoffButton() {
-    return this.currentSeason === '2020-21' ? true : false;
+    return this.currentSeason === '2021-22' ? true : false;
   }
 
 }

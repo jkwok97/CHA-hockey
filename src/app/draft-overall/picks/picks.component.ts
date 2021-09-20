@@ -110,43 +110,46 @@ export class PicksComponent implements OnInit, OnDestroy {
   getLeagueLeaders(resp, drafts) {
     
     let tempLeaders = resp;
+
+    //TODO PUT THIS ALL BACK WHEN SEASON STARTS
     
-    drafts.forEach(element => {
+    // drafts.forEach(element => {
 
-      let tempTeam = tempLeaders.find(team => team.shortname === element.shortname);
-      element.points = tempTeam.points;
-      element.wins = tempTeam.wins;
-      element.goals_for = tempTeam.goals_for;
-      element.goals_against = tempTeam.goals_against;
+    //   let tempTeam = tempLeaders.find(team => team.shortname === element.shortname);
+    //   element.points = tempTeam.points;
+    //   element.wins = tempTeam.wins;
+    //   element.goals_for = tempTeam.goals_for;
+    //   element.goals_against = tempTeam.goals_against;
 
-      // THIS IS TEMPORARY
-      // if (element.shortname === 'VSJ') {
-      //  let tempTeam = tempLeaders.find(team => team.shortname === 'VIC');
-      //  element.points = tempTeam.points;
-      // } else if (element.shortname === 'SJV') {
-      //   let tempTeam = tempLeaders.find(team => team.shortname === 'SCS');
-      //   element.points = tempTeam.points;
-      // } else {
-      //   let tempTeam = tempLeaders.find(team => team.shortname === element.shortname);
-      //   element.points = tempTeam.points;
-      // }
-    });
+    //   // THIS IS TEMPORARY
+    //   // if (element.shortname === 'VSJ') {
+    //   //  let tempTeam = tempLeaders.find(team => team.shortname === 'VIC');
+    //   //  element.points = tempTeam.points;
+    //   // } else if (element.shortname === 'SJV') {
+    //   //   let tempTeam = tempLeaders.find(team => team.shortname === 'SCS');
+    //   //   element.points = tempTeam.points;
+    //   // } else {
+    //   //   let tempTeam = tempLeaders.find(team => team.shortname === element.shortname);
+    //   //   element.points = tempTeam.points;
+    //   // }
+    // });
 
-    drafts.sort((a,b) => {
-      if (b.points === a.points) {
-        if (b.wins === a.wins) {
-          if ((b.goals_for-b.goals_against) === (a.goals_for-a.goals_against)) {
-            return b.goals_for - a.goals_for;
-          } else {
-            return (b.goals_for-b.goals_against) - (a.goals_for-a.goals_against);
-          }
-        } else {
-          return b.wins - a.wins;
-        }
-      } else {
-        return b.points - a.points;
-      }
-    }).reverse();
+    // drafts.sort((a,b) => {
+    //   if (b.points === a.points) {
+    //     if (b.wins === a.wins) {
+    //       if ((b.goals_for-b.goals_against) === (a.goals_for-a.goals_against)) {
+    //         return b.goals_for - a.goals_for;
+    //       } else {
+    //         return (b.goals_for-b.goals_against) - (a.goals_for-a.goals_against);
+    //       }
+    //     } else {
+    //       return b.wins - a.wins;
+    //     }
+    //   } else {
+    //     return b.points - a.points;
+    //   }
+    // }).reverse();
+
     
     setTimeout(() => {
       this.draft = new MatTableDataSource<any[]>(drafts);

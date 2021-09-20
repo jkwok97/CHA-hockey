@@ -12,7 +12,7 @@ export class GamesComponent implements OnInit {
   routes = [
     { name: 'By Day', url: 'day', current: true, disabled: false },
     { name: 'All', url: 'all', current: true, disabled: false },
-    { name: 'Playoffs', url: 'playoffs', current: true, disabled: false },
+    { name: 'Playoffs', url: 'playoffs', current: true, disabled: true },
   ];
 
   constructor() { }
