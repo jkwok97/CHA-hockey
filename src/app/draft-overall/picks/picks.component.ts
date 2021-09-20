@@ -47,7 +47,7 @@ export class PicksComponent implements OnInit, OnDestroy {
     private _draftService: DraftService
   ) { 
     this.teams$ = this._teamInfoService.getTeamsByActive('true');
-    this.draftSeason = '2021';
+    this.draftSeason = '2022';
     this.currentSeason = this._currentSeasonService.currentSeason;
   }
 
