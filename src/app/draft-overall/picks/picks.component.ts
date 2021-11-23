@@ -99,7 +99,7 @@ export class PicksComponent implements OnInit, OnDestroy {
   // }
 
   getTeamStats(seasonType: string) {
-    this._teamStatsService.getTeamStatsBySeasonByType('2020-21', seasonType).pipe(
+    this._teamStatsService.getTeamStatsBySeasonByType('2021-22', seasonType).pipe(
       takeWhile(() => this._alive)
     ).subscribe((teamStats: TeamStat[]) => {
       this.teamStats = teamStats;
