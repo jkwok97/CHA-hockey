@@ -40,7 +40,6 @@ export class CurrentGoaliesSalariesComponent implements OnInit, AfterViewInit {
   }
 
   getTotalSalary(array, string) {
-    console.log(array);
     let total = 0;
     if (string === "current") {
       array.forEach(element => {
