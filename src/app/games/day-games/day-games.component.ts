@@ -15,7 +15,7 @@ export class DayGamesComponent implements OnInit, OnDestroy {
 
   currentSeason: string;
   dayValue: string = "day";
-  currentDay: number = 206;
+  currentDay: number = 211;
 
   groupGames: any;
 
