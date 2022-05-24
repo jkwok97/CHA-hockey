@@ -14,18 +14,19 @@
         <app-playoff-matchup-card
           [homeTeam]="westernTeams[0]"
           [visTeam]="westernTeams[7]"
-          [winningTeam]="null"
-          [losingTeam]="null"
-          [seriesScore]="'0-0'"
+          [winningTeam]="westernTeams[0]"
+          [losingTeam]="westernTeams[7]"
+          [seriesTied]="true"
+          [seriesScore]="'1-1'"
           [seriesDone]="false"
         ></app-playoff-matchup-card>
         <!-- WIC / VIC -->
         <app-playoff-matchup-card
           [homeTeam]="westernTeams[2]"
           [visTeam]="westernTeams[5]"
-          [winningTeam]="null"
-          [losingTeam]="null"
-          [seriesScore]="'0-0'"
+          [winningTeam]="westernTeams[2]"
+          [losingTeam]="westernTeams[5]"
+          [seriesScore]="'2-0'"
           [seriesTied]="false"
           [seriesDone]="false"
         ></app-playoff-matchup-card>
@@ -33,19 +34,19 @@
         <app-playoff-matchup-card
           [homeTeam]="westernTeams[3]"
           [visTeam]="westernTeams[4]"
-          [winningTeam]="null"
-          [losingTeam]="null"
-          [seriesScore]="'0-0'"
-          [seriesTied]="false"
+          [winningTeam]="westernTeams[3]"
+          [losingTeam]="westernTeams[4]"
+          [seriesScore]="'1-1'"
+          [seriesTied]="true"
           [seriesDone]="false"
         ></app-playoff-matchup-card>
         <!-- CHY / SFC -->
         <app-playoff-matchup-card
           [homeTeam]="westernTeams[1]"
           [visTeam]="westernTeams[6]"
-          [winningTeam]="null"
-          [losingTeam]="null"
-          [seriesScore]="'0-0'"
+          [winningTeam]="westernTeams[1]"
+          [losingTeam]="westernTeams[6]"
+          [seriesScore]="'2-0'"
           [seriesTied]="false"
           [seriesDone]="false"
         ></app-playoff-matchup-card>
@@ -153,31 +154,31 @@
       </div>
 
       <div class="round-container">
-        <!-- GLORY / NORTH STARS -->
+        <!-- VIKINGS / NORTH STARS -->
         <app-playoff-matchup-card
           [homeTeam]="easternTeams[0]"
           [visTeam]="easternTeams[7]"
-          [winningTeam]="null"
-          [losingTeam]="null"
-          [seriesScore]="'0-0'"
+          [winningTeam]="easternTeams[0]"
+          [losingTeam]="easternTeams[7]"
+          [seriesScore]="'2-0'"
           [seriesDone]="false"
         ></app-playoff-matchup-card>
         <!-- ATL / CIN -->
         <app-playoff-matchup-card
           [homeTeam]="easternTeams[2]"
           [visTeam]="easternTeams[5]"
-          [winningTeam]="null"
-          [losingTeam]="null"
-          [seriesScore]="'0-0'"
+          [winningTeam]="easternTeams[2]"
+          [losingTeam]="easternTeams[5]"
+          [seriesScore]="'2-0'"
           [seriesDone]="false"
         ></app-playoff-matchup-card>
         <!-- MIL / AUG -->
         <app-playoff-matchup-card
           [homeTeam]="easternTeams[3]"
           [visTeam]="easternTeams[4]"
-          [winningTeam]="null"
-          [losingTeam]="null"
-          [seriesScore]="'0-0'"
+          [winningTeam]="easternTeams[3]"
+          [losingTeam]="easternTeams[4]"
+          [seriesScore]="'2-0'"
           [seriesDone]="false"
         ></app-playoff-matchup-card>
 
@@ -185,10 +186,11 @@
         <app-playoff-matchup-card
           [homeTeam]="easternTeams[1]"
           [visTeam]="easternTeams[6]"
-          [winningTeam]="null"
-          [losingTeam]="null"
-          [seriesScore]="'0-0'"
+          [winningTeam]="easternTeams[1]"
+          [losingTeam]="easternTeams[6]"
+          [seriesScore]="'1-1'"
           [seriesDone]="false"
+          [seriesTied]="true"
         ></app-playoff-matchup-card>
       </div>
     </div>
