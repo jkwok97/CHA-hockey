@@ -16,9 +16,9 @@
           [visTeam]="westernTeams[7]"
           [winningTeam]="westernTeams[0]"
           [losingTeam]="westernTeams[7]"
-          [seriesTied]="true"
-          [seriesScore]="'2-2'"
-          [seriesDone]="false"
+          [seriesTied]="false"
+          [seriesScore]="'4-2'"
+          [seriesDone]="true"
         ></app-playoff-matchup-card>
 
         <!-- OAK / KEL -->
@@ -27,9 +27,9 @@
           [visTeam]="westernTeams[4]"
           [winningTeam]="westernTeams[4]"
           [losingTeam]="westernTeams[3]"
-          [seriesScore]="'3-1'"
+          [seriesScore]="'4-2'"
           [seriesTied]="false"
-          [seriesDone]="false"
+          [seriesDone]="true"
         ></app-playoff-matchup-card>
 
         <!-- WIC / VIC -->
@@ -38,9 +38,9 @@
           [visTeam]="westernTeams[5]"
           [winningTeam]="westernTeams[2]"
           [losingTeam]="westernTeams[5]"
-          [seriesScore]="'2-2'"
-          [seriesTied]="true"
-          [seriesDone]="false"
+          [seriesScore]="'4-2'"
+          [seriesTied]="false"
+          [seriesDone]="true"
         ></app-playoff-matchup-card>
 
         <!-- CHY / SFC -->
@@ -49,27 +49,27 @@
           [visTeam]="westernTeams[6]"
           [winningTeam]="westernTeams[1]"
           [losingTeam]="westernTeams[6]"
-          [seriesScore]="'3-1'"
+          [seriesScore]="'4-2'"
           [seriesTied]="false"
-          [seriesDone]="false"
+          [seriesDone]="true"
         ></app-playoff-matchup-card>
       </div>
 
       <div class="round-container">
-        <!-- OAK / KEL -->
+        <!-- KEL / SAC -->
         <app-playoff-matchup-card
-          [homeTeam]="null"
-          [visTeam]="null"
+          [homeTeam]="westernTeams[0]"
+          [visTeam]="westernTeams[4]"
           [winningTeam]="null"
           [losingTeam]="null"
           [seriesScore]="'0-0'"
           [seriesTied]="false"
           [seriesDone]="false"
         ></app-playoff-matchup-card>
-        <!-- LV / SEA -->
+        <!-- WIT / CHY -->
         <app-playoff-matchup-card
-          [homeTeam]="null"
-          [visTeam]="null"
+          [homeTeam]="westernTeams[1]"
+          [visTeam]="westernTeams[2]"
           [winningTeam]="null"
           [losingTeam]="null"
           [seriesScore]="'0-0'"
@@ -135,20 +135,20 @@
       </div>
 
       <div class="round-container">
-        <!--  / MSG -->
+        <!-- AUG / MSG -->
         <app-playoff-matchup-card
           [homeTeam]="easternTeams[0]"
-          [visTeam]="null"
+          [visTeam]="easternTeams[4]"
           [winningTeam]="null"
           [losingTeam]="null"
           [seriesScore]="'0-0'"
           [seriesTied]="false"
           [seriesDone]="false"
         ></app-playoff-matchup-card>
-        <!--  CIN -->
+        <!--  CIN / PEO -->
         <app-playoff-matchup-card
-          [homeTeam]="easternTeams[2]"
-          [visTeam]="null"
+          [homeTeam]="easternTeams[1]"
+          [visTeam]="easternTeams[2]"
           [winningTeam]="null"
           [losingTeam]="null"
           [seriesScore]="'0-0'"
@@ -171,11 +171,11 @@
         <app-playoff-matchup-card
           [homeTeam]="easternTeams[3]"
           [visTeam]="easternTeams[4]"
-          [winningTeam]="easternTeams[3]"
-          [losingTeam]="easternTeams[4]"
-          [seriesScore]="'2-2'"
-          [seriesDone]="false"
-          [seriesTied]="true"
+          [winningTeam]="easternTeams[4]"
+          [losingTeam]="easternTeams[3]"
+          [seriesScore]="'4-3'"
+          [seriesDone]="true"
+          [seriesTied]="false"
         ></app-playoff-matchup-card>
 
         <!-- ATL / CIN -->
@@ -192,11 +192,11 @@
         <app-playoff-matchup-card
           [homeTeam]="easternTeams[1]"
           [visTeam]="easternTeams[6]"
-          [winningTeam]="easternTeams[6]"
-          [losingTeam]="easternTeams[1]"
-          [seriesScore]="'2-2'"
-          [seriesDone]="false"
-          [seriesTied]="true"
+          [winningTeam]="easternTeams[1]"
+          [losingTeam]="easternTeams[6]"
+          [seriesScore]="'4-3'"
+          [seriesDone]="true"
+          [seriesTied]="false"
         ></app-playoff-matchup-card>
       </div>
     </div>
