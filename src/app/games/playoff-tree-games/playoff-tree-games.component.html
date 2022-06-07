@@ -79,12 +79,13 @@
       </div>
 
       <div class="round-container">
+        <!-- KEL / CHY -->
         <app-playoff-matchup-card
           [homeTeam]="westernTeams[1]"
           [visTeam]="westernTeams[4]"
-          [seriesScore]="'0-0'"
-          [winningTeam]="null"
-          [losingTeam]="null"
+          [seriesScore]="'2-0'"
+          [winningTeam]="westernTeams[1]"
+          [losingTeam]="westernTeams[4]"
           [seriesTied]="false"
           [seriesDone]="false"
         ></app-playoff-matchup-card>
@@ -123,12 +124,13 @@
 
     <div class="conference-container">
       <div class="round-container">
+        <!-- PEO / MSG -->
         <app-playoff-matchup-card
           [homeTeam]="easternTeams[0]"
           [visTeam]="easternTeams[1]"
-          [seriesScore]="'0-0'"
-          [winningTeam]="null"
-          [losingTeam]="null"
+          [seriesScore]="'2-0'"
+          [winningTeam]="easternTeams[0]"
+          [losingTeam]="easternTeams[1]"
           [seriesTied]="false"
           [seriesDone]="false"
         ></app-playoff-matchup-card>
