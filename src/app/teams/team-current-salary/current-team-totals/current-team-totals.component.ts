@@ -1,14 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { CurrentSeasonService } from 'src/app/_services/current-season.service';
-import { PlayerSalary } from 'src/app/_models/player';
+import { Component, OnInit, Input } from "@angular/core";
+import { CurrentSeasonService } from "src/app/_services/current-season.service";
+import { PlayerSalary } from "src/app/_models/player";
 
 @Component({
-  selector: 'app-current-team-totals',
-  templateUrl: './current-team-totals.component.html',
-  styleUrls: ['./current-team-totals.component.css']
+  selector: "app-current-team-totals",
+  templateUrl: "./current-team-totals.component.html",
+  styleUrls: ["./current-team-totals.component.css"],
 })
 export class CurrentTeamTotalsComponent implements OnInit {
-
   @Input() salaries: [];
   @Input() goalieSalaries: [];
 
@@ -24,15 +23,13 @@ export class CurrentTeamTotalsComponent implements OnInit {
   currentSeason: string;
   nextSeason: string;
 
-  constructor(
-    private _currentSeasonService: CurrentSeasonService
-  ) {
+  constructor(private _currentSeasonService: CurrentSeasonService) {
     this.currentSeasonCap = this._currentSeasonService.currentSeasonCap;
     this.nextSeasonCap = this._currentSeasonService.nextSeasonCap;
     // this.currentSeason = this._currentSeasonService.currentSeason;
-    this.currentSeason = '2021-22';
+    this.currentSeason = "2022-23";
     this.nextSeason = this._currentSeasonService.nextSeason;
-   }
+  }
 
   ngOnInit() {
     this.total = this.salaries.length + this.goalieSalaries.length;
@@ -44,13 +41,12 @@ export class CurrentTeamTotalsComponent implements OnInit {
 
   getTotals(salaries: PlayerSalary[]) {
     salaries.forEach((salary: PlayerSalary) => {
-      if (+salary.season_2021 > 0) {
-        this.currentSeasonPayroll += +salary.season_2021;
-      }
       if (+salary.season_2022 > 0) {
-        this.nextSeasonPayroll += +salary.season_2022;
-      } 
-    })
+        this.currentSeasonPayroll += +salary.season_2022;
+      }
+      if (+salary.season_2023 > 0) {
+        this.nextSeasonPayroll += +salary.season_2023;
+      }
+    });
   }
-
 }

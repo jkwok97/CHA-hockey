@@ -1,190 +1,191 @@
 <h3>Salaries</h3>
 
 <section class="filter-add">
+  <mat-form-field color="accent" class="filtering">
+    <input
+      matInput
+      (keyup)="applyFilter($event.target.value)"
+      placeholder="Search"
+    />
+  </mat-form-field>
 
-    <mat-form-field color="accent" class="filtering">
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
-    </mat-form-field>
-
-    <mat-button-toggle-group #byActive="matButtonToggleGroup" [value]="showType" (change)="changeActive(byActive.value)">
-        <mat-button-toggle value="true" color="accent">
-            On Disk
-        </mat-button-toggle>
-        <mat-button-toggle value="false" color="accent">
-            Off Disk
-        </mat-button-toggle>
-    </mat-button-toggle-group>
-
+  <mat-button-toggle-group
+    #byActive="matButtonToggleGroup"
+    [value]="showType"
+    (change)="changeActive(byActive.value)"
+  >
+    <mat-button-toggle value="true" color="accent"> On Disk </mat-button-toggle>
+    <mat-button-toggle value="false" color="accent">
+      Off Disk
+    </mat-button-toggle>
+  </mat-button-toggle-group>
 </section>
 
-<mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
+<mat-progress-bar
+  mode="query"
+  color="accent"
+  *ngIf="isLoading"
+></mat-progress-bar>
 
 <div class="table" *ngIf="!isLoading">
+  <table
+    mat-table
+    [dataSource]="salariesData"
+    matSort
+    class="mat-elevation-z8"
+    matSortActive="lastname"
+    matSortDirection="asc"
+  >
+    <ng-container matColumnDef="firstname">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>First</th>
+      <td mat-cell *matCellDef="let salary">{{ salary.firstname }}</td>
+    </ng-container>
 
-    <table 
-        mat-table 
-        [dataSource]="salariesData" 
-        matSort 
-        class="mat-elevation-z8" 
-        matSortActive="lastname" 
-        matSortDirection="asc"
-    >
+    <ng-container matColumnDef="lastname" sticky>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Last</th>
+      <td mat-cell *matCellDef="let salary">{{ salary.lastname }}</td>
+    </ng-container>
 
-        <ng-container matColumnDef="firstname">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> First </th>
-            <td mat-cell *matCellDef="let salary"> {{salary.firstname}} </td>
-        </ng-container>
+    <ng-container matColumnDef="isgoalie">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Goalie</th>
+      <td mat-cell *matCellDef="let salary">
+        <mat-icon *ngIf="salary.isgoalie" class="green">done</mat-icon>
+        <mat-icon color="warn" *ngIf="!salary.isgoalie">block</mat-icon>
+      </td>
+    </ng-container>
 
-        <ng-container matColumnDef="lastname" sticky>
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Last </th>
-            <td mat-cell *matCellDef="let salary"> {{salary.lastname}} </td>
-        </ng-container>
+    <ng-container matColumnDef="isforward">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Forward</th>
+      <td mat-cell *matCellDef="let salary">
+        <mat-icon *ngIf="salary.isforward" class="green">done</mat-icon>
+        <mat-icon color="warn" *ngIf="!salary.isforward">block</mat-icon>
+      </td>
+    </ng-container>
 
-        <ng-container matColumnDef="isgoalie">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Goalie </th>
-            <td mat-cell *matCellDef="let salary">
-                <mat-icon *ngIf="salary.isgoalie" class="green">done</mat-icon>
-                <mat-icon color="warn" *ngIf="!salary.isgoalie">block</mat-icon>
-            </td>
-        </ng-container>
+    <ng-container matColumnDef="isdefense">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Defense</th>
+      <td mat-cell *matCellDef="let salary">
+        <mat-icon *ngIf="salary.isdefense" class="green">done</mat-icon>
+        <mat-icon color="warn" *ngIf="!salary.isdefense">block</mat-icon>
+      </td>
+    </ng-container>
 
-        <ng-container matColumnDef="isforward">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Forward </th>
-            <td mat-cell *matCellDef="let salary"> 
-                <mat-icon *ngIf="salary.isforward" class="green">done</mat-icon>
-                <mat-icon color="warn" *ngIf="!salary.isforward">block</mat-icon> 
-            </td>
-        </ng-container>
+    <ng-container matColumnDef="isactive">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>On Disk</th>
+      <td mat-cell *matCellDef="let salary">
+        <mat-icon *ngIf="salary.isactive" class="green">done</mat-icon>
+        <mat-icon color="warn" *ngIf="!salary.isactive">block</mat-icon>
+      </td>
+    </ng-container>
 
-        <ng-container matColumnDef="isdefense">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Defense </th>
-            <td mat-cell *matCellDef="let salary">
-                <mat-icon *ngIf="salary.isdefense" class="green">done</mat-icon>
-                <mat-icon color="warn" *ngIf="!salary.isdefense">block</mat-icon> 
-            </td>
-        </ng-container>
+    <ng-container matColumnDef="season_2021">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>20-21</th>
+      <td mat-cell *matCellDef="let salary">{{ salary.season_2021 }}</td>
+    </ng-container>
 
-        <ng-container matColumnDef="isactive">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> On Disk </th>
-            <td mat-cell *matCellDef="let salary">
-                    <mat-icon *ngIf="salary.isactive" class="green">done</mat-icon>
-                    <mat-icon color="warn" *ngIf="!salary.isactive">block</mat-icon>
-            </td>
-        </ng-container>
+    <ng-container matColumnDef="season_2022">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>21-22</th>
+      <td mat-cell *matCellDef="let salary">{{ salary.season_2022 }}</td>
+    </ng-container>
 
-        <ng-container matColumnDef="season_2021">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> 20-21 </th>
-            <td mat-cell *matCellDef="let salary"> {{salary.season_2021}} </td>
-        </ng-container>
+    <ng-container matColumnDef="season_2023">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>22-23</th>
+      <td mat-cell *matCellDef="let salary">{{ salary.season_2023 }}</td>
+    </ng-container>
 
-        <ng-container matColumnDef="season_2022">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> 21-22 </th>
-            <td mat-cell *matCellDef="let salary"> {{salary.season_2022}} </td>
-        </ng-container>
+    <ng-container matColumnDef="season_2024">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>23-24</th>
+      <td mat-cell *matCellDef="let salary">{{ salary.season_2024 }}</td>
+    </ng-container>
 
-        <ng-container matColumnDef="season_2023">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> 22-23 </th>
-            <td mat-cell *matCellDef="let salary"> {{salary.season_2023}} </td>
-        </ng-container>
+    <ng-container matColumnDef="season_2025">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>24-25</th>
+      <td mat-cell *matCellDef="let salary">{{ salary.season_2025 }}</td>
+    </ng-container>
 
-        <ng-container matColumnDef="season_2024">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> 23-24 </th>
-            <td mat-cell *matCellDef="let salary"> {{salary.season_2024}} </td>
-        </ng-container>
+    <ng-container matColumnDef="season_2026">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>25-26</th>
+      <td mat-cell *matCellDef="let salary">{{ salary.season_2026 }}</td>
+    </ng-container>
 
-        <ng-container matColumnDef="season_2025">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> 24-25 </th>
-            <td mat-cell *matCellDef="let salary"> {{salary.season_2025}} </td>
-        </ng-container>
+    <ng-container matColumnDef="season_2027">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>26-27</th>
+      <td mat-cell *matCellDef="let salary">{{ salary.season_2027 }}</td>
+    </ng-container>
 
-        <ng-container matColumnDef="season_2026">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> 25-26 </th>
-            <td mat-cell *matCellDef="let salary"> {{salary.season_2026}} </td>
-        </ng-container>
+    <ng-container matColumnDef="season_2028">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>27-28</th>
+      <td mat-cell *matCellDef="let salary">{{ salary.season_2028 }}</td>
+    </ng-container>
 
-        <ng-container matColumnDef="season_2027">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> 26-27 </th>
-            <td mat-cell *matCellDef="let salary"> {{salary.season_2027}} </td>
-        </ng-container>
+    <ng-container matColumnDef="season_2029">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>28-29</th>
+      <td mat-cell *matCellDef="let salary">{{ salary.season_2029 }}</td>
+    </ng-container>
 
-        <ng-container matColumnDef="season_2028">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> 27-28 </th>
-            <td mat-cell *matCellDef="let salary"> {{salary.season_2028}} </td>
-        </ng-container>
+    <ng-container matColumnDef="season_2030">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>29-30</th>
+      <td mat-cell *matCellDef="let salary">{{ salary.season_2030 }}</td>
+    </ng-container>
 
-        <ng-container matColumnDef="season_2029">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> 28-29 </th>
-            <td mat-cell *matCellDef="let salary"> {{salary.season_2029}} </td>
-        </ng-container>
+    <ng-container matColumnDef="season_2031">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>30-31</th>
+      <td mat-cell *matCellDef="let salary">{{ salary.season_2031 }}</td>
+    </ng-container>
 
-        <ng-container matColumnDef="season_2030">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> 29-30 </th>
-            <td mat-cell *matCellDef="let salary"> {{salary.season_2030}} </td>
-        </ng-container>
+    <ng-container matColumnDef="season_2032">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>31-32</th>
+      <td mat-cell *matCellDef="let salary">{{ salary.season_2032 }}</td>
+    </ng-container>
 
-        <ng-container matColumnDef="season_2031">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> 30-31 </th>
-            <td mat-cell *matCellDef="let salary"> {{salary.season_2031}} </td>
-        </ng-container>
+    <ng-container matColumnDef="season_2033">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>32-33</th>
+      <td mat-cell *matCellDef="let salary">{{ salary.season_2033 }}</td>
+    </ng-container>
 
-        <ng-container matColumnDef="season_2032">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> 31-32 </th>
-            <td mat-cell *matCellDef="let salary"> {{salary.season_2032}} </td>
-        </ng-container>
+    <ng-container matColumnDef="season_2034">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>33-34</th>
+      <td mat-cell *matCellDef="let salary">{{ salary.season_2034 }}</td>
+    </ng-container>
 
-        <ng-container matColumnDef="season_2033">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> 32-33 </th>
-            <td mat-cell *matCellDef="let salary"> {{salary.season_2033}} </td>
-        </ng-container>
+    <ng-container matColumnDef="season_2035">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>34-35</th>
+      <td mat-cell *matCellDef="let salary">{{ salary.season_2035 }}</td>
+    </ng-container>
 
-        <ng-container matColumnDef="season_2034">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> 33-34 </th>
-            <td mat-cell *matCellDef="let salary"> {{salary.season_2034}} </td>
-        </ng-container>
+    <ng-container matColumnDef="season_2036">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>35-36</th>
+      <td mat-cell *matCellDef="let salary">{{ salary.season_2036 }}</td>
+    </ng-container>
 
-        <ng-container matColumnDef="season_2035">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> 34-35 </th>
-            <td mat-cell *matCellDef="let salary"> {{salary.season_2035}} </td>
-        </ng-container>
+    <ng-container matColumnDef="season_2037">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>36-37</th>
+      <td mat-cell *matCellDef="let salary">{{ salary.season_2037 }}</td>
+    </ng-container>
 
-        <ng-container matColumnDef="season_2036">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> 35-36 </th>
-            <td mat-cell *matCellDef="let salary"> {{salary.season_2036}} </td>
-        </ng-container>
+    <ng-container matColumnDef="season_2038">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>37-38</th>
+      <td mat-cell *matCellDef="let salary">{{ salary.season_2038 }}</td>
+    </ng-container>
 
-        <ng-container matColumnDef="season_2037">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> 36-37 </th>
-            <td mat-cell *matCellDef="let salary"> {{salary.season_2037}} </td>
-        </ng-container>
+    <ng-container matColumnDef="season_2039">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>38-39</th>
+      <td mat-cell *matCellDef="let salary">{{ salary.season_2039 }}</td>
+    </ng-container>
 
-        <ng-container matColumnDef="season_2038">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> 37-38 </th>
-            <td mat-cell *matCellDef="let salary"> {{salary.season_2038}} </td>
-        </ng-container>
+    <ng-container matColumnDef="season_2040">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>39-40</th>
+      <td mat-cell *matCellDef="let salary">{{ salary.season_2040 }}</td>
+    </ng-container>
 
-        <ng-container matColumnDef="season_2039">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> 38-39 </th>
-            <td mat-cell *matCellDef="let salary"> {{salary.season_2039}} </td>
-        </ng-container>
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr mat-row *matRowDef="let salary; columns: columns"></tr>
+  </table>
 
-        <ng-container matColumnDef="season_2040">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> 39-40 </th>
-            <td mat-cell *matCellDef="let salary"> {{salary.season_2040}} </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="columns"></tr>
-        <tr 
-            mat-row 
-            *matRowDef="let salary; columns: columns;"
-        ></tr>
-
-    </table>
-
-    <mat-paginator
-        [pageSize]="pageSize"
-        [length]="length"
-        color="accent"
-        showFirstLastButtons
-    ></mat-paginator>
-
+  <mat-paginator
+    [pageSize]="pageSize"
+    [length]="length"
+    color="accent"
+    showFirstLastButtons
+  ></mat-paginator>
 </div>

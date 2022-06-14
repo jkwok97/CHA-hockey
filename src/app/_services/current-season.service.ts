@@ -4,16 +4,16 @@ import { Injectable } from "@angular/core";
   providedIn: "root",
 })
 export class CurrentSeasonService {
-  isOffSeason: boolean = false;
+  isOffSeason: boolean = true;
 
   currentSeasonCap: number = 102.7;
-  nextSeasonCap: number = 102.7;
+  nextSeasonCap: number = 104.02;
 
   draftSeason: string = "2022";
 
   currentSeason: string = this.handleSeason(this.isOffSeason);
-  currentSeasonType: string = "Playoffs";
-  nextSeason: string = "2022-23";
+  currentSeasonType: string = "Regular";
+  nextSeason: string = "2023-24";
 
   minGames: number = this.handleMinGames(
     this.isOffSeason,
@@ -26,7 +26,7 @@ export class CurrentSeasonService {
   constructor() {}
 
   handleSeason(bool: boolean) {
-    return bool ? "2020-21" : "2021-22";
+    return bool ? "2021-22" : "2022-23";
   }
 
   handleMinGames(bool: boolean, type: string) {
@@ -34,6 +34,6 @@ export class CurrentSeasonService {
   }
 
   handlePlayoffButton() {
-    return this.currentSeasonType === "Playoffs" ? true : false;
+    return this.currentSeasonType === "Regular" ? true : false;
   }
 }
