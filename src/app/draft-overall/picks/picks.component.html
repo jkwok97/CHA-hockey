@@ -3,89 +3,92 @@
 <p>Order Based On Regular Season Standings</p>
 
 <section class="filter-add">
-
-    <mat-button-toggle-group #bySeason="matButtonToggleGroup" [value]="draftSeason" (change)="changeActive(bySeason.value)">
-        <!-- <mat-button-toggle value="2021" color="accent">
-            2021
-        </mat-button-toggle> -->
-        <mat-button-toggle value="2022" color="accent">
-            2022
-        </mat-button-toggle>
-    </mat-button-toggle-group>
-
+  <mat-button-toggle-group
+    #bySeason="matButtonToggleGroup"
+    [value]="draftSeason"
+    (change)="changeActive(bySeason.value)"
+  >
+    <mat-button-toggle value="2022" color="accent"> 2022 </mat-button-toggle>
+    <mat-button-toggle value="2023" color="accent"> 2023 </mat-button-toggle>
+  </mat-button-toggle-group>
 </section>
 
-<mat-progress-bar mode="query" color="accent" *ngIf="isLoading"></mat-progress-bar>
+<mat-progress-bar
+  mode="query"
+  color="accent"
+  *ngIf="isLoading"
+></mat-progress-bar>
 
 <div class="table" *ngIf="!isLoading">
+  <table
+    mat-table
+    [dataSource]="draft"
+    matSort
+    class="mat-elevation-z8 full-width"
+    matSortActive="city"
+    matSortDirection="asc"
+  >
+    <ng-container matColumnDef="pick" sticky>
+      <th mat-header-cell *matHeaderCellDef>Pick No.</th>
+      <td mat-cell *matCellDef="let team; let i = index">{{ i + 1 }}</td>
+    </ng-container>
 
-    <table 
-        mat-table 
-        [dataSource]="draft" 
-        matSort 
-        class="mat-elevation-z8 full-width" 
-        matSortActive="city" 
-        matSortDirection="asc"
-    >
+    <ng-container matColumnDef="logo" sticky>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Logo</th>
+      <td mat-cell *matCellDef="let table">
+        <img [src]="table.teamlogo" />
+      </td>
+    </ng-container>
 
-        <ng-container matColumnDef="pick" sticky>
-            <th mat-header-cell *matHeaderCellDef> Pick No. </th>
-            <td mat-cell *matCellDef="let team; let i = index"> {{i+1}} </td>
-        </ng-container>
+    <ng-container matColumnDef="team_name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Team</th>
+      <td mat-cell *matCellDef="let table">
+        {{ table.city }} {{ table.nickname }}
+      </td>
+    </ng-container>
 
-        <ng-container matColumnDef="logo" sticky>
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Logo </th>
-            <td mat-cell *matCellDef="let table">
-                <img [src]="table.teamlogo">
-            </td>
-        </ng-container>
+    <ng-container matColumnDef="round_one">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Round 1</th>
+      <td mat-cell *matCellDef="let table">
+        <img [src]="getTeamLogo(table.round_one)" />
+      </td>
+    </ng-container>
 
-        <ng-container matColumnDef="team_name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Team </th>
-            <td mat-cell *matCellDef="let table"> {{table.city}} {{table.nickname}}</td>
-        </ng-container>
+    <ng-container matColumnDef="round_two">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Round 2</th>
+      <td mat-cell *matCellDef="let table">
+        <img [src]="getTeamLogo(table.round_two)" />
+      </td>
+    </ng-container>
 
-        <ng-container matColumnDef="round_one">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Round 1 </th>
-            <td mat-cell *matCellDef="let table">
-                 <img [src]="getTeamLogo(table.round_one)">
-            </td>
-        </ng-container>
+    <ng-container matColumnDef="round_three">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Round 3</th>
+      <td mat-cell *matCellDef="let table">
+        <img [src]="getTeamLogo(table.round_three)" />
+      </td>
+    </ng-container>
 
-        <ng-container matColumnDef="round_two">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Round 2 </th>
-            <td mat-cell *matCellDef="let table">
-                 <img [src]="getTeamLogo(table.round_two)">
-            </td>
-        </ng-container>
+    <ng-container matColumnDef="round_four">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Round 4</th>
+      <td mat-cell *matCellDef="let table">
+        <img [src]="getTeamLogo(table.round_four)" />
+      </td>
+    </ng-container>
 
-        <ng-container matColumnDef="round_three">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Round 3 </th>
-            <td mat-cell *matCellDef="let table">
-                 <img [src]="getTeamLogo(table.round_three)">
-            </td>
-        </ng-container>
+    <ng-container matColumnDef="round_five">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Round 5</th>
+      <td mat-cell *matCellDef="let table">
+        <img [src]="getTeamLogo(table.round_five)" />
+      </td>
+    </ng-container>
 
-        <ng-container matColumnDef="round_four">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Round 4 </th>
-            <td mat-cell *matCellDef="let table">
-                 <img [src]="getTeamLogo(table.round_four)">
-            </td>
-        </ng-container>
-
-        <ng-container matColumnDef="round_five">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Round 5 </th>
-            <td mat-cell *matCellDef="let table">
-                 <img [src]="getTeamLogo(table.round_five)">
-            </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="isMobile ? mobileColumns : columns"></tr>
-        <tr 
-            mat-row 
-            *matRowDef="let table; columns: isMobile ? mobileColumns : columns"
-        ></tr>
-
-    </table>
-
+    <tr
+      mat-header-row
+      *matHeaderRowDef="isMobile ? mobileColumns : columns"
+    ></tr>
+    <tr
+      mat-row
+      *matRowDef="let table; columns: isMobile ? mobileColumns : columns"
+    ></tr>
+  </table>
 </div>
