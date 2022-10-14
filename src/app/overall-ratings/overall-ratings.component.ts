@@ -1,75 +1,96 @@
-import { Component, OnInit } from '@angular/core';
-import { CurrentSeasonService } from '../_services/current-season.service';
-import { PlayerService } from '../_services/player.service';
-import { takeWhile } from 'rxjs/operators';
-import { MatTableDataSource } from '@angular/material';
+import { Component, OnInit } from "@angular/core";
+import { CurrentSeasonService } from "../_services/current-season.service";
+import { PlayerService } from "../_services/player.service";
+import { takeWhile } from "rxjs/operators";
+import { MatTableDataSource } from "@angular/material";
 
 @Component({
-  selector: 'app-overall-ratings',
-  templateUrl: './overall-ratings.component.html',
-  styleUrls: ['./overall-ratings.component.css']
+  selector: "app-overall-ratings",
+  templateUrl: "./overall-ratings.component.html",
+  styleUrls: ["./overall-ratings.component.css"],
 })
 export class OverallRatingsComponent implements OnInit {
-
   private _alive: boolean = true;
   isLoading: boolean = false;
 
-  playerType: string = 'player';
+  playerType: string = "player";
   season: string;
 
   statRatings: MatTableDataSource<any[]>;
   goalieStatRatings: any[];
 
-  playersRateColumns = [ 'team', 'player_name', 
-    'c_rate', 'l_rate', 'r_rate', 'ld_rate', 'rd_rate', 'skating', 'speed', 'passing',
-    'shooting', 'face_off', 'forecheck', 'assist_rating', 'clear_crease', 'shot_block', 'pk', 'physical',
-    'rock', 'intimidation', 'game_fatigue', 'shift_fatigue'
+  playersRateColumns = [
+    "team",
+    "player_name",
+    "c_rate",
+    "l_rate",
+    "r_rate",
+    "ld_rate",
+    "rd_rate",
+    "skating",
+    "speed",
+    "passing",
+    "shooting",
+    "face_off",
+    "forecheck",
+    "assist_rating",
+    "clear_crease",
+    "shot_block",
+    "pk",
+    "physical",
+    "rock",
+    "intimidation",
+    "game_fatigue",
+    "shift_fatigue",
   ];
 
-  goalieRateColumns = [
-    'team', 'player_name', 'passing', 'skating', 'speed'
-  ];
+  goalieRateColumns = ["team", "player_name", "passing", "skating", "speed"];
 
   constructor(
     private _currentSeasonService: CurrentSeasonService,
     private _playerService: PlayerService
-  ) { 
+  ) {
     // this.season = this._currentSeasonService.currentSeason;
-    this.season = '2021-22';
-
+    this.season = "2022-23";
   }
 
   ngOnInit() {
     this.isLoading = true;
-    this.getPlayerRatings(this.season)
+    this.getPlayerRatings(this.season);
   }
 
   showRateColumns() {
-    return this.playerType === 'player' ? this.playersRateColumns : this.goalieRateColumns;
+    return this.playerType === "player"
+      ? this.playersRateColumns
+      : this.goalieRateColumns;
   }
 
   changeSeason(playerType: string) {
     this.isLoading = true;
     this.playerType = playerType;
-    playerType === 'player' ? this.getPlayerRatings(this.season) : this.getGoalieRatings(this.season);
+    playerType === "player"
+      ? this.getPlayerRatings(this.season)
+      : this.getGoalieRatings(this.season);
   }
 
   getPlayerRatings(season: string) {
-    this._playerService.getAllPlayerRatings(season).pipe(
-      takeWhile(() => this._alive)
-    ).subscribe((ratings) => {
-      this.statRatings = new MatTableDataSource<any[]>(ratings as []);
-      this.isLoading = false;
-    })
+    this._playerService
+      .getAllPlayerRatings(season)
+      .pipe(takeWhile(() => this._alive))
+      .subscribe((ratings) => {
+        this.statRatings = new MatTableDataSource<any[]>(ratings as []);
+        this.isLoading = false;
+      });
   }
 
   getGoalieRatings(season: string) {
-    this._playerService.getAllGoalieRatings(season).pipe(
-      takeWhile(() => this._alive)
-    ).subscribe((ratings) => {
-      this.statRatings = new MatTableDataSource<any[]>(ratings as []);
-      this.isLoading = false;
-    })
+    this._playerService
+      .getAllGoalieRatings(season)
+      .pipe(takeWhile(() => this._alive))
+      .subscribe((ratings) => {
+        this.statRatings = new MatTableDataSource<any[]>(ratings as []);
+        this.isLoading = false;
+      });
   }
 
   applyFilter(filterValue: string) {
@@ -82,5 +103,4 @@ export class OverallRatingsComponent implements OnInit {
   ngOnDestroy(): void {
     this._alive = false;
   }
-
 }
